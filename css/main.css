@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url("../img/wavegrid.png");
+    font-family: Tahoma, Verdana;
+}
+
+.main {
+    width: 90%;
+    min-width: 950px;
+    margin: 5px auto;
+}

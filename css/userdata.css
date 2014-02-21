@@ -1,0 +1,55 @@
+.main__user-data {
+    border: 1px solid #BDBDBD;
+    font-size: 16px;
+    width: 250px;
+    height: 23px;
+    text-align: left;
+    float: right;
+    margin: 0 0 3px 0;
+    padding: 5px;
+    position: relative;
+}
+
+.main__user-data__exit {
+    display: inline-block;
+    margin: 5px;
+    width: 80px;
+    height: 22px;
+    background: #2189C2;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    border: 1px solid #2189C2;
+    position: absolute;
+    right: 5px;
+    top:0px	
+}
+
+.main__user-data__exit:hover {
+    box-shadow: 1px 1px 5px #C0F6F6, -1px -1px 5px #C0F6F6;
+    border: 1px solid #2189C2;
+}
+
+.main__user-data__exit:focus {
+    border: 1px solid #FFF;
+}
+
+.main__user-data__exit:active {
+    background: #CF4231;
+    border: 1px solid #CF4231;
+    box-shadow: 1px 1px 5px #FFBA9C, -1px -1px 5px #FFBA9C;
+    color: #D0D6DA;
+}
+
+.main__user-data__user-name {
+    color: #5C5C5C;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    left: 35px;
+}
+
+.clear {
+    clear: right;
+}

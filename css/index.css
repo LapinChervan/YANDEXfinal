@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Tahoma, Verdana;
+    background: url("../img/wavegrid.png");
+}
+
+.main {
+    width: 96%;
+    margin: 10px auto;
+    min-width: 980px;
+}
+
+.main__header {
+    background: url("../img/headerbg.png");
+    height: 210px;
+    margin: 20px 0 0 0;
+}
+
+.header__logo { 
+    margin: -2px 0 0 -1px;
+    display: inline-block;
+    height:100px;
+    overflow: hidden;
+    color:#fff;
+}
+
+.header__logoname {
+    float: right;
+    margin: 5px 30px;
+}
+
+.clear {
+    clear: right;
+}
+
+.header__reg, .header__auth {
+    margin: 25px 35px 0;  
+    display: table;
+}
+
+.header__reg {
+    float: right;
+}
+
+.header__auth {
+    float: left; 
+}
+
+.allbutton {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.header__reg__button, .header__auth__button  {
+    display: table-cell;
+    height: 45px;
+    width: 215px;
+    border-radius: 4px;
+    text-decoration: none;
+    background: #2189C2;
+    text-align: center;
+    vertical-align: middle;
+    color: #F0F0F0;
+}
+
+.header__reg__button {
+    background: #2189C2; 
+    border: 1px solid #2189C2;
+}
+
+.header__auth__button {
+    background: #60B149; 
+    border: 1px solid #60B149;
+}
+
+/*BUTTON REG*/
+.header__reg__button:hover {
+    box-shadow: 1px 1px 20px #C0F6F6, -1px -1px 20px #C0F6F6;
+    border: 1px solid #2189C2;
+}
+
+.header__reg__button:focus {
+    border: 1px solid #FFF;
+}
+
+.header__reg__button:active {
+    background: #0A72AB;
+    box-shadow: inset 1px 3px 12px #424B49;
+    color: #D0D6DA;
+}
+/*-----------------------------------------------*/
+
+/*BUTTON AUTH*/
+.header__auth__button:hover {
+    box-shadow: 1px 1px 20px #C2F9BC, -1px -1px 20px #C2F9BC;
+    border: 1px solid #60B149;
+}
+
+.header__auth__button:focus {
+    border: 1px solid #E2FFCB;
+}
+
+.header__auth__button:active {
+    background: #43942C;
+    box-shadow: inset 1px 3px 12px #424B49;
+    color: #D0D6DA;
+}
+/*-----------------------------------------------*/
+
+
+.main__content {
+    margin: -1px auto;
+    text-align: center;
+}
+
+.main__content__block {
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    width: 20%;
+    height: 280px;
+    margin: 10px 1%;
+    padding: 12px;
+    background: #F3F3F3;
+    color: #464646;
+    border-radius: 5px;
+    box-shadow: 2px 2px 12px #C6C6C6;
+    overflow: auto;
+}
+
+.main__content__block h3 {
+    text-transform: uppercase;
+    color: #E74C3C;
+    margin: 15px;
+    font-size: 16px;
+}
+
+.main__content__block:hover {
+    background: #E9E9E9;
+    box-shadow: 3px 3px 12px #C6C6C6, -3px -3px 12px #BBBBBB;
+    cursor: pointer;
+}
+
+.main__book {
+    text-align: center;
+    padding: 25px 0 0 0;
+}
+
+.main__book .mac {
+    max-width: 70%;
+}
+
+.main__footer {
+    background: url("../img/headerbg.png");
+    width: 100%;
+    height: 80px;
+    margin: 25px 0 0 0;
+    display: table;
+}
+
+.wrap_about {
+    margin: 25px auto;
+    width: 100%;
+    text-align: center;
+}
+
+.main__why {
+    display: inline-block;
+    margin: 30px 10px;
+    padding: 15px 0 0 0;
+    width: 28%;
+    height: 40px;
+    background: #CF4231;
+    border-radius: 4px;
+    position: relative;
+    color: #EDEDED;
+    text-transform: uppercase;
+    text-align: center;  
+}
+
+.main__why_triangle {
+    position: absolute;
+    left: 49%;
+    top: 55px;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #CF4231;
+}
+
+.main__footer__about {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}

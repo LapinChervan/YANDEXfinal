@@ -1,0 +1,60 @@
+#second ul {
+    list-style-type: none;
+}
+
+#second li {
+    color: #464646;
+    padding: 1px 0 1px 10px;
+    box-shadow: 0 0 10px rgba(18, 46, 30, 0.5);
+    border-radius: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    cursor: pointer;
+    background: url("../img/hist.png") 0 -6px;
+}
+
+#second li > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.history-content-wrap {
+    width: 31%;
+    line-height: .8;
+    font-size: 14px;
+}
+
+#second img {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.history-date, .account {
+    margin-bottom: 5px;
+}
+
+.color-income {
+    color: #0E7C0E;
+}
+
+.color-consumption {
+    color: #FF3532;
+}
+
+.color-send {
+    color: #405CFA;
+}
+
+.currency {
+    font-size: 12px;
+}

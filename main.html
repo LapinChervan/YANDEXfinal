@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Контроль средств</title>
+    <meta charset="utf-8">
+    <meta http-equiv= "X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">	 
+    <link rel="stylesheet" href="css/userdata.css">  
+    <link rel="stylesheet" href="css/tabmenuitems.css"> 
+    <link rel="stylesheet" href="css/tabmenucontents.css"> 
+    <link rel="stylesheet" href="css/firsttabcontent.css">
+    <link rel="stylesheet" href="css/secondtabcontent.css">
+</head>
+<body>
+    <div class="main">
+        <!--userData.css-->
+        <div class="main__user-data">
+            <img src="img/user.png" alt="">
+            <span class="main__user-data__user-name">username</span>
+            <a class="main__user-data__exit" href="">Выйти</a>
+        </div>
+        <div class="clear"></div>
+        <!--END userData.css-->
+
+        <!--tabMenuItems.css-->
+        <div class="main__tabs">
+            <ul class="main__tabs__ul">
+                <li class="main__tabs__ul__li"><a href="#first">Главная</a></li>
+                <li class="main__tabs__ul__li"><a href="#second">История</a></li>
+                <li class="main__tabs__ul__li"><a href="#person">Персонализация</a></li>
+            </ul>
+        </div>
+        <!--END tabMenuItems.css-->
+
+        <!--Wrapper for ALL TABS CONTENT-->
+        <div class="main__tabs__content">
+            <!--UL = WRAP FOR EACH LI(tab content)-->
+            <ul class="main__tabs__content__ul">
+               <!--firstTabContents.css-->
+                <li class="main__tabs__content__ul__li" id="first">
+                    <ul>
+                        <li>
+                            <img src="img/dohod.png" alt="">
+                            <span>Доходы</span>
+                        </li>
+                        <li>
+                            <img src="img/rashod.png" alt="">
+                            <span>Расходы</span>
+                        </li>
+                        <li>
+                            <img src="img/send.png" alt="">
+                            <span>Переводы</span>
+                        </li>
+                        <li>
+                            <img src="img/sch.png" alt="">
+                            <span>Счета</span>
+                        </li>
+                    </ul>	
+
+                    <div class="statistics__header">
+                        <span class="statistics__header_stat">Статистика</span>
+                        <img class="statistics__header_img" src="img/stat.png" alt="">
+                    </div>
+                </li>
+                <!--END firstTabContents.css-->
+
+                <!--secondTabContents.css-->
+                <li class="main__tabs__content__ul__li" id="second">
+                    <ul>
+                        <li>
+                            <div>
+                                <img src="img/dohod.png" alt="">
+                            </div>
+
+                            <div class="history-content-wrap">
+                                <div class="history-date">Date</div>
+                                <div>Category</div>
+                            </div>
+
+                            <div class="history-content-wrap alignCenter">Describe</div>
+
+                            <div class="history-content-wrap alignRight">
+                                <div class="account">Кошелек</div>
+                                <div class="color-income">Сумма
+                                    <span class="currency">Валюта</span>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <div>
+                                <img src="img/rashod.png" alt="">
+                            </div>
+
+                            <div class="history-content-wrap">
+                                <div class="history-date">Date</div>
+                                <div>Category</div>       
+                            </div>
+
+                            <div class="history-content-wrap alignCenter">Describe</div>
+                            <div class="history-content-wrap alignRight">
+                                <div class="account">Кошелек</div>
+                                <div class="color-consumption">Сумма
+                                    <span class="currency">Валюта</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div>
+                                <img src="img/send.png" alt="">
+                            </div>
+                            <div class="history-content-wrap">
+                                <div class="history-date">Date</div>
+                                <div>Category</div>
+                            </div>
+                            <div class="history-content-wrap alignCenter">Describe</div>
+                            <div class="history-content-wrap alignRight">
+                                <div class="account">Кошелек</div>
+                                <div class="color-send">Сумма
+                                    <span class="currency">Валюта</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!--END secondTabContents.css-->
+
+                <li class="main__tabs__content__ul__li" id="person">3
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
