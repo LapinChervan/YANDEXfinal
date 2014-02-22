@@ -1,5 +1,4 @@
 .main__tabs__content {
-    height:550px;
     overflow:hidden;
     background: url("../img/libg.png");
     border-top-right-radius: 4px;
@@ -7,7 +6,16 @@
     border-bottom-left-radius: 4px;
 }
 
+.main__tabs__content__ul {
+    white-space: nowrap;
+}
+
+.indentation {
+    margin: 10px 10px 0 10px;
+}
+
 .main__tabs__content__ul__li {
-    height:550px;
-    padding: 10px;
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
 }
