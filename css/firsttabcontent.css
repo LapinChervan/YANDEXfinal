@@ -137,7 +137,7 @@
     box-shadow: inset 1px 2px 2px #949494;  
 }
 
-.form__plus {
+.form__plus, .form__minus, .form__send, .form__card {
     height: 325px;
     width: 275px;
     margin: 5px auto;
@@ -145,7 +145,7 @@
     background: url("../img/wavegrid.png");
 }
 
-.form__plus__header {
+.form__plus__header, .form__minus__header, .form__send__header, .form__card__header {
     height: 22px;
     width: 269px;
     border-top-left-radius: 4px;
