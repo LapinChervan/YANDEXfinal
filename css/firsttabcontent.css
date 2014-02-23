@@ -74,9 +74,14 @@
     top: 43px;
 }
 
+.statistics__kurs img {
+    vertical-align: middle;
+}
+
 .cash {
     color: #454545;
     margin: 0 5px 0 2px;
+    vertical-align: middle;
 }
 
 .statistics__ul {

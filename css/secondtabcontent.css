@@ -12,6 +12,15 @@
     margin-bottom: 5px;
     cursor: pointer;
     background: url("../img/hist.png") 0 -6px;
+    position: relative;
+}
+
+#second li:hover div.alignRight {
+    margin-left: -20px;
+}
+
+#second li:hover .delete, #second li:hover .edit{
+    display: inline-block;
 }
 
 #second li > div {
