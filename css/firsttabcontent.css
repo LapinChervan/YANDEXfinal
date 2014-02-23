@@ -114,10 +114,10 @@
 }
 
 .statistics__ul__li a,
-.form__plus__add,
-.form__minus__add,
-.form__send__add,
-.form__card__add {
+.form__plus__add, .form__plus__cancel,
+.form__minus__add, .form__minus__cancel,
+.form__send__add, .form__send__cancel,
+.form__card__add, .form__card__cancel {
     display: inline-block;
     text-align: center;
     text-decoration: none;
@@ -133,11 +133,19 @@
     box-shadow: 0px 2px 5px #949494;
 }
 
-.statistics__ul__li a:hover {
+.statistics__ul__li a:hover,
+.form__plus__add:hover, .form__plus__cancel:hover,
+.form__minus__add:hover, .form__minus__cancel:hover,
+.form__send__add:hover, .form__send__cancel:hover,
+.form__card__add:hover, .form__card__cancel:hover {
     box-shadow: -1px -1px 5px #949494, 3px 3px 5px #949494;
 }
 
-.statistics__ul__li a:active {
+.statistics__ul__li a:active,
+.form__plus__add:active, .form__plus__cancel:active,
+.form__minus__add:active, .form__minus__cancel:active,
+.form__send__add:active, .form__send__cancel:active,
+.form__card__add:active, .form__card__cancel:active {
     box-shadow: inset 1px 2px 2px #949494;  
 }
 
