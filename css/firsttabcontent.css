@@ -136,3 +136,22 @@
 .statistics__ul__li a:active {
     box-shadow: inset 1px 2px 2px #949494;  
 }
+
+.form__plus {
+    height: 325px;
+    width: 275px;
+    margin: 5px auto;
+    border-radius: 4px;
+    background: url("../img/wavegrid.png");
+}
+
+.form__plus__header {
+    height: 22px;
+    width: 269px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background: url("../img/headerbg.png");
+    color: #F9F1F1;
+    font-weight: bold;
+    padding: 5px 3px;
+}
