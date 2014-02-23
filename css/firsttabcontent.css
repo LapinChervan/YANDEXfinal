@@ -74,6 +74,7 @@
     width: 45%;
     height: 390px;
     position: relative;
+    overflow: auto;
 }
 
 .statistics__ul__li tr {
@@ -152,7 +153,10 @@
 .form__plus,
 .form__minus,
 .form__send,
-.form__card {
+.form__card,
+.form__plus__filters,
+.form__minus__filters {
+    text-align: center;
     height: 325px;
     width: 275px;
     margin: 5px auto;
@@ -164,7 +168,9 @@
 .form__plus__header,
 .form__minus__header,
 .form__send__header,
-.form__card__header {
+.form__card__header,
+.form__plus__header__filters,
+.form__minus__header__filters {
     height: 22px;
     width: 269px;
     border-top-left-radius: 4px;
@@ -178,7 +184,9 @@
 .form__plus__blockButton,
 .form__minus__blockButton,
 .form__send__blockButton,
-.form__card__blockButton {
+.form__card__blockButton,
+.form__plus__blockButton__filters,
+.form__minus__blockButton__filters {
     position: absolute;
     width: 180px;
     height: 30px;
@@ -189,7 +197,9 @@
 .form__plus__blockInputs,
 .form__minus__blockInputs,
 .form__send__blockInputs,
-.form__card__blockInputs {
+.form__card__blockInputs,
+.form__plus__blockInputs__filters,
+.form__minus__blockInputs__filters {
     width: 250px;
     margin: 5px auto;
     border: 1px solid black;
