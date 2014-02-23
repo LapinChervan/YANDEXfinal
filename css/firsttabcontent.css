@@ -60,6 +60,21 @@
     margin: 5px auto;
 }
 
+.statistics__kurs {
+    width: 300px;
+    height: 15px;
+    margin: 5px auto;
+    background: url("../img/wavegrid.png");
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+}
+
+.cash {
+    color: #454545;
+    margin: 0 5px 0 2px;
+}
+
 .statistics__ul {
     list-style-type: none;
     text-align: center;
@@ -72,9 +87,7 @@
     box-shadow: 2px 2px 10px #AFAFAF, -2px -2px 10px #AFAFAF;
     margin: 5px 20px 0;
     width: 45%;
-    height: 390px;
     position: relative;
-    overflow: auto;
 }
 
 .statistics__ul__li tr {
