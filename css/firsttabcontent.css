@@ -113,7 +113,11 @@
     color: #FF3532;
 }
 
-.statistics__ul__li a {
+.statistics__ul__li a,
+.form__plus__add,
+.form__minus__add,
+.form__send__add,
+.form__card__add {
     display: inline-block;
     text-align: center;
     text-decoration: none;
