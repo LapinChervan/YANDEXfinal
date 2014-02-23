@@ -149,15 +149,22 @@
     box-shadow: inset 1px 2px 2px #949494;  
 }
 
-.form__plus, .form__minus, .form__send, .form__card {
+.form__plus,
+.form__minus,
+.form__send,
+.form__card {
     height: 325px;
     width: 275px;
     margin: 5px auto;
     border-radius: 4px;
     background: url("../img/wavegrid.png");
+    position: relative;
 }
 
-.form__plus__header, .form__minus__header, .form__send__header, .form__card__header {
+.form__plus__header,
+.form__minus__header,
+.form__send__header,
+.form__card__header {
     height: 22px;
     width: 269px;
     border-top-left-radius: 4px;
@@ -166,4 +173,15 @@
     color: #F9F1F1;
     font-weight: bold;
     padding: 5px 3px;
+}
+
+.form__plus__blockButton,
+.form__minus__blockButton,
+.form__send__blockButton,
+.form__card__blockButton {
+    position: absolute;
+    width: 180px;
+    height: 30px;
+    top: 290px;
+    left: 40px;
 }
