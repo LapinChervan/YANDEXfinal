@@ -2,6 +2,7 @@
     list-style-type: none;
     text-align: left;
     margin: 0 0 15px 0;
+    display: inline-block;
 }
 
 .first__ul__li__button {
@@ -63,11 +64,14 @@
 .statistics__kurs {
     width: 300px;
     height: 15px;
-    margin: 5px auto;
-    background: url("../img/wavegrid.png");
+    margin: -1px 0 0 -25px;
     border-radius: 4px;
     padding: 10px;
     text-align: center;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 43px;
 }
 
 .cash {
