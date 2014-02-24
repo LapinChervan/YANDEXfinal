@@ -58,11 +58,11 @@ div.removeStyle > div > span {
 .create-block {
     margin-top: 10px;
 }
-
+/*
 .create-image {
     border: 1px dashed;
     box-shadow: inset 0 0 1px;
-}
+}*/
 
 .inlineBlock {
     display: inline-block;

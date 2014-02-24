@@ -12,19 +12,15 @@
     height: 70px;
     margin: 0 1px;
     border-radius: 4px;
-    background: #CF4231;
+    background: url("../img/wavegrid.png");
     padding: 8px;
     cursor: pointer;
-    color: #EDEDED;
+    color: #626262;
 }
 
 .first__ul__li__button img {
     display: block;
     margin: 0 auto;
-}
-
-.first__ul__li__button:hover {
-    background: #4CB864;
 }
 
 .statistics__header {
@@ -140,7 +136,11 @@
     padding: 2px 2px;
 }
 
-.diagram > div {
+.filters__inputs {
+    text-align: left;
+}
+
+.cat {
     margin: 2px 0;
     height: 27px;
     border-radius: 4px;
@@ -152,19 +152,13 @@
     background: url("../img/headerbg.png");
     color: #F9F1F1;
     font-weight: bold;
-    padding: 7px 3px 0;
-    height: 18px;
+    padding: 5px 3px 0;
+    height: 26px;
     margin: 2px 0;
 }
 
-.filters__header {
-    height: 26px;
-    padding: 5px 3px 0;
-}
-
-.filters img, .diagram  img{
-    border: 1px dashed;
-    box-shadow: inset 0 0 1px;
+.calendarr {
+    text-align: left;
 }
 
 .cat1 {
@@ -215,6 +209,11 @@
     box-shadow: 0px 2px 5px #949494;
 }
 
+.apply_filter1, .apply_filter2 {
+    margin: 5px 3px;
+    display: block;
+}
+
 .form__plus__add:hover, .form__plus__cancel:hover,
 .form__minus__add:hover, .form__minus__cancel:hover,
 .form__send__add:hover, .form__send__cancel:hover,
@@ -222,7 +221,8 @@
 .form__plus__add__filters:hover, .form__plus__cancel__filters:hover,
 .form__minus__add__filters:hover, .form__minus__cancel__filters:hover,
 .add_cat_sch:hover, .add_cat_plus:hover, .add_cat_minus:hover,
-.apply_filter1:hover, .apply_filter2:hover {
+.apply_filter1:hover, .apply_filter2:hover,
+.first__ul__li__button:hover {
     box-shadow: -1px -1px 5px #949494, 3px 3px 5px #949494;
 }
 
@@ -233,8 +233,9 @@
 .form__plus__add__filters:active, .form__plus__cancel__filters:active,
 .form__minus__add__filters:active, .form__minus__cancel__filters:active,
 .add_cat_sch:active, .add_cat_plus:active, .add_cat_minus:active,
-.apply_filter1:active, .apply_filter2:active {
-    box-shadow: inset 1px 2px 2px #949494;  
+.apply_filter1:active, .apply_filter2:active, 
+.first__ul__li__button:active {
+    box-shadow: inset 1px 2px 2px #949494;
 }
 
 .form__plus,
