@@ -3,6 +3,48 @@
     padding: 0;
 }
 
+.login, .logreg {
+    margin: 10px auto;
+    width: 300px;
+    height: 215px;
+    background: url("../img/headerbg.png");
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.login__inputs, .logreg__inputs {
+    width: 90%;
+    margin: 5px auto;
+    text-align: center;
+}
+
+.login__inputs input, .logreg__inputs input {
+    padding: 0 5px;
+    height: 40px;
+    width: 80%;
+    margin: 2px 0;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #464646;
+}
+
+.log_in, .log_reg {
+    margin: 2px auto;
+    display: block;
+    height: 35px;
+    width: 83%;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    color: #F0F0F0;
+    padding: 10px 0 0 0;
+}
+
 body {
     font-family: Tahoma, Verdana;
     background: url("../img/wavegrid.png");
@@ -55,7 +97,7 @@ body {
     margin: 0 auto;
 }
 
-.header__reg__button, .header__auth__button  {
+.header__reg__button, .header__auth__button {
     display: table-cell;
     height: 45px;
     width: 215px;
@@ -67,27 +109,27 @@ body {
     color: #F0F0F0;
 }
 
-.header__reg__button {
+.header__reg__button, .log_reg {
     background: #2189C2; 
     border: 1px solid #2189C2;
 }
 
-.header__auth__button {
+.header__auth__button, .log_in {
     background: #60B149; 
     border: 1px solid #60B149;
 }
 
 /*BUTTON REG*/
-.header__reg__button:hover {
+.header__reg__button:hover, .log_reg:hover {
     box-shadow: 1px 1px 20px #C0F6F6, -1px -1px 20px #C0F6F6;
     border: 1px solid #2189C2;
 }
 
-.header__reg__button:focus {
+.header__reg__button:focus, .log_reg:focus {
     border: 1px solid #FFF;
 }
 
-.header__reg__button:active {
+.header__reg__button:active, .log_reg:active {
     background: #0A72AB;
     box-shadow: inset 1px 3px 12px #424B49;
     color: #D0D6DA;
@@ -95,16 +137,16 @@ body {
 /*-----------------------------------------------*/
 
 /*BUTTON AUTH*/
-.header__auth__button:hover {
+.header__auth__button:hover, .log_in:hover {
     box-shadow: 1px 1px 20px #C2F9BC, -1px -1px 20px #C2F9BC;
     border: 1px solid #60B149;
 }
 
-.header__auth__button:focus {
+.header__auth__button:focus, .log_in:focus {
     border: 1px solid #E2FFCB;
 }
 
-.header__auth__button:active {
+.header__auth__button:active, .log_in:active {
     background: #43942C;
     box-shadow: inset 1px 3px 12px #424B49;
     color: #D0D6DA;

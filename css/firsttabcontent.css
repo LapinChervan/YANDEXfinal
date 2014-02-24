@@ -12,7 +12,7 @@
     height: 70px;
     margin: 0 1px;
     border-radius: 4px;
-    background: #A32C2C;
+    background: #CF4231;
     padding: 8px;
     cursor: pointer;
     color: #EDEDED;
@@ -25,12 +25,6 @@
 
 .first__ul__li__button:hover {
     background: #4CB864;
-}
-
-
-.statistics {
-    border-radius: 4px;
-    height: 350px;
 }
 
 .statistics__header {
@@ -56,8 +50,8 @@
 }
 
 .statistics {
+    border-radius: 4px;
     width: 95%;
-    height: 400px;
     margin: 5px auto;
 }
 
@@ -94,8 +88,9 @@
     display: inline-block;
     border-radius: 4px;
     box-shadow: 2px 2px 10px #AFAFAF, -2px -2px 10px #AFAFAF;
-    margin: 5px 20px 0;
-    width: 45%;
+    background: url("../img/wavegrid.png");
+    margin: 5px 10px 0;
+    width: 49%;
     position: relative;
 }
 
@@ -107,7 +102,6 @@
     width: 95%;
     margin: 5px auto -3px;
     border-collapse: inherit;
-    background: url("../img/wavegrid.png");
     border-radius: 4px;
     padding: 0 5px;
 }
@@ -115,16 +109,18 @@
 .tableprices__plus tr, .tableprices__minus tr {
     height: 40px;
     cursor: pointer;
+     border-radius: 4px;
 }
 
-.tableprices__plus tr:hover, .tableprices__minus tr:hover {
-    height: 40px;
-    cursor: pointer;
+.tableprices__plus, .tableprices__minus td {
+    padding: 0 10px;
 }
 
 .tableprices__plus td:last-child {
     text-align: right;
-    color: #0E7C0E;
+    color: #4D76B6;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .tableprices__plus td:first-child, .tableprices__minus td:first-child {
@@ -133,14 +129,77 @@
 
 .tableprices__minus td:last-child {
     text-align: right;
-    color: #FF3532;
+    color: #F08A03;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.statistics__ul__li a,
+.diagram, .filters {
+    width: 90%;
+    margin: 5px auto;   
+    padding: 2px 2px;
+}
+
+.diagram > div {
+    margin: 2px 0;
+    height: 27px;
+    border-radius: 4px;
+    padding: 5px 2px 0 2px;
+}
+
+.diagram__header, .filters__header {
+    border-radius: 4px;
+    background: url("../img/headerbg.png");
+    color: #F9F1F1;
+    font-weight: bold;
+    padding: 7px 3px 0;
+    height: 18px;
+    margin: 2px 0;
+}
+
+.filters__header {
+    height: 26px;
+    padding: 5px 3px 0;
+}
+
+.filters img, .diagram  img{
+    border: 1px dashed;
+    box-shadow: inset 0 0 1px;
+}
+
+.cat1 {
+    width: 70%;
+    background: #4BF069;
+}
+
+.cat2 {
+    width: 90%;
+    background: #6C7EF0;
+}
+
+.cat3 {
+    width: 55%;
+    background: #F0BE68;
+}
+
+.cat4 {
+    width: 40%;
+    background: #7042F0;
+}
+
+.cat5 {
+    width: 60%;
+    background: #F05550;
+}
+
 .form__plus__add, .form__plus__cancel,
 .form__minus__add, .form__minus__cancel,
 .form__send__add, .form__send__cancel,
-.form__card__add, .form__card__cancel {
+.form__card__add, .form__card__cancel,
+.form__plus__add__filters, .form__plus__cancel__filters,
+.form__minus__add__filters, .form__minus__cancel__filters,
+.add_cat_sch, .add_cat_plus, .add_cat_minus,
+.apply_filter1, .apply_filter2 {
     display: inline-block;
     text-align: center;
     text-decoration: none;
@@ -156,19 +215,25 @@
     box-shadow: 0px 2px 5px #949494;
 }
 
-.statistics__ul__li a:hover,
 .form__plus__add:hover, .form__plus__cancel:hover,
 .form__minus__add:hover, .form__minus__cancel:hover,
 .form__send__add:hover, .form__send__cancel:hover,
-.form__card__add:hover, .form__card__cancel:hover {
+.form__card__add:hover, .form__card__cancel:hover,
+.form__plus__add__filters:hover, .form__plus__cancel__filters:hover,
+.form__minus__add__filters:hover, .form__minus__cancel__filters:hover,
+.add_cat_sch:hover, .add_cat_plus:hover, .add_cat_minus:hover,
+.apply_filter1:hover, .apply_filter2:hover {
     box-shadow: -1px -1px 5px #949494, 3px 3px 5px #949494;
 }
 
-.statistics__ul__li a:active,
 .form__plus__add:active, .form__plus__cancel:active,
 .form__minus__add:active, .form__minus__cancel:active,
 .form__send__add:active, .form__send__cancel:active,
-.form__card__add:active, .form__card__cancel:active {
+.form__card__add:active, .form__card__cancel:active,
+.form__plus__add__filters:active, .form__plus__cancel__filters:active,
+.form__minus__add__filters:active, .form__minus__cancel__filters:active,
+.add_cat_sch:active, .add_cat_plus:active, .add_cat_minus:active,
+.apply_filter1:active, .apply_filter2:active {
     box-shadow: inset 1px 2px 2px #949494;  
 }
 

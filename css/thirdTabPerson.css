@@ -26,25 +26,10 @@
     margin: 0 5px 5px 0;
 }
 
-.setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete{
+.setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete {
     display: inline-block;
 }
 
-.create-block a {
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 4px;
-    width: 100px;
-    height: 15px;
-    color: #454545;
-    font-size: 12px;
-    padding: 7px;
-    font-weight: bold;
-    background: url("../img/wavegrid.png");
-    box-shadow: 0px 2px 5px #949494;
-    margin-top: 5px;
-}
 
 div.removeStyle {
     text-align: left;
@@ -56,7 +41,7 @@ div.removeStyle {
 div.removeStyle > div {
     display: inline-block;
     width: 350px;
-    background: grey;
+    background: gray;
     padding: 8px;
     border-radius: 4px;
     background: url(../img/wavegrid.png);
@@ -91,6 +76,7 @@ input[type=text] {
     background: #F6F6f6;
     border-radius: 4px;
     text-align: center;
+    margin: 0 0 3px 0;
 }
 
 .block {
