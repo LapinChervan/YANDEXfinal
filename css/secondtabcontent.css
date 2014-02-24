@@ -23,6 +23,30 @@
     display: inline-block;
 }
 
+.history-filter {
+    background: url("../img/headerbg.png");
+    color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(18, 46, 30, 0.5);
+}
+
+.history-filter select {
+    width: 100px;
+    margin: 0 5px 0 5px;
+    vertical-align: middle;
+}
+
+.history-filter label {
+    margin: 5px;
+}
+
+.history-filter label input {
+    margin-right: 3px;
+    vertical-align: middle;
+}
+
 #second li > div {
     display: inline-block;
     vertical-align: middle;
@@ -42,6 +66,10 @@
 
 .alignCenter {
     text-align: center;
+}
+
+.marginL5 {
+    margin-left: 5px;
 }
 
 .alignRight {

@@ -255,69 +255,86 @@
 
                 <!--secondTabContents.css-->
                 <li class="main__tabs__content__ul__li" id="second">
-                    <ul class="indentation">
-                        <li>
-                            <span class="edit"></span>
-                            <span class="delete"></span>
-                            <div>
-                                <img src="img/dohod.png" alt="">
-                            </div>
-
-                            <div class="history-content-wrap">
-                                <div class="history-date">Date</div>
-                                <div>Category</div>
-                            </div>
-
-                            <div class="history-content-wrap alignCenter">Describe</div>
-
-                            <div class="history-content-wrap alignRight">
-                                <div class="account">Кошелек</div>
-                                <div class="color-income">Сумма
-                                    <span class="currency">Валюта</span>
+                    <div class="indentation">
+                        <div class="history-filter">
+                            <select>
+                                <option>счет 1</option>
+                                <option>счет 2</option>
+                            </select>
+                            <label><input type="radio" name="operation" checked>Все операции</label>
+                            <label><input type="radio" name="operation">Доход</label>
+                            <label><input type="radio" name="operation">Расход</label>
+                            <label><input type="radio" name="operation">Перевод</label>
+                            <select>
+                                <option>операция 1</option>
+                                <option>операция 2</option>
+                            </select>
+                            <a class="add_cat_sch marginL5">Применить</a>
+                        </div>
+                        <ul>
+                            <li>
+                                <span class="edit"></span>
+                                <span class="delete"></span>
+                                <div>
+                                    <img src="img/dohod.png" alt="">
                                 </div>
-                            </div>
-                        </li>
 
-                        <li>
-                            <span class="edit"></span>
-                            <span class="delete"></span>
-                            <div>
-                                <img src="img/rashod.png" alt="">
-                            </div>
-
-                            <div class="history-content-wrap">
-                                <div class="history-date">Date</div>
-                                <div>Category</div>       
-                            </div>
-
-                            <div class="history-content-wrap alignCenter">Describe</div>
-                            <div class="history-content-wrap alignRight">
-                                <div class="account">Кошелек</div>
-                                <div class="color-consumption">Сумма
-                                    <span class="currency">Валюта</span>
+                                <div class="history-content-wrap">
+                                    <div class="history-date">Date</div>
+                                    <div>Category</div>
                                 </div>
-                            </div>
-                        </li>
 
-                        <li>
-                            <span class="edit"></span>
-                            <span class="delete"></span>
-                            <div>
-                                <img src="img/send.png" alt="">
-                            </div>
-                            <div class="history-content-wrap">
-                                <div class="history-date">Date</div>
-                                <div>Category</div>
-                            </div>
-                            <div class="history-content-wrap alignCenter">Describe</div>
-                            <div class="history-content-wrap alignRight">
-                                <div class="account">Кошелек</div>
-                                <div class="color-send">Сумма
-                                    <span class="currency">Валюта</span>
+                                <div class="history-content-wrap alignCenter">Describe</div>
+
+                                <div class="history-content-wrap alignRight">
+                                    <div class="account">Кошелек</div>
+                                    <div class="color-income">Сумма
+                                        <span class="currency">Валюта</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+
+                            <li>
+                                <span class="edit"></span>
+                                <span class="delete"></span>
+                                <div>
+                                    <img src="img/rashod.png" alt="">
+                                </div>
+
+                                <div class="history-content-wrap">
+                                    <div class="history-date">Date</div>
+                                    <div>Category</div>
+                                </div>
+
+                                <div class="history-content-wrap alignCenter">Describe</div>
+                                <div class="history-content-wrap alignRight">
+                                    <div class="account">Кошелек</div>
+                                    <div class="color-consumption">Сумма
+                                        <span class="currency">Валюта</span>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <span class="edit"></span>
+                                <span class="delete"></span>
+                                <div>
+                                    <img src="img/send.png" alt="">
+                                </div>
+                                <div class="history-content-wrap">
+                                    <div class="history-date">Date</div>
+                                    <div>Category</div>
+                                </div>
+                                <div class="history-content-wrap alignCenter">Describe</div>
+                                <div class="history-content-wrap alignRight">
+                                    <div class="account">Кошелек</div>
+                                    <div class="color-send">Сумма
+                                        <span class="currency">Валюта</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
                 <!--END secondTabContents.css-->
