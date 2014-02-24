@@ -10,6 +10,13 @@
     background: url("../img/headerbg.png");
     padding: 10px;
     border-radius: 4px;
+    position: relative;
+}
+
+.close {
+    top: -8px; 
+    right: -8px;
+    position: absolute;
 }
 
 .login__inputs, .logreg__inputs {
