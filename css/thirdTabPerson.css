@@ -106,3 +106,7 @@ input[type=text] {
 .relative > div {
     position: relative
 }
+
+div.marginR0 {
+    margin-right: 0;
+}
