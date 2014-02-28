@@ -11,7 +11,6 @@
     text-overflow: ellipsis;
     margin-bottom: 5px;
     cursor: pointer;
-    background: url("../img/wavegrid.png") 0 -6px;
     position: relative;
 }
 
@@ -24,7 +23,6 @@
 }
 
 .history-filter {
-    background: url("../img/headerbg.png");
     color: white;
     margin-bottom: 10px;
     padding: 10px;
