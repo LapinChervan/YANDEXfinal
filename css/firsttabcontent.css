@@ -102,7 +102,7 @@
 .tableprices__plus tr, .tableprices__minus tr {
     height: 40px;
     cursor: pointer;
-     border-radius: 4px;
+    border-radius: 4px;
 }
 
 .tableprices__plus, .tableprices__minus td {

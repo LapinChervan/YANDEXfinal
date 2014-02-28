@@ -13,7 +13,6 @@
 	background: url("../img/headerbg.png");
 }
 
-
 body,
 .first__ul__li__button,
 .statistics__ul__li,
@@ -33,4 +32,9 @@ body,
 .form__minus__filters,
 #second li {
 	background: url("../img/wavegrid.png");
+}
+
+.main__tabs__content,
+.main__tabs__ul__li {
+	background: url("../img/libg.png");
 }
