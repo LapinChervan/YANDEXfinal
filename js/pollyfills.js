@@ -1,3 +1,4 @@
+//addEventListener
 (function() {
     if (!Event.prototype.preventDefault) {
         Event.prototype.preventDefault=function() {
@@ -70,6 +71,7 @@
     }
 })();
 
+//getElementsByClassName
 (function() {
     if (!document.getElementsByClassName) {
         var indexOf = [].indexOf || function(prop) {
