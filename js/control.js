@@ -17,6 +17,21 @@ CONTROL.User = function(name, password) {
 		gain: [] 
 	};
 	this.mainCurr = 'Грн';
+	this.history = [];
+	this.total = { 	  
+		costs: {
+			thisMonth: 0 + this.mainCurr,
+			priorMont: 0 + this.mainCurr,
+			thisYear: 0 + this.mainCurr,
+			priorYear: 0 + this.mainCurr
+		},
+		gain: {
+			thisMonth: 0 + this.mainCurr,
+			priorMont: 0 + this.mainCurr,
+			thisYear: 0 + this.mainCurr,
+			priorYear: 0 + this.mainCurr
+		}
+	};
 	this.currency = { 
 		uah: {			
 			title: 'Грн',
@@ -35,32 +50,27 @@ CONTROL.User = function(name, password) {
 			price: 0.00
 		}
 	};
-	this.history = [];
-	this.total = { 	  
-		costs: {
-			thisMonth: 0 + this.mainCurr,
-			priorMont: 0 + this.mainCurr,
-			thisYear: 0 + this.mainCurr,
-			priorYear: 0 + this.mainCurr
-		},
-		gain: {
-			thisMonth: 0 + this.mainCurr,
-			priorMont: 0 + this.mainCurr,
-			thisYear: 0 + this.mainCurr,
-			priorYear: 0 + this.mainCurr
-		}
-	};
 }
 
 CONTROL.User.prototype.newCategory = function(type, category) {
-	if (this.categories[type] && category) {
-		this.categories[type].push(category);
+	var arr = this.categories[type];
+	if (arr && category) {
+		arr.push(category);
 	}
 }
 
 CONTROL.User.prototype.removeCategory = function(type, category) {
-
+	var arr = this.categories[type];
+	if (arr && arr.indexOf(category) !== -1) {
+		arr = arr.splice(arr.indexOf(category), 1);
+	}
 }
 
+CONTROL.User.prototype.renameCategory = function(type, oldCategory, newCategory) {
+	var arr = this.categories[type];
+	if (arr && arr.indexOf(oldCategory) !== -1 && newCategory) {
+		arr = arr.splice(arr.indexOf(oldCategory), 1, newCategory);
+	}
+}
 
 

@@ -13,3 +13,20 @@ buttonReg.addEventListener('click', function() {
 buttonAuth.addEventListener('click', function() {
 	doc.body.innerHTML = formLogin;
 }, false);
+
+
+var user = new CONTROL.User('вася', '12345');
+
+user.newCategory('costs','зп');
+user.newCategory('costs','аыап');
+
+alert(user.categories.costs);
+
+user.removeCategory('costs','аыап');
+alert(user.categories.costs);
+
+user.renameCategory('costs', 'зп', 'ЗП!');
+alert(user.categories.costs);
+
+user.newCategory('gain', 'такой себе gain');
+alert(user.categories.gain);
