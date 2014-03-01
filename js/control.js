@@ -1,7 +1,7 @@
 var CONTROL = {};
 
 CONTROL.initialize = (function() {
-	
+
 	var events = {};
 
 	if (typeof window.addEventListener === 'function') {
@@ -34,12 +34,13 @@ CONTROL.initialize = (function() {
 
 })();
 
+CONTROL.animate = (function() {
+
+})();
 
 CONTROL.dom = (function() {
 
 })();
-
-
 
 CONTROL.user = (function() {
   

@@ -14,5 +14,3 @@ events.addListener(buttonReg, 'click', function() {
 events.addListener(buttonAuth, 'click', function() {
 	doc.body.innerHTML = formLogin;
 }, false);
-
-

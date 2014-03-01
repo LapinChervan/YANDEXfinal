@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.body {
+    position: relative;
+}
+
 .login, .logreg {
     margin: 10px auto;
     width: 300px;
