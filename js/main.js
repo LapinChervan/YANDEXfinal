@@ -15,11 +15,15 @@ buttonAuth.addEventListener('click', function() {
 }, false);
 
 
-var user = new CONTROL.User('вася', '12345');
+
+/*var user = new CONTROL.User('вася', '12345');
+var use2 = new CONTROL.User('вася1', '32345');
 
 user.newCategory('costs','зп');
 user.newCategory('costs','аыап');
 
+
+alert(use2.categories.costs);
 alert(user.categories.costs);
 
 user.removeCategory('costs','аыап');
@@ -30,3 +34,6 @@ alert(user.categories.costs);
 
 user.newCategory('gain', 'такой себе gain');
 alert(user.categories.gain);
+*/
+
+

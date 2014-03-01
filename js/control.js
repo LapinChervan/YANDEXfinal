@@ -72,5 +72,3 @@ CONTROL.User.prototype.renameCategory = function(type, oldCategory, newCategory)
 		arr = arr.splice(arr.indexOf(oldCategory), 1, newCategory);
 	}
 }
-
-
