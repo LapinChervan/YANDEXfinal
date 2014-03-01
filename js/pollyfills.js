@@ -92,12 +92,9 @@
             })();
             return elems;
         };
-        document.getElementsByClassName = function(className) {
+        HTMLDocument.prototype.getElementsByClassName = function(className) {
             return getElementsByClassName(className,document);
         };
-        if (!window.Element){
-            window.Element = function(){};
-        }
         Element.prototype.getElementsByClassName = function(className) {
             return getElementsByClassName(className,this);
         };
