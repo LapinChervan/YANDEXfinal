@@ -12,8 +12,7 @@
 }
 
 .setting-wrap {
-    padding-top: 10px;
-    padding-bottom: 5px;
+    padding: 10px 0 5px 0;
 }
 
 .setting-wrap > div {
