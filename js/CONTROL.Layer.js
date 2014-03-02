@@ -1,5 +1,7 @@
+// new CONTROL.Layer(options), options = object with options
+
 CONTROL.Layer = function (options) {
-    this.allLayers.push(this.CreateLayer);
+    this.allLayers.push(this.createLayer(options));
 };
 
 CONTROL.Layer.prototype.allLayers = [];
@@ -7,50 +9,58 @@ CONTROL.Layer.prototype.allLayers = [];
 CONTROL.Layer.prototype.getDefaultOptions = function () {
     return {
         parent: document.body,
-        clsOpacityLayer: undefined,
-        clsContentLayer: undefined,
+        clsOpacityLayer: 'modal',
+        clsContentLayer: 'layer',
         content: undefined
     }
 };
 
 CONTROL.Layer.prototype.setOptions = function (options) {
+    var optionsObject;
     this.options = this.getDefaultOptions();
+    optionsObject = this.options;
     Object.keys(options).forEach(function (key) {
-        this.options[key] = options[key];
+        optionsObject[key] = options[key];
     });
 };
 
-CONTROL.Layer.prototype.CreateLayer = function (options) {
+CONTROL.Layer.prototype.createLayer = function (options) {
     var modal = document.createElement('div'),
         layer = document.createElement('div'),
-        optionsObject = this.options;
+        optionsObject;
     this.setOptions(options);
+    optionsObject = this.options;
     modal.className = optionsObject.clsOpacityLayer;
     layer.className = optionsObject.clsContentLayer;
     layer.innerHTML = optionsObject.content;
-    modal.innerHTML = layer;
-    layer.addEventListener('click',this.stopEvent);
     optionsObject.parent.appendChild(modal);
+    optionsObject.parent.appendChild(layer);
+    layer.addEventListener('click',this.stopEvent);
     return {
         modal: modal,
+        layer: layer,
         parent: optionsObject.parent
     };
 };
 
-CONTROL.Layer.prototype.stopEvent = function () {
-    var event = event || window.event;
+CONTROL.Layer.prototype.stopEvent = function (e) {
+    var event = e || window.event;
     event.stopPropagation();
 };
 
 CONTROL.Layer.prototype.destroyLayer = function () {
-    this.allLayers.forEach(function (layerObject) {
-        layerObject.parent.removeChild(layerObject.modal);
-        layerObject = null;
+    var allLayers = this.allLayers;
+    allLayers.forEach(function (layerObject, index) {
+        if (layerObject != null) {
+            layerObject.parent.removeChild(layerObject.modal);
+            layerObject.parent.removeChild(layerObject.layer);
+            allLayers[index] = null;
+        }
     });
 };
 
 (function () {
     window.addEventListener('click',function () {
-        CONTROL.Layer.destroyLayer();
+        CONTROL.Layer.prototype.destroyLayer();
     });
 })();
