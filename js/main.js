@@ -21,7 +21,10 @@ buttonAuth.addEventListener('click', function() {
 var user = new CONTROL.User('вася', '12345');
 var use2 = new CONTROL.User('вася1', '32345');
 
-alert(user.newGain({}));
+
+alert(user.newTransaction('send', {from: 'visa', to: 'masterCard', currency: 1000})); //true
+alert(user.newTransaction('gain', ['1','2'])); //false
+console.log(JSON.stringify(user));
 /*
 alert(user.setTitleCurr('uah','Гривна')); // true
 alert(user.currency.uah.title); //Гривна

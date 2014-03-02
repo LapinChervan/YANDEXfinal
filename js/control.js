@@ -17,7 +17,11 @@ CONTROL.User = function(name, password) {
 		gain: [] 
 	};
 	this.mainCurr = '';
-	this.history = [];
+	this.history = {
+		gain: [],
+		costs: [],
+		send: []
+	};
 	this.total = { 	  
 		costs: {
 			thisMonth: 0 + this.mainCurr,
@@ -117,9 +121,10 @@ CONTROL.User.prototype.setTitleCurr = function(type, title) {
 	return false;
 }
 
-CONTROL.User.prototype.newTransaction = function(data) {
-	if (Object.prototype.toString.call(data) === '[object Object]') {
-		this.history.push(data);
+CONTROL.User.prototype.newTransaction = function(type, data) {
+	var arr = this.history[type];
+	if (arr && Object.prototype.toString.call(data) === '[object Object]') {
+		arr.push(data);
 		return true;
 	}
 	return false;
