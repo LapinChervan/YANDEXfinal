@@ -117,3 +117,10 @@ CONTROL.User.prototype.setTitleCurr = function(type, title) {
 	return false;
 }
 
+CONTROL.User.prototype.newTransaction = function(data) {
+	if (Object.prototype.toString.call(data) === '[object Object]') {
+		this.history.push(data);
+		return true;
+	}
+	return false;
+}

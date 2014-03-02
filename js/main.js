@@ -21,10 +21,17 @@ buttonAuth.addEventListener('click', function() {
 var user = new CONTROL.User('вася', '12345');
 var use2 = new CONTROL.User('вася1', '32345');
 
+alert(user.newGain({}));
+/*
+alert(user.setTitleCurr('uah','Гривна')); // true
+alert(user.currency.uah.title); //Гривна
+
 user.newCategory('costs','зп');
 user.newCategory('costs','аыап');
 
-/*
+
+
+
 alert(use2.categories.costs);
 alert(user.categories.costs);
 
