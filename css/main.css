@@ -3,6 +3,9 @@
     padding: 0;
 }
 
+body {
+	font-family: Verdana, Tahoma;
+}
 .main {
     width: 90%;
     min-width: 950px;

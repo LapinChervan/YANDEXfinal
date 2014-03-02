@@ -72,7 +72,6 @@ CONTROL.User = function(name, password) {
 	};
 };
 
-
 CONTROL.User.prototype = (function() {
 
 	function isObject(obj) {
