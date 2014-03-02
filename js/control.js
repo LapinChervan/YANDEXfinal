@@ -107,3 +107,13 @@ CONTROL.User.prototype.setMainCurr = function(main, dataCurr) {
 	}
 	return false;
 };
+
+CONTROL.User.prototype.setTitleCurr = function(type, title) {
+	var arr = this.currency[type];
+	if (arr && title) {
+		arr.title = title;
+		return true;
+	}	
+	return false;
+}
+
