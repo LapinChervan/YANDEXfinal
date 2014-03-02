@@ -4,6 +4,9 @@ var	doc = document, // документ
 	formReg = doc.getElementById('form-reg').innerHTML, // форма регистрации
 	formLogin = doc.getElementById('form-login').innerHTML; // форма авторизации
 
+//TODO убрать у шаблонов id, поставить class
+//TODO использовавть делегировани для кликов на войти и регу
+
 // вызов формы регистрации
 buttonReg.addEventListener('click', function() {
 	doc.body.innerHTML = formReg;
