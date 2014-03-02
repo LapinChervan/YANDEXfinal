@@ -8,12 +8,14 @@ var	doc = document, // документ
 
 // вызов формы регистрации
 buttonReg.addEventListener('click', function() {
-	doc.body.innerHTML = formReg;
+    event.stopPropagation();
+    new CONTROL.Layer({content:formReg});
 }, false);
 
 // вызов формы авторизации
 buttonAuth.addEventListener('click', function() {
-	doc.body.innerHTML = formLogin;
+    event.stopPropagation();
+    new CONTROL.Layer({content:formLogin});
 }, false);
 
 
