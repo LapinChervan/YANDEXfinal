@@ -72,60 +72,78 @@ CONTROL.User = function(name, password) {
 	};
 };
 
-CONTROL.User.prototype.newCategory = function(type, category) {
-	var arr = this.categories[type];
-	if (arr && category) {
-		arr.push(category);
-		return true;
-	}
-	return false;
-};
 
-CONTROL.User.prototype.removeCategory = function(type, category) {
-	var arr = this.categories[type];
-	if (arr && arr.indexOf(category) !== -1) {
-		arr = arr.splice(arr.indexOf(category), 1);
-		return true;
-	}
-	return false;
-};
+CONTROL.User.prototype = (function() {
 
-CONTROL.User.prototype.renameCategory = function(type, oldCategory, newCategory) {
-	var arr = this.categories[type];
-	if (arr && arr.indexOf(oldCategory) !== -1 && newCategory) {
-		arr = arr.splice(arr.indexOf(oldCategory), 1, newCategory);
-		return true;
+	function isObject(obj) {
+		return Object.prototype.toString.call(obj) === '[object Object]' ? true : false;	
 	}
-	return false;
-};
 
-CONTROL.User.prototype.setMainCurr = function(main, dataCurr) {
-	var curr = this.currency[main].price;
-	if (curr && Object.prototype.toString.call(dataCurr) === '[object Object]') {
-		Object.keys(dataCurr).
-			forEach(function(elem) {
-				curr[elem] = dataCurr[elem];
-			});
-		this.mainCurr = this.currency[main].title;
-		return true;
+	function newCategory(type, category) {
+		var arr = this.categories[type];
+		if (arr && category) {
+			arr.push(category);
+			return true;
+		}
+		return false;
 	}
-	return false;
-};
 
-CONTROL.User.prototype.setTitleCurr = function(type, title) {
-	var arr = this.currency[type];
-	if (arr && title) {
-		arr.title = title;
-		return true;
-	}	
-	return false;
-}
-
-CONTROL.User.prototype.newTransaction = function(type, data) {
-	var arr = this.history[type];
-	if (arr && Object.prototype.toString.call(data) === '[object Object]') {
-		arr.push(data);
-		return true;
+	function removeCategory(type, category) {
+		var arr = this.categories[type];
+		if (arr && arr.indexOf(category) !== -1) {
+			arr = arr.splice(arr.indexOf(category), 1);
+			return true;
+		}
+		return false;
 	}
-	return false;
-}
+
+	function renameCategory(type, oldCategory, newCategory) {
+		var arr = this.categories[type];
+		if (arr && arr.indexOf(oldCategory) !== -1 && newCategory) {
+			arr = arr.splice(arr.indexOf(oldCategory), 1, newCategory);
+			return true;
+		}
+		return false;
+	}
+
+	function setMainCurr(main, dataCurr) {
+		var curr = this.currency[main].price;
+		if (curr && isObject(dataCurr)) {
+			Object.keys(dataCurr).
+				forEach(function(elem) {
+					curr[elem] = dataCurr[elem];
+				});
+			this.mainCurr = this.currency[main].title;
+			return true;
+		}
+		return false;
+	}
+
+	function setTitleCurr(type, title) {
+		var arr = this.currency[type];
+		if (arr && title) {
+			arr.title = title;
+			return true;
+		}	
+		return false;
+	}
+
+	function newTransaction(type, data) {
+		var arr = this.history[type];
+		if (arr && isObject(data)) {
+			arr.push(data);
+			return true;
+		}
+		return false;
+	}
+
+	return {
+		newCategory: newCategory,
+		removeCategory: removeCategory,
+		renameCategory: renameCategory,
+		setMainCurr: setMainCurr,
+		setTitleCurr: setTitleCurr,
+		newTransaction: newTransaction		
+	}
+
+})();
