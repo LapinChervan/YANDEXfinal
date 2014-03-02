@@ -16,7 +16,7 @@ CONTROL.User = function(name, password) {
 		costs: [],  
 		gain: [] 
 	};
-	this.mainCurr = 'Грн';
+	this.mainCurr = '';
 	this.history = [];
 	this.total = { 	  
 		costs: {
@@ -102,6 +102,7 @@ CONTROL.User.prototype.setMainCurr = function(main, dataCurr) {
 			forEach(function(elem) {
 				curr[elem] = dataCurr[elem];
 			});
+		this.mainCurr = this.currency[main].title;
 		return true;
 	}
 	return false;
