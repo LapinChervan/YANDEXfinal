@@ -4,21 +4,13 @@ var	doc = document, // документ
 	formReg = doc.getElementById('form-reg').innerHTML, // форма регистрации
 	formLogin = doc.getElementById('form-login').innerHTML, // форма авторизации
 	access = CONTROL.access,
+    layer = CONTROL.layer,
 	log_in, log_reg;
 
-
-function stop() {
-  if (event.preventDefault) { 
-    event.stopPropagation();
-  } else {                       
-    event.cancelBubble = true;
-  }
-}
-
 // вызов формы регистрации
-buttonReg.addEventListener('click', function() {
-    stop();
-    new CONTROL.Layer({content:formReg});
+buttonReg.addEventListener('click', function(e) {
+    e.stopPropagation();
+    CONTROL.layer.createLayer({content:formReg});
 
     log_reg = doc.getElementsByClassName('log_reg')[0];
 	log_reg.onclick = function() {	
@@ -28,9 +20,9 @@ buttonReg.addEventListener('click', function() {
 }, false);
 
 // вызов формы авторизации
-buttonAuth.addEventListener('click', function() {
-    stop();
-    new CONTROL.Layer({content:formLogin});
+buttonAuth.addEventListener('click', function(e) {
+    e.stopPropagation();
+    CONTROL.layer.createLayer({content:formLogin});
 
     log_in = doc.getElementsByClassName('log_in')[0];
 	log_in.onclick = function() {	
