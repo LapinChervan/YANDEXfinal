@@ -15,7 +15,7 @@ buttonReg.addEventListener('click', function() {
 
     log_reg = doc.getElementsByClassName('log_reg')[0];
 	log_reg.onclick = function() {	
-		access.registration('nvz3','qwerty');
+		access.registration(doc.getElementsByClassName('input_login_reg')[0].value,'qwerty');
 	};
 
 }, false);
@@ -27,7 +27,7 @@ buttonAuth.addEventListener('click', function() {
 
     log_in = doc.getElementsByClassName('log_in')[0];
 	log_in.onclick = function() {	
-		console.log(access.auth('nvz2'));
+		alert((access.auth(doc.getElementsByClassName('input_login_auth')[0].value)));
 	};
 }, false);
 
