@@ -2,7 +2,7 @@ var CONTROL = {};
 
 CONTROL.access = (function() {
 	
-	var ACCOUNT = 'account';
+	var ACCOUNT = 'account:';
 
 	function cacheLocal(user, userData) {
 		if (!localStorage[ACCOUNT + user] && user) {
@@ -15,13 +15,15 @@ CONTROL.access = (function() {
 	}
 
 	function registration(n, p) {
-		var newUser = new CONTROL.User(n, p);
-		cacheLocal(n, newUser);
+		if (n && p) {
+			var newUser = new CONTROL.User(n, p);
+			alert(cacheLocal(n, newUser));
+		}
 	}
 
 	function auth(n, p) {
-		var userData;
 		if (localStorage[ACCOUNT + n]) {
+			var userData;
 			return userData = JSON.parse(localStorage[ACCOUNT + n]);
 		}
 		return false;

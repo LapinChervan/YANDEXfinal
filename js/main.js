@@ -20,8 +20,10 @@ buttonAuth.addEventListener('click', function() {
 
 
 
-var user = new CONTROL.User('вася', '12345');
-var use2 = new CONTROL.User('вася1', '32345');
+var access = CONTROL.access;
+
+access.registration('nvz','qwerty');
+console.log(access.auth('nvz'));
 
 /*	
 alert(user.newTransaction('send', {from: 'visa', to: 'masterCard', currency: 1000})); //true
