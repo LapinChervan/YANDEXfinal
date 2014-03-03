@@ -2,7 +2,9 @@ var	doc = document, // документ
 	buttonReg = doc.getElementsByClassName('header__reg')[0], // кнопка регистрации
 	buttonAuth = doc.getElementsByClassName('header__auth')[0], // кнопка авторизации
 	formReg = doc.getElementById('form-reg').innerHTML, // форма регистрации
-	formLogin = doc.getElementById('form-login').innerHTML; // форма авторизации
+	formLogin = doc.getElementById('form-login').innerHTML, // форма авторизации
+	access = CONTROL.access,
+	log_in, log_reg;
 
 
 
@@ -10,20 +12,28 @@ var	doc = document, // документ
 buttonReg.addEventListener('click', function() {
     event.stopPropagation();
     new CONTROL.Layer({content:formReg});
+
+    log_reg = doc.getElementsByClassName('log_reg')[0];
+	log_reg.onclick = function() {	
+		access.registration('nvz3','qwerty');
+	};
+
 }, false);
 
 // вызов формы авторизации
 buttonAuth.addEventListener('click', function() {
     event.stopPropagation();
     new CONTROL.Layer({content:formLogin});
+
+    log_in = doc.getElementsByClassName('log_in')[0];
+	log_in.onclick = function() {	
+		console.log(access.auth('nvz2'));
+	};
 }, false);
 
 
-
-var access = CONTROL.access;
-
-access.registration('nvz','qwerty');
-console.log(access.auth('nvz'));
+//access.registration('nvz2','qwerty');
+//console.log(access.auth('nvz'));
 
 /*	
 alert(user.newTransaction('send', {from: 'visa', to: 'masterCard', currency: 1000})); //true

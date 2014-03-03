@@ -67,7 +67,7 @@ div.removeStyle > div > span {
     display: inline-block;
 }
 
-input[type=text] {
+.block {
     width: 100px;
     font-size: 13px;
     padding: 6px 0 4px 10px;

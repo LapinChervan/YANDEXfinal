@@ -1,8 +1,13 @@
 var CONTROL = {};
 
-CONTROL.access = (function() {
-	
+CONTROL.access = (function() {	
 	var ACCOUNT = 'account:';
+
+	function showContent() {
+		var doc = document;
+			content = doc.getElementById('user-form').innerHTML;
+		doc.body.innerHTML = content; 
+	}
 
 	function cacheLocal(user, userData) {
 		if (!localStorage[ACCOUNT + user] && user) {
@@ -24,6 +29,7 @@ CONTROL.access = (function() {
 	function auth(n, p) {
 		if (localStorage[ACCOUNT + n]) {
 			var userData;
+			showContent();
 			return userData = JSON.parse(localStorage[ACCOUNT + n]);
 		}
 		return false;
@@ -33,7 +39,6 @@ CONTROL.access = (function() {
 		registration: registration,
 		auth: auth
 	}
-
 })();
 
 CONTROL.User = function(name, password) {
@@ -172,5 +177,4 @@ CONTROL.User.prototype = (function() {
 		setTitleCurr: setTitleCurr,
 		newTransaction: newTransaction		
 	}
-
 })();

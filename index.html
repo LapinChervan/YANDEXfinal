@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="css/merge.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/layer.css">
+
+    <link rel="stylesheet" href="css/main.css">  
+    <link rel="stylesheet" href="css/userdata.css">  
+    <link rel="stylesheet" href="css/tabmenuitems.css"> 
+    <link rel="stylesheet" href="css/tabmenucontents.css"> 
+    <link rel="stylesheet" href="css/firsttabcontent.css">
+    <link rel="stylesheet" href="css/secondtabcontent.css">
+    <link rel="stylesheet" href="css/thirdTabPerson.css">
 </head>
 <body>
     <div class="main">
@@ -124,9 +132,467 @@
         </script>
     </div>
 
+    <script type="text/template" id="user-form">
+        <div class="main">
+            <!--userData.css-->
+            <div class="main__user-data">
+                <img src="img/user.png" alt="">
+                <span class="main__user-data__user-name">username</span>
+                <a class="main__user-data__exit" href="">Выйти</a>
+            </div>
+            <div class="clear"></div>
+            <!--END userData.css-->
+
+            <!--tabMenuItems.css-->
+            <div class="main__tabs">
+                <ul class="main__tabs__ul">
+                    <li class="main__tabs__ul__li"><a href="#first">Главная</a></li>
+                    <li class="main__tabs__ul__li"><a href="#second">История</a></li>
+                    <li class="main__tabs__ul__li"><a href="#person">Персонализация</a></li>
+                </ul>
+            </div>
+            <!--END tabMenuItems.css-->
+
+            <!--Wrapper for ALL TABS CONTENT-->
+            <div class="main__tabs__content">
+                <!--UL = WRAP FOR EACH LI(tab content)-->
+                <ul class="main__tabs__content__ul">
+                   <!--firstTabContents.css-->
+                    <li class="main__tabs__content__ul__li" id="first">
+                        <div class="indentation">
+                            <ul class="first__ul__button">
+                                <li class="first__ul__li__button">
+                                    <img src="img/dohod.png" alt="">
+                                    <span>Доходы</span>
+                                </li>
+                                <li class="first__ul__li__button">
+                                    <img src="img/rashod.png" alt="">
+                                    <span>Расходы</span>
+                                </li>
+                                <li class="first__ul__li__button">
+                                    <img src="img/send.png" alt="">
+                                    <span>Переводы</span>
+                                </li>
+                                <li class="first__ul__li__button">
+                                    <img src="img/sch.png" alt="">
+                                    <span>Счета</span>
+                                </li>
+                            </ul>
+
+                            <div class="statistics__kurs">
+                                <img src="img/usa.png" alt=""><span class="cash">9.00</span>
+                                <img src="img/eur.png" alt=""><span class="cash">11.54</span>
+                                <img src="img/rur.png" alt=""><span class="cash">2.45</span>
+                                <img src="img/uah.png" alt=""><span class="cash">1.00</span>
+                            </div>
+
+                            <div class="statistics__header">
+                                <span class="statistics__header_stat">Статистика</span>
+                                <img class="statistics__header_img" src="img/stat.png" alt="">
+                            </div>
+
+                            <div class="statistics">
+                                <ul class="statistics__ul">
+                                    <li class="statistics__ul__li">
+                                        <img class="logo_stat" src="img/plus.png" alt="">
+
+                                        <table class="tableprices__plus">
+                                            <tr>
+                                                <td>Текущий месяц</td>
+                                                <td>12 000 RUR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Предыдущий месяц</td>
+                                                <td>25 000 RUR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Текущий год</td>
+                                                <td>45 000 RUR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Предыдущий год</td>
+                                                <td>190 000 RUR</td>
+                                            </tr>
+                                        </table>
+
+                                        <div class="diagram">
+                                            <div class="diagram__header">Доходы за текущий месяц</div> 
+                                            <div class="calendarr"><img src="img/calendar.png" alt=""></div>
+                                            <div class="cat cat1">Категория 1</div>
+                                            <div class="cat cat2">Категория 2</div>
+                                            <div class="cat cat3">Категория 3</div>
+                                            <div class="cat cat4">Категория 4</div>
+                                            <div class="cat cat5">Категория 5</div>
+                                        </div>
+            
+                                        <div class="filters">
+                                            <div class="filters__header">Доходы за произвольный период</div>
+                                            <div class="calendarr"><img src="img/calendar.png" alt=""></div>
+                                            <div class="filters__inputs">
+                                                <input class="dateFrom" type="text" value="01.01.2014">
+                                                <input class="dateTo" type="text" value="01.03.2014">
+                                                <a class="apply_filter1" href="#">Отобрать</a>
+                                            </div>                     
+                                        </div>
+
+                                    </li>
+                                    <li class="statistics__ul__li">
+                                        <img  class="logo_stat" src="img/minus.png" alt="">
+                                        <table class="tableprices__minus">
+                                            <tr>
+                                                <td>Текущий месяц</td>
+                                                <td>10 000 RUR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Предыдущий месяц</td>
+                                                <td>22 000 RUR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Текущий год</td>
+                                                <td>40 000 RUR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Предыдущий год</td>
+                                                <td>150 000 RUR</td>
+                                            </tr>
+                                        </table>
+
+                                        <div class="diagram">    
+                                            <div class="diagram__header">Расходы за текущий месяц</div>
+                                            <div class="calendarr"><img src="img/calendar.png" alt=""></div>
+                                            <div class="cat cat1">Категория 1</div>
+                                            <div class="cat cat2"> Категория 2</div>
+                                            <div class="cat cat3"> Категория 3</div>
+                                            <div class="cat cat4">Категория 4</div>
+                                            <div class="cat cat5">Категория 5</div>
+                                        </div>
+
+                                        <div class="filters">
+                                            <div class="filters__header">Расходы за произвольный период</div>
+                                            <div class="calendarr"><img src="img/calendar.png" alt=""></div>
+                                            <div class="filters__inputs">
+                                                <input class="dateFrom" type="text" value="01.01.2014">
+                                                <input class="dateTo" type="text" value="01.03.2014">
+                                                <a class="apply_filter2" href="#">Отобрать</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>           
+                            </div> 
+                        </div> 
+                    </li>
+                    <!--END firstTabContents.css-->
+
+                    <!--secondTabContents.css-->
+                    <li class="main__tabs__content__ul__li" id="second">
+                        <div class="indentation">
+                            <div class="history-filter">
+                                <select>
+                                    <option>счет 1</option>
+                                    <option>счет 2</option>
+                                </select>
+                                <select>
+                                    <option>операция 1</option>
+                                    <option>операция 2</option>
+                                </select>
+                                <label><input type="radio" name="operation" checked>Все операции</label>
+                                <label><input type="radio" name="operation">Доход</label>
+                                <label><input type="radio" name="operation">Расход</label>
+                                <label><input type="radio" name="operation">Перевод</label>
+
+                                <a class="add_cat_sch marginL5">Применить</a>
+                            </div>
+                            <ul>
+                                <li>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <div>
+                                        <img src="img/dohod.png" alt="">
+                                    </div>
+
+                                    <div class="history-content-wrap">
+                                        <div class="history-date">Date</div>
+                                        <div>Category</div>
+                                    </div>
+
+                                    <div class="history-content-wrap alignCenter">Describe</div>
+
+                                    <div class="history-content-wrap alignRight">
+                                        <div class="account">Кошелек</div>
+                                        <div class="color-income">Сумма
+                                            <span class="currency">Валюта</span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <div>
+                                        <img src="img/rashod.png" alt="">
+                                    </div>
+
+                                    <div class="history-content-wrap">
+                                        <div class="history-date">Date</div>
+                                        <div>Category</div>
+                                    </div>
+
+                                    <div class="history-content-wrap alignCenter">Describe</div>
+                                    <div class="history-content-wrap alignRight">
+                                        <div class="account">Кошелек</div>
+                                        <div class="color-consumption">Сумма
+                                            <span class="currency">Валюта</span>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <div>
+                                        <img src="img/send.png" alt="">
+                                    </div>
+                                    <div class="history-content-wrap">
+                                        <div class="history-date">Date</div>
+                                        <div>Category</div>
+                                    </div>
+                                    <div class="history-content-wrap alignCenter">Describe</div>
+                                    <div class="history-content-wrap alignRight">
+                                        <div class="account">Кошелек</div>
+                                        <div class="color-send">Сумма
+                                            <span class="currency">Валюта</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!--END secondTabContents.css-->
+
+                    <!--thirdTabPerson.css-->
+                    <li class="main__tabs__content__ul__li" id="person">
+                        <div class="indentation">
+                            <div class="statistics__header">
+                                <span class="statistics__header_stat">Счета</span>
+                                <img class="statistics__header_img" src="img/stat.png" alt="">
+                            </div>
+                            <div class="floatRight create-block">
+                                <div class="inlineBlock create-image">
+                                    <img src="img/sch.png">
+                                </div>
+                                <div class="inlineBlock">
+                                    <input class="block" type="text">
+                                    <a href="#" class="add_cat_sch">Добавить</a>
+                                </div>
+                            </div>
+                            <div class="setting-wrap relative">
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>ПриватБанк</div>
+                                </div>
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>ПриватБанк</div>
+                                </div>
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>ПриватБанк</div>
+                                </div>
+                            </div>
+                            <div class="statistics__header">
+                                <span class="statistics__header_stat">Доходы</span>
+                                <img class="statistics__header_img" src="img/stat.png" alt="">
+                            </div>
+                            <div class="floatRight create-block">
+                                <div class="inlineBlock create-image">
+                                    <img src="img/sch.png">
+                                </div>
+                                <div class="inlineBlock">
+                                    <input class="block" type="text">
+                                    <a href="#" class="add_cat_plus">Добавить</a>
+                                </div>
+                            </div>
+                            <div class="setting-wrap relative">
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>Зарплата</div>
+                                </div>
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>Зарплата</div>
+                                </div>
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>Зарплата</div>
+                                </div>
+                            </div>
+                            <div class="statistics__header">
+                                <span class="statistics__header_stat">Расходы</span>
+                                <img class="statistics__header_img" src="img/stat.png" alt="">
+                            </div>
+                            <div class="floatRight create-block">
+                                <div class="inlineBlock create-image">
+                                    <img src="img/sch.png">
+                                </div>
+                                <div class="inlineBlock">
+                                    <input class="block" type="text">
+                                    <a href="#" class="add_cat_minus">Добавить</a>
+                                </div>
+                            </div>
+                            <div class="setting-wrap relative">
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>Покупки</div>
+                                </div>
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>Покупки</div>
+                                </div>
+                                <div>
+                                    <span class="edit"></span>
+                                    <span class="delete"></span>
+                                    <img src="img/rashod.png">
+                                    <div>Покупки</div>
+                                </div>
+                            </div>
+                            <div class="statistics__header">
+                                <span class="statistics__header_stat">Курс валют</span>
+                                <img class="statistics__header_img" src="img/stat.png" alt="">
+                            </div>
+                            <div class="setting-wrap">
+                                <div class="floatRight marginR0">
+                                    <label><input type="radio" name="valuta" checked>UA</label>
+                                    <label><input type="radio" name="valuta">RU</label>
+                                    <label><input type="radio" name="valuta">USA</label>
+                                    <label><input type="radio" name="valuta">EU</label>
+                                </div>
+                                <div class="removeStyle">
+                                    <div>
+                                        <span>Гривна(UA)</span>
+                                        <span class="floatRight">Основная валюта</span>
+                                    </div>
+                                </div>
+                                <div class="removeStyle">
+                                    <div>
+                                        <span>Рубль(RU)</span>
+                                        <span class="floatRight">1 RU = <input type="text" value="0.5"> UA</span>
+                                    </div>
+                                </div>
+                                <div class="removeStyle">
+                                    <div>
+                                        <span>Долар(USA)</span>
+                                        <span class="floatRight">1 USA = <input type="text" value="9"> UA</span>
+                                    </div>
+                                </div>
+                                <div class="removeStyle">
+                                    <div>
+                                        <span>Евро(EU)</span>
+                                        <span class="floatRight">1 EU = <input type="text" value="12"> UA</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--END thirdTabPerson.css-->
+                </ul>
+            </div>
+        </div>
+    </script>
+
+        <script type="text/template" id="form__plu_filt">
+            <div class="form__plus__filters">
+                <div class="form__plus__header__filters">Фильтры по доходам</div>
+                <div class="form__plus__blockInputs__filters">
+                </div>
+                <div class="form__plus__blockButton__filters">
+                    <a class="form__plus__cancel__filters" href="">Отмена</a>
+                    <a class="form__plus__add__filters" href="">Применить</a>
+                </div>
+            </div>
+        </script>  
+
+        <script type="text/template" id="form__plus">
+            <div class="form__plus">
+                <div class="form__plus__header">Доходы</div>
+                <div class="form__plus__blockInputs">
+                </div>
+                <div class="form__plus__blockButton">
+                    <a class="form__plus__cancel" href="">Отмена</a>
+                    <a class="form__plus__add" href="">Добавить</a>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="form__minus">
+            <div class="form__minus">
+                <div class="form__minus__header">Расходы</div>
+                <div class="form__minus__blockInputs">
+                </div>
+                <div class="form__minus__blockButton">
+                    <a class="form__minus__cancel" href="">Отмена</a>
+                    <a class="form__minus__add" href="">Добавить</a>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="form__send">
+            <div class="form__send">
+                <div class="form__send__header">Переводы</div>
+                <div class="form__send__blockInputs">
+                </div>
+                <div class="form__send__blockButton">
+                    <a class="form__send__cancel" href="">Отмена</a>
+                    <a class="form__send__add" href="">Добавить</a>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/template" id="form__card">
+            <div class="form__card">
+                <div class="form__card__header">Счета</div>
+                <div class="form__card__blockInputs">
+                </div>
+                <div class="form__card__blockButton">
+                    <a class="form__card__cancel" href="">Отмена</a>
+                    <a class="form__card__add" href="">Добавить</a>
+                </div>
+            </div>
+        </script>   
+
+        <script type="text/template" id="form__min_filt">
+            <div class="form__minus__filters">
+                <div class="form__minus__header__filters">Фильтры по расходам</div>
+                <div class="form__minus__blockInputs__filters">
+                </div>
+                <div class="form__minus__blockButton__filters">
+                    <a class="form__minus__cancel__filters" href="">Отмена</a>
+                    <a class="form__minus__add__filters" href="">Применить</a>
+                </div>
+            </div>
+        </script>      
+
     <script src="js/pollyfills.js"></script>
+    <script src="js/mustache.js"></script>
     <script src="js/control.js"></script>
     <script src="js/CONTROL.Layer.js"></script>
     <script src="js/main.js"></script>
+
 </body>
 </html>
