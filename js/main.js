@@ -15,7 +15,7 @@ buttonReg.addEventListener('click', function() {
 
     log_reg = doc.getElementsByClassName('log_reg')[0];
 	log_reg.onclick = function() {	
-		access.registration(doc.getElementsByClassName('input_login_reg')[0].value,'qwerty');
+		access.registration(doc.getElementsByClassName('input_login_reg')[0].value, 'qwerty');
 	};
 
 }, false);
@@ -27,38 +27,9 @@ buttonAuth.addEventListener('click', function() {
 
     log_in = doc.getElementsByClassName('log_in')[0];
 	log_in.onclick = function() {	
-		alert((access.auth(doc.getElementsByClassName('input_login_auth')[0].value)));
+		access.auth(doc.getElementsByClassName('input_login_auth')[0].value);
 	};
 }, false);
 
 
-//access.registration('nvz2','qwerty');
-//console.log(access.auth('nvz'));
-
-/*	
-alert(user.newTransaction('send', {from: 'visa', to: 'masterCard', currency: 1000})); //true
-alert(user.newTransaction('gain', ['1','2'])); //false
-console.log(JSON.stringify(user));
-
-alert(user.setTitleCurr('uah','Гривна')); // true
-alert(user.currency.uah.title); //Гривна
-
-user.newCategory('costs','зп');
-user.newCategory('costs','аыап');
-
-
-
-
-alert(use2.categories.costs);
-alert(user.categories.costs);
-
-user.removeCategory('costs','аыап');
-alert(user.categories.costs);
-
-user.renameCategory('costs', 'зп', 'ЗП!');
-alert(user.categories.costs);
-
-user.newCategory('gain', 'такой себе gain');
-alert(user.categories.gain);
-*/
 
