@@ -25,10 +25,9 @@
     margin: 0 5px 5px 0;
 }
 
-.setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete {
+.setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete, .inlineBlock {
     display: inline-block;
 }
-
 
 div.removeStyle {
     text-align: left;
@@ -63,19 +62,16 @@ div.removeStyle > div > span {
     box-shadow: inset 0 0 1px;
 }*/
 
-.inlineBlock {
-    display: inline-block;
-}
-
-.block {
-    width: 100px;
+.setting-wrap input[type=text], .create-block input[type=text]{
+    width: 110px;
     font-size: 13px;
-    padding: 6px 0 4px 10px;
+    padding: 6px 10px 4px 10px;
     border: 1px solid #cecece;
     background: #F6F6f6;
     border-radius: 4px;
     text-align: center;
     margin: 0 0 3px 0;
+    text-overflow: ellipsis;
 }
 
 .block {
@@ -87,19 +83,17 @@ div.removeStyle > div > span {
     height: 16px;
     position: absolute;
     display: none;
+    top: 2px;
 }
 
 .edit {
-
     background: url(../img/edit.png);
     right: 20px;
-    top: 2px;
 }
 
 .delete {
     background: url(../img/delete.png);
     right: 2px;
-    top: 2px;
 }
 
 .relative > div {
@@ -108,4 +102,9 @@ div.removeStyle > div > span {
 
 div.marginR0 {
     margin-right: 0;
+}
+
+.addCategoryButton {
+    display: block;
+    width: auto;
 }
