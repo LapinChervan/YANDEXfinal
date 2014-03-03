@@ -1,10 +1,36 @@
 var CONTROL = {};
 
-CONTROL.animate = (function() {
+CONTROL.access = (function() {
+	
+	var ACCOUNT = 'account';
 
-})();
+	function cacheLocal(user, userData) {
+		if (!localStorage[ACCOUNT + user] && user) {
+			//here write userData on server
+			userData.password = undefined;
+			localStorage[ACCOUNT + user] = JSON.stringify(userData);
+			return true;
+		}
+		return false;
+	}
 
-CONTROL.dom = (function() {
+	function registration(n, p) {
+		var newUser = new CONTROL.User(n, p);
+		cacheLocal(n, newUser);
+	}
+
+	function auth(n, p) {
+		var userData;
+		if (localStorage[ACCOUNT + n]) {
+			return userData = JSON.parse(localStorage[ACCOUNT + n]);
+		}
+		return false;
+	}
+
+	return {
+		registration: registration,
+		auth: auth
+	}
 
 })();
 
@@ -12,11 +38,11 @@ CONTROL.User = function(name, password) {
 	this.name = name;	
 	this.password = password;
 	this.categories = { 
-		accounts: [], 
-		costs: [],  
-		gain: [] 
+		accounts: ["Кошелек","Банк"], 
+		costs: ["Продукты","Авто","Дети","Одежда","Подарки","Лекарства"],  
+		gain: ["Зарплата"] 
 	};
-	this.mainCurr = '';
+	this.mainCurr = 'Грн';
 	this.history = {
 		gain: [],
 		costs: [],
