@@ -7,6 +7,7 @@ CONTROL.layer = (function () {
             optionsObject, key, parent;
         optionsObject = getDefaultOptions();
         for (key in options) {
+            if (!options.hasOwnProperty(key)) continue;
             optionsObject[key] = options[key];
         }
         this.parent = parent = optionsObject.parent;
