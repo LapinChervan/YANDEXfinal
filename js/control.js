@@ -1,3 +1,5 @@
+'use strict'
+
 var CONTROL = {};
 
 CONTROL.access = (function() {	
@@ -5,8 +7,7 @@ CONTROL.access = (function() {
 
 	function showContent() {
 		var doc = document;
-			content = doc.getElementById('user-form').innerHTML;
-		doc.body.innerHTML = content; 
+		doc.body.innerHTML = doc.getElementById('user-form').innerHTML; 
 	}
 
 	function cacheLocal(user, userData) {
@@ -19,18 +20,18 @@ CONTROL.access = (function() {
 		return false;
 	}
 
-	function registration(n, p) {
-		if (n && p) {
-			var newUser = new CONTROL.User(n, p);
-			alert(cacheLocal(n, newUser));
+	function registration(user, password) {
+		if (user && password) {
+			var newUser = new CONTROL.User(user, password);
+			alert(cacheLocal(user, newUser));
 		}
 	}
 
-	function auth(n, p) {
-		if (localStorage[ACCOUNT + n]) {
+	function auth(user, password) {
+		if (localStorage[ACCOUNT + user]) {
 			var userData;
 			showContent();
-			return userData = JSON.parse(localStorage[ACCOUNT + n]);
+			return userData = JSON.parse(localStorage[ACCOUNT + user]);
 		}
 		return false;
 	}
