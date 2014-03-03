@@ -10,11 +10,13 @@ var	doc = document, // документ
 // вызов формы регистрации
 buttonReg.addEventListener('click', function(e) {
     e.stopPropagation();
-    CONTROL.layer.createLayer({content:formReg});
+    layer.createLayer({content:formReg});
 
     log_reg = doc.getElementsByClassName('log_reg')[0];
-	log_reg.onclick = function() {	
-		access.registration(doc.getElementsByClassName('input_login_reg')[0].value, 'qwerty');
+	log_reg.onclick = function() {
+        var value = doc.getElementsByClassName('input_login_reg')[0].value
+        layer.destroyLayer();
+		access.registration(value, 'qwerty');
 	};
 
 }, false);
@@ -22,11 +24,13 @@ buttonReg.addEventListener('click', function(e) {
 // вызов формы авторизации
 buttonAuth.addEventListener('click', function(e) {
     e.stopPropagation();
-    CONTROL.layer.createLayer({content:formLogin});
+    layer.createLayer({content:formLogin});
 
     log_in = doc.getElementsByClassName('log_in')[0];
-	log_in.onclick = function() {	
-		access.auth(doc.getElementsByClassName('input_login_auth')[0].value);
+	log_in.onclick = function() {
+        var value = doc.getElementsByClassName('input_login_auth')[0].value
+        layer.destroyLayer();
+		access.auth(value);
 	};
 }, false);
 

@@ -49,7 +49,8 @@ CONTROL.layer = (function () {
     });
 
     return {
-        createLayer : createLayer
+        createLayer: createLayer,
+        destroyLayer: destroyLayer
     }
 })();
 
