@@ -7,10 +7,17 @@ var	doc = document, // документ
 	log_in, log_reg;
 
 
+function stop() {
+  if (event.preventDefault) { 
+    event.stopPropagation();
+  } else {                       
+    event.cancelBubble = true;
+  }
+}
 
 // вызов формы регистрации
 buttonReg.addEventListener('click', function() {
-    event.stopPropagation();
+    stop();
     new CONTROL.Layer({content:formReg});
 
     log_reg = doc.getElementsByClassName('log_reg')[0];
@@ -22,7 +29,7 @@ buttonReg.addEventListener('click', function() {
 
 // вызов формы авторизации
 buttonAuth.addEventListener('click', function() {
-    event.stopPropagation();
+    stop();
     new CONTROL.Layer({content:formLogin});
 
     log_in = doc.getElementsByClassName('log_in')[0];
