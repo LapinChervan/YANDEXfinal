@@ -1,27 +1,24 @@
 var mongodb = require('mongodb');
-var db = new mongodb.Db('exampleDb', new mongodb.Server('localhost', 8080, {}), {safe: true});
+var db = new mongodb.Db('exampleDb', new mongodb.Server('localhost', 27017, {}), {safe: true});
 
 
 db.open(function(err, db) {
-	if (err) {
-		throw err;
-	}
 	if (!err) {
 		console.log('open...');
-		db.collection('widgets', function(err, collection) {
-			collection.remove(null, {safe: true}, function(err, result) {
+		db.createCollection('widgets', function(err, collection) {
+			collection.remove(null, function(err, result) {
 				if (!err) {
-					var widget1 = {id: 1, title: First, price: 313},
-						widget2 = {id: 2, title: Second, price: 31},
-						widget3 = {id: 3, title: Third, price: 66},
-						widget4 = {id: 4, title: Four, price: 1};
+					var widget1 = {id: 1, title: 'First', price: 313},
+						widget2 = {id: 2, title: 'Second', price: 31},
+						widget3 = {id: 3, title: 'Third', price: 66},
+						widget4 = {id: 4, title: 'Four', price: 1};
 
-					collection.insert([widget1,widget2,widget3,widget4], {safe: true}, function(err, result) {
+					collection.insert([widget1,widget2,widget3,widget4], function(err, result) {
 						if (err) {
 							console.log(err);
 						} else {
 							collection.find().toArray(function(err, docs) {
-								console.log(dogs);
+								console.log(docs);
 								db.close();
 							});
 						}
