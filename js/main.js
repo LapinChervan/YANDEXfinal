@@ -3,7 +3,7 @@ var	doc = document, // документ
 	buttonAuth = doc.getElementsByClassName('header__auth')[0], // кнопка авторизации
 	formReg = doc.getElementById('form-reg').innerHTML, // форма регистрации
 	formLogin = doc.getElementById('form-login').innerHTML, // форма авторизации
-	access = CONTROL.access,
+    access = CONTROL.access,
     layer = CONTROL.layer,
 	log_in, log_reg;
 
@@ -39,6 +39,9 @@ buttonAuth.addEventListener('click', function(e) {
         var value = form.getElementsByClassName('input_login_auth')[0].value
         layer.destroyLayer();
 		access.auth(value);
+
+        $('.dateFrom').datepicker();
+        $('.dateTo').datepicker();
 	};
     closeCross = form.getElementsByClassName('close')[0];
     closeCross.addEventListener('click',function(){
