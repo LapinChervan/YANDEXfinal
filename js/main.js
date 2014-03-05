@@ -38,7 +38,7 @@ buttonAuth.addEventListener('click', function(e) {
 	log_in.onclick = function() {
         var value = form.getElementsByClassName('input_login_auth')[0].value
         layer.destroyLayer();
-		access.auth(value);
+		//access.auth(value);
 
         $('.dateFrom').datepicker();
         $('.dateTo').datepicker();

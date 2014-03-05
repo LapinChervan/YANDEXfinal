@@ -2,6 +2,26 @@
 
 var CONTROL = {};
 
+CONTROL.ajax = (function() {
+	function toServer(link) {
+		var xhr = new XMLHttpRequest();
+    
+        xhr.open('GET', link); 
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState != 4) return; 
+
+           var serverResponse = xhr.responseText; 
+        }
+        xhr.send();
+
+        return serverResponse;
+	}
+
+	return {
+		toServer: toServer
+	}
+})();
+
 CONTROL.access = (function() {	
 	var ACCOUNT = 'account:';
 
@@ -10,6 +30,13 @@ CONTROL.access = (function() {
 		doc.body.innerHTML = doc.getElementById('user-form').innerHTML; 
 	}
 
+	function registration(user, password) {
+		var ajax = CONTROL.ajax;
+		if (user && password) {
+			ajax.toServer('http://localhost:1111/');
+		}
+	}
+	/*
 	function cacheLocal(user, userData) {
 		if (!localStorage[ACCOUNT + user] && user) {
 			//here write userData on server
@@ -35,10 +62,10 @@ CONTROL.access = (function() {
 		}
 		return false;
 	}
-
+	*/
 	return {
-		registration: registration,
-		auth: auth
+		registration: registration
+		//auth: auth
 	}
 })();
 

@@ -4,8 +4,19 @@ var http = require('http'),
 	mongodb = require('mongodb'),
 	db = new mongodb.Db('exampleDb', new mongodb.Server('localhost', 27017, {}), {safe: true}),
 	data;
+	
 http.createServer(function(req, res) {
 
+	console.log('шляпа');
+	res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+	res.write('Сервер не может отдать ');
+	res.end();
+	
+}).listen(1111);
+
+
+
+/*
 
 	var urlParsed = url.parse(req.url, true);
 	if (urlParsed.pathname == '/echo') {
@@ -37,10 +48,9 @@ db.open(function(err, db) {
 	}
 });
 	res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8'});
-	res.end(util.inspect(data));
+	//res.end(util.inspect(data));
+	res.end('ДА ЕСТЬ ЖЕЖ')
 }	
+*/
 
-	res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8'});
-	res.end('Сервер не может отдать ');
-	
-}).listen(1111);
+
