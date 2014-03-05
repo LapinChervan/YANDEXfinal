@@ -1,26 +1,21 @@
 var	doc = document, // документ
-	buttonReg = doc.getElementsByClassName('header__reg')[0], // кнопка регистрации
-	buttonAuth = doc.getElementsByClassName('header__auth')[0], // кнопка авторизации
-	formReg = doc.getElementById('form-reg').innerHTML, // форма регистрации
-	formLogin = doc.getElementById('form-login').innerHTML, // форма авторизации
     access = CONTROL.access,
-    layer = CONTROL.layer,
-	log_in, log_reg;
+    layer = CONTROL.layer;
 
 //TODO переделать обработчики
 
 // вызов формы регистрации
-buttonReg.addEventListener('click', function(e) {
-    var form, closeCross;
+doc.getElementsByClassName('header__reg')[0].addEventListener('click', function(e) {
+    var form, closeCross, log_reg;
     e.stopPropagation();
-    layer.createLayer({content:formReg});
+    layer.createLayer({content: doc.getElementById('form-reg').innerHTML});
 
     log_reg = doc.getElementsByClassName('log_reg')[0];
     form = log_reg.parentNode;
 	log_reg.onclick = function() {
         layer.destroyLayer();
 		access.registration(form.getElementsByClassName('input_login_reg')[0].value,
-                            form.getElementsByClassName('input_pass_reg')[0].value);
+                            form.getElementsByClassName('input_login_reg')[1].value);
 	};
     closeCross = form.getElementsByClassName('close')[0];
     closeCross.addEventListener('click',function(){
@@ -29,19 +24,21 @@ buttonReg.addEventListener('click', function(e) {
 }, false);
 
 // вызов формы авторизации
-buttonAuth.addEventListener('click', function(e) {
+doc.getElementsByClassName('header__auth')[0].addEventListener('click', function(e) {
+    var log_in;
     e.stopPropagation();
-    layer.createLayer({content:formLogin});
+    layer.createLayer({content: doc.getElementById('form-login').innerHTML});
 
     log_in = doc.getElementsByClassName('log_in')[0];
     form = log_in.parentNode;
 	log_in.onclick = function() {
-        var value = form.getElementsByClassName('input_login_auth')[0].value
         layer.destroyLayer();
-		//access.auth(value);
+		access.authorization(form.getElementsByClassName('input_login_reg')[0].value,
+                             form.getElementsByClassName('input_login_reg')[1].value);
 
-        $('.dateFrom').datepicker();
-        $('.dateTo').datepicker();
+        //TODO поправить дейтпикеры
+       // $('.dateFrom').datepicker();
+      //  $('.dateTo').datepicker();
 	};
     closeCross = form.getElementsByClassName('close')[0];
     closeCross.addEventListener('click',function(){
