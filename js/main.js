@@ -18,9 +18,9 @@ buttonReg.addEventListener('click', function(e) {
     log_reg = doc.getElementsByClassName('log_reg')[0];
     form = log_reg.parentNode;
 	log_reg.onclick = function() {
-        var value = form.getElementsByClassName('input_login_auth')[0].value
         layer.destroyLayer();
-		access.registration(value, 'qwerty');
+		access.registration(form.getElementsByClassName('input_login_reg')[0].value,
+                            form.getElementsByClassName('input_pass_reg')[0].value);
 	};
     closeCross = form.getElementsByClassName('close')[0];
     closeCross.addEventListener('click',function(){
