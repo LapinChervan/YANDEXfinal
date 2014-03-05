@@ -1,13 +1,12 @@
 var http = require('http'),
 	url = require('url'),
-	util = require('util'),
-	mongodb = require('mongodb'),
-	db = new mongodb.Db('exampleDb', new mongodb.Server('localhost', 27017, {}), {safe: true}),
-	data;
+	util = require('util');
+	requests = require('./requests'),
+	querys = requests;
 	
 http.createServer(function(req, res) {
-
-	console.log('шляпа');
+	console.log('Вижу реквест');
+	querys.reg('Вася','пароль');
 	res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
 	res.write('Сервер не может отдать ');
 	res.end();
