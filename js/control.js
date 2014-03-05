@@ -16,7 +16,6 @@ CONTROL.ajax = (function() {
             }
         };
         xhr.send();
-      	return data;
 	}
 
 	return {
