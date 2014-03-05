@@ -1,7 +1,7 @@
 var http = require('http'),
 	url = require('url'),
 	util = require('util');
-	requests = require('./requests');
+	requests = require('requests');
 	
 http.createServer(function(req, res) {
 	var data = url.parse(req.url, true);
