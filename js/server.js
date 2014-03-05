@@ -11,6 +11,12 @@ http.createServer(function(req, res) {
 		res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
 		res.end();
 	}
+
+    if (data.pathname === '/auth') {
+        requests.auth(data.query.login, data.query.password, res);
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+       // res.end();
+    }
 	
 }).listen(1111);
 
