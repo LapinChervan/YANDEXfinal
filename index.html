@@ -389,7 +389,9 @@
                                     <a href="#" class="add_cat_sch addCategoryButton">Добавить</a>
                                 </div>
                             </div>
-                            <div class="userAccs setting-wrap relative">
+                            <div class="accounts setting-wrap relative">
+
+                                <!--SLOT FOR TEMPLATE-->
 
                             </div>
                             <div class="statistics__header">
@@ -405,13 +407,10 @@
                                     <a href="#" class="add_cat_plus addCategoryButton">Добавить</a>
                                 </div>
                             </div>
-                            <div class="setting-wrap relative">
-                                <div>
-                                    <span class="edit"></span>
-                                    <span class="delete"></span>
-                                    <img src="img/rashod.png">
-                                    <div>Зарплата</div>
-                                </div>
+                            <div class="gain setting-wrap relative">
+
+                               <!--SLOT FOR TEMPLATE-->
+
                             </div>
                             <div class="statistics__header">
                                 <span class="statistics__header_stat">Расходы</span>
@@ -426,13 +425,10 @@
                                     <a href="#" class="add_cat_minus addCategoryButton">Добавить</a>
                                 </div>
                             </div>
-                            <div class="setting-wrap relative">
-                                <div>
-                                    <span class="edit"></span>
-                                    <span class="delete"></span>
-                                    <img src="img/rashod.png">
-                                    <div>Покупки</div>
-                                </div>
+                            <div class="costs setting-wrap relative">
+
+                                <!--SLOT FOR TEMPLATE-->
+
                             </div>
                             <div class="statistics__header">
                                 <span class="statistics__header_stat">Курс валют</span>
@@ -480,14 +476,33 @@
 
     </script>
 
-        <script type="text/template" id="userAccounts">
+        <script type="text/template" id="useraccounts">
             <div>
                 <span class="edit"></span>
                 <span class="delete"></span>
                 <img src="img/rashod.png">
-                <div>{{account}}</div>
+                <div>{{accounts}}</div>
             </div>
         </script>
+
+        <script type="text/template" id="usergain">
+            <div>
+                <span class="edit"></span>
+                <span class="delete"></span>
+                <img src="img/rashod.png">
+                <div>{{gain}}</div>
+            </div>
+        </script>
+
+        <script type="text/template" id="usercosts">
+            <div>
+                <span class="edit"></span>
+                <span class="delete"></span>
+                <img src="img/rashod.png">
+                <div>{{costs}}</div>
+            </div>
+        </script>
+
 
         <script type="text/template" id="form__plu_filt">
             <div class="form__plus__filters">

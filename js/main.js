@@ -25,7 +25,8 @@ doc.getElementsByClassName('header__reg')[0].addEventListener('click', function(
 
 // вызов формы авторизации
 doc.getElementsByClassName('header__auth')[0].addEventListener('click', function(e) {
-    var log_in;
+    var log_in,
+        userData;
     e.stopPropagation();
     layer.createLayer({content: doc.getElementById('form-login').innerHTML});
 
@@ -35,7 +36,7 @@ doc.getElementsByClassName('header__auth')[0].addEventListener('click', function
         layer.destroyLayer();
 		access.authorization(form.getElementsByClassName('input_login_reg')[0].value,
                              form.getElementsByClassName('input_login_reg')[1].value);
-
+        alert(CONTROL.userData);
         //TODO поправить дейтпикеры
        // $('.dateFrom').datepicker();
       //  $('.dateTo').datepicker();
