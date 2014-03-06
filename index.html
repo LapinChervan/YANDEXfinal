@@ -134,6 +134,7 @@
     </div>
 
     <script type="text/template" id="user-form">
+
         <div class="main">
             <!--userData.css-->
             <div class="main__user-data">
@@ -371,6 +372,7 @@
 
                     <!--END secondTabContents.css-->
 
+
                     <!--thirdTabPerson.css-->
                     <li class="main__tabs__content__ul__li" id="person">
                         <div class="indentation">
@@ -387,13 +389,8 @@
                                     <a href="#" class="add_cat_sch addCategoryButton">Добавить</a>
                                 </div>
                             </div>
-                            <div class="setting-wrap relative">
-                                <div>
-                                    <span class="edit"></span>
-                                    <span class="delete"></span>
-                                    <img src="img/rashod.png">
-                                    <div>ПриватБанк</div>
-                                </div>
+                            <div class="userAccs setting-wrap relative">
+
                             </div>
                             <div class="statistics__header">
                                 <span class="statistics__header_stat">Доходы</span>
@@ -478,8 +475,19 @@
                     <!--END thirdTabPerson.css-->
                 </ul>
             </div>
+
         </div>
+
     </script>
+
+        <script type="text/template" id="userAccounts">
+            <div>
+                <span class="edit"></span>
+                <span class="delete"></span>
+                <img src="img/rashod.png">
+                <div>{{account}}</div>
+            </div>
+        </script>
 
         <script type="text/template" id="form__plu_filt">
             <div class="form__plus__filters">
@@ -551,7 +559,10 @@
                     <a class="form__minus__add__filters" href="">Применить</a>
                 </div>
             </div>
-        </script>      
+        </script>
+
+
+
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="js/pollyfills.js"></script>
