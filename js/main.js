@@ -36,7 +36,7 @@ doc.getElementsByClassName('header__auth')[0].addEventListener('click', function
         layer.destroyLayer();
 		access.authorization(form.getElementsByClassName('input_login_reg')[0].value,
                              form.getElementsByClassName('input_login_reg')[1].value);
-        alert(CONTROL.userData);
+        console.log(CONTROL.userData);
         //TODO поправить дейтпикеры
        // $('.dateFrom').datepicker();
       //  $('.dateTo').datepicker();
