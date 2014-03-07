@@ -18,6 +18,10 @@ http.createServer(function(req, res) {
 
        // res.end();
     }
+
+    if (data.pathname === '/currency') {
+
+    }
 	
 }).listen(1111);
 
