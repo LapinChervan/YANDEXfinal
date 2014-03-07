@@ -1,3 +1,24 @@
+.login__inputs input, .form__plus input,
+.form__minus input, .form__send input,
+.form__plus select, .form__minus select, .form__send select {
+    padding: 0 5px;
+    height: 40px;
+    width: 80%;
+    margin: 2px 0;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 16px;
+    color: #464646;
+}
+
+.form__plus select, .form__minus select, .form__send select {
+    width: 84%;
+}
+
+
+
 .login, .logreg,
 .main__header,
 .main__footer,
@@ -7,10 +28,9 @@
 .form__minus__header,
 .form__send__header,
 .form__card__header,
-.form__plus__header__filters,
-.form__minus__header__filters,
 .history-filter {
 	background: url("../img/headerbg.png");
+    margin: 0 0 8px 0;
 }
 
 body,
@@ -20,16 +40,8 @@ body,
 .form__minus__add, .form__minus__cancel,
 .form__send__add, .form__send__cancel,
 .form__card__add, .form__card__cancel,
-.form__plus__add__filters, .form__plus__cancel__filters,
-.form__minus__add__filters, .form__minus__cancel__filters,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
 .apply_filter1, .apply_filter2,
-.form__plus,
-.form__minus,
-.form__send,
-.form__card,
-.form__plus__filters,
-.form__minus__filters,
 #second li {
 	background: url("../img/wavegrid.png");
 }

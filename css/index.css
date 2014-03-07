@@ -28,19 +28,6 @@
     text-align: center;
 }
 
-.login__inputs input {
-    padding: 0 5px;
-    height: 40px;
-    width: 80%;
-    margin: 2px 0;
-    border: none;
-    outline: none;
-    border-radius: 2px;
-    text-align: center;
-    font-size: 16px;
-    color: #464646;
-}
-
 .log_in, .log_reg {
     margin: 2px auto;
     display: block;

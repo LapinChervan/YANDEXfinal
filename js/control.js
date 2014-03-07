@@ -19,7 +19,6 @@ CONTROL.initialize = (function() {
                     });
             }
         }
-
     }
     return {
         loadThirdTab: loadThirdTab
