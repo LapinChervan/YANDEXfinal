@@ -15,8 +15,6 @@ http.createServer(function(req, res) {
     if (data.pathname === '/auth') {
         res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
         requests.auth(data.query.login, data.query.password, res);
-
-       // res.end();
     }
 
     if (data.pathname === '/currency') {

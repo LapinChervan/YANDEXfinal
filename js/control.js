@@ -60,11 +60,11 @@ CONTROL.access = (function() {
             var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&curr=' + target.value);
         });
-        var btnValuta = document.getElementsByClassName('buttonValuta')[0];
+        var btnValuta = doc.getElementsByClassName('buttonValuta')[0];
         btnValuta.addEventListener('click',function() {
             var inputValuta = btnValuta.parentNode.getElementsByClassName('valuta');
             var data = {};
-            for (var i = 0; i < inputValuta.length; i ++) {
+            for (var i = 0; i < inputValuta.length; i++) {
                 data[inputValuta[i].name] = inputValuta[i].value;
             }
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&valuta=' + data);
@@ -80,7 +80,7 @@ CONTROL.access = (function() {
 
     function authorization(user, password) {
         if (user && password) {
-            CONTROL.userData = ajax.toServer('http://localhost:1111/auth?login=' + user +'&password='+ password, showContent);
+            ajax.toServer('http://localhost:1111/auth?login=' + user +'&password='+ password, showContent);
         }
         return false;
     }
