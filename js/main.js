@@ -47,9 +47,9 @@ doc.getElementsByClassName('header__auth')[0].addEventListener('click', function
     });
 }, false);
 
-document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
+/*document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
     var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
 
-});
+});*/
 
 

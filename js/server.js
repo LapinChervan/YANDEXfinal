@@ -20,7 +20,13 @@ http.createServer(function(req, res) {
     }
 
     if (data.pathname === '/currency') {
-
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+        if (data.query.curr) {
+            requests.changeCurr(data.query.login, data.query.curr, res);
+        }
+        else {
+            requests.setMainCurr(data.query.login, data.query.valuta, res);
+        }
     }
 	
 }).listen(1111);
