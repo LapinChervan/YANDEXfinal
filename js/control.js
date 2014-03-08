@@ -69,6 +69,23 @@ CONTROL.access = (function() {
             }
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&valuta=' + data);
         });
+
+
+        doc.getElementsByClassName('add_cat_plus')[0].addEventListener('click', function(e) {
+            e.preventDefault();
+            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +'&plus=' + doc.getElementsByClassName('edit_cat_plus')[0].value);
+        }, false);
+
+        doc.getElementsByClassName('add_cat_minus')[0].addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('ура');
+        }, false);
+
+        doc.getElementsByClassName('add_cat_sch')[0].addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('ура');
+        }, false);
+
 	}
 
     //TODO отсылать логин и пароль не GETом

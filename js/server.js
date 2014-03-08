@@ -26,6 +26,12 @@ http.createServer(function(req, res) {
             requests.setMainCurr(data.query.login, data.query.valuta, res);
         }
     }
+
+    if (data.pathname === '/newCategories') {
+      //  res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+        requests.newCat(data.query.login, data.query.plus);
+     //   res.end();
+    }
 	
 }).listen(1111);
 

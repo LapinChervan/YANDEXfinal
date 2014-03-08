@@ -36,7 +36,7 @@ doc.getElementsByClassName('header__auth')[0].addEventListener('click', function
         layer.destroyLayer();
 		access.authorization(form.getElementsByClassName('input_login_reg')[0].value,
                              form.getElementsByClassName('input_login_reg')[1].value);
-        console.log(CONTROL.userData);
+
         //TODO поправить дейтпикеры
        // $('.dateFrom').datepicker();
       //  $('.dateTo').datepicker();
@@ -45,7 +45,23 @@ doc.getElementsByClassName('header__auth')[0].addEventListener('click', function
     closeCross.addEventListener('click',function(){
         layer.destroyLayer.call(layer);
     });
+
 }, false);
+
+
+
+/*
+doc.getElementsByClassName('inlineBlock').onclick = function(e) {
+    var event = e || window.event;
+    var target = event.target || event.srcElement;
+
+
+    if (target.nodeName != 'A') return;
+
+
+    alert(target.getAttribute('href'));
+    return false;
+}*/
 
 /*document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
     var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
