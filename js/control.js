@@ -72,6 +72,7 @@ CONTROL.access = (function() {
 
 
         doc.getElementsByClassName('first__ul__li__button')[0].addEventListener('click', function() {
+            event.stopPropagation();
             CONTROL.layer.createLayer({content: doc.getElementById('form__plus').innerHTML});
         }, false);
 
