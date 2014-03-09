@@ -71,10 +71,30 @@ CONTROL.access = (function() {
         });
 
 
-        doc.getElementsByClassName('first__ul__li__button')[0].addEventListener('click', function() {
+
+        doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement;
+
+            if (target.tagName != 'DIV') return;
             event.stopPropagation();
-            CONTROL.layer.createLayer({content: doc.getElementById('form__plus').innerHTML});
-        }, false);
+            switch (target.innerHTML) {
+                case 'Доходы':
+                    CONTROL.layer.createLayer({content: doc.getElementById('form__plus').innerHTML});
+                    break;
+
+                case 'Расходы':
+                    CONTROL.layer.createLayer({content: doc.getElementById('form__minus').innerHTML});
+                    break;
+
+                case 'Переводы':
+                    CONTROL.layer.createLayer({content: doc.getElementById('form__send').innerHTML});
+                    break;
+            }
+
+
+
+        }, true);
 
         doc.getElementsByClassName('add_cat_plus')[0].addEventListener('click', function(e) {
             e.preventDefault();

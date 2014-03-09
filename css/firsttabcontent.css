@@ -82,9 +82,31 @@
     display: inline-block;
     border-radius: 4px;
     box-shadow: 2px 2px 10px #AFAFAF, -2px -2px 10px #AFAFAF;
-    margin: 5px 10px 0;
     width: 49%;
     position: relative;
+}
+
+.first, .second, .third, .four {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 50px 0 0 0;
+}
+
+.first {
+    background: url('../img/dohod.png') 50% 5% no-repeat;
+}
+
+.second {
+    background: url('../img/rashod.png') 50% 5% no-repeat;
+}
+
+.third {
+    background: url('../img/send.png') 50% 0% no-repeat;
+}
+
+.four {
+    background: url('../img/sch.png') 50% 5% no-repeat;
 }
 
 .statistics__ul__li tr {
