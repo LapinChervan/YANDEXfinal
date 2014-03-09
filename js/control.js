@@ -25,7 +25,6 @@ CONTROL.initialize = (function() {
     }
 })();
 
-
 CONTROL.ajax = (function() {
 	function toServer(link, callback) {
 		var xhr = new XMLHttpRequest();
@@ -38,10 +37,8 @@ CONTROL.ajax = (function() {
                 callback(xhr.responseText);
             }
         };
-
         xhr.send();
 	}
-
 	return {
 		toServer: toServer
 	}
@@ -70,13 +67,11 @@ CONTROL.access = (function() {
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&valuta=' + data);
         });
 
-
-
         doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement;
 
-            if (target.tagName != 'DIV') return;
+            if (target.tagName !== 'DIV') return;
             event.stopPropagation();
             switch (target.innerHTML) {
                 case 'Доходы':
@@ -91,28 +86,31 @@ CONTROL.access = (function() {
                     CONTROL.layer.createLayer({content: doc.getElementById('form__send').innerHTML});
                     break;
             }
-
-
-
-        }, true);
-
-        doc.getElementsByClassName('add_cat_plus')[0].addEventListener('click', function(e) {
-            e.preventDefault();
-            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +'&plus=' + doc.getElementsByClassName('edit_cat_plus')[0].value);
         }, false);
 
-        doc.getElementsByClassName('add_cat_minus')[0].addEventListener('click', function(e) {
+        doc.getElementsByClassName('addCategoryButton')[1].addEventListener('click', function(e) {
             e.preventDefault();
-            alert('ура');
+            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +
+                                                               '&cat=' + doc.getElementsByClassName('edit_cat_plus')[0].value +
+                                                               '&typ=gain');
         }, false);
 
-        doc.getElementsByClassName('add_cat_sch')[0].addEventListener('click', function(e) {
+        doc.getElementsByClassName('addCategoryButton')[2].addEventListener('click', function(e) {
             e.preventDefault();
-            alert('ура');
+            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +
+                                                              '&cat=' + doc.getElementsByClassName('edit_cat_minus')[0].value +
+                                                              '&typ=costs');
+        }, false);
+
+        doc.getElementsByClassName('addCategoryButton')[0].addEventListener('click', function(e) {
+            e.preventDefault();
+            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +
+                                                              '&cat=' + doc.getElementsByClassName('edit_cat_sch')[0].value +
+                                                              '&typ=accounts');
         }, false);
 
 	}
-
+    
     //TODO отсылать логин и пароль не GETом
 	function registration(user, password) {
 		if (user && password) {
