@@ -59,12 +59,12 @@ CONTROL.access = (function() {
         });
         var btnValuta = doc.getElementsByClassName('buttonValuta')[0];
         btnValuta.addEventListener('click',function() {
-            var inputValuta = btnValuta.parentNode.getElementsByClassName('valuta');
+            var inputValuta = btnValuta.parentNode.getElementsByClassName('value');
             var data = {};
             for (var i = 0; i < inputValuta.length; i++) {
                 data[inputValuta[i].name] = inputValuta[i].value;
             }
-            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&valuta=' + data);
+            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&valuta=' + JSON.stringify(data));
         });
 
         doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
