@@ -110,7 +110,7 @@ CONTROL.access = (function() {
         }, false);
 
 	}
-    
+
     //TODO отсылать логин и пароль не GETом
 	function registration(user, password) {
 		if (user && password) {
