@@ -25,13 +25,48 @@ CONTROL.initialize = (function() {
     }
 })();
 
+
+CONTROL.responses = (function() {
+    function newCategory(type, category) {
+        var doc = document;
+
+            doc.getElementsByClassName(type)[0].innerHTML = doc.getElementsByClassName(type)[0].innerHTML +
+            Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML, {costs: category});
+    }
+
+    return {
+        newCategory: newCategory
+    }
+})();
+
 CONTROL.ajax = (function() {
+    var responses = CONTROL.responses,
+        doc = document;
+
 	function toServer(link, callback) {
 		var xhr = new XMLHttpRequest();
 
         xhr.open('GET', link); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return; 
+            alert(xhr.responseText);
+            switch (xhr.responseText) {
+                case 'gain':
+                    responses.newCategory('gain', doc.getElementsByClassName('edit_cat_plus')[0].value);
+                    doc.getElementsByClassName('edit_cat_plus')[0].value = '';
+                    break;
+
+                case 'costs':
+                    responses.newCategory('costs', doc.getElementsByClassName('edit_cat_minus')[0].value);
+                    doc.getElementsByClassName('edit_cat_minus')[0].value = '';
+                    break;
+
+                case 'accounts':
+                    responses.newCategory('accounts', doc.getElementsByClassName('edit_cat_sch')[0].value);
+                    doc.getElementsByClassName('edit_cat_sch')[0].value = '';
+                    break;
+            }
+
 
             if (typeof callback === 'function') {
                 callback(xhr.responseText);

@@ -30,8 +30,8 @@ http.createServer(function(req, res) {
     }
 
     if (data.pathname === '/newCategories') {
-      //  res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
-        requests.newCat(data.query.login, data.query.typ, data.query.cat);
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+        requests.newCat(data.query.login, data.query.typ, data.query.cat, res);
      //   res.end();
     }
 	
