@@ -23,6 +23,7 @@
     min-width: 100px;
     border-radius: 4px;
     margin: 0 5px 5px 0;
+    vertical-align: bottom;
 }
 
 .setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete, .inlineBlock {
