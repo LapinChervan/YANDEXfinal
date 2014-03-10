@@ -432,12 +432,15 @@
                             </div>
                             <div class="setting-wrap">
                                 <div class="floatRight marginR0">
-                                    <label><input type="radio" name="valuta" value="uah" checked>UA</label>
+                                   <!-- <label><input type="radio" name="valuta" value="uah" checked>UA</label>
                                     <label><input type="radio" name="valuta" value="rub">RU</label>
                                     <label><input type="radio" name="valuta" value="usd">USA</label>
-                                    <label><input type="radio" name="valuta" value="eur">EU</label>
+                                    <label><input type="radio" name="valuta" value="eur">EU</label>-->
                                 </div>
-                                <div class="removeStyle">
+                                <div>
+
+                                </div>
+                                <!--<div class="removeStyle">
                                     <div>
                                         <span>Гривна(UA)</span>
                                         <span class="floatRight">Основная валюта</span>
@@ -460,7 +463,7 @@
                                         <span>Евро(EU)</span>
                                         <span class="floatRight">1 EU = <input name="eur" class="value" type="text" value="12"> UA</span>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="buttonValuta">Сохранить</div>
                             </div>
                         </div>
@@ -575,6 +578,24 @@
         </div>
     </script>
 
+    <script type="text/template" class="template_value">
+        <label><input type="radio" name="valuta" value={{value}}>{{value}}</label>
+    </script>
+
+    <script type="text/template" class="template_curr">
+        <div class="removeStyle">
+            <div>
+                <span>{{valuta}}</span>
+                <span class="floatRight">1 {{valuta}} = <input name={{valuta}} class="value" type="text" value={{count}}> {{main}}</span>
+            </div>
+        </div>
+    </script>
+    <div class="removeStyle">
+        <div>
+            <span>Евро(EU)</span>
+            <span class="floatRight">1 EU = <input name="eur" class="value" type="text" value="12"> UA</span>
+        </div>
+    </div>
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="js/pollyfills.js"></script>

@@ -2,13 +2,14 @@
 
 var CONTROL = {};
 
-CONTROL.initialize = (function() {
+CONTROL.initialize = (function() {;
     function loadThirdTab(data) {
         var doc = document,
-            tmp,
-            obj = JSON.parse(data);
+            tmp, key,
+            obj = data,
+            mainCurr = obj.mainCurr;
         window.login = obj.name;
-        for (var key in obj.categories) {
+        for (key in obj.categories) {
             if (obj.categories.hasOwnProperty(key)) {
                 obj.categories[key].
                     forEach(function(elem) {
@@ -19,6 +20,7 @@ CONTROL.initialize = (function() {
                     });
             }
         }
+        CONTROL.responses.rebuildCurrency(obj);
     }
     return {
         loadThirdTab: loadThirdTab
@@ -34,8 +36,27 @@ CONTROL.responses = (function() {
             Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML, {costs: category});
     }
 
+    function rebuildCurrency (obj) {
+        var mainCurrWrap = document.querySelector('.floatRight.marginR0'),
+            mainCurr = obj.mainCurr,
+            currency = obj.currency[mainCurr],
+            templateRadio = document.querySelector('.template_value').innerHTML,
+            templateInput = document.querySelector('.template_curr').innerHTML,
+            currentCurr = Mustache.render(templateRadio, {value: mainCurr}),
+            index = currentCurr.indexOf('input') + 5,
+            radio, key, input = '';
+        radio = currentCurr.slice(0, index) + ' checked' + currentCurr.slice(index, currentCurr.length);
+        for (key in currency) {
+            radio = radio + Mustache.render(templateRadio, {value: key});
+            input = input + Mustache.render(templateInput, {valuta: key, count: currency[key], main: mainCurr});
+        }
+        mainCurrWrap.innerHTML = radio;
+        mainCurrWrap.nextElementSibling.innerHTML = input;
+    }
+
     return {
-        newCategory: newCategory
+        newCategory: newCategory,
+        rebuildCurrency: rebuildCurrency
     }
 })();
 
@@ -76,7 +97,7 @@ CONTROL.ajax = (function() {
 
 
             if (typeof callback === 'function') {
-                callback(xhr.responseText);
+                callback(JSON.parse(xhr.responseText));
             }
         };
         xhr.send();
@@ -97,7 +118,7 @@ CONTROL.access = (function() {
         //todo убрать обработчики
         document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
             var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
-            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&curr=' + target.value);
+            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&curr=' + target.value,CONTR.responses.rebuildCurrency);
         });
 
         //ОТПРАВКА ОСНОВНОЙ ВАЛЮТЫ
