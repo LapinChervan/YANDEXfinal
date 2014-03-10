@@ -138,8 +138,9 @@ CONTROL.access = (function() {
                     break;
 
                 case 'Расходы':
+                    //ФОРМА ДЛЯ РАСХОДА
                     CONTROL.layer.createLayer({content: doc.getElementById('form__minus').innerHTML});
-                    //ДОБАВЛЕНИЕ НОВОГО ДОХОДА
+                    //ДОБАВЛЕНИЕ НОВОГО РАСХОДА
                     doc.getElementsByClassName('form__minus__add')[0].addEventListener('click', function(e) {
                         var form = doc.getElementsByClassName('form__minus__blockInputs')[0];
 
@@ -154,7 +155,20 @@ CONTROL.access = (function() {
                     break;
 
                 case 'Переводы':
+                    //ФОРМА ДЛЯ ПЕРЕВОДА
                     CONTROL.layer.createLayer({content: doc.getElementById('form__send').innerHTML});
+                    //ДОБАВЛЕНИЕ НОВОГО ПЕРЕВОДА
+                    doc.getElementsByClassName('form__send__add')[0].addEventListener('click', function(e) {
+                        var form = doc.getElementsByClassName('form__send__blockInputs')[0];
+
+                        e.preventDefault();
+                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + window.login +
+                            '&date='+ form.children[0].value+
+                            '&sch=' + form.children[1].value +
+                            '&cat=' + form.children[2].value +
+                            '&sum=' + form.children[3].value+
+                            '&comment=' + form.children[4].value + '&type=send');
+                    }, false);
                     break;
             }
         }, false);
