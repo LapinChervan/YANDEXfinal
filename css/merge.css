@@ -1,6 +1,7 @@
 .login__inputs input, .form__plus input,
 .form__minus input, .form__send input,
-.form__plus select, .form__minus select, .form__send select {
+.form__plus select, .form__minus select, .form__send select,
+.history_operand_select, .history_sch_select {
     padding: 0 5px;
     height: 40px;
     width: 80%;

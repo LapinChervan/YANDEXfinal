@@ -32,4 +32,17 @@ http.createServer(function(req, res) {
         res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
         requests.newCat(data.query.login, data.query.typ, data.query.cat, res);
     }
+
+    if (data.pathname === '/historyNewGain') {
+        var obj = {
+            date: data.query.date,
+            sch: data.query.sch,
+            cat: data.query.cat,
+            sum: data.query.sum,
+            comm: data.query.comment
+        };
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+        requests.newGain(data.query.login, obj, res);
+    }
+
 }).listen(1111);

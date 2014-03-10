@@ -48,22 +48,29 @@ CONTROL.ajax = (function() {
 
         xhr.open('GET', link); 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState != 4) return; 
+            if (xhr.readyState != 4) return;
+
             alert(xhr.responseText);
+
+
             switch (xhr.responseText) {
-                case 'gain':
+                case 'CatFor__GAIN__IsWrite':
                     responses.newCategory('gain', doc.getElementsByClassName('edit_cat_plus')[0].value);
                     doc.getElementsByClassName('edit_cat_plus')[0].value = '';
                     break;
 
-                case 'costs':
+                case 'CatFor__COSTS__IsWrite':
                     responses.newCategory('costs', doc.getElementsByClassName('edit_cat_minus')[0].value);
                     doc.getElementsByClassName('edit_cat_minus')[0].value = '';
                     break;
 
-                case 'accounts':
+                case 'CatFor__ACCOUNTS__IsWrite':
                     responses.newCategory('accounts', doc.getElementsByClassName('edit_cat_sch')[0].value);
                     doc.getElementsByClassName('edit_cat_sch')[0].value = '';
+                    break;
+
+                case 'new__GAIN__isWrite':
+
                     break;
             }
 
@@ -92,6 +99,8 @@ CONTROL.access = (function() {
             var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&curr=' + target.value);
         });
+
+        //ОТПРАВКА ОСНОВНОЙ ВАЛЮТЫ
         var btnValuta = doc.getElementsByClassName('buttonValuta')[0];
         btnValuta.addEventListener('click',function() {
             var inputValuta = btnValuta.parentNode.getElementsByClassName('value');
@@ -102,15 +111,30 @@ CONTROL.access = (function() {
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&valuta=' + JSON.stringify(data));
         });
 
+        // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
         doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement;
 
             if (target.tagName !== 'DIV') return;
             event.stopPropagation();
+
             switch (target.innerHTML) {
                 case 'Доходы':
                     CONTROL.layer.createLayer({content: doc.getElementById('form__plus').innerHTML});
+
+                    //ДОБАВЛЕНИЕ НОВОГО ДОХОДА
+                    doc.getElementsByClassName('form__plus__add')[0].addEventListener('click', function(e) {
+                        var form = doc.getElementsByClassName('form__plus__blockInputs')[0];
+
+                        e.preventDefault();
+                        ajax.toServer('http://localhost:1111/historyNewGain?login=' + window.login +
+                                      '&date='+ form.children[0].value+
+                                      '&sch=' + form.children[1].value +
+                                      '&cat=' + form.children[2].value +
+                                      '&sum=' + form.children[3].value+
+                                      '&comment=' + form.children[4].value);
+                    }, false);
                     break;
 
                 case 'Расходы':
@@ -123,6 +147,7 @@ CONTROL.access = (function() {
             }
         }, false);
 
+        // ДОБАВЛЕНИЕ НОВЫХ КАТЕГОРИЙ
         doc.getElementsByClassName('addCategoryButton')[1].addEventListener('click', function(e) {
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +
@@ -143,7 +168,6 @@ CONTROL.access = (function() {
                                                               '&cat=' + doc.getElementsByClassName('edit_cat_sch')[0].value +
                                                               '&typ=accounts');
         }, false);
-
 	}
 
     //TODO отсылать логин и пароль не GETом
