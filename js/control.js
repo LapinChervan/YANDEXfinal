@@ -121,24 +121,36 @@ CONTROL.access = (function() {
 
             switch (target.innerHTML) {
                 case 'Доходы':
+                    //ФОРМА ДЛЯ ДОХОДА
                     CONTROL.layer.createLayer({content: doc.getElementById('form__plus').innerHTML});
-
                     //ДОБАВЛЕНИЕ НОВОГО ДОХОДА
                     doc.getElementsByClassName('form__plus__add')[0].addEventListener('click', function(e) {
                         var form = doc.getElementsByClassName('form__plus__blockInputs')[0];
 
                         e.preventDefault();
-                        ajax.toServer('http://localhost:1111/historyNewGain?login=' + window.login +
+                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + window.login +
                                       '&date='+ form.children[0].value+
                                       '&sch=' + form.children[1].value +
                                       '&cat=' + form.children[2].value +
                                       '&sum=' + form.children[3].value+
-                                      '&comment=' + form.children[4].value);
+                                      '&comment=' + form.children[4].value + '&type=plus');
                     }, false);
                     break;
 
                 case 'Расходы':
                     CONTROL.layer.createLayer({content: doc.getElementById('form__minus').innerHTML});
+                    //ДОБАВЛЕНИЕ НОВОГО ДОХОДА
+                    doc.getElementsByClassName('form__minus__add')[0].addEventListener('click', function(e) {
+                        var form = doc.getElementsByClassName('form__minus__blockInputs')[0];
+
+                        e.preventDefault();
+                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + window.login +
+                            '&date='+ form.children[0].value+
+                            '&sch=' + form.children[1].value +
+                            '&cat=' + form.children[2].value +
+                            '&sum=' + form.children[3].value+
+                            '&comment=' + form.children[4].value + '&type=minus');
+                    }, false);
                     break;
 
                 case 'Переводы':

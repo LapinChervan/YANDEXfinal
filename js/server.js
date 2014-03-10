@@ -33,7 +33,7 @@ http.createServer(function(req, res) {
         requests.newCat(data.query.login, data.query.typ, data.query.cat, res);
     }
 
-    if (data.pathname === '/historyNewGain') {
+    if (data.pathname === '/historyNewOper') {
         var obj = {
             date: data.query.date,
             sch: data.query.sch,
@@ -42,7 +42,7 @@ http.createServer(function(req, res) {
             comm: data.query.comment
         };
         res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
-        requests.newGain(data.query.login, obj, res);
+        requests.newGain(data.query.login, data.query.type, obj, res);
     }
 
 }).listen(1111);
