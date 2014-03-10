@@ -42,7 +42,7 @@ http.createServer(function(req, res) {
             comm: data.query.comment
         };
         res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
-        requests.newGain(data.query.login, data.query.type, obj, res);
+        requests.newOper(data.query.login, data.query.type, obj, res);
     }
 
 }).listen(1111);
