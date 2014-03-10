@@ -75,17 +75,17 @@ CONTROL.ajax = (function() {
 
 
             switch (xhr.responseText) {
-                case 'CatFor__GAIN__IsWrite':
+                case 'CatFor__gain__IsWrite':
                     responses.newCategory('gain', doc.getElementsByClassName('edit_cat_plus')[0].value);
                     doc.getElementsByClassName('edit_cat_plus')[0].value = '';
                     break;
 
-                case 'CatFor__COSTS__IsWrite':
+                case 'CatFor__costs__IsWrite':
                     responses.newCategory('costs', doc.getElementsByClassName('edit_cat_minus')[0].value);
                     doc.getElementsByClassName('edit_cat_minus')[0].value = '';
                     break;
 
-                case 'CatFor__ACCOUNTS__IsWrite':
+                case 'CatFor__accounts__IsWrite':
                     responses.newCategory('accounts', doc.getElementsByClassName('edit_cat_sch')[0].value);
                     doc.getElementsByClassName('edit_cat_sch')[0].value = '';
                     break;
