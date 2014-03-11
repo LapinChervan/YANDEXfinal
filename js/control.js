@@ -2,28 +2,34 @@
 
 var CONTROL = {};
 
-CONTROL.initialize = (function() {;
-    function loadThirdTab(data) {
-        var doc = document,
-            tmp, key,
-            obj = data,
-            mainCurr = obj.mainCurr;
-        window.login = obj.name;
-        for (key in obj.categories) {
-            if (obj.categories.hasOwnProperty(key)) {
-                obj.categories[key].
+
+
+CONTROL.initialize = (function() {
+    var initMethods = {
+        categories: function(data) {
+            var doc = document,
+                tmp = doc.getElementsByClassName('useraccounts')[0].innerHTML,
+                key, html;
+            window.login = data.name;
+            for (key in data.categories) {
+                html = '';
+                data.categories[key].
                     forEach(function(elem) {
-                        tmp = doc.getElementsByClassName('useraccounts')[0].innerHTML;
-                        console.log(key);
-                        doc.getElementsByClassName(key)[0].innerHTML = doc.getElementsByClassName(key)[0].innerHTML +
-                                                                       Mustache.render(tmp, {costs: elem})
+                        html += Mustache.render(tmp, {costs: elem});
                     });
+                doc.getElementsByClassName(key)[0].innerHTML = html;
             }
+            CONTROL.responses.rebuildCurrency(data);
         }
-        CONTROL.responses.rebuildCurrency(obj);
-    }
-    return {
-        loadThirdTab: loadThirdTab
+    };
+    return function (data) {
+        var key,
+            methods = initMethods;
+        for (var key in methods) {
+            setTimeout(function() {
+                methods[key](data);
+            }, 15);
+        }
     }
 })();
 
@@ -114,7 +120,7 @@ CONTROL.access = (function() {
 	function showContent(responseData) {
 		var doc = document;
 		doc.getElementsByClassName('main')[0].innerHTML = doc.getElementById('user-form').innerHTML;
-        CONTR.initialize.loadThirdTab(responseData);
+        CONTR.initialize(responseData);
         //todo убрать обработчики
         document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
             var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
