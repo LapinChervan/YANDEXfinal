@@ -1,8 +1,7 @@
 'use strict'
-
 var CONTROL = {};
 
-CONTROL.initialize = (function() {;
+CONTROL.initialize = (function() {
     function loadThirdTab(data) {
         var doc = document,
             tmp, key,
