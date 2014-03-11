@@ -1,7 +1,7 @@
 'use strict'
 var CONTROL = {};
 
-
+CONTROL.user = {};
 
 CONTROL.initialize = (function() {
     var initMethods = {
@@ -9,7 +9,7 @@ CONTROL.initialize = (function() {
             var doc = document,
                 tmp = doc.getElementsByClassName('useraccounts')[0].innerHTML,
                 key, html;
-            window.login = data.name;
+            CONTROL.user.login = data.name;
             for (key in data.categories) {
                 html = '';
                 data.categories[key].
@@ -123,7 +123,7 @@ CONTROL.access = (function() {
         //todo убрать обработчики
         document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
             var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
-            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&curr=' + target.value,CONTR.responses.rebuildCurrency);
+            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + CONTROL.user.login +'&curr=' + target.value,CONTR.responses.rebuildCurrency);
         });
 
         //ОТПРАВКА ОСНОВНОЙ ВАЛЮТЫ
@@ -134,7 +134,7 @@ CONTROL.access = (function() {
             for (var i = 0; i < inputValuta.length; i++) {
                 data[inputValuta[i].name] = inputValuta[i].value;
             }
-            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + window.login +'&valuta=' + JSON.stringify(data));
+            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + CONTROL.user.login +'&valuta=' + JSON.stringify(data));
         });
 
         // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
@@ -154,7 +154,7 @@ CONTROL.access = (function() {
                         var form = doc.getElementsByClassName('form__plus__blockInputs')[0];
 
                         e.preventDefault();
-                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + window.login +
+                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + CONTROL.user.login +
                                       '&date='+ form.children[0].value+
                                       '&sch=' + form.children[1].value +
                                       '&cat=' + form.children[2].value +
@@ -171,7 +171,7 @@ CONTROL.access = (function() {
                         var form = doc.getElementsByClassName('form__minus__blockInputs')[0];
 
                         e.preventDefault();
-                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + window.login +
+                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + CONTROL.user.login +
                             '&date='+ form.children[0].value+
                             '&sch=' + form.children[1].value +
                             '&cat=' + form.children[2].value +
@@ -188,7 +188,7 @@ CONTROL.access = (function() {
                         var form = doc.getElementsByClassName('form__send__blockInputs')[0];
 
                         e.preventDefault();
-                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + window.login +
+                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + CONTROL.user.login +
                             '&date='+ form.children[0].value+
                             '&sch=' + form.children[1].value +
                             '&cat=' + form.children[2].value +
@@ -202,21 +202,21 @@ CONTROL.access = (function() {
         // ДОБАВЛЕНИЕ НОВЫХ КАТЕГОРИЙ
         doc.getElementsByClassName('addCategoryButton')[1].addEventListener('click', function(e) {
             e.preventDefault();
-            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +
+            ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
                                                                '&cat=' + doc.getElementsByClassName('edit_cat_plus')[0].value +
                                                                '&typ=gain');
         }, false);
 
         doc.getElementsByClassName('addCategoryButton')[2].addEventListener('click', function(e) {
             e.preventDefault();
-            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +
+            ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
                                                               '&cat=' + doc.getElementsByClassName('edit_cat_minus')[0].value +
                                                               '&typ=costs');
         }, false);
 
         doc.getElementsByClassName('addCategoryButton')[0].addEventListener('click', function(e) {
             e.preventDefault();
-            ajax.toServer('http://localhost:1111/newCategories?login='+ window.login +
+            ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
                                                               '&cat=' + doc.getElementsByClassName('edit_cat_sch')[0].value +
                                                               '&typ=accounts');
         }, false);
