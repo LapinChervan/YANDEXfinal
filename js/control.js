@@ -43,10 +43,10 @@ CONTROL.requests = (function() {
 })();
 
 CONTROL.responses = (function() {
-    function newCategory(type, category) {
-        var doc = document;
-        doc.getElementsByClassName(type)[0].innerHTML = doc.getElementsByClassName(type)[0].innerHTML +
-        Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML, {costs: category});
+    function newCategory(res) {
+        var doc = document,
+            categories = doc.getElementsByClassName(res.type)[0];
+        categories.innerHTML = categories.innerHTML + Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML, {costs: res.name});
     }
 
     function rebuildCurrency (obj) {
@@ -67,24 +67,9 @@ CONTROL.responses = (function() {
         mainCurrWrap.nextElementSibling.innerHTML = input;
     }
 
-    function reViewGain (response) {
-        newCategory('gain', response);
-    }
-
-    function reViewCosts(response) {
-        newCategory('costs', response);
-    }
-
-    function reViewAccounts(response) {
-        newCategory('accounts', response);
-    }
-
     return {
         newCategory: newCategory,
-        rebuildCurrency: rebuildCurrency,
-        reViewGain: reViewGain,
-        reViewCosts: reViewCosts,
-        reViewAccounts: reViewAccounts
+        rebuildCurrency: rebuildCurrency
     }
 })();
 
@@ -340,7 +325,7 @@ CONTROL.access = (function() {
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
                                                                '&cat=' + txtInput.value +
-                                                               '&typ=gain',CONTROL.responses.reViewGain);
+                                                               '&typ=gain',CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
 
@@ -349,7 +334,7 @@ CONTROL.access = (function() {
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
                                                               '&cat=' + txtInput.value +
-                                                              '&typ=costs',CONTROL.responses.reViewCosts);
+                                                              '&typ=costs',CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
 
@@ -358,7 +343,7 @@ CONTROL.access = (function() {
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
                                                               '&cat=' + txtInput.value +
-                                                              '&typ=accounts',CONTROL.responses.reViewAccounts);
+                                                              '&typ=accounts',CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
 
