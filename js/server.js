@@ -45,4 +45,15 @@ http.createServer(function(req, res) {
         requests.newOper(data.query.login, data.query.type, obj, res);
     }
 
+    if (data.pathname === '/renameCategory') {
+        var obj = {
+            login: data.query.login,
+            type: data.query.type,
+            old: data.query.old,
+            new: data.query.new
+        }
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+        requests.renameCat(obj, res);
+    }
+
 }).listen(1111);

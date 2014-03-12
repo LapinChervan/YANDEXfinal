@@ -37,6 +37,11 @@ CONTROL.initialize = (function() {
     }
 })();
 
+CONTROL.requests = (function() {
+    var host = 'http://localhost:1111/';
+
+
+})();
 
 CONTROL.responses = (function() {
     function newCategory(type, category) {
@@ -183,6 +188,17 @@ CONTROL.access = (function() {
                 (target.classList.contains('delete')) {
                 alert('delete');
             }
+
+            doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                var event = e || window.event,
+                    input = doc.getElementsByClassName('editCatInput')[0];
+
+                event.preventDefault();
+                ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
+                                                                   '&type=accounts' +
+                                                                   '&old=' + input.placeholder +
+                                                                   '&new=' + input.value);
+            });
         });
 
         // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
