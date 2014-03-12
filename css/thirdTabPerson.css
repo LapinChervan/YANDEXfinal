@@ -13,6 +13,8 @@
 
 .setting-wrap {
     padding: 10px 0 5px 0;
+    width: 1010px;
+    overflow:auto;
 }
 
 .setting-wrap > div {
@@ -24,6 +26,10 @@
     border-radius: 4px;
     margin: 0 5px 5px 0;
     vertical-align: bottom;
+}
+
+.clearr {
+    clear: both;
 }
 
 .setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete, .inlineBlock {
