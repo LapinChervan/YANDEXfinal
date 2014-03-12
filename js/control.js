@@ -52,12 +52,19 @@ CONTROL.responses = (function() {
     }
 
     function renameCategory(res) {
-        var doc = document,
-            parent = doc.getElementsByClassName(res.type)[0],
-            pos = 0;
-
+        var parent = document.getElementsByClassName(res.type)[0];
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.old + '</div>', '<div>' + res.new + '</div>');
+    }
 
+    function removeCategory(res) {
+        var parent = document.getElementsByClassName(res.type)[0],
+            indexStart,
+            subs = '';
+
+        indexStart = parent.innerHTML.indexOf('<div>' + res.cat + '</div>');
+        subs = parent.innerHTML.slice(parent.innerHTML.lastIndexOf('<div>', indexStart - 1),
+                                      parent.innerHTML.indexOf('<div>', indexStart + 1));
+        parent.innerHTML = parent.innerHTML.replace(subs, '');
     }
 
     function rebuildCurrency (obj) {
@@ -82,7 +89,8 @@ CONTROL.responses = (function() {
     return {
         newCategory: newCategory,
         rebuildCurrency: rebuildCurrency,
-        renameCategory: renameCategory
+        renameCategory: renameCategory,
+        removeCategory: removeCategory
     }
 })();
 
@@ -180,7 +188,7 @@ CONTROL.access = (function() {
                         event.preventDefault();
                         ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
                             '&type=costs' +
-                            '&old=' + input.placeholder);
+                            '&old=' + input.placeholder, response.removeCategory);
                     });
                 }
         });
@@ -223,7 +231,7 @@ CONTROL.access = (function() {
                         event.preventDefault();
                         ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
                             '&type=gain' +
-                            '&old=' + input.placeholder);
+                            '&old=' + input.placeholder, response.removeCategory);
                     });
                 }
         });
@@ -266,7 +274,7 @@ CONTROL.access = (function() {
                         event.preventDefault();
                         ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
                             '&type=accounts' +
-                            '&old=' + input.placeholder);
+                            '&old=' + input.placeholder, response.removeCategory);
                     });
                 }
         });
