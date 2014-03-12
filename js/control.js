@@ -67,33 +67,24 @@ CONTROL.responses = (function() {
         mainCurrWrap.nextElementSibling.innerHTML = input;
     }
 
-    function reViewCategories (response) {
-        switch (response) {
-            case 'CatFor__gain__IsWrite':
-                newCategory('gain', doc.getElementsByClassName('edit_cat_plus')[0].value);
-                doc.getElementsByClassName('edit_cat_plus')[0].value = '';
-                break;
+    function reViewGain (response) {
+        newCategory('gain', response);
+    }
 
-            case 'CatFor__costs__IsWrite':
-                newCategory('costs', doc.getElementsByClassName('edit_cat_minus')[0].value);
-                doc.getElementsByClassName('edit_cat_minus')[0].value = '';
-                break;
+    function reViewCosts(response) {
+        newCategory('costs', response);
+    }
 
-            case 'CatFor__accounts__IsWrite':
-                newCategory('accounts', doc.getElementsByClassName('edit_cat_sch')[0].value);
-                doc.getElementsByClassName('edit_cat_sch')[0].value = '';
-                break;
-
-            case 'new__GAIN__isWrite':
-
-                break;
-        }
+    function reViewAccounts(response) {
+        newCategory('accounts', response);
     }
 
     return {
         newCategory: newCategory,
         rebuildCurrency: rebuildCurrency,
-        reViewCategories: reViewCategories
+        reViewGain: reViewGain,
+        reViewCosts: reViewCosts,
+        reViewAccounts: reViewAccounts
     }
 })();
 
@@ -345,24 +336,30 @@ CONTROL.access = (function() {
 
         // ДОБАВЛЕНИЕ НОВЫХ КАТЕГОРИЙ
         doc.getElementsByClassName('addCategoryButton')[1].addEventListener('click', function(e) {
+            var txtInput = doc.getElementsByClassName('edit_cat_plus')[0];
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
-                                                               '&cat=' + doc.getElementsByClassName('edit_cat_plus')[0].value +
-                                                               '&typ=gain',CONTROL.responses.reViewCategories);
+                                                               '&cat=' + txtInput.value +
+                                                               '&typ=gain',CONTROL.responses.reViewGain);
+            txtInput.value = '';
         }, false);
 
         doc.getElementsByClassName('addCategoryButton')[2].addEventListener('click', function(e) {
+            var txtInput = doc.getElementsByClassName('edit_cat_minus')[0];
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
-                                                              '&cat=' + doc.getElementsByClassName('edit_cat_minus')[0].value +
-                                                              '&typ=costs',CONTROL.responses.reViewCategories);
+                                                              '&cat=' + txtInput.value +
+                                                              '&typ=costs',CONTROL.responses.reViewCosts);
+            txtInput.value = '';
         }, false);
 
         doc.getElementsByClassName('addCategoryButton')[0].addEventListener('click', function(e) {
+            var txtInput = doc.getElementsByClassName('edit_cat_sch')[0];
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
-                                                              '&cat=' + doc.getElementsByClassName('edit_cat_sch')[0].value +
-                                                              '&typ=accounts',CONTROL.responses.reViewCategories);
+                                                              '&cat=' + txtInput.value +
+                                                              '&typ=accounts',CONTROL.responses.reViewAccounts);
+            txtInput.value = '';
         }, false);
 
 
