@@ -46,10 +46,17 @@ CONTROL.responses = (function() {
     function newCategory(res) {
         var doc = document,
             categories = doc.getElementsByClassName(res.type)[0];
-        categories.innerHTML = categories.innerHTML + Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML, {costs: res.cat});
+
+        categories.innerHTML = categories.innerHTML + Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML,
+                                                                      {costs: res.cat});
     }
 
     function renameCategory(res) {
+        var doc = document,
+            parent = doc.getElementsByClassName(res.type)[0],
+            pos = 0;
+
+        parent.innerHTML = parent.innerHTML.replace('<div>' + res.old + '</div>', '<div>' + res.new + '</div>');
 
     }
 
@@ -74,7 +81,8 @@ CONTROL.responses = (function() {
 
     return {
         newCategory: newCategory,
-        rebuildCurrency: rebuildCurrency
+        rebuildCurrency: rebuildCurrency,
+        renameCategory: renameCategory
     }
 })();
 
@@ -108,7 +116,8 @@ CONTROL.ajax = (function() {
 
 CONTROL.access = (function() {
     var CONTR = CONTROL,
-        ajax = CONTR.ajax;
+        ajax = CONTR.ajax,
+        response = CONTR.responses;
 
 	function showContent(responseData) {
 		var doc = document;
@@ -152,7 +161,7 @@ CONTROL.access = (function() {
                     ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
                         '&type=costs' +
                         '&old=' + input.placeholder +
-                        '&new=' + input.value);
+                        '&new=' + input.value, response.renameCategory);
                 });
 
             } else if
@@ -195,7 +204,7 @@ CONTROL.access = (function() {
                     ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
                         '&type=gain' +
                         '&old=' + input.placeholder +
-                        '&new=' + input.value);
+                        '&new=' + input.value, response.renameCategory);
                 });
 
             } else if
@@ -238,7 +247,7 @@ CONTROL.access = (function() {
                     ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
                         '&type=accounts' +
                         '&old=' + input.placeholder +
-                        '&new=' + input.value);
+                        '&new=' + input.value, response.renameCategory);
                 });
 
             } else if
