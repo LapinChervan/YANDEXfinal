@@ -121,6 +121,7 @@ div.marginR0 {
     background:  url(../img/headerbg.png);
     border-radius: 4px;
     padding: 8px;
+    position: relative;
 }
 
 .formCatEdit input {
@@ -138,4 +139,12 @@ div.marginR0 {
 
 .formCatEdit a {
     background:  url(../img/wavegrid.png)
+}
+
+.closedForm {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    cursor: pointer;
 }

@@ -16,12 +16,6 @@
     position: relative;
 }
 
-.close {
-    top: -8px; 
-    right: -8px;
-    position: absolute;
-}
-
 .login__inputs {
     width: 90%;
     margin: 5px auto;
