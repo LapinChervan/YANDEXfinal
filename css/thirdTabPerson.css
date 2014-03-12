@@ -27,10 +27,6 @@
     vertical-align: bottom;
 }
 
-.clearr {
-    clear: both;
-}
-
 .setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete, .inlineBlock {
     display: inline-block;
     cursor: pointer;
