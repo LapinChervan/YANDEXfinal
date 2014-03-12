@@ -384,16 +384,19 @@ CONTROL.access = (function() {
 	}
 })();
 
-CONTROL.layer = (function () {
-    function createLayer (options) {
-        var modal = this.modal = document.createElement('div'),
-            layer = this.layer = document.createElement('div'),
-            optionsObject, key, parent;
+CONTROL.layer = (function() {
+    function createLayer(options) {
+        var doc = document,
+            modal = this.modal = doc.createElement('div'),
+            layer = this.layer = doc.createElement('div'),
+            optionsObject, parent;
+
         optionsObject = getDefaultOptions();
-        for (key in options) {
-            if (!options.hasOwnProperty(key)) continue;
-            optionsObject[key] = options[key];
-        }
+        Object.keys(options).
+            forEach(function(key) {
+                optionsObject[key] = options[key];
+            });
+
         this.parent = parent = optionsObject.parent;
         modal.className = optionsObject.clsOpacityLayer;
         layer.className = optionsObject.clsContentLayer;
