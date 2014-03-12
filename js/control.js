@@ -111,12 +111,6 @@ CONTROL.ajax = (function() {
             alert(xhr.responseText);
 
             if (typeof callback === 'function') {
-               /* if (typeof xhr.responseText ==='object') {
-                    callback(JSON.parse(xhr.responseText));
-                }
-                else {
-                    callback(xhr.responseText);
-                }*/
                 try {
                     callback(JSON.parse(xhr.responseText));
                 } catch (e){
