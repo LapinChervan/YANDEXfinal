@@ -56,4 +56,9 @@ http.createServer(function(req, res) {
         requests.renameCat(obj, res);
     }
 
+    if (data.pathname === '/removeCategory') {
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+        requests.removeCat(data.query.login, data.query.type, data.query.old, res);
+    }
+
 }).listen(1111);
