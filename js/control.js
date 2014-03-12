@@ -142,13 +142,43 @@ CONTROL.access = (function() {
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + CONTROL.user.login +'&valuta=' + JSON.stringify(data));
         });
 
-
+        // РЕДАТИРОВАНИЕ КАТЕГОРИЙ РАСХОДОВ
         doc.getElementsByClassName('costs')[0].addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement;
 
             if (target.classList.contains('edit')) {
-                alert('Edit');
+                event.stopPropagation();
+                CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                                           {text: target.parentNode.lastElementChild.innerHTML})});
+            } else if
+                (target.classList.contains('delete')) {
+                alert('delete');
+            }
+        });
+        // РЕДАТИРОВАНИЕ КАТЕГОРИЙ ДОХОДОВ
+        doc.getElementsByClassName('gain')[0].addEventListener('click', function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement;
+
+            if (target.classList.contains('edit')) {
+                event.stopPropagation();
+                CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                    {text: target.parentNode.lastElementChild.innerHTML})});
+            } else if
+                (target.classList.contains('delete')) {
+                alert('delete');
+            }
+        });
+        // РЕДАТИРОВАНИЕ КАТЕГОРИЙ СЧЕТОВ
+        doc.getElementsByClassName('accounts')[0].addEventListener('click', function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement;
+
+            if (target.classList.contains('edit')) {
+                event.stopPropagation();
+                CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                    {text: target.parentNode.lastElementChild.innerHTML})});
             } else if
                 (target.classList.contains('delete')) {
                 alert('delete');

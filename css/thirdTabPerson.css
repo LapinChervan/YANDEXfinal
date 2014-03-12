@@ -28,6 +28,7 @@
 
 .setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete, .inlineBlock {
     display: inline-block;
+    cursor: pointer;
 }
 
 div.removeStyle {
@@ -112,4 +113,29 @@ div.marginR0 {
 
 .buttonValuta {
     cursor: pointer;
+}
+
+.formCatEdit {
+    text-align: center;
+    width: 220px;
+    background:  url(../img/headerbg.png);
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.formCatEdit input {
+    margin: 10px 0;
+    padding: 0 5px;
+    outline: none;
+    height: 40px;
+    width: 80%;
+    border-radius: 2px;
+    border: none;
+    font-size: 16px;
+    color: #464646;
+    text-align: center;
+}
+
+.formCatEdit a {
+    background:  url(../img/wavegrid.png)
 }

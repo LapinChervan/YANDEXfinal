@@ -18,8 +18,6 @@
     width: 84%;
 }
 
-
-
 .login, .logreg,
 .main__header,
 .main__footer,
@@ -30,7 +28,7 @@
 .form__send__header,
 .form__card__header,
 .history-filter {
-	background: url("../img/headerbg.png");
+    background: url("../img/headerbg.png");
     margin: 0 0 8px 0;
 }
 
