@@ -39,7 +39,6 @@ CONTROL.initialize = (function() {
 
 CONTROL.requests = (function() {
     var host = 'http://localhost:1111/';
-
 })();
 
 CONTROL.responses = (function() {
@@ -106,7 +105,6 @@ CONTROL.ajax = (function() {
             if (xhr.readyState != 4) return;
 
             alert(xhr.responseText);
-
             if (typeof callback === 'function') {
                 try {
                     callback(JSON.parse(xhr.responseText));
@@ -368,9 +366,6 @@ CONTROL.access = (function() {
                                                               '&typ=accounts',CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
-
-
-
 	}
 
 	function registration(user, password) {
