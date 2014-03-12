@@ -40,7 +40,6 @@ CONTROL.initialize = (function() {
 CONTROL.requests = (function() {
     var host = 'http://localhost:1111/';
 
-
 })();
 
 CONTROL.responses = (function() {
@@ -87,7 +86,6 @@ CONTROL.ajax = (function() {
             if (xhr.readyState != 4) return;
 
             alert(xhr.responseText);
-
 
             switch (xhr.responseText) {
                 case 'CatFor__gain__IsWrite':
