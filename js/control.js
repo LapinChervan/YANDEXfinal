@@ -215,8 +215,23 @@ CONTROL.access = (function() {
 
             } else if
                 (target.classList.contains('delete')) {
-                alert('delete');
-            }
+                    event.stopPropagation();
+                    CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                        {edit: target.parentNode.lastElementChild.innerHTML,
+                            caption: 'Удалить',
+                            img: 'img/close2.png',
+                            readonly: 'readonly'})});
+
+                    doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                        var event = e || window.event,
+                            input = doc.getElementsByClassName('editCatInput')[0];
+
+                        event.preventDefault();
+                        ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
+                            '&type=gain' +
+                            '&old=' + input.placeholder);
+                    });
+                }
         });
         // РЕДАТИРОВАНИЕ КАТЕГОРИЙ СЧЕТОВ
         doc.getElementsByClassName('accounts')[0].addEventListener('click', function(e) {
@@ -243,8 +258,23 @@ CONTROL.access = (function() {
 
             } else if
                 (target.classList.contains('delete')) {
-                alert('delete');
-            }
+                    event.stopPropagation();
+                    CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                        {edit: target.parentNode.lastElementChild.innerHTML,
+                            caption: 'Удалить',
+                            img: 'img/close2.png',
+                            readonly: 'readonly'})});
+
+                    doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                        var event = e || window.event,
+                            input = doc.getElementsByClassName('editCatInput')[0];
+
+                        event.preventDefault();
+                        ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
+                            '&type=accounts' +
+                            '&old=' + input.placeholder);
+                    });
+                }
         });
 
         // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
