@@ -13,8 +13,7 @@
 
 .setting-wrap {
     padding: 10px 0 5px 0;
-    width: 1010px;
-    overflow:auto;
+    white-space: normal;
 }
 
 .setting-wrap > div {
