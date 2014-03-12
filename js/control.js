@@ -46,7 +46,11 @@ CONTROL.responses = (function() {
     function newCategory(res) {
         var doc = document,
             categories = doc.getElementsByClassName(res.type)[0];
-        categories.innerHTML = categories.innerHTML + Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML, {costs: res.name});
+        categories.innerHTML = categories.innerHTML + Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML, {costs: res.cat});
+    }
+
+    function renameCategory(res) {
+
     }
 
     function rebuildCurrency (obj) {
@@ -58,6 +62,7 @@ CONTROL.responses = (function() {
             currentCurr = Mustache.render(templateRadio, {value: mainCurr}),
             index = currentCurr.indexOf('input') + 5,
             radio, key, input = '';
+
         radio = currentCurr.slice(0, index) + ' checked' + currentCurr.slice(index, currentCurr.length);
         for (key in currency) {
             radio = radio + Mustache.render(templateRadio, {value: key});
@@ -325,7 +330,7 @@ CONTROL.access = (function() {
             e.preventDefault();
             ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
                                                                '&cat=' + txtInput.value +
-                                                               '&typ=gain',CONTROL.responses.newCategory);
+                                                               '&typ=gain', CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
 
