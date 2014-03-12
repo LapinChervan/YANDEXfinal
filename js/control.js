@@ -155,11 +155,40 @@ CONTROL.access = (function() {
             if (target.classList.contains('edit')) {
                 event.stopPropagation();
                 CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                                           {text: target.parentNode.lastElementChild.innerHTML})});
+                                                   {edit: target.parentNode.lastElementChild.innerHTML,
+                                                    caption: 'Изменить',
+                                                    img: 'img/edit2.png'})});
+
+                doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                    var event = e || window.event,
+                        input = doc.getElementsByClassName('editCatInput')[0];
+
+                    event.preventDefault();
+                    ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
+                        '&type=costs' +
+                        '&old=' + input.placeholder +
+                        '&new=' + input.value);
+                });
+
             } else if
                 (target.classList.contains('delete')) {
-                alert('delete');
-            }
+                    event.stopPropagation();
+                    CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                                                            {edit: target.parentNode.lastElementChild.innerHTML,
+                                                            caption: 'Удалить',
+                                                            img: 'img/close2.png',
+                                                            readonly: 'readonly'})});
+
+                    doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                        var event = e || window.event,
+                            input = doc.getElementsByClassName('editCatInput')[0];
+
+                        event.preventDefault();
+                        ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
+                            '&type=costs' +
+                            '&old=' + input.placeholder);
+                    });
+                }
         });
         // РЕДАТИРОВАНИЕ КАТЕГОРИЙ ДОХОДОВ
         doc.getElementsByClassName('gain')[0].addEventListener('click', function(e) {
@@ -169,7 +198,21 @@ CONTROL.access = (function() {
             if (target.classList.contains('edit')) {
                 event.stopPropagation();
                 CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                    {text: target.parentNode.lastElementChild.innerHTML})});
+                                                    {edit: target.parentNode.lastElementChild.innerHTML,
+                                                    caption: 'Изменить',
+                                                    img: 'img/edit2.png'})});
+
+                doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                    var event = e || window.event,
+                        input = doc.getElementsByClassName('editCatInput')[0];
+
+                    event.preventDefault();
+                    ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
+                        '&type=gain' +
+                        '&old=' + input.placeholder +
+                        '&new=' + input.value);
+                });
+
             } else if
                 (target.classList.contains('delete')) {
                 alert('delete');
@@ -183,22 +226,25 @@ CONTROL.access = (function() {
             if (target.classList.contains('edit')) {
                 event.stopPropagation();
                 CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                    {text: target.parentNode.lastElementChild.innerHTML})});
+                                                    {edit: target.parentNode.lastElementChild.innerHTML,
+                                                     caption: 'Изменить',
+                                                     img: 'img/edit2.png'})});
+
+                doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                    var event = e || window.event,
+                        input = doc.getElementsByClassName('editCatInput')[0];
+
+                    event.preventDefault();
+                    ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
+                        '&type=accounts' +
+                        '&old=' + input.placeholder +
+                        '&new=' + input.value);
+                });
+
             } else if
                 (target.classList.contains('delete')) {
                 alert('delete');
             }
-
-            doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
-                var event = e || window.event,
-                    input = doc.getElementsByClassName('editCatInput')[0];
-
-                event.preventDefault();
-                ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
-                                                                   '&type=accounts' +
-                                                                   '&old=' + input.placeholder +
-                                                                   '&new=' + input.value);
-            });
         });
 
         // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
