@@ -1,7 +1,9 @@
 'use strict'
 var CONTROL = {};
 
-CONTROL.user = {};
+CONTROL.user = {
+    login: ''
+};
 
 CONTROL.initialize = (function() {
     var initMethods = {
@@ -9,7 +11,9 @@ CONTROL.initialize = (function() {
             var doc = document,
                 tmp = doc.getElementsByClassName('useraccounts')[0].innerHTML,
                 key, html;
+
             CONTROL.user.login = data.name;
+
             for (key in data.categories) {
                 html = '';
                 data.categories[key].
@@ -24,6 +28,7 @@ CONTROL.initialize = (function() {
     return function (data) {
         var key,
             methods = initMethods;
+
         for (var key in methods) {
             setTimeout(function() {
                 methods[key](data);
@@ -100,7 +105,6 @@ CONTROL.ajax = (function() {
                     break;
             }
 
-
             if (typeof callback === 'function') {
                 callback(JSON.parse(xhr.responseText));
             }
@@ -119,10 +123,11 @@ CONTROL.access = (function() {
 	function showContent(responseData) {
 		var doc = document;
 		doc.getElementsByClassName('main')[0].innerHTML = doc.getElementById('user-form').innerHTML;
+
         CONTR.initialize(responseData);
-        //todo убрать обработчики
+
         document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
-            var target = event.target || event.srcElement; //проверить ие8 на евент таргет а то забыл))
+            var target = event.target || event.srcElement;
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + CONTROL.user.login +'&curr=' + target.value,CONTR.responses.rebuildCurrency);
         });
 
@@ -135,6 +140,19 @@ CONTROL.access = (function() {
                 data[inputValuta[i].name] = inputValuta[i].value;
             }
             CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + CONTROL.user.login +'&valuta=' + JSON.stringify(data));
+        });
+
+
+        doc.getElementsByClassName('costs')[0].addEventListener('click', function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement;
+
+            if (target.classList.contains('edit')) {
+                alert('Edit');
+            } else if
+                (target.classList.contains('delete')) {
+                alert('delete');
+            }
         });
 
         // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
@@ -220,9 +238,11 @@ CONTROL.access = (function() {
                                                               '&cat=' + doc.getElementsByClassName('edit_cat_sch')[0].value +
                                                               '&typ=accounts');
         }, false);
+
+
+
 	}
 
-    //TODO отсылать логин и пароль не GETом
 	function registration(user, password) {
 		if (user && password) {
             ajax.toServer('http://localhost:1111/reg?login=' + user +'&password='+ password);
@@ -296,5 +316,3 @@ CONTROL.layer = (function () {
         destroyLayer: destroyLayer
     }
 })();
-
-
