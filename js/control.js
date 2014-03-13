@@ -88,9 +88,13 @@ CONTROL.requests = (function() {
         return host + 'auth?login=' + user + '&password=' + password;
     }
 
-    function newOper(user, type, date, sch, cat, sum, comm) {
+    function newOper(user, type, date, sch, cat, sum, comm, id) {
         return host + 'historyNewOper?login=' + user + '&type=' + type + '&date=' + date + '&sch=' + sch +
-               '&cat=' + cat + '&sum=' + sum + '&comment=' + comm;
+               '&cat=' + cat + '&sum=' + sum + '&comment=' + comm + '&id=' + id;
+    }
+
+    function removeOper(user, id) {
+        return host + 'historyRemove?login=' + user + '&id=' + id;
     }
 
     return {
@@ -101,7 +105,8 @@ CONTROL.requests = (function() {
         newCategory: newCategory,
         registration: registration,
         auth: auth,
-        newOper: newOper
+        newOper: newOper,
+        removeOper: removeOper
     }
 })();
 
@@ -138,6 +143,10 @@ CONTROL.responses = (function() {
                            Mustache.render(doc.getElementsByClassName('history' + res.type)[0].innerHTML, res);
     }
 
+    function removeOper(res) {
+
+    }
+
     function rebuildCurrency (obj) {
         var mainCurrWrap = document.querySelector('.currency-radio'),
             mainCurr = obj.mainCurr,
@@ -162,7 +171,8 @@ CONTROL.responses = (function() {
         rebuildCurrency: rebuildCurrency,
         renameCategory: renameCategory,
         removeCategory: removeCategory,
-        newOper: newOper
+        newOper: newOper,
+        removeOper: removeOper
     }
 })();
 
@@ -367,7 +377,9 @@ CONTROL.access = (function() {
                                                                                   form.children[1].value,
                                                                                   form.children[2].value,
                                                                                   form.children[3].value,
-                                                                                  form.children[4].value), response.newOper);
+                                                                                  form.children[4].value,
+                                                                                  Math.round(Math.random()*1000000)),
+                                                                                  response.newOper);
                     }, false);
                     break;
 
@@ -383,7 +395,9 @@ CONTROL.access = (function() {
                                                                                    form.children[1].value,
                                                                                    form.children[2].value,
                                                                                    form.children[3].value,
-                                                                                   form.children[4].value), response.newOper);
+                                                                                   form.children[4].value,
+                                                                                   Math.round(Math.random()*1000000)),
+                                                                                   response.newOper);
                     }, false);
                     break;
 
@@ -399,7 +413,9 @@ CONTROL.access = (function() {
                                                                                   form.children[1].value,
                                                                                   form.children[2].value,
                                                                                   form.children[3].value,
-                                                                                  form.children[4].value), response.newOper);
+                                                                                  form.children[4].value,
+                                                                                  Math.round(Math.random()*1000000)),
+                                                                                  response.newOper);
                     }, false);
                     break;
             }
@@ -430,9 +446,11 @@ CONTROL.access = (function() {
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
         doc.getElementsByClassName('historyUl')[0].addEventListener('click', function(e) {
             var event = e || window.event,
-                target = event.target || event.srcElement;
+                target = event.target || event.srcElement,
+                id;
 
             if (!target.classList.contains('delete')) return;
+            id = target.previousElementSibling.innerHTML;
 
             event.stopPropagation();
             CONTROL.layer.createLayer({content: doc.getElementsByClassName('remHistForm')[0].innerHTML});
@@ -441,7 +459,7 @@ CONTROL.access = (function() {
                var event = e || window.event;
 
                event.preventDefault();
-
+               ajax.toServer(request.removeOper(CONTROL.user.login, id), request.removeOper);
             });
 
         }, false);

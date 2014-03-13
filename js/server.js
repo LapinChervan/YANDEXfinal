@@ -40,10 +40,16 @@ http.createServer(function(req, res) {
             cat: data.query.cat,
             sum: data.query.sum,
             comm: data.query.comment,
-            type: data.query.type
+            type: data.query.type,
+            id: data.query.id
         };
         res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
         requests.newOper(data.query.login, data.query.type, obj, res);
+    }
+
+    if (data.pathname === '/historyRemove') {
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+        requests.removeOper(data.query.login, data.query.id, res);
     }
 
     if (data.pathname === '/renameCategory') {
