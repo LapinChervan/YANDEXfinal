@@ -39,6 +39,14 @@ CONTROL.initialize = (function() {
 
 CONTROL.requests = (function() {
     var host = 'http://localhost:1111/';
+
+    function changeMainCurr(user, curr) {
+        return host + 'currency?login=' + user + '&curr=' + curr;
+    }
+
+    return {
+        changeMainCurr: changeMainCurr
+    }
 })();
 
 CONTROL.responses = (function() {
@@ -123,7 +131,8 @@ CONTROL.ajax = (function() {
 CONTROL.access = (function() {
     var CONTR = CONTROL,
         ajax = CONTR.ajax,
-        response = CONTR.responses;
+        response = CONTR.responses,
+        request = CONTR.requests;
 
 	function showContent(responseData) {
 		var doc = document;
@@ -133,7 +142,7 @@ CONTROL.access = (function() {
 
         document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
             var target = event.target || event.srcElement;
-            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + CONTROL.user.login +'&curr=' + target.value,CONTR.responses.rebuildCurrency);
+            CONTROL.ajax.toServer(request.changeMainCurr(CONTROL.user.login, target.value),CONTR.responses.rebuildCurrency);
         });
 
         //ОТПРАВКА ОСНОВНОЙ ВАЛЮТЫ
