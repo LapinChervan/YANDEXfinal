@@ -235,127 +235,6 @@ CONTROL.access = (function() {
             CONTROL.ajax.toServer(request.changeRates(CONTROL.user.login, JSON.stringify(data)));
         });
 
-        // РЕДАТИРОВАНИЕ КАТЕГОРИЙ РАСХОДОВ
-        doc.getElementsByClassName('costs')[0].addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement;
-
-            if (target.classList.contains('edit')) {
-                event.stopPropagation();
-                CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                                                   {edit: target.parentNode.lastElementChild.innerHTML,
-                                                    caption: 'Изменить',
-                                                    img: 'img/edit2.png'})});
-
-                doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
-                    var event = e || window.event,
-                        input = doc.getElementsByClassName('editCatInput')[0];
-
-                    event.preventDefault();
-                    ajax.toServer(request.editCategory(CONTROL.user.login, 'costs', input.placeholder, input.value),
-                                  response.renameCategory);
-                });
-
-            } else if
-                (target.classList.contains('delete')) {
-                    event.stopPropagation();
-                    CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                                                            {edit: target.parentNode.lastElementChild.innerHTML,
-                                                            caption: 'Удалить',
-                                                            img: 'img/close2.png',
-                                                            readonly: 'readonly'})});
-
-                    doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
-                        var event = e || window.event,
-                            input = doc.getElementsByClassName('editCatInput')[0];
-
-                        event.preventDefault();
-                        ajax.toServer(request.removeCategory(CONTROL.user.login, 'costs', input.placeholder),
-                                      response.removeCategory);
-                    });
-                }
-        });
-        // РЕДАТИРОВАНИЕ КАТЕГОРИЙ ДОХОДОВ
-        doc.getElementsByClassName('gain')[0].addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement;
-
-            if (target.classList.contains('edit')) {
-                event.stopPropagation();
-                CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                                                    {edit: target.parentNode.lastElementChild.innerHTML,
-                                                    caption: 'Изменить',
-                                                    img: 'img/edit2.png'})});
-
-                doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
-                    var event = e || window.event,
-                        input = doc.getElementsByClassName('editCatInput')[0];
-
-                    event.preventDefault();
-                    ajax.toServer(request.editCategory(CONTROL.user.login, 'gain', input.placeholder, input.value),
-                                  response.renameCategory);
-                });
-
-            } else if
-                (target.classList.contains('delete')) {
-                    event.stopPropagation();
-                    CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                        {edit: target.parentNode.lastElementChild.innerHTML,
-                            caption: 'Удалить',
-                            img: 'img/close2.png',
-                            readonly: 'readonly'})});
-
-                    doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
-                        var event = e || window.event,
-                            input = doc.getElementsByClassName('editCatInput')[0];
-
-                        event.preventDefault();
-                        ajax.toServer(request.removeCategory(CONTROL.user.login, 'gain', input.placeholder),
-                                      response.removeCategory);
-                    });
-                }
-        });
-        // РЕДАТИРОВАНИЕ КАТЕГОРИЙ СЧЕТОВ
-        doc.getElementsByClassName('accounts')[0].addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement;
-
-            if (target.classList.contains('edit')) {
-                event.stopPropagation();
-                CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                                                    {edit: target.parentNode.lastElementChild.innerHTML,
-                                                     caption: 'Изменить',
-                                                     img: 'img/edit2.png'})});
-
-                doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
-                    var event = e || window.event,
-                        input = doc.getElementsByClassName('editCatInput')[0];
-
-                    event.preventDefault();
-                    ajax.toServer(request.editCategory(CONTROL.user.login, 'accounts', input.placeholder, input.value),
-                                  response.renameCategory);
-                });
-
-            } else if
-                (target.classList.contains('delete')) {
-                    event.stopPropagation();
-                    CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
-                        {edit: target.parentNode.lastElementChild.innerHTML,
-                            caption: 'Удалить',
-                            img: 'img/close2.png',
-                            readonly: 'readonly'})});
-
-                    doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
-                        var event = e || window.event,
-                            input = doc.getElementsByClassName('editCatInput')[0];
-
-                        event.preventDefault();
-                        ajax.toServer(request.removeCategory(CONTROL.user.login, 'accounts', input.placeholder),
-                                      response.removeCategory);
-                    });
-                }
-        });
-
         // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
         doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
             var event = e || window.event,
@@ -421,27 +300,77 @@ CONTROL.access = (function() {
             }
         }, false);
 
-        // ОБРАБОТЧИКИ ДОБАВЛЕНИЯ НОВЫХ КАТЕГОРИЙ
+        // ДЕЛЕГИРОВАНИЯ
         doc.getElementsByClassName('indentation')[2].addEventListener('click', function(e) {
             var event = e || window,
-                target = event.target || event.srcElement;
+                target = event.target || event.srcElement,
+                key;
 
-            if (!target.classList.contains('addCategoryButton')) return;
-            event.preventDefault();
+            //КНОПКИ ДОБАВЛЕНИЯ НОВЫХ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
+            if (target.classList.contains('addCategoryButton')) {
+                event.preventDefault();
 
-            var txtInput,
-                types = {
-                add_cat_sch: ['edit_cat_sch', 'accounts'],
-                add_cat_plus: ['edit_cat_plus', 'gain'],
-                add_cat_minus: ['edit_cat_minus', 'costs']
-                };
+                var txtInput,
+                    types = {
+                    add_cat_sch: ['edit_cat_sch', 'accounts'],
+                    add_cat_plus: ['edit_cat_plus', 'gain'],
+                    add_cat_minus: ['edit_cat_minus', 'costs']
+                    };
 
-            for (var key in types) {
-                if (target.classList.contains(key)) {
-                    txtInput = doc.getElementsByClassName(types[key][0])[0];
-                    ajax.toServer(request.newCategory(CONTROL.user.login, types[key][1], txtInput.value) ,CONTROL.responses.newCategory);
-                    txtInput.value = '';
+                for (key in types) {
+                    if (target.classList.contains(key)) {
+                        txtInput = doc.getElementsByClassName(types[key][0])[0];
+                        ajax.toServer(request.newCategory(CONTROL.user.login, types[key][1], txtInput.value), response.newCategory);
+                        txtInput.value = '';
+                    }
                 }
+            }
+
+            //КНОПКИ РЕДАКТИРОВАНИЯ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
+            if (target.classList.contains('edit')) {
+                ['accounts', 'gain', 'costs'].
+                    forEach(function(elem) {
+                        if (target.parentNode.parentNode.classList.contains(elem)) {
+                            event.stopPropagation();
+                            CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                                {edit: target.parentNode.lastElementChild.innerHTML,
+                                    caption: 'Изменить',
+                                    img: 'img/edit2.png'})});
+
+                            doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                                var event = e || window.event,
+                                    input = doc.getElementsByClassName('editCatInput')[0];
+
+                                event.preventDefault();
+                                ajax.toServer(request.editCategory(CONTROL.user.login, elem, input.placeholder, input.value),
+                                    response.renameCategory);
+                            });
+                        }
+                    });
+            }
+
+            //КНОПКИ УДАЛЕНИЯ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
+            if (target.classList.contains('delete')) {
+                ['accounts', 'gain', 'costs'].
+                    forEach(function(elem) {
+                        if (target.parentNode.parentNode.classList.contains(elem)) {
+                            event.stopPropagation();
+                            CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                                {edit: target.parentNode.lastElementChild.innerHTML,
+                                    caption: 'Удалить',
+                                    img: 'img/close2.png',
+                                    readonly: 'readonly'})});
+
+                            doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                                var event = e || window.event,
+                                    input = doc.getElementsByClassName('editCatInput')[0];
+
+                                event.preventDefault();
+                                ajax.toServer(request.removeCategory(CONTROL.user.login, elem, input.placeholder),
+                                    response.removeCategory);
+                            });
+                        }
+                    });
             }
         }, false);
 
