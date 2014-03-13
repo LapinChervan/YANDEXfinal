@@ -426,6 +426,18 @@ CONTROL.access = (function() {
             ajax.toServer(request.newCategory(CONTROL.user.login, 'accounts', txtInput.value) ,CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
+
+        //УДАЛЕНИЕ ИЗ ИСТОРИИ
+        doc.getElementsByClassName('historyUl')[0].addEventListener('click', function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement;
+
+            if (!target.classList.contains('delete')) return;
+
+                event.stopPropagation();
+                CONTROL.layer.createLayer({content: doc.getElementsByClassName('remHistForm')[0].innerHTML});
+
+        }, false);
 	}
 
 	function registration(user, password) {

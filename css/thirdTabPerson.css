@@ -116,12 +116,20 @@ div.marginR0 {
     cursor: pointer;
 }
 
-.formCatEdit {
+.formCatEdit, .remHistForm {
     text-align: center;
     width: 220px;
     background:  url(../img/headerbg.png);
     border-radius: 4px;
     padding: 8px;
+}
+
+.remHistForm > span {
+    color: #EB8745;
+}
+
+.remHistForm > div {
+    margin: 10px 0 0 0;
 }
 
 .formCatEdit input {
@@ -137,6 +145,6 @@ div.marginR0 {
     text-align: center;
 }
 
-.formCatEdit a {
+.formCatEdit a, .remHistForm a {
     background:  url(../img/wavegrid.png)
 }
