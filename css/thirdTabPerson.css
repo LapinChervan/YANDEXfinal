@@ -16,7 +16,7 @@
     white-space: normal;
 }
 
-.setting-wrap > div {
+.setting-wrap > div, .currency-radio{
     background: url(../img/wavegrid.png);
     display: inline-block;
     text-align: center;

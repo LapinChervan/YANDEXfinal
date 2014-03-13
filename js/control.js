@@ -131,7 +131,7 @@ CONTROL.responses = (function() {
     }
 
     function newOper(res) {
-        var doc = document;
+        var doc = document,
             parent = doc.getElementsByClassName('historyUl')[0];
 
         parent.innerHTML = parent.innerHTML +
@@ -139,7 +139,7 @@ CONTROL.responses = (function() {
     }
 
     function rebuildCurrency (obj) {
-        var mainCurrWrap = document.querySelector('.floatRight.marginR0'),
+        var mainCurrWrap = document.querySelector('.currency-radio'),
             mainCurr = obj.mainCurr,
             currency = obj.currency[mainCurr],
             templateRadio = document.querySelector('.template_value').innerHTML,
@@ -154,7 +154,7 @@ CONTROL.responses = (function() {
             input = input + Mustache.render(templateInput, {valuta: key, count: currency[key], main: mainCurr});
         }
         mainCurrWrap.innerHTML = radio;
-        mainCurrWrap.nextElementSibling.innerHTML = input;
+        mainCurrWrap.parentElement.nextElementSibling.innerHTML = input;
     }
 
     return {
@@ -171,6 +171,7 @@ CONTROL.ajax = (function() {
         doc = document;
 
 	function toServer(link, callback) {
+       // var resp;
 		var xhr = new XMLHttpRequest();
 
         xhr.open('GET', link); 
@@ -180,10 +181,13 @@ CONTROL.ajax = (function() {
             alert(xhr.responseText);
             if (typeof callback === 'function') {
                 try {
+                   // resp = JSON.parse(xhr.responseText);
                     callback(JSON.parse(xhr.responseText));
                 } catch (e){
                     callback(xhr.responseText);
+                   // resp = xhr.responseText;
                 }
+               // callback(resp);
             }
         };
         xhr.send();
@@ -205,7 +209,7 @@ CONTROL.access = (function() {
 
         CONTR.initialize(responseData);
 
-        document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
+        document.querySelector('.currency-radio').addEventListener('change', function() {
             var target = event.target || event.srcElement;
             CONTROL.ajax.toServer(request.changeMainCurr(CONTROL.user.login, target.value), CONTR.responses.rebuildCurrency);
         });
