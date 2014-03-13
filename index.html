@@ -298,74 +298,14 @@
 
                                 <a class="add_cat_sch marginL5">Применить</a>
                             </div>
-                            <ul>
-                                <li>
-                                    <span class="edit"></span>
-                                    <span class="delete"></span>
-                                    <div>
-                                        <img src="img/dohod.png" alt="">
-                                    </div>
+                            <ul class="historyUl">
 
-                                    <div class="history-content-wrap">
-                                        <div class="history-date">Date</div>
-                                        <div>Category</div>
-                                    </div>
+                                <!--SLOT FOR TEMPLATE HISTORY-->
 
-                                    <div class="history-content-wrap alignCenter">Describe</div>
-
-                                    <div class="history-content-wrap alignRight">
-                                        <div class="account">Кошелек</div>
-                                        <div class="color-income">Сумма
-                                            <span class="currency">Валюта</span>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <span class="edit"></span>
-                                    <span class="delete"></span>
-                                    <div>
-                                        <img src="img/rashod.png" alt="">
-                                    </div>
-
-                                    <div class="history-content-wrap">
-                                        <div class="history-date">Date</div>
-                                        <div>Category</div>
-                                    </div>
-
-                                    <div class="history-content-wrap alignCenter">Describe</div>
-                                    <div class="history-content-wrap alignRight">
-                                        <div class="account">Кошелек</div>
-                                        <div class="color-consumption">Сумма
-                                            <span class="currency">Валюта</span>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <span class="edit"></span>
-                                    <span class="delete"></span>
-                                    <div>
-                                        <img src="img/send.png" alt="">
-                                    </div>
-                                    <div class="history-content-wrap">
-                                        <div class="history-date">Date</div>
-                                        <div>Category</div>
-                                    </div>
-                                    <div class="history-content-wrap alignCenter">Describe</div>
-                                    <div class="history-content-wrap alignRight">
-                                        <div class="account">Кошелек</div>
-                                        <div class="color-send">Сумма
-                                            <span class="currency">Валюта</span>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                     </li>
-
                     <!--END secondTabContents.css-->
-
 
                     <!--thirdTabPerson.css-->
                     <li class="main__tabs__content__ul__li" id="person">
@@ -385,7 +325,7 @@
                             </div>
                             <div class="accounts setting-wrap relative">
 
-                                <!--SLOT FOR TEMPLATE-->
+                                <!--SLOT FOR TEMPLATE CATEGORY 1-->
 
                             </div>
                             <div class="statistics__header">
@@ -403,7 +343,7 @@
                             </div>
                             <div class="gain setting-wrap relative">
 
-                               <!--SLOT FOR TEMPLATE-->
+                               <!--SLOT FOR TEMPLATE CATEGORY 2-->
 
                             </div>
                             <div class="statistics__header">
@@ -421,7 +361,7 @@
                             </div>
                             <div class="costs setting-wrap relative">
 
-                                <!--SLOT FOR TEMPLATE-->
+                                <!--SLOT FOR TEMPLATE CATEGORY 3-->
 
                             </div>
                             <div class="statistics__header">
@@ -463,6 +403,74 @@
                 <img src="img/rashod.png">
                 <div>{{costs}}</div>
             </div>
+        </script>
+
+        <script type="text/template" class="historygain">
+            <li>
+                <span class="edit"></span>
+                <span class="delete"></span>
+                <div>
+                    <img src="img/dohod.png" alt="">
+                </div>
+
+                <div class="history-content-wrap">
+                    <div class="history-date">{{date}}</div>
+                    <div>{{cat}}</div>
+                </div>
+
+                <div class="history-content-wrap alignCenter">{{comm}}</div>
+
+                <div class="history-content-wrap alignRight">
+                    <div class="account">{{sch}}</div>
+                    <div class="color-income">{{sum}}
+                        <span class="currency">{{mainCurr}}</span>
+                    </div>
+                </div>
+            </li>
+        </script>
+
+        <script type="text/template" class="historycosts">
+            <li>
+                <span class="edit"></span>
+                <span class="delete"></span>
+                <div>
+                    <img src="img/rashod.png" alt="">
+                </div>
+
+                <div class="history-content-wrap">
+                    <div class="history-date">{{date}}</div>
+                    <div>{{cat}}</div>
+                </div>
+
+                <div class="history-content-wrap alignCenter">{{comm}}</div>
+                <div class="history-content-wrap alignRight">
+                    <div class="account">{{sch}}</div>
+                    <div class="color-consumption">{{sum}}
+                        <span class="currency">{{mainCurr}}</span>
+                    </div>
+                </div>
+            </li>
+        </script>
+
+        <script type="text/template" class="historysend">
+            <li>
+                <span class="edit"></span>
+                <span class="delete"></span>
+                <div>
+                    <img src="img/send.png" alt="">
+                </div>
+                <div class="history-content-wrap">
+                    <div class="history-date">{{date}}</div>
+                    <div>{{cat}}</div>
+                </div>
+                <div class="history-content-wrap alignCenter">{{comm}}</div>
+                <div class="history-content-wrap alignRight">
+                    <div class="account">{{sch}}</div>
+                    <div class="color-send">{{sum}}
+                        <span class="currency">{{mainCurr}}</span>
+                    </div>
+                </div>
+            </li>
         </script>
 
         <script type="text/template" id="form__plus">

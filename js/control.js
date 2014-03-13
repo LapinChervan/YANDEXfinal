@@ -6,33 +6,53 @@ CONTROL.user = {
 };
 
 CONTROL.initialize = (function() {
-    var initMethods = {
-        categories: function(data) {
-            var doc = document,
-                tmp = doc.getElementsByClassName('useraccounts')[0].innerHTML,
-                key, html;
+    var doc = document,
+        initMethods = {
+            categories: function(data) {
+                var tmp = doc.getElementsByClassName('useraccounts')[0].innerHTML,
+                    key, html;
 
-            CONTROL.user.login = data.name;
+                CONTROL.user.login = data.name;
 
-            for (key in data.categories) {
-                html = '';
-                data.categories[key].
-                    forEach(function(elem) {
-                        html += Mustache.render(tmp, {costs: elem});
+                for (key in data.categories) {
+                    html = '';
+                    data.categories[key].
+                        forEach(function(elem) {
+                            html += Mustache.render(tmp, {costs: elem});
+                        });
+                    doc.getElementsByClassName(key)[0].innerHTML = html;
+                }
+                CONTROL.responses.rebuildCurrency(data);
+            },
+
+            history: function(data) {
+                var  doc = document,
+                     key, key2,
+                     html = '',
+                     thisData = {};
+
+
+                for (key in data.history) {
+                    data.history[key].
+                        forEach(function(objInArr) {
+                            for (key2 in objInArr) {
+                                 thisData[key2] = objInArr[key2];
+                            }
+                            thisData.mainCurr = data.mainCurr;
+                            html = html + Mustache.render(doc.getElementsByClassName('history'+thisData.type)[0].innerHTML, thisData);
                     });
-                doc.getElementsByClassName(key)[0].innerHTML = html;
+                }
+                doc.getElementsByClassName('historyUl')[0].innerHTML = html;
             }
-            CONTROL.responses.rebuildCurrency(data);
-        }
-    };
+        };
     return function (data) {
         var key,
             methods = initMethods;
 
         for (var key in methods) {
-            setTimeout(function() {
+          //  setTimeout(function() {
                 methods[key](data);
-            }, 15);
+          //  }, 150);
         }
     }
 })();
@@ -72,7 +92,6 @@ CONTROL.requests = (function() {
         return host + 'historyNewOper?login=' + user + '&type=' + type + '&date=' + date + '&sch=' + sch +
                '&cat=' + cat + '&sum=' + sum + '&comment=' + comm;
     }
-
 
     return {
         changeMainCurr: changeMainCurr,
