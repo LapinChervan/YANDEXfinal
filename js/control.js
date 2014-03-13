@@ -44,8 +44,23 @@ CONTROL.requests = (function() {
         return host + 'currency?login=' + user + '&curr=' + curr;
     }
 
+    function changeRates(user, currData) {
+        return host + 'currency?login=' + user + '&valuta=' + currData;
+    }
+
+    function editCategory(user, type, old, cat) {
+        return host + 'renameCategory?login=' + user + '&type=' + type + '&old=' + old + '&new=' + cat;
+    }
+
+    function removeCategory(user, type, old) {
+        return host + 'removeCategory?login=' + user + '&type=' + type + '&old=' + old;
+    }
+
     return {
-        changeMainCurr: changeMainCurr
+        changeMainCurr: changeMainCurr,
+        changeRates: changeRates,
+        editCategory: editCategory,
+        removeCategory: removeCategory
     }
 })();
 
@@ -142,7 +157,7 @@ CONTROL.access = (function() {
 
         document.querySelector('.floatRight.marginR0').addEventListener('change', function() {
             var target = event.target || event.srcElement;
-            CONTROL.ajax.toServer(request.changeMainCurr(CONTROL.user.login, target.value),CONTR.responses.rebuildCurrency);
+            CONTROL.ajax.toServer(request.changeMainCurr(CONTROL.user.login, target.value), CONTR.responses.rebuildCurrency);
         });
 
         //ОТПРАВКА ОСНОВНОЙ ВАЛЮТЫ
@@ -153,7 +168,7 @@ CONTROL.access = (function() {
             for (var i = 0; i < inputValuta.length; i++) {
                 data[inputValuta[i].name] = inputValuta[i].value;
             }
-            CONTROL.ajax.toServer('http://localhost:1111/currency?login=' + CONTROL.user.login +'&valuta=' + JSON.stringify(data));
+            CONTROL.ajax.toServer(request.changeRates(CONTROL.user.login, JSON.stringify(data)));
         });
 
         // РЕДАТИРОВАНИЕ КАТЕГОРИЙ РАСХОДОВ
@@ -173,10 +188,8 @@ CONTROL.access = (function() {
                         input = doc.getElementsByClassName('editCatInput')[0];
 
                     event.preventDefault();
-                    ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
-                        '&type=costs' +
-                        '&old=' + input.placeholder +
-                        '&new=' + input.value, response.renameCategory);
+                    ajax.toServer(request.editCategory(CONTROL.user.login, 'costs', input.placeholder, input.value),
+                                  response.renameCategory);
                 });
 
             } else if
@@ -193,9 +206,8 @@ CONTROL.access = (function() {
                             input = doc.getElementsByClassName('editCatInput')[0];
 
                         event.preventDefault();
-                        ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
-                            '&type=costs' +
-                            '&old=' + input.placeholder, response.removeCategory);
+                        ajax.toServer(request.removeCategory(CONTROL.user.login, 'costs', input.placeholder),
+                                      response.removeCategory);
                     });
                 }
         });
@@ -216,10 +228,8 @@ CONTROL.access = (function() {
                         input = doc.getElementsByClassName('editCatInput')[0];
 
                     event.preventDefault();
-                    ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
-                        '&type=gain' +
-                        '&old=' + input.placeholder +
-                        '&new=' + input.value, response.renameCategory);
+                    ajax.toServer(request.editCategory(CONTROL.user.login, 'gain', input.placeholder, input.value),
+                                  response.renameCategory);
                 });
 
             } else if
@@ -236,9 +246,8 @@ CONTROL.access = (function() {
                             input = doc.getElementsByClassName('editCatInput')[0];
 
                         event.preventDefault();
-                        ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
-                            '&type=gain' +
-                            '&old=' + input.placeholder, response.removeCategory);
+                        ajax.toServer(request.removeCategory(CONTROL.user.login, 'gain', input.placeholder),
+                                      response.removeCategory);
                     });
                 }
         });
@@ -259,10 +268,8 @@ CONTROL.access = (function() {
                         input = doc.getElementsByClassName('editCatInput')[0];
 
                     event.preventDefault();
-                    ajax.toServer('http://localhost:1111/renameCategory?login=' + CONTROL.user.login +
-                        '&type=accounts' +
-                        '&old=' + input.placeholder +
-                        '&new=' + input.value, response.renameCategory);
+                    ajax.toServer(request.editCategory(CONTROL.user.login, 'accounts', input.placeholder, input.value),
+                                  response.renameCategory);
                 });
 
             } else if
@@ -279,9 +286,8 @@ CONTROL.access = (function() {
                             input = doc.getElementsByClassName('editCatInput')[0];
 
                         event.preventDefault();
-                        ajax.toServer('http://localhost:1111/removeCategory?login=' + CONTROL.user.login +
-                            '&type=accounts' +
-                            '&old=' + input.placeholder, response.removeCategory);
+                        ajax.toServer(request.removeCategory(CONTROL.user.login, 'accounts', input.placeholder),
+                                      response.removeCategory);
                     });
                 }
         });
