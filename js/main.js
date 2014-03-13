@@ -41,11 +41,6 @@ doc.getElementsByClassName('header__auth')[0].addEventListener('click', function
        // $('.dateFrom').datepicker();
       //  $('.dateTo').datepicker();
 	};
-    closeCross = form.getElementsByClassName('closedForm')[0];
-    closeCross.addEventListener('click',function(){
-        layer.destroyLayer.call(layer);
-    });
-
 }, false);
 
 

@@ -56,11 +56,33 @@ CONTROL.requests = (function() {
         return host + 'removeCategory?login=' + user + '&type=' + type + '&old=' + old;
     }
 
+    function newCategory(user, type, cat) {
+        return host + 'newCategories?login=' + user + '&typ=' + type + '&cat=' + cat;
+    }
+
+    function registration(user, password) {
+        return host + 'reg?login=' + user + '&password=' + password;
+    }
+
+    function auth(user, password) {
+        return host + 'auth?login=' + user + '&password=' + password;
+    }
+
+    function newOper(user, type, date, sch, cat, sum, comm) {
+        return host + 'historyNewOper?login=' + user + '&type=' + type + '&date=' + date + '&sch=' + sch +
+               '&cat=' + cat + '&sum=' + sum + '&comment=' + comm;
+    }
+
+
     return {
         changeMainCurr: changeMainCurr,
         changeRates: changeRates,
         editCategory: editCategory,
-        removeCategory: removeCategory
+        removeCategory: removeCategory,
+        newCategory: newCategory,
+        registration: registration,
+        auth: auth,
+        newOper: newOper
     }
 })();
 
@@ -309,12 +331,11 @@ CONTROL.access = (function() {
                         var form = doc.getElementsByClassName('form__plus__blockInputs')[0];
 
                         e.preventDefault();
-                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + CONTROL.user.login +
-                                      '&date='+ form.children[0].value+
-                                      '&sch=' + form.children[1].value +
-                                      '&cat=' + form.children[2].value +
-                                      '&sum=' + form.children[3].value+
-                                      '&comment=' + form.children[4].value + '&type=plus');
+                        ajax.toServer(request.newOper(CONTROL.user.login, 'gain', form.children[0].value,
+                                                                                  form.children[1].value,
+                                                                                  form.children[2].value,
+                                                                                  form.children[3].value,
+                                                                                  form.children[4].value));
                     }, false);
                     break;
 
@@ -326,12 +347,11 @@ CONTROL.access = (function() {
                         var form = doc.getElementsByClassName('form__minus__blockInputs')[0];
 
                         e.preventDefault();
-                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + CONTROL.user.login +
-                            '&date='+ form.children[0].value+
-                            '&sch=' + form.children[1].value +
-                            '&cat=' + form.children[2].value +
-                            '&sum=' + form.children[3].value+
-                            '&comment=' + form.children[4].value + '&type=minus');
+                        ajax.toServer(request.newOper(CONTROL.user.login, 'costs', form.children[0].value,
+                                                                                   form.children[1].value,
+                                                                                   form.children[2].value,
+                                                                                   form.children[3].value,
+                                                                                   form.children[4].value));
                     }, false);
                     break;
 
@@ -343,12 +363,11 @@ CONTROL.access = (function() {
                         var form = doc.getElementsByClassName('form__send__blockInputs')[0];
 
                         e.preventDefault();
-                        ajax.toServer('http://localhost:1111/historyNewOper?login=' + CONTROL.user.login +
-                            '&date='+ form.children[0].value+
-                            '&sch=' + form.children[1].value +
-                            '&cat=' + form.children[2].value +
-                            '&sum=' + form.children[3].value+
-                            '&comment=' + form.children[4].value + '&type=send');
+                        ajax.toServer(request.newOper(CONTROL.user.login, 'send', form.children[0].value,
+                                                                                  form.children[1].value,
+                                                                                  form.children[2].value,
+                                                                                  form.children[3].value,
+                                                                                  form.children[4].value));
                     }, false);
                     break;
             }
@@ -358,40 +377,34 @@ CONTROL.access = (function() {
         doc.getElementsByClassName('addCategoryButton')[1].addEventListener('click', function(e) {
             var txtInput = doc.getElementsByClassName('edit_cat_plus')[0];
             e.preventDefault();
-            ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
-                                                               '&cat=' + txtInput.value +
-                                                               '&typ=gain', CONTROL.responses.newCategory);
+            ajax.toServer(request.newCategory(CONTROL.user.login, 'gain', txtInput.value), CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
 
         doc.getElementsByClassName('addCategoryButton')[2].addEventListener('click', function(e) {
             var txtInput = doc.getElementsByClassName('edit_cat_minus')[0];
             e.preventDefault();
-            ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
-                                                              '&cat=' + txtInput.value +
-                                                              '&typ=costs',CONTROL.responses.newCategory);
+            ajax.toServer(request.newCategory(CONTROL.user.login, 'costs', txtInput.value), CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
 
         doc.getElementsByClassName('addCategoryButton')[0].addEventListener('click', function(e) {
             var txtInput = doc.getElementsByClassName('edit_cat_sch')[0];
             e.preventDefault();
-            ajax.toServer('http://localhost:1111/newCategories?login='+ CONTROL.user.login +
-                                                              '&cat=' + txtInput.value +
-                                                              '&typ=accounts',CONTROL.responses.newCategory);
+            ajax.toServer(request.newCategory(CONTROL.user.login, 'accounts', txtInput.value) ,CONTROL.responses.newCategory);
             txtInput.value = '';
         }, false);
 	}
 
 	function registration(user, password) {
 		if (user && password) {
-            ajax.toServer('http://localhost:1111/reg?login=' + user +'&password='+ password);
+            ajax.toServer(request.registration(user, password));
 		}
 	}
 
     function authorization(user, password) {
         if (user && password) {
-            ajax.toServer('http://localhost:1111/auth?login=' + user +'&password='+ password, showContent);
+            ajax.toServer(request.auth(user, password), showContent);
         }
         return false;
     }
