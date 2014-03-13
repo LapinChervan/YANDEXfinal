@@ -421,26 +421,28 @@ CONTROL.access = (function() {
             }
         }, false);
 
-        // ДОБАВЛЕНИЕ НОВЫХ КАТЕГОРИЙ
-        doc.getElementsByClassName('addCategoryButton')[1].addEventListener('click', function(e) {
-            var txtInput = doc.getElementsByClassName('edit_cat_plus')[0];
-            e.preventDefault();
-            ajax.toServer(request.newCategory(CONTROL.user.login, 'gain', txtInput.value), CONTROL.responses.newCategory);
-            txtInput.value = '';
-        }, false);
+        // ОБРАБОТЧИКИ ДОБАВЛЕНИЯ НОВЫХ КАТЕГОРИЙ
+        doc.getElementsByClassName('indentation')[2].addEventListener('click', function(e) {
+            var event = e || window,
+                target = event.target || event.srcElement;
 
-        doc.getElementsByClassName('addCategoryButton')[2].addEventListener('click', function(e) {
-            var txtInput = doc.getElementsByClassName('edit_cat_minus')[0];
-            e.preventDefault();
-            ajax.toServer(request.newCategory(CONTROL.user.login, 'costs', txtInput.value), CONTROL.responses.newCategory);
-            txtInput.value = '';
-        }, false);
+            if (!target.classList.contains('addCategoryButton')) return;
+            event.preventDefault();
 
-        doc.getElementsByClassName('addCategoryButton')[0].addEventListener('click', function(e) {
-            var txtInput = doc.getElementsByClassName('edit_cat_sch')[0];
-            e.preventDefault();
-            ajax.toServer(request.newCategory(CONTROL.user.login, 'accounts', txtInput.value) ,CONTROL.responses.newCategory);
-            txtInput.value = '';
+            var txtInput,
+                types = {
+                add_cat_sch: ['edit_cat_sch', 'accounts'],
+                add_cat_plus: ['edit_cat_plus', 'gain'],
+                add_cat_minus: ['edit_cat_minus', 'costs']
+                };
+
+            for (var key in types) {
+                if (target.classList.contains(key)) {
+                    txtInput = doc.getElementsByClassName(types[key][0])[0];
+                    ajax.toServer(request.newCategory(CONTROL.user.login, types[key][1], txtInput.value) ,CONTROL.responses.newCategory);
+                    txtInput.value = '';
+                }
+            }
         }, false);
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
