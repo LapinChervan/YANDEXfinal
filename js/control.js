@@ -434,8 +434,15 @@ CONTROL.access = (function() {
 
             if (!target.classList.contains('delete')) return;
 
-                event.stopPropagation();
-                CONTROL.layer.createLayer({content: doc.getElementsByClassName('remHistForm')[0].innerHTML});
+            event.stopPropagation();
+            CONTROL.layer.createLayer({content: doc.getElementsByClassName('remHistForm')[0].innerHTML});
+
+            doc.getElementsByClassName('butRemoveHist')[0].addEventListener('click', function(e) {
+               var event = e || window.event;
+
+               event.preventDefault();
+
+            });
 
         }, false);
 	}
