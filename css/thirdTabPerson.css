@@ -150,6 +150,10 @@ div.marginR0 {
     background:  url(../img/wavegrid.png)
 }
 
+.currency-wrap {
+    padding: 10px 0 5px 0;
+}
+
 .currency-radio {
     width: 260px;
     background: url(../img/wavegrid.png);
