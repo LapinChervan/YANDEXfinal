@@ -16,7 +16,7 @@
     white-space: normal;
 }
 
-.setting-wrap > div, .currency-radio{
+.setting-wrap > div{
     background: url(../img/wavegrid.png);
     display: inline-block;
     text-align: center;
@@ -65,7 +65,7 @@ div.removeStyle > div > span {
     box-shadow: inset 0 0 1px;
 }*/
 
-.setting-wrap input[type=text], .create-block input[type=text]{
+.setting-wrap input[type=text], .create-block input[type=text], .currency-wrap input[type="text"]{
     width: 110px;
     font-size: 13px;
     padding: 6px 10px 4px 10px;
@@ -114,6 +114,7 @@ div.marginR0 {
 
 .buttonValuta {
     cursor: pointer;
+    background: url(../img/wavegrid.png);
 }
 
 .formCatEdit, .remHistForm {
@@ -147,4 +148,26 @@ div.marginR0 {
 
 .formCatEdit a, .remHistForm a {
     background:  url(../img/wavegrid.png)
+}
+
+.currency-radio {
+    width: 260px;
+    background: url(../img/wavegrid.png);
+    padding: 8px;
+    min-width: 100px;
+    border-radius: 4px;
+    margin: 0 5px 5px 0;
+}
+
+.currency-radio img {
+    vertical-align: middle;
+}
+
+.currency-radio:first-child {
+    text-align: center;
+}
+
+.curr-value {
+    clear: both;
+    margin-bottom: 15px;
 }

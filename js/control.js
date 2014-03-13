@@ -154,7 +154,7 @@ CONTROL.responses = (function() {
             input = input + Mustache.render(templateInput, {valuta: key, count: currency[key], main: mainCurr});
         }
         mainCurrWrap.innerHTML = radio;
-        mainCurrWrap.parentElement.nextElementSibling.innerHTML = input;
+        mainCurrWrap.nextElementSibling.innerHTML = input;
     }
 
     return {

@@ -369,10 +369,8 @@
                                 <img class="statistics__header_img" src="img/stat.png" alt="">
                             </div>
                             <div class="currency-wrap">
-                                <div>
-                                    <div class="currency-radio"></div>
-                                </div>
-                                <div></div>
+                                <div class="currency-radio"></div>
+                                <div class="currency-radio"></div>
                                 <div class="buttonValuta">Сохранить</div>
                             </div>
                         </div>
@@ -578,12 +576,10 @@
     </script>
 
     <script type="text/template" class="template_curr">
-        <div class="removeStyle">
-            <div>
-                <span>{{valuta}}</span>
-                <span class="floatRight">1 {{valuta}} = <input name={{valuta}} class="value" type="text" value={{count}}> {{main}}</span>
+            <div class="curr-value">
+                <img src="img/{{valuta}}.png">
+                <span>1 {{valuta}} = <input name={{valuta}} class="value" type="text" value={{count}}> {{main}}</span>
             </div>
-        </div>
     </script>
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
