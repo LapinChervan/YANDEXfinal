@@ -130,6 +130,14 @@ CONTROL.responses = (function() {
         parent.innerHTML = parent.innerHTML.replace(subs, '');
     }
 
+    function newOper(res) {
+        var doc = document;
+            parent = doc.getElementsByClassName('historyUl')[0];
+
+        parent.innerHTML = parent.innerHTML +
+                           Mustache.render(doc.getElementsByClassName('history' + res.type)[0].innerHTML, res);
+    }
+
     function rebuildCurrency (obj) {
         var mainCurrWrap = document.querySelector('.floatRight.marginR0'),
             mainCurr = obj.mainCurr,
@@ -153,7 +161,8 @@ CONTROL.responses = (function() {
         newCategory: newCategory,
         rebuildCurrency: rebuildCurrency,
         renameCategory: renameCategory,
-        removeCategory: removeCategory
+        removeCategory: removeCategory,
+        newOper: newOper
     }
 })();
 
@@ -354,7 +363,7 @@ CONTROL.access = (function() {
                                                                                   form.children[1].value,
                                                                                   form.children[2].value,
                                                                                   form.children[3].value,
-                                                                                  form.children[4].value));
+                                                                                  form.children[4].value), response.newOper);
                     }, false);
                     break;
 
@@ -370,7 +379,7 @@ CONTROL.access = (function() {
                                                                                    form.children[1].value,
                                                                                    form.children[2].value,
                                                                                    form.children[3].value,
-                                                                                   form.children[4].value));
+                                                                                   form.children[4].value), response.newOper);
                     }, false);
                     break;
 
@@ -386,7 +395,7 @@ CONTROL.access = (function() {
                                                                                   form.children[1].value,
                                                                                   form.children[2].value,
                                                                                   form.children[3].value,
-                                                                                  form.children[4].value));
+                                                                                  form.children[4].value), response.newOper);
                     }, false);
                     break;
             }
