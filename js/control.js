@@ -451,7 +451,7 @@ CONTROL.access = (function() {
 
             if (!target.classList.contains('delete')) return;
             id = target.previousElementSibling.innerHTML;
-
+            alert('id='+id);
             event.stopPropagation();
             CONTROL.layer.createLayer({content: doc.getElementsByClassName('remHistForm')[0].innerHTML});
 
