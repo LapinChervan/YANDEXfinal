@@ -235,72 +235,46 @@ CONTROL.access = (function() {
             CONTROL.ajax.toServer(request.changeRates(CONTROL.user.login, JSON.stringify(data)));
         });
 
-        // ОБРАБОТЧИК ВЫЗОВ ФОРМ ДЛЯ ОПЕРАЦИЙ
+        // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
         doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
             var event = e || window.event,
-                target = event.target || event.srcElement;
+                target = event.target || event.srcElement,
+                key, formType, type;
 
             if (target.tagName !== 'DIV') return;
-            event.stopPropagation();
 
-            switch (target.innerHTML) {
-                case 'Доходы':
-                    //ФОРМА ДЛЯ ДОХОДА
-                    CONTROL.layer.createLayer({content: doc.getElementById('form__plus').innerHTML});
-                    //ДОБАВЛЕНИЕ НОВОГО ДОХОДА
-                    doc.getElementsByClassName('form__plus__add')[0].addEventListener('click', function(e) {
-                        var form = doc.getElementsByClassName('form__plus__blockInputs')[0];
+            formType = {
+                'Доходы': 'gain',
+                'Расходы': 'costs',
+                'Переводы': 'send'
+            }
 
-                        e.preventDefault();
-                        ajax.toServer(request.newOper(CONTROL.user.login, 'gain', form.children[0].value,
-                                                                                  form.children[1].value,
-                                                                                  form.children[2].value,
-                                                                                  form.children[3].value,
-                                                                                  form.children[4].value,
-                                                                                  Math.round(Math.random()*1000000)),
-                                                                                  response.newOper);
+            for (key in formType) {
+                alert(target.innerHTML + ' - '+ key);
+                if (target.innerHTML === key) {
+                    type = formType[key];
+                    event.stopPropagation();
+                    CONTROL.layer.createLayer({content: doc.getElementsByClassName('form__' + type)[0].innerHTML});
+
+                    doc.getElementsByClassName('form__' + type + '__add')[0].addEventListener('click', function(e) {
+                        var event = e || window.event,
+                            form = doc.getElementsByClassName('form__' + type  + '__blockInputs')[0];
+
+                        event.preventDefault();
+                        alert('form__' + type  + '__blockInputs');
+                        ajax.toServer(request.newOper(CONTROL.user.login, type, form.children[0].value,
+                            form.children[1].value,
+                            form.children[2].value,
+                            form.children[3].value,
+                            form.children[4].value,
+                            Math.round(Math.random()*1000000)),
+                            response.newOper);
                     }, false);
-                    break;
-
-                case 'Расходы':
-                    //ФОРМА ДЛЯ РАСХОДА
-                    CONTROL.layer.createLayer({content: doc.getElementById('form__minus').innerHTML});
-                    //ДОБАВЛЕНИЕ НОВОГО РАСХОДА
-                    doc.getElementsByClassName('form__minus__add')[0].addEventListener('click', function(e) {
-                        var form = doc.getElementsByClassName('form__minus__blockInputs')[0];
-
-                        e.preventDefault();
-                        ajax.toServer(request.newOper(CONTROL.user.login, 'costs', form.children[0].value,
-                                                                                   form.children[1].value,
-                                                                                   form.children[2].value,
-                                                                                   form.children[3].value,
-                                                                                   form.children[4].value,
-                                                                                   Math.round(Math.random()*1000000)),
-                                                                                   response.newOper);
-                    }, false);
-                    break;
-
-                case 'Переводы':
-                    //ФОРМА ДЛЯ ПЕРЕВОДА
-                    CONTROL.layer.createLayer({content: doc.getElementById('form__send').innerHTML});
-                    //ДОБАВЛЕНИЕ НОВОГО ПЕРЕВОДА
-                    doc.getElementsByClassName('form__send__add')[0].addEventListener('click', function(e) {
-                        var form = doc.getElementsByClassName('form__send__blockInputs')[0];
-
-                        e.preventDefault();
-                        ajax.toServer(request.newOper(CONTROL.user.login, 'send', form.children[0].value,
-                                                                                  form.children[1].value,
-                                                                                  form.children[2].value,
-                                                                                  form.children[3].value,
-                                                                                  form.children[4].value,
-                                                                                  Math.round(Math.random()*1000000)),
-                                                                                  response.newOper);
-                    }, false);
-                    break;
+                }
             }
         }, false);
 
-        // ДЕЛЕГИРОВАНИЯ
+        // ДЕЛЕГИРОВАНИЯ (ТАБ 3)
         doc.getElementsByClassName('indentation')[2].addEventListener('click', function(e) {
             var event = e || window,
                 target = event.target || event.srcElement,

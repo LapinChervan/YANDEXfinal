@@ -1,6 +1,6 @@
-.login__inputs input, .form__plus input,
-.form__minus input, .form__send input,
-.form__plus select, .form__minus select, .form__send select,
+.login__inputs input, .form__gain input,
+.form__costs input, .form__send input,
+.form__gain select, .form__costs select, .form__send select,
 .history_operand_select, .history_sch_select {
     padding: 0 5px;
     height: 40px;
@@ -14,7 +14,7 @@
     color: #464646;
 }
 
-.form__plus select, .form__minus select, .form__send select {
+.form__gain select, .form__costs select, .form__send select {
     width: 84%;
 }
 
@@ -23,8 +23,8 @@
 .main__footer,
 .statistics__header,
 .diagram__header, .filters__header,
-.form__plus__header,
-.form__minus__header,
+.form__gain__header,
+.form__costs__header,
 .form__send__header,
 .form__card__header,
 .history-filter {
@@ -35,8 +35,8 @@
 body,
 .first__ul__li__button,
 .statistics__ul__li,
-.form__plus__add, .form__plus__cancel,
-.form__minus__add, .form__minus__cancel,
+.form__gain__add, .form__gain__cancel,
+.form__costs__add, .form__costs__cancel,
 .form__send__add, .form__send__cancel,
 .form__card__add, .form__card__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,

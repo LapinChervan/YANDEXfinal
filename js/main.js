@@ -17,10 +17,6 @@ doc.getElementsByClassName('header__reg')[0].addEventListener('click', function(
 		access.registration(form.getElementsByClassName('input_login_reg')[0].value,
                             form.getElementsByClassName('input_login_reg')[1].value);
 	};
-    closeCross = form.getElementsByClassName('closedForm')[0];
-    closeCross.addEventListener('click',function(){
-        layer.destroyLayer.call(layer);
-    });
 }, false);
 
 // вызов формы авторизации

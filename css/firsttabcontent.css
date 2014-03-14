@@ -204,8 +204,8 @@
     background: #F05550;
 }
 
-.form__plus__add, .form__plus__cancel,
-.form__minus__add, .form__minus__cancel,
+.form__gain__add, .form__gain__cancel,
+.form__costs__add, .form__costs__cancel,
 .form__send__add, .form__send__cancel,
 .form__card__add, .form__card__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
@@ -229,12 +229,12 @@
     display: block;
 }
 
-.form__plus__add:hover, .form__plus__cancel:hover,
-.form__minus__add:hover, .form__minus__cancel:hover,
+.form__gain__add:hover, .form__gain__cancel:hover,
+.form__costs__add:hover, .form__costs__cancel:hover,
 .form__send__add:hover, .form__send__cancel:hover,
 .form__card__add:hover, .form__card__cancel:hover,
-.form__plus__add__filters:hover, .form__plus__cancel__filters:hover,
-.form__minus__add__filters:hover, .form__minus__cancel__filters:hover,
+.form__gain__add__filters:hover, .form__gain__cancel__filters:hover,
+.form__costs__add__filters:hover, .form__costs__cancel__filters:hover,
 .add_cat_sch:hover, .add_cat_plus:hover, .add_cat_minus:hover,
 .apply_filter1:hover, .apply_filter2:hover,
 .first__ul__li__button:hover, .buttonValuta:hover,
@@ -242,12 +242,12 @@
     box-shadow: -1px -1px 5px #949494, 3px 3px 5px #949494;
 }
 
-.form__plus__add:active, .form__plus__cancel:active,
-.form__minus__add:active, .form__minus__cancel:active,
+.form__gain__add:active, .form__gain__cancel:active,
+.form__costs__add:active, .form__costs__cancel:active,
 .form__send__add:active, .form__send__cancel:active,
 .form__card__add:active, .form__card__cancel:active,
-.form__plus__add__filters:active, .form__plus__cancel__filters:active,
-.form__minus__add__filters:active, .form__minus__cancel__filters:active,
+.form__gain__add__filters:active, .form__gain__cancel__filters:active,
+.form__costs__add__filters:active, .form__costs__cancel__filters:active,
 .add_cat_sch:active, .add_cat_plus:active, .add_cat_minus:active,
 .apply_filter1:active, .apply_filter2:active, 
 .first__ul__li__button:active, .buttonValuta:active,
@@ -255,8 +255,8 @@
     box-shadow: inset 1px 2px 2px #949494;
 }
 
-.form__plus,
-.form__minus,
+.form__gain,
+.form__costs,
 .form__send,
 .form__card {
     text-align: center;
@@ -268,8 +268,8 @@
     background: url("../img/headerbg.png");
 }
 
-.form__plus__header,
-.form__minus__header,
+.form__gain__header,
+.form__costs__header,
 .form__send__header,
 .form__card__header {
     height: 40px;
@@ -281,8 +281,8 @@
     padding: 5px 3px;
 }
 
-.form__plus__blockButton,
-.form__minus__blockButton,
+.form__gain__blockButton,
+.form__costs__blockButton,
 .form__send__blockButton,
 .form__card__blockButton {
     position: absolute;
@@ -292,8 +292,8 @@
     left: 40px;
 }
 
-.form__plus__blockInputs,
-.form__minus__blockInputs,
+.form__gain__blockInputs,
+.form__costs__blockInputs,
 .form__send__blockInputs,
 .form__card__blockInputs {
     width: 250px;
