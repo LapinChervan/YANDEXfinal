@@ -127,9 +127,8 @@ CONTROL.responses = (function() {
 
     function removeCategory(res) {
         var parent = document.querySelectorAll('.' + res.type),
-            indexStart,
             html = parent.innerHTML,
-            subs = '';
+            indexStart, subs;
 
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
