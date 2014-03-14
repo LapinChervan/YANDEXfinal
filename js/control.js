@@ -112,6 +112,8 @@ CONTROL.requests = (function() {
 })();
 
 CONTROL.responses = (function() {
+    var doc = document;
+
     function newCategory(res) {
         var doc = document,
             categories = doc.getElementsByClassName(res.type)[0];
@@ -121,12 +123,12 @@ CONTROL.responses = (function() {
     }
 
     function renameCategory(res) {
-        var parent = document.querySelectorAll('.' + res.type);
+        var parent = doc.querySelectorAll('.' + res.type);
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.old + '</div>', '<div>' + res.new + '</div>');
     }
 
     function removeCategory(res) {
-        var parent = document.querySelectorAll('.' + res.type),
+        var parent = doc.querySelectorAll('.' + res.type),
             html = parent.innerHTML,
             indexStart, subs;
 
@@ -149,11 +151,11 @@ CONTROL.responses = (function() {
     }
 
     function rebuildCurrency (obj) {
-        var mainCurrWrap = document.querySelector('.currency-radio'),
+        var mainCurrWrap = doc.querySelector('.currency-radio'),
             mainCurr = obj.mainCurr,
             currency = obj.currency[mainCurr],
-            templateRadio = document.querySelector('.template_value').innerHTML,
-            templateInput = document.querySelector('.template_curr').innerHTML,
+            templateRadio = doc.querySelector('.template_value').innerHTML,
+            templateInput = doc.querySelector('.template_curr').innerHTML,
             currentCurr = Mustache.render(templateRadio, {value: mainCurr}),
             index = currentCurr.indexOf('input') + 5,
             radio, key, input = '';
@@ -178,11 +180,7 @@ CONTROL.responses = (function() {
 })();
 
 CONTROL.ajax = (function() {
-    var responses = CONTROL.responses,
-        doc = document;
-
 	function toServer(link, callback) {
-       // var resp;
 		var xhr = new XMLHttpRequest();
 
         xhr.open('GET', link); 
@@ -192,13 +190,10 @@ CONTROL.ajax = (function() {
             alert(xhr.responseText);
             if (typeof callback === 'function') {
                 try {
-                   // resp = JSON.parse(xhr.responseText);
                     callback(JSON.parse(xhr.responseText));
                 } catch (e){
                     callback(xhr.responseText);
-                   // resp = xhr.responseText;
                 }
-               // callback(resp);
             }
         };
         xhr.send();
@@ -213,12 +208,11 @@ CONTROL.access = (function() {
         ajax = CONTR.ajax,
         response = CONTR.responses,
         request = CONTR.requests,
-        login = CONTR.user.login;
+        login = CONTR.user.login,
+        doc = document;
 
 	function showContent(responseData) {
-		var doc = document;
 		doc.querySelectorAll('.main').innerHTML = doc.getElementById('user-form').innerHTML;
-
         CONTR.initialize(responseData);
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
@@ -391,9 +385,10 @@ CONTROL.access = (function() {
 })();
 
 CONTROL.layer = (function() {
+    var doc = document;
+    
     function createLayer(options) {
-        var doc = document,
-            modal = this.modal = doc.createElement('div'),
+        var modal = this.modal = doc.createElement('div'),
             layer = this.layer = doc.createElement('div'),
             optionsObject, parent;
 
