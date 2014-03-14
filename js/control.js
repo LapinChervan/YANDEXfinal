@@ -118,17 +118,17 @@ CONTROL.responses = (function() {
         var doc = document,
             categories = doc.querySelector('.' + res.type);
 
-        categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelectorAll('.useraccounts').innerHTML,
+        categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
                                                                       {costs: res.cat});
     }
 
     function renameCategory(res) {
-        var parent = doc.querySelectorAll('.' + res.type);
+        var parent = doc.querySelector('.' + res.type);
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.old + '</div>', '<div>' + res.new + '</div>');
     }
 
     function removeCategory(res) {
-        var parent = doc.querySelectorAll('.' + res.type),
+        var parent = doc.querySelector('.' + res.type),
             html = parent.innerHTML,
             indexStart, subs;
 
@@ -140,10 +140,10 @@ CONTROL.responses = (function() {
 
     function newOper(res) {
         var doc = document,
-            parent = doc.querySelectorAll('.historyUl');
+            parent = doc.querySelector('.historyUl');
 
         parent.innerHTML = parent.innerHTML +
-                           Mustache.render(doc.querySelectorAll('.history' + res.type).innerHTML, res);
+                           Mustache.render(doc.querySelector('.history' + res.type).innerHTML, res);
     }
 
     function removeOper(res) {
@@ -212,7 +212,7 @@ CONTROL.access = (function() {
         doc = document;
 
 	function showContent(responseData) {
-		doc.querySelectorAll('.main').innerHTML = doc.getElementById('user-form').innerHTML;
+		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize(responseData);
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
