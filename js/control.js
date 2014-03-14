@@ -237,7 +237,7 @@ CONTROL.access = (function() {
 
                     doc.querySelector('.form__' + type + '__add').addEventListener('click', function(e) {
                         var event = e || window.event,
-                            form = doc.querySelector('form__' + type  + '__blockInputs');
+                            form = doc.querySelector('.form__' + type  + '__blockInputs');
 
                         event.preventDefault();
                         ajax.toServer(request.newOper(login, type, form.children[0].value,
