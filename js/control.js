@@ -20,7 +20,7 @@ CONTROL.initialize = (function() {
                         forEach(function(elem) {
                             html += Mustache.render(tmp, {costs: elem});
                         });
-                    doc.getElementsByClassName(key)[0].innerHTML = html;
+                    doc.querySelector('.' + key).innerHTML = html;
                 }
                 CONTROL.responses.rebuildCurrency(data);
             },
