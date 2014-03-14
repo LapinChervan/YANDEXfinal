@@ -219,22 +219,6 @@ CONTROL.access = (function() {
 
         CONTR.initialize(responseData);
 
-        document.querySelector('.currency-radio').addEventListener('change', function() {
-            var target = event.target || event.srcElement;
-            CONTROL.ajax.toServer(request.changeMainCurr(CONTROL.user.login, target.value), CONTR.responses.rebuildCurrency);
-        });
-
-        //ОТПРАВКА ОСНОВНОЙ ВАЛЮТЫ
-        var btnValuta = doc.getElementsByClassName('buttonValuta')[0];
-        btnValuta.addEventListener('click',function() {
-            var inputValuta = btnValuta.parentNode.getElementsByClassName('value');
-            var data = {};
-            for (var i = 0; i < inputValuta.length; i++) {
-                data[inputValuta[i].name] = inputValuta[i].value;
-            }
-            CONTROL.ajax.toServer(request.changeRates(CONTROL.user.login, JSON.stringify(data)));
-        });
-
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
         doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
             var event = e || window.event,
@@ -250,7 +234,6 @@ CONTROL.access = (function() {
             }
 
             for (key in formType) {
-                alert(target.innerHTML + ' - '+ key);
                 if (target.innerHTML === key) {
                     type = formType[key];
                     event.stopPropagation();
@@ -261,7 +244,6 @@ CONTROL.access = (function() {
                             form = doc.getElementsByClassName('form__' + type  + '__blockInputs')[0];
 
                         event.preventDefault();
-                        alert('form__' + type  + '__blockInputs');
                         ajax.toServer(request.newOper(CONTROL.user.login, type, form.children[0].value,
                             form.children[1].value,
                             form.children[2].value,
@@ -346,7 +328,24 @@ CONTROL.access = (function() {
                         }
                     });
             }
+
+            if (target.classList.contains('buttonValuta')) {
+                var inputCurr = target.parentNode.getElementsByClassName('value'),
+                    len = inputCurr.length, i, item,
+                    data = {};
+
+                for (i = 0; i < len; i++) {
+                    item = inputCurr[i];
+                    data[item.name] = item.value;
+                }
+                CONTROL.ajax.toServer(request.changeRates(CONTROL.user.login, JSON.stringify(data)));
+            }
         }, false);
+
+        document.querySelector('.currency-radio').addEventListener('change', function() {
+            var target = event.target || event.srcElement;
+            CONTROL.ajax.toServer(request.changeMainCurr(CONTROL.user.login, target.value), CONTR.responses.rebuildCurrency);
+        });
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
         doc.getElementsByClassName('historyUl')[0].addEventListener('click', function(e) {
