@@ -392,7 +392,7 @@ CONTROL.layer = (function() {
     function createLayer(options) {
         var modal = this.modal = doc.createElement('div'),
             layer = this.layer = doc.createElement('div'),
-            optionsObject, parent;
+            optionsObject, parent, fragment = doc.createDocumentFragment();
 
         optionsObject = getDefaultOptions();
         Object.keys(options).
@@ -404,8 +404,9 @@ CONTROL.layer = (function() {
         modal.className = optionsObject.clsOpacityLayer;
         layer.className = optionsObject.clsContentLayer;
         layer.innerHTML = optionsObject.content;
-        parent.appendChild(modal);
-        parent.appendChild(layer);
+        fragment.appendChild(modal);
+        fragment.appendChild(layer);
+        parent.appendChild(fragment);
         layer.addEventListener('click', function (e) {
             var event = e || window.event;
             event.stopPropagation();
