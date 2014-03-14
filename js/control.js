@@ -399,7 +399,6 @@ CONTROL.layer = (function() {
             forEach(function(key) {
                 optionsObject[key] = options[key];
             });
-
         this.parent = parent = optionsObject.parent;
         modal.className = optionsObject.clsOpacityLayer;
         layer.className = optionsObject.clsContentLayer;
