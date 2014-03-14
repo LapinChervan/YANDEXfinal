@@ -25,16 +25,7 @@ http.createServer(function(req, res) {
             requests.newCat(data.query.login, data.query.typ, data.query.cat, res);
         },
         '/historyNewOper': function() {
-            var obj = {
-                date: data.query.date,
-                sch: data.query.sch,
-                cat: data.query.cat,
-                sum: data.query.sum,
-                comm: data.query.comment,
-                type: data.query.type,
-                id: data.query.id
-            };
-            requests.newOper(data.query.login, data.query.type, obj, res);
+            requests.newOper(data.query.login, data.query.type, data.query.formData, res);
         },
         '/historyRemove': function() {
             requests.removeOper(data.query.login, data.query.id, res);

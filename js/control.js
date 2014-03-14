@@ -89,9 +89,8 @@ CONTROL.requests = (function() {
         return host + 'auth?login=' + user + '&password=' + password;
     }
 
-    function newOper(user, type, date, sch, cat, sum, comm, id) {
-        return host + 'historyNewOper?login=' + user + '&type=' + type + '&date=' + date + '&sch=' + sch +
-               '&cat=' + cat + '&sum=' + sum + '&comment=' + comm + '&id=' + id;
+    function newOper(user, type, data) {
+        return host + 'historyNewOper?login=' + user + '&type=' + type + '&formData=' + data;
     }
 
     function removeOper(user, id) {
@@ -237,16 +236,19 @@ CONTROL.access = (function() {
 
                     doc.querySelector('.form__' + type + '__add').addEventListener('click', function(e) {
                         var event = e || window.event,
-                            form = doc.querySelector('.form__' + type  + '__blockInputs');
+                            form = doc.querySelector('.form__' + type  + '__blockInputs').children,
+                            len = form.length,
+                            arr = ['date', 'sch', 'cat', 'sum', 'comm'],
+                            i, item, data = {};
+
+                        for (i = 0; i < len; i++) {
+                            item = form[i];
+                            data[arr[i]] = item.value;
+                        }
+                        data['id'] = Math.round(Math.random() * 1000000);
 
                         event.preventDefault();
-                        ajax.toServer(request.newOper(user.login, type, form.children[0].value,
-                            form.children[1].value,
-                            form.children[2].value,
-                            form.children[3].value,
-                            form.children[4].value,
-                            Math.round(Math.random()*1000000)),
-                            response.newOper);
+                        ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
                     }, false);
                 }
             }
