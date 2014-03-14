@@ -10,9 +10,11 @@ http.createServer(function(req, res) {
         '/reg': function() {
             requests.reg(data.query.login, data.query.password);
         },
+
         '/auth': function() {
             requests.auth(data.query.login, data.query.password, res);
         },
+
         '/currency': function() {
             if (data.query.curr) {
                 requests.changeCurr(data.query.login, data.query.curr, res);
@@ -21,15 +23,19 @@ http.createServer(function(req, res) {
                 requests.setMainCurr(data.query.login, data.query.valuta, res);
             }
         },
+
         '/newCategories': function() {
             requests.newCat(data.query.login, data.query.typ, data.query.cat, res);
         },
+
         '/historyNewOper': function() {
             requests.newOper(data.query.login, data.query.type, data.query.formData, res);
         },
+
         '/historyRemove': function() {
             requests.removeOper(data.query.login, data.query.id, res);
         },
+
         '/renameCategory': function() {
             var obj = {
                 login: data.query.login,
