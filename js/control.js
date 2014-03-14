@@ -211,7 +211,8 @@ CONTROL.access = (function() {
     var CONTR = CONTROL,
         ajax = CONTR.ajax,
         response = CONTR.responses,
-        request = CONTR.requests;
+        request = CONTR.requests,
+        login = CONTR.user.login;
 
 	function showContent(responseData) {
 		var doc = document;
@@ -244,7 +245,7 @@ CONTROL.access = (function() {
                             form = doc.getElementsByClassName('form__' + type  + '__blockInputs')[0];
 
                         event.preventDefault();
-                        ajax.toServer(request.newOper(CONTROL.user.login, type, form.children[0].value,
+                        ajax.toServer(request.newOper(login, type, form.children[0].value,
                             form.children[1].value,
                             form.children[2].value,
                             form.children[3].value,
@@ -276,7 +277,7 @@ CONTROL.access = (function() {
                 for (key in types) {
                     if (target.classList.contains(key)) {
                         txtInput = doc.getElementsByClassName(types[key][0])[0];
-                        ajax.toServer(request.newCategory(CONTROL.user.login, types[key][1], txtInput.value), response.newCategory);
+                        ajax.toServer(request.newCategory(login, types[key][1], txtInput.value), response.newCategory);
                         txtInput.value = '';
                     }
                 }
@@ -298,7 +299,7 @@ CONTROL.access = (function() {
                                     input = doc.getElementsByClassName('editCatInput')[0];
 
                                 event.preventDefault();
-                                ajax.toServer(request.editCategory(CONTROL.user.login, elem, input.placeholder, input.value),
+                                ajax.toServer(request.editCategory(login, elem, input.placeholder, input.value),
                                     response.renameCategory);
                             });
                         }
@@ -322,7 +323,7 @@ CONTROL.access = (function() {
                                     input = doc.getElementsByClassName('editCatInput')[0];
 
                                 event.preventDefault();
-                                ajax.toServer(request.removeCategory(CONTROL.user.login, elem, input.placeholder),
+                                ajax.toServer(request.removeCategory(login, elem, input.placeholder),
                                     response.removeCategory);
                             });
                         }
@@ -338,13 +339,13 @@ CONTROL.access = (function() {
                     item = inputCurr[i];
                     data[item.name] = item.value;
                 }
-                CONTROL.ajax.toServer(request.changeRates(CONTROL.user.login, JSON.stringify(data)));
+                CONTROL.ajax.toServer(request.changeRates(login, JSON.stringify(data)));
             }
         }, false);
 
         document.querySelector('.currency-radio').addEventListener('change', function() {
             var target = event.target || event.srcElement;
-            CONTROL.ajax.toServer(request.changeMainCurr(CONTROL.user.login, target.value), CONTR.responses.rebuildCurrency);
+            CONTROL.ajax.toServer(request.changeMainCurr(login, target.value), CONTR.responses.rebuildCurrency);
         });
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
@@ -363,17 +364,17 @@ CONTROL.access = (function() {
                var event = e || window.event;
 
                event.preventDefault();
-               ajax.toServer(request.removeOper(CONTROL.user.login, id), request.removeOper);
+               ajax.toServer(request.removeOper(login, id), request.removeOper);
             });
 
         }, false);
-	}
+    }
 
-	function registration(user, password) {
-		if (user && password) {
+    function registration(user, password) {
+        if (user && password) {
             ajax.toServer(request.registration(user, password));
-		}
-	}
+        }
+    }
 
     function authorization(user, password) {
         if (user && password) {
@@ -382,10 +383,10 @@ CONTROL.access = (function() {
         return false;
     }
 
-	return {
-		registration: registration,
+    return {
+        registration: registration,
         authorization: authorization
-	}
+    }
 })();
 
 CONTROL.layer = (function() {
