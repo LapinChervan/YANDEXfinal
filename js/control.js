@@ -116,7 +116,7 @@ CONTROL.responses = (function() {
 
     function newCategory(res) {
         var doc = document,
-            categories = doc.getElementsByClassName(res.type)[0];
+            categories = doc.querySelector('.' + res.type);
 
         categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelectorAll('.useraccounts').innerHTML,
                                                                       {costs: res.cat});
