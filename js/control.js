@@ -9,7 +9,7 @@ CONTROL.initialize = (function() {
     var doc = document,
         initMethods = {
             categories: function(data) {
-                var tmp = doc.getElementsByClassName('useraccounts')[0].innerHTML,
+                var tmp = doc.querySelector('.useraccounts').innerHTML,
                     key, html;
 
                 CONTROL.user.login = data.name;
@@ -20,7 +20,7 @@ CONTROL.initialize = (function() {
                         forEach(function(elem) {
                             html += Mustache.render(tmp, {costs: elem});
                         });
-                    doc.getElementsByClassName(key)[0].innerHTML = html;
+                    doc.querySelector('.' + key).innerHTML = html;
                 }
                 CONTROL.responses.rebuildCurrency(data);
             },
@@ -40,11 +40,10 @@ CONTROL.initialize = (function() {
                                  thisData[key2] = objInArr[key2];
                             }
                             thisData.mainCurr = data.mainCurr;
-                            html = html +
-                                Mustache.render(getElementsByClassName('history'+thisData.type)[0].innerHTML, thisData);
+                            html = html + Mustache.render(doc.querySelector('.history' + thisData.type).innerHTML, thisData);
                     });
                 }
-                doc.getElementsByClassName('historyUl')[0].innerHTML = html;
+                doc.querySelector('.historyUl').innerHTML = html;
             }
         };
     return function (data) {
@@ -117,19 +116,19 @@ CONTROL.responses = (function() {
 
     function newCategory(res) {
         var doc = document,
-            categories = doc.getElementsByClassName(res.type)[0];
+            categories = doc.querySelector('.' + res.type);
 
-        categories.innerHTML = categories.innerHTML + Mustache.render(doc.getElementsByClassName('useraccounts')[0].innerHTML,
+        categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
                                                                       {costs: res.cat});
     }
 
     function renameCategory(res) {
-        var parent = doc.getElementsByClassName(res.type)[0];
+        var parent = doc.querySelector('.' + res.type);
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.old + '</div>', '<div>' + res.new + '</div>');
     }
 
     function removeCategory(res) {
-        var parent = doc.getElementsByClassName(res.type)[0],
+        var parent = doc.querySelector('.' + res.type),
             html = parent.innerHTML,
             indexStart, subs;
 
@@ -141,10 +140,10 @@ CONTROL.responses = (function() {
 
     function newOper(res) {
         var doc = document,
-            parent = doc.getElementsByClassName('historyUl')[0];
+            parent = doc.querySelector('.historyUl');
 
         parent.innerHTML = parent.innerHTML +
-                           Mustache.render(doc.getElementsByClassName('history' + res.type)[0].innerHTML, res);
+                           Mustache.render(doc.querySelector('.history' + res.type).innerHTML, res);
     }
 
     function removeOper(res) {
@@ -152,11 +151,11 @@ CONTROL.responses = (function() {
     }
 
     function rebuildCurrency (obj) {
-        var mainCurrWrap = doc.getElementsByClassName('currency-radio')[0],
+        var mainCurrWrap = doc.querySelector('.currency-radio'),
             mainCurr = obj.mainCurr,
             currency = obj.currency[mainCurr],
-            templateRadio = doc.getElementsByClassName('template_value')[0].innerHTML,
-            templateInput = doc.getElementsByClassName('template_curr')[0].innerHTML,
+            templateRadio = doc.querySelector('.template_value').innerHTML,
+            templateInput = doc.querySelector('.template_curr').innerHTML,
             currentCurr = Mustache.render(templateRadio, {value: mainCurr}),
             index = currentCurr.indexOf('input') + 5,
             radio, key, input = '';
@@ -209,15 +208,15 @@ CONTROL.access = (function() {
         ajax = CONTR.ajax,
         response = CONTR.responses,
         request = CONTR.requests,
-        login = CONTR.user.login,
+        user = CONTR.user,
         doc = document;
 
 	function showContent(responseData) {
-		doc.getElementsByClassName('main')[0].innerHTML = doc.getElementById('user-form').innerHTML;
+		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize(responseData);
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
-        doc.getElementsByClassName('first__ul__button')[0].addEventListener('click', function(e) {
+        doc.querySelector('.first__ul__button').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
                 key, formType, type;
@@ -234,14 +233,14 @@ CONTROL.access = (function() {
                 if (target.innerHTML === key) {
                     type = formType[key];
                     event.stopPropagation();
-                    CONTROL.layer.createLayer({content: doc.getElementsByClassName('form__' + type)[0].innerHTML});
+                    CONTROL.layer.createLayer({content: doc.querySelector('.form__' + type).innerHTML});
 
-                    doc.getElementsByClassName('form__' + type + '__add')[0].addEventListener('click', function(e) {
+                    doc.querySelector('.form__' + type + '__add').addEventListener('click', function(e) {
                         var event = e || window.event,
-                            form = doc.getElementsByClassName('form__' + type  + '__blockInputs')[0];
+                            form = doc.querySelector('.form__' + type  + '__blockInputs');
 
                         event.preventDefault();
-                        ajax.toServer(request.newOper(login, type, form.children[0].value,
+                        ajax.toServer(request.newOper(user.login, type, form.children[0].value,
                             form.children[1].value,
                             form.children[2].value,
                             form.children[3].value,
@@ -272,8 +271,8 @@ CONTROL.access = (function() {
 
                 for (key in types) {
                     if (target.classList.contains(key)) {
-                        txtInput = doc.getElementsByClassName(types[key][0])[0];
-                        ajax.toServer(request.newCategory(login, types[key][1], txtInput.value), response.newCategory);
+                        txtInput = doc.querySelector('.' + types[key][0]);
+                        ajax.toServer(request.newCategory(user.login, types[key][1], txtInput.value), response.newCategory);
                         txtInput.value = '';
                     }
                 }
@@ -285,17 +284,17 @@ CONTROL.access = (function() {
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
-                            CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                            CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Изменить',
                                     img: 'img/edit2.png'})});
 
-                            doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                            doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event,
-                                    input = doc.getElementsByClassName('editCatInput')[0];
+                                    input = doc.querySelector('.editCatInput');
 
                                 event.preventDefault();
-                                ajax.toServer(request.editCategory(login, elem, input.placeholder, input.value),
+                                ajax.toServer(request.editCategory(user.login, elem, input.placeholder, input.value),
                                     response.renameCategory);
                             });
                         }
@@ -308,18 +307,18 @@ CONTROL.access = (function() {
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
-                            CONTROL.layer.createLayer({content: Mustache.render(doc.getElementsByClassName('editCatForm')[0].innerHTML,
+                            CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Удалить',
                                     img: 'img/close2.png',
                                     readonly: 'readonly'})});
 
-                            doc.getElementsByClassName('butRenameCat')[0].addEventListener('click', function(e) {
+                            doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event,
-                                    input = doc.getElementsByClassName('editCatInput')[0];
+                                    input = doc.querySelector('.editCatInput');
 
                                 event.preventDefault();
-                                ajax.toServer(request.removeCategory(login, elem, input.placeholder),
+                                ajax.toServer(request.removeCategory(user.login, elem, input.placeholder),
                                     response.removeCategory);
                             });
                         }
@@ -335,17 +334,17 @@ CONTROL.access = (function() {
                     item = inputCurr[i];
                     data[item.name] = item.value;
                 }
-                CONTROL.ajax.toServer(request.changeRates(login, JSON.stringify(data)));
+                CONTROL.ajax.toServer(request.changeRates(user.login, JSON.stringify(data)));
             }
         }, false);
 
         document.querySelector('.currency-radio').addEventListener('change', function() {
             var target = event.target || event.srcElement;
-            CONTROL.ajax.toServer(request.changeMainCurr(login, target.value), CONTR.responses.rebuildCurrency);
+            CONTROL.ajax.toServer(request.changeMainCurr(user.login, target.value), CONTR.responses.rebuildCurrency);
         });
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
-        doc.getElementsByClassName('historyUl')[0].addEventListener('click', function(e) {
+        doc.querySelector('.historyUl').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
                 id;
@@ -354,13 +353,13 @@ CONTROL.access = (function() {
             id = target.previousElementSibling.innerHTML;
             alert('id='+id);
             event.stopPropagation();
-            CONTROL.layer.createLayer({content: doc.getElementsByClassName('remHistForm')[0].innerHTML});
+            CONTROL.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
 
-            doc.getElementsByClassName('butRemoveHist')[0].addEventListener('click', function(e) {
+            doc.querySelector('.butRemoveHist').addEventListener('click', function(e) {
                var event = e || window.event;
 
                event.preventDefault();
-               ajax.toServer(request.removeOper(login, id), request.removeOper);
+               ajax.toServer(request.removeOper(user.login, id), request.removeOper);
             });
 
         }, false);
