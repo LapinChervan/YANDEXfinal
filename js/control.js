@@ -434,7 +434,7 @@ CONTROL.layer = (function() {
     }
 
     document.addEventListener('click', function(){
-        destroyLayer.call(CONTROL.layer)
+        destroyLayer.call(CONTROL.layer);
     });
 
     return {
