@@ -88,6 +88,10 @@ CONTROL.reload = (function() {
                         html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
                 });
                 doc.querySelector('.select__' + key).innerHTML = html;
+
+                if (formType === 'send') {
+                    doc.querySelectorAll('.select__' + key)[1].innerHTML = html;
+                }
             }
         }
     }
