@@ -35,6 +35,9 @@ CONTROL.initialize = (function() {
                 for (key in history) {
                     history[key].
                         forEach(function(objInArr) {
+                            console.log(objInArr);
+                            objInArr = JSON.parse(objInArr);
+
                             for (key2 in objInArr) {
                                  thisData[key2] = objInArr[key2];
                             }
@@ -193,6 +196,7 @@ CONTROL.responses = (function() {
     }
 
     function removeOper(res) {
+        console.log(res);
         var parent = doc.querySelector('.historyUl'),
             html = parent.innerHTML,
             indexStart,
@@ -445,8 +449,6 @@ CONTROL.access = (function() {
             doc.querySelector('.butRemoveHist').addEventListener('click', function(e) {
                var event = e || window.event,
                    json = JSON.stringify(obj);
-                alert(type);
-                alert(json);
                event.preventDefault();
                ajax.toServer(request.removeOper(user.login, type, json), response.removeOper);
             });
