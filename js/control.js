@@ -39,8 +39,23 @@ CONTROL.initialize = (function() {
                             for (key2 in objInArr) {
                                  thisData[key2] = objInArr[key2];
                             }
+
+                            switch (thisData.type) {
+                                case 'gain':
+                                    thisData['ico'] = 'img/dohod.png';
+                                    break;
+
+                                case 'costs':
+                                    thisData['ico'] = 'img/rashod.png';
+                                    break;
+
+                                case 'send':
+                                    thisData['ico'] = 'img/send.png';
+                                    break;
+                            }
+
                             thisData.mainCurr = data.mainCurr;
-                            html = html + Mustache.render(doc.querySelector('.history' + thisData.type).innerHTML, thisData);
+                            html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
                     });
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
@@ -162,8 +177,20 @@ CONTROL.responses = (function() {
         var doc = document,
             parent = doc.querySelector('.historyUl');
 
-        parent.innerHTML = parent.innerHTML +
-                           Mustache.render(doc.querySelector('.history' + res.type).innerHTML, res);
+        switch (res.type) {
+            case 'gain':
+                res['ico'] = 'img/dohod.png';
+                break;
+
+            case 'costs':
+                res['ico'] = 'img/rashod.png';
+                break;
+
+            case 'send':
+                res['ico'] = 'img/send.png';
+                break;
+        }
+        parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
     }
 
     function removeOper(res) {

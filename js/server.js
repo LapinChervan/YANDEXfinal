@@ -33,7 +33,7 @@ http.createServer(function(req, res) {
         },
 
         '/historyRemove': function() {
-            requests.removeOper(data.query.login, data.query.id, res);
+            requests.removeOper(data.query.login, data.query.type, data.query.json, res);
         },
 
         '/renameCategory': function() {
