@@ -58,6 +58,27 @@ CONTROL.initialize = (function() {
     }
 })();
 
+CONTROL.reload = (function() {
+    var doc = document;
+    function loadSelectForm(data, formType) {
+        var html, key;
+
+        for (key in data.categories) {
+            html = '';
+            if (key === 'accounts' || key === formType) {
+                data.categories[key].
+                    forEach(function(elem) {
+                        html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
+                });
+                doc.querySelector('.select__' + key).innerHTML = html;
+            }
+        }
+    }
+    return {
+        loadSelectForm: loadSelectForm
+    }
+})();
+
 CONTROL.requests = (function() {
     var host = 'http://localhost:1111/';
 
@@ -211,6 +232,7 @@ CONTROL.access = (function() {
         doc = document;
 
 	function showContent(responseData) {
+        user.data  = responseData;
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize(responseData);
 
@@ -233,6 +255,7 @@ CONTROL.access = (function() {
                     type = formType[key];
                     event.stopPropagation();
                     CONTROL.layer.createLayer({content: doc.querySelector('.form__' + type).innerHTML});
+                    CONTROL.reload.loadSelectForm(CONTROL.user.data, type);
 
                     doc.querySelector('.form__' + type + '__add').addEventListener('click', function(e) {
                         var event = e || window.event,
