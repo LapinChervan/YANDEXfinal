@@ -411,13 +411,13 @@ CONTROL.access = (function() {
 
 CONTROL.layer = (function() {
     var doc = document,
-        obj = {};
+        layerElements = {};
     var createLayer = (function () {
-        obj.modal = doc.createElement('div');
-        obj.layer = doc.createElement('div');
+        layerElements.modal = doc.createElement('div');
+        layerElements.layer = doc.createElement('div');
         var optionsObject = getDefaultOptions(),
-            modal = obj.modal, layer = obj.layer;
-        obj.parent = optionsObject.parent;
+            modal = layerElements.modal, layer = layerElements.layer;
+        layerElements.parent = optionsObject.parent;
         modal.className = optionsObject.clsOpacityLayer;
         layer.className = optionsObject.clsContentLayer;
 
@@ -434,8 +434,8 @@ CONTROL.layer = (function() {
             layer.innerHTML = optionsObject.content;
             fragment.appendChild(modal);
             fragment.appendChild(layer);
-            obj.parent.appendChild(fragment);
-            obj.isCreated = true;
+            layerElements.parent.appendChild(fragment);
+            layerElements.isCreated = true;
         }
     })();
 
@@ -449,11 +449,11 @@ CONTROL.layer = (function() {
     }
 
     function destroyLayer() {
-        var parent = obj.parent;
-        if (obj.isCreated) {
-            parent.removeChild(obj.modal);
-            parent.removeChild(obj.layer);
-            obj.isCreated = false;
+        var parent = layerElements.parent;
+        if (layerElements.isCreated) {
+            parent.removeChild(layerElements.modal);
+            parent.removeChild(layerElements.layer);
+            layerElements.isCreated = false;
         }
     }
 
