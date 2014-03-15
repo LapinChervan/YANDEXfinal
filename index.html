@@ -408,21 +408,20 @@
 
         <script type="text/template" class="history">
             <li>
-                <span style="display: none;">{{id}}</span>
+                <span class="id" style="display: none;">{{id}}</span>
                 <span class="delete"></span>
                 <div>
-                    <img src="{{ico}}" alt="">
+                    <img class="icoHist" src="{{ico}}" alt="">
                 </div>
                 <div class="history-content-wrap">
-                    <div class="history-date">{{date}}</div>
-                    <div>{{cat}}</div>
+                    <div class="date history-date">{{date}}</div>
+                    <div class="cat">{{cat}}</div>
                 </div>
-                <div class="history-content-wrap alignCenter">{{comm}}</div>
+                <div class="comm history-content-wrap alignCenter">{{comm}}</div>
                 <div class="history-content-wrap alignRight">
-                    <div class="account">{{sch}}</div>
-                    <div class="color-send">{{sum}}
-                        <span class="currency">{{mainCurr}}</span>
-                    </div>
+                    <div class="sch account">{{sch}}</div>
+                    <div class="sum color-send">{{sum}}</div>
+                    <span class="currency">{{mainCurr}}</span>
                 </div>
             </li>
         </script>

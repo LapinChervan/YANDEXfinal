@@ -32,7 +32,6 @@ CONTROL.initialize = (function() {
                      history = data.history,
                      thisData = {};
 
-
                 for (key in history) {
                     history[key].
                         forEach(function(objInArr) {
@@ -129,8 +128,8 @@ CONTROL.requests = (function() {
         return host + 'historyNewOper?login=' + user + '&type=' + type + '&formData=' + data;
     }
 
-    function removeOper(user, id) {
-        return host + 'historyRemove?login=' + user + '&id=' + id;
+    function removeOper(user, type, json) {
+        return host + 'historyRemove?login=' + user + '&type=' + type + '&json=' + json;
     }
 
     return {
@@ -399,19 +398,28 @@ CONTROL.access = (function() {
         doc.querySelector('.historyUl').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
-                id;
+                parent, obj = {};
 
             if (!target.classList.contains('delete')) return;
-            id = target.previousElementSibling.innerHTML;
-            alert('id='+id);
+
+            parent = target.parentNode;
+            ['id', 'date', 'cat', 'comm', 'sch', 'sum'].
+                forEach(function(elem) {
+                    if (parent.querySelector('.' + elem)) {
+                        obj[elem] = parent.querySelector('.' + elem).innerHTML;
+                    }
+                });
+            console.log(obj);
+
             event.stopPropagation();
             CONTROL.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
 
             doc.querySelector('.butRemoveHist').addEventListener('click', function(e) {
-               var event = e || window.event;
+               var event = e || window.event,
+                   type, json;
 
                event.preventDefault();
-               ajax.toServer(request.removeOper(user.login, id), request.removeOper);
+               ajax.toServer(request.removeOper(user.login, type, json), request.removeOper);
             });
 
         }, false);
