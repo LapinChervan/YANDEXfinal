@@ -481,15 +481,11 @@
                 </div>
                 <div class="form__gain__blockInputs">
                     <input placeholder="Дата операции" type="text">
-                    <select>
-                        <option>Счет</option>
-                        <option>1</option>
-                        <option>2</option>
+                    <select class="select__accounts">
+                        <option>{{accounts}}</option>
                     </select>
-                    <select>
-                        <option>Категория</option>
-                        <option>1</option>
-                        <option>2</option>
+                    <select class="select__gain">
+                        <option>{{accounts}}</option>
                     </select>
                     <input placeholder="Сумма" type="text">
                     <input placeholder="Комментарий" type="text">
@@ -508,15 +504,11 @@
             </div>
             <div class="form__costs__blockInputs">
                 <input placeholder="Дата операции" type="text">
-                <select>
-                    <option>Счет</option>
-                    <option>1</option>
-                    <option>2</option>
+                <select class="select__accounts">
+                    <option>{{accounts}}</option>
                 </select>
-                <select>
-                    <option>Категория</option>
-                    <option>1</option>
-                    <option>2</option>
+                <select class="select__costs">
+                    <option>{{accounts}}</option>
                 </select>
                 <input placeholder="Сумма" type="text">
                 <input placeholder="Комментарий" type="text">
@@ -528,22 +520,18 @@
         </div>
     </script>
 
-      <script type="text/template" class="form__send">
+    <script type="text/template" class="form__send">
         <div class="form__send">
             <div class="form__send__header">
                 <img src="img/send.png" alt="">
             </div>
             <div class="form__send__blockInputs">
                 <input placeholder="Дата операции" type="text">
-                <select>
-                    <option>Со счета</option>
-                    <option>1</option>
-                    <option>2</option>
+                <select class="select__accounts">
+                    <option>{{accounts}}</option>
                 </select>
-                <select>
-                    <option>На счет</option>
-                    <option>1</option>
-                    <option>2</option>
+                <select class="select__accounts">
+                    <option>{{accounts}}</option>
                 </select>
                 <input placeholder="Сумма" type="text">
                 <input placeholder="Комментарий" type="text">
