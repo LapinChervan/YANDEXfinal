@@ -309,6 +309,7 @@ CONTROL.access = (function() {
                             data[arr[i]] = item.value;
                         }
                         data['id'] = Math.round(Math.random() * 1000000);
+                        data['type'] = type;
                        // var arrD = data.date.split('.').reverse();
                       //  data.date = Date.parse(arrD[0],arrD[1],arrD[2]);
                         event.preventDefault();
@@ -435,7 +436,7 @@ CONTROL.access = (function() {
                     break;
             }
 
-            ['date', 'cat', 'comm', 'sch', 'sum', 'id'].
+            ['date', 'sch', 'cat', 'sum', 'comm', 'id'].
                 forEach(function(elem) {
                     if (parent.querySelector('.' + elem)) {
                         obj[elem] = parent.querySelector('.' + elem).innerHTML;
@@ -451,6 +452,7 @@ CONTROL.access = (function() {
                var event = e || window.event,
                    json = JSON.stringify(obj);
                event.preventDefault();
+                console.log('vot on: '+json);
                ajax.toServer(request.removeOper(user.login, type, json), response.removeOper);
             });
 
