@@ -193,7 +193,17 @@ CONTROL.responses = (function() {
     }
 
     function removeOper(res) {
+        var parent = doc.querySelector('.historyUl'),
+            html = parent.innerHTML,
+            indexStart,
+            subs;
 
+        indexStart = html.indexOf(res);
+        subs = html.slice(html.lastIndexOf('<li>', indexStart),
+            html.indexOf('</li>', indexStart) + 5);
+
+        alert(subs);
+        parent.innerHTML = html.replace(subs, '');
     }
 
     function rebuildCurrency (obj) {
@@ -398,28 +408,47 @@ CONTROL.access = (function() {
         doc.querySelector('.historyUl').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
-                parent, obj = {};
+                parent, type, src,  obj = {};
 
             if (!target.classList.contains('delete')) return;
 
             parent = target.parentNode;
-            ['id', 'date', 'cat', 'comm', 'sch', 'sum'].
+            src = parent.querySelector('.icoHist').src;
+
+
+            switch (src.slice(src.lastIndexOf('/') + 1)) {
+                case 'dohod.png':
+                    type = 'gain';
+                    break;
+
+                case 'rashod.png':
+                    type = 'costs';
+                    break;
+
+                case 'send.png':
+                    type = 'send';
+                    break;
+            }
+
+            ['date', 'cat', 'comm', 'sch', 'sum', 'id'].
                 forEach(function(elem) {
                     if (parent.querySelector('.' + elem)) {
                         obj[elem] = parent.querySelector('.' + elem).innerHTML;
                     }
                 });
-            console.log(obj);
+
+            obj['type'] = type;
 
             event.stopPropagation();
             CONTROL.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
 
             doc.querySelector('.butRemoveHist').addEventListener('click', function(e) {
                var event = e || window.event,
-                   type, json;
-
+                   json = JSON.stringify(obj);
+                alert(type);
+                alert(json);
                event.preventDefault();
-               ajax.toServer(request.removeOper(user.login, type, json), request.removeOper);
+               ajax.toServer(request.removeOper(user.login, type, json), response.removeOper);
             });
 
         }, false);
