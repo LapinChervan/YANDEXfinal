@@ -29,11 +29,11 @@ http.createServer(function(req, res) {
         },
 
         '/historyNewOper': function() {
-            requests.newOper(data.query.login, data.query.type, data.query.formData, res);
+            requests.newOper(data.query.login, data.query.type, data.query.id, data.query.formData, res);
         },
 
         '/historyRemove': function() {
-            requests.removeOper(data.query.login, data.query.type, data.query.json, res);
+            requests.removeOper(data.query.login, data.query.type, data.query.id, data.query.json, res);
         },
 
         '/renameCategory': function() {

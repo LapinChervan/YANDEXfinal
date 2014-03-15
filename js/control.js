@@ -27,38 +27,38 @@ CONTROL.initialize = (function() {
 
             history: function(data) {
                 var  doc = document,
-                     key, key2,
+                     objKey, objKey2, objKey3,
                      html = '',
                      history = data.history,
                      thisData = {};
 
-                for (key in history) {
-                    history[key].
-                        forEach(function(objInArr) {
-                            console.log(objInArr);
-                            objInArr = JSON.parse(objInArr);
+                for (objKey in history) {
+                    for (objKey2 in history[objKey]) {
+                        for (objKey3 in history[objKey][objKey2]) {
+                            console.log(objKey3);
+                        }
+                    }
 
-                            for (key2 in objInArr) {
-                                 thisData[key2] = objInArr[key2];
-                            }
 
-                            switch (thisData.type) {
-                                case 'gain':
-                                    thisData['ico'] = 'img/dohod.png';
-                                    break;
+                       // thisData[key2] =history[key][key2];
 
-                                case 'costs':
-                                    thisData['ico'] = 'img/rashod.png';
-                                    break;
+                        switch (thisData.type) {
+                            case 'gain':
+                                thisData['ico'] = 'img/dohod.png';
+                                break;
 
-                                case 'send':
-                                    thisData['ico'] = 'img/send.png';
-                                    break;
-                            }
+                            case 'costs':
+                                thisData['ico'] = 'img/rashod.png';
+                                break;
 
-                            thisData.mainCurr = data.mainCurr;
-                            html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
-                    });
+                            case 'send':
+                                thisData['ico'] = 'img/send.png';
+                                break;
+                        }
+
+                        thisData.mainCurr = data.mainCurr;
+                        html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
+
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
             }
@@ -131,12 +131,12 @@ CONTROL.requests = (function() {
         return host + 'auth?login=' + user + '&password=' + password;
     }
 
-    function newOper(user, type, data) {
-        return host + 'historyNewOper?login=' + user + '&type=' + type + '&formData=' + data;
+    function newOper(user, type, id, data) {
+        return host + 'historyNewOper?login=' + user + '&type=' + type + '&id=' + id + '&formData=' + data;
     }
 
-    function removeOper(user, type, json) {
-        return host + 'historyRemove?login=' + user + '&type=' + type + '&json=' + json;
+    function removeOper(user, type, id) {
+        return host + 'historyRemove?login=' + user + '&type=' + type + '&id=' + id;
     }
 
     return {
@@ -306,18 +306,18 @@ CONTROL.access = (function() {
                             form = doc.querySelector('.form__' + type  + '__blockInputs').children,
                             len = form.length,
                             arr = ['date', 'sch', 'cat', 'sum', 'comm'],
-                            i, item, data = {};
+                            i, item, data = {},
+                            id;
 
                         for (i = 0; i < len; i++) {
                             item = form[i];
                             data[arr[i]] = item.value;
                         }
-                        data['id'] = Math.round(Math.random() * 1000000);
                         data['type'] = type;
-                       // var arrD = data.date.split('.').reverse();
-                      //  data.date = Date.parse(arrD[0],arrD[1],arrD[2]);
+                        id = 'id'+Math.round(Math.random() * 1000000);
+
                         event.preventDefault();
-                        ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
+                        ajax.toServer(request.newOper(user.login, type, id, JSON.stringify(data)), response.newOper);
                     }, false);
                 }
             }
@@ -418,7 +418,8 @@ CONTROL.access = (function() {
         doc.querySelector('.historyUl').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
-                parent, type, src,  obj = {};
+                parent, type, src,  obj = {},
+                id;
 
             if (!target.classList.contains('delete')) return;
 
@@ -439,7 +440,7 @@ CONTROL.access = (function() {
                     type = 'send';
                     break;
             }
-
+/*
             ['date', 'sch', 'cat', 'sum', 'comm', 'id'].
                 forEach(function(elem) {
                     if (parent.querySelector('.' + elem)) {
@@ -448,16 +449,16 @@ CONTROL.access = (function() {
                 });
 
             obj['type'] = type;
-
+ */         id = parent.querySelector('.id').innerHTML;
             event.stopPropagation();
             CONTROL.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
 
             doc.querySelector('.butRemoveHist').addEventListener('click', function(e) {
-               var event = e || window.event,
-                   json = JSON.stringify(obj);
+               var event = e || window.event;
+
                event.preventDefault();
-                console.log('vot on: '+json);
-               ajax.toServer(request.removeOper(user.login, type, json), response.removeOper);
+
+               ajax.toServer(request.removeOper(user.login, type, id), response.removeOper);
             });
 
         }, false);
