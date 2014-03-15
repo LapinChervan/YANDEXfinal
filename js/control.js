@@ -33,14 +33,10 @@ CONTROL.initialize = (function() {
                      thisData = {};
 
                 for (objKey in history) {
-                    for (objKey2 in history[objKey]) {
+                    for (objKey2 in  history[objKey]) {
                         for (objKey3 in history[objKey][objKey2]) {
-                            console.log(objKey3);
+                            thisData[objKey3] = history[objKey][objKey2][objKey3];
                         }
-                    }
-
-
-                       // thisData[key2] =history[key][key2];
 
                         switch (thisData.type) {
                             case 'gain':
@@ -55,9 +51,9 @@ CONTROL.initialize = (function() {
                                 thisData['ico'] = 'img/send.png';
                                 break;
                         }
-
                         thisData.mainCurr = data.mainCurr;
                         html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
+                    }
 
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
@@ -131,8 +127,8 @@ CONTROL.requests = (function() {
         return host + 'auth?login=' + user + '&password=' + password;
     }
 
-    function newOper(user, type, id, data) {
-        return host + 'historyNewOper?login=' + user + '&type=' + type + '&id=' + id + '&formData=' + data;
+    function newOper(user, type, data) {
+        return host + 'historyNewOper?login=' + user + '&type=' + type + '&formData=' + data;
     }
 
     function removeOper(user, type, id) {
@@ -169,6 +165,7 @@ CONTROL.responses = (function() {
     }
 
     function removeCategory(res) {
+        alert(res);
         var parent = doc.querySelector('.' + res.type),
             html = parent.innerHTML,
             indexStart, subs;
@@ -314,10 +311,10 @@ CONTROL.access = (function() {
                             data[arr[i]] = item.value;
                         }
                         data['type'] = type;
-                        id = 'id'+Math.round(Math.random() * 1000000);
+                        data['id'] = 'id'+Math.round(Math.random() * 1000000);
 
                         event.preventDefault();
-                        ajax.toServer(request.newOper(user.login, type, id, JSON.stringify(data)), response.newOper);
+                        ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
                     }, false);
                 }
             }
@@ -440,16 +437,8 @@ CONTROL.access = (function() {
                     type = 'send';
                     break;
             }
-/*
-            ['date', 'sch', 'cat', 'sum', 'comm', 'id'].
-                forEach(function(elem) {
-                    if (parent.querySelector('.' + elem)) {
-                        obj[elem] = parent.querySelector('.' + elem).innerHTML;
-                    }
-                });
 
-            obj['type'] = type;
- */         id = parent.querySelector('.id').innerHTML;
+            id = parent.querySelector('.id').innerHTML;
             event.stopPropagation();
             CONTROL.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
 
@@ -457,7 +446,6 @@ CONTROL.access = (function() {
                var event = e || window.event;
 
                event.preventDefault();
-
                ajax.toServer(request.removeOper(user.login, type, id), response.removeOper);
             });
 

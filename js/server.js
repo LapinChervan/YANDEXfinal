@@ -29,7 +29,7 @@ http.createServer(function(req, res) {
         },
 
         '/historyNewOper': function() {
-            requests.newOper(data.query.login, data.query.type, data.query.id, data.query.formData, res);
+            requests.newOper(data.query.login, data.query.type, data.query.formData, res);
         },
 
         '/historyRemove': function() {
