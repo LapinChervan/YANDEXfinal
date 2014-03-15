@@ -496,6 +496,7 @@ CONTROL.layer = (function() {
                     optionsObject[key] = options[key];
                 });
             layer.innerHTML = optionsObject.content;
+            layer.className = optionsObject.clsContentLayer;
             fragment.appendChild(modal);
             fragment.appendChild(layer);
             layerElements.parent.appendChild(fragment);
