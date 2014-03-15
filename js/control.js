@@ -410,30 +410,34 @@ CONTROL.access = (function() {
 })();
 
 CONTROL.layer = (function() {
-    var doc = document;
-    
-    function createLayer(options) {
-        var modal = this.modal = doc.createElement('div'),
-            layer = this.layer = doc.createElement('div'),
-            optionsObject, parent, fragment = doc.createDocumentFragment();
-
-        optionsObject = getDefaultOptions();
-        Object.keys(options).
-            forEach(function(key) {
-                optionsObject[key] = options[key];
-            });
-        this.parent = parent = optionsObject.parent;
+    var doc = document,
+        obj = {};
+    var createLayer = (function () {
+        obj.modal = doc.createElement('div');
+        obj.layer = doc.createElement('div');
+        var optionsObject = getDefaultOptions(),
+            modal = obj.modal, layer = obj.layer;
+        obj.parent = optionsObject.parent;
         modal.className = optionsObject.clsOpacityLayer;
         layer.className = optionsObject.clsContentLayer;
-        layer.innerHTML = optionsObject.content;
-        fragment.appendChild(modal);
-        fragment.appendChild(layer);
-        parent.appendChild(fragment);
+
         layer.addEventListener('click', function (e) {
             var event = e || window.event;
             event.stopPropagation();
         });
-    }
+        return function (options) {
+            var fragment = doc.createDocumentFragment();
+            Object.keys(options).
+                forEach(function(key) {
+                    optionsObject[key] = options[key];
+                });
+            layer.innerHTML = optionsObject.content;
+            fragment.appendChild(modal);
+            fragment.appendChild(layer);
+            obj.parent.appendChild(fragment);
+            obj.isCreated = true;
+        }
+    })();
 
     function getDefaultOptions() {
         return {
@@ -445,21 +449,16 @@ CONTROL.layer = (function() {
     }
 
     function destroyLayer() {
-        var layer = this.layer,
-            modal = this.modal,
-            parent = this.parent;
-        if (!modal || !layer) {
-            return;
+        var parent = obj.parent;
+        if (obj.isCreated) {
+            parent.removeChild(obj.modal);
+            parent.removeChild(obj.layer);
+            obj.isCreated = false;
         }
-        parent.removeChild(modal);
-        parent.removeChild(layer);
-        this.parent = undefined;
-        this.layer = undefined;
-        this.modal = undefined;
     }
 
     document.addEventListener('click', function(){
-        destroyLayer.call(CONTROL.layer);
+        destroyLayer();
     });
 
     return {
