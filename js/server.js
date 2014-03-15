@@ -47,7 +47,10 @@ http.createServer(function(req, res) {
         },
         '/removeCategory': function() {
             requests.removeCat(data.query.login, data.query.type, data.query.old, res);
-        }
+        }/*,
+        '/findOperation': function() {
+            requests.findOperation(data.query.login, data.query.time);
+        }*/
     };
 
     if (pathObj[data.pathname]) {
