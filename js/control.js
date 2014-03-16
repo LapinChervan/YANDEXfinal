@@ -311,8 +311,8 @@ CONTROL.access = (function() {
                         }
                         data['type'] = type;
                         data['id'] = 'id'+Math.round(Math.random() * 1000000);
-                        var arrD = data.date.split('.').reverse();
-                        data.date = Date.parse(arrD[0],arrD[1],arrD[2]);
+                        var arrD = data.date.split('.');
+                        data.time = Date.parse(arrD[2],arrD[1],arrD[0]);
 
                         event.preventDefault();
                         ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
