@@ -12,6 +12,8 @@
     margin-bottom: 5px;
     cursor: pointer;
     position: relative;
+    height: 45px;
+
 }
 
 #second li:hover div.alignRight {
@@ -55,6 +57,15 @@
     width: 31%;
     line-height: .8;
     font-size: 14px;
+    margin: -5px 0 0 0;
+}
+
+.hist, .comm {
+    color: #816D66;
+}
+
+.sum, .history-date {
+    color: #F94327;
 }
 
 #second img {
@@ -76,10 +87,35 @@
     text-align: right;
 }
 
-.history-date, .account {
+ .account {
     margin-bottom: 5px;
 }
 
+.history-date {
+    margin: 12px 0 0;
+}
+
+.sch, .cat {
+   color: #085877;
+}
+
+.sch {
+    margin: -5px 0 0 0;
+}
+
+.sum {
+    margin: 4px 0;
+}
+
+.comm {
+  font-size: 16px;
+}
+
+
+
+
+
+/*
 .color-income {
     color: #1FB76B;
 }
@@ -94,4 +130,4 @@
 
 .currency {
     font-size: 12px;
-}
+}*/
