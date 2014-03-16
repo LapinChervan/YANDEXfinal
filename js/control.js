@@ -303,8 +303,7 @@ CONTROL.access = (function() {
                             form = doc.querySelector('.form__' + type  + '__blockInputs').children,
                             len = form.length,
                             arr = ['date', 'sch', 'cat', 'sum', 'comm'],
-                            i, item, data = {},
-                            id;
+                            i, item, data = {};
 
                         for (i = 0; i < len; i++) {
                             item = form[i];
@@ -422,7 +421,6 @@ CONTROL.access = (function() {
 
             parent = target.parentNode;
             src = parent.querySelector('.icoHist').src;
-
 
             switch (src.slice(src.lastIndexOf('/') + 1)) {
                 case 'dohod.png':
