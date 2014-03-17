@@ -215,20 +215,31 @@ CONTROL.responses = (function() {
     }
 
     function filterDate(res) {
-        var sum, key,
+        var sum, key, data,
             i, len,
-            elem;
+            elem,
+            diagram = {};
 
         for (key in res) {
+            if (key === 'accounts') continue;
             sum = 0;
             len = res[key].length;
 
+            diagram[key] = {};
+
             for (i = 0; i < len; i++) {
-                sum += +res[key][i].sum;
+                data = res[key][i];
+                sum += +data.sum;
+
+                if (!diagram[key][data.cat]) {
+                    diagram[key][data.cat] = 0;
+                }
+                diagram[key][data.cat] += +data.sum;
             }
 
             doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.mainCurr;
         }
+        console.log(diagram);
     }
 
     function removeOper(res) {
@@ -321,7 +332,6 @@ CONTROL.access = (function() {
 
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
-                alert(tools.getDateMs(doc.querySelector('.dateFrom').value) + ' - '+ tools.getDateMs(doc.querySelector('.dateTo').value));
                 ajax.toServer(request.filterDate(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value)),
                               response.filterDate);
             }
