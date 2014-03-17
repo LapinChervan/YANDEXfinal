@@ -294,14 +294,15 @@ CONTROL.access = (function() {
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize(responseData);
 
+        // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement;
 
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
-                alert(target.innerHTML);
-             //   ajax.toServer(user.login, )
+                alert(tools.getDateMs(doc.querySelector('.dateFrom').value) + ' - '+ tools.getDateMs(doc.querySelector('.dateTo').value));
+                ajax.toServer(request.findOperation(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value), 'all'));
             }
         }, false);
 
