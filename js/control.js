@@ -193,6 +193,10 @@ CONTROL.requests = (function() {
         return host + 'findOperation?login=' + user + '&start=' + start + '&end=' + end + '&type=' + type;
     }
 
+    function filterHistory(user, account, type) {
+        return host + 'findOperation?login=' + user + '&account=' + account + '&type=' + type;
+    }
+
     return {
         changeMainCurr: changeMainCurr,
         changeRates: changeRates,

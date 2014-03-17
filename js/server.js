@@ -49,7 +49,12 @@ http.createServer(function(req, res) {
             requests.removeCat(data.query.login, data.query.type, data.query.old, res);
         },
         '/findOperation': function() {
-            requests.findOperation(data.query.login, data.query.start, data.query.end, res, data.query.type);
+            if (data.query.start) {
+                requests.dateFilter(data.query.login, data.query.start, data.query.end, res);
+            }
+            else {
+                requests.historyFilter(data.query.login, data.query.account, res, data.query.type);
+            }
         }
     };
 
