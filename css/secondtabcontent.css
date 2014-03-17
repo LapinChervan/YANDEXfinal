@@ -64,7 +64,7 @@
     color: #816D66;
 }
 
-.sum, .history-date {
+.sum {
     color: #F94327;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .history-date {
-    margin: 12px 0 0;
+    margin: 6px 0 7px ;
 }
 
 .sch, .cat {
@@ -100,7 +100,7 @@
 }
 
 .sch {
-    margin: -5px 0 0 0;
+    margin: 5px 0 0 0;
 }
 
 .sum {
@@ -111,11 +111,6 @@
   font-size: 16px;
 }
 
-
-
-
-
-
 .color-income {
     color: #1FB76B;
 }
@@ -124,7 +119,7 @@
     color: #BA6022;
 }
 
-.color-send {
+.color-send, .history-date {
     color: #47A2CA;
 }
 
