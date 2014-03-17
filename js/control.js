@@ -232,6 +232,7 @@ CONTROL.responses = (function() {
         var doc = document,
             categories = doc.querySelector('.' + res.type);
 
+        user.data.categories[res.type].push(res.cat);
         categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
                                                                       {costs: res.cat});
     }
