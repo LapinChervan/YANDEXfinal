@@ -78,8 +78,50 @@ CONTROL.tools = (function() {
         return Date.parse(new Date(arr[2],arr[1],arr[0]));
     }
 
+    function isBiggest(numb, biggest) {
+        return (numb > biggest) ? numb : biggest;
+    }
+
+    function randomColor() {
+        function getColor() {
+            return Math.round(Math.random() * 230);
+        }
+        return 'rgb(' +getColor()+ ',' +getColor()+ ',' +getColor()+ ');';
+    }
+
+    function showDiagram(data) {
+        var key, key2,
+            biggest, biggestArr = [],
+            html, i = 0;
+
+        for (key in data) {
+            biggest = 0;
+            for (key2 in data[key]) {
+                biggest = isBiggest(data[key][key2], biggest);
+            }
+            biggestArr.push(biggest);
+        }
+
+        for (key in data) {
+            html = '';
+            for (key2 in data[key]) {
+                html = html + Mustache.render(doc.querySelector('.cats').innerHTML, {
+                    proc: Math.round((data[key][key2] / biggestArr[i]) * 100),
+                    category: key2,
+                    price: data[key][key2],
+                    rgb: randomColor()
+                });
+            }
+            i++;
+            doc.querySelector('.diag' + key).innerHTML = html;
+        }
+    }
+
     return {
-        getDateMs: getDateMs
+        getDateMs: getDateMs,
+        isBiggest: isBiggest,
+        randomColor: randomColor,
+        showDiagram: showDiagram
     }
 })();
 
@@ -211,6 +253,7 @@ CONTROL.responses = (function() {
                 res['ico'] = 'img/send.png';
                 break;
         }
+        res.mainCurr = user.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
     }
 
@@ -236,10 +279,10 @@ CONTROL.responses = (function() {
                 }
                 diagram[key][data.cat] += +data.sum;
             }
-
             doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.mainCurr;
         }
-        console.log(diagram);
+
+        CONTROL.tools.showDiagram(diagram);
     }
 
     function removeOper(res) {

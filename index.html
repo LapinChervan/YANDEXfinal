@@ -182,8 +182,8 @@
 
                             <div class="statistics">
                                 <div class="filters__inputs">
-                                    <input class="dateFrom" placeholder="Отобрать с" type="text" value="">
-                                    <input class="dateTo" type="text" placeholder="Отобрать по" value="">
+                                    <input class="dateFrom" placeholder="Отобрать с" type="text" value="01.03.2014">
+                                    <input class="dateTo" type="text" placeholder="Отобрать по" value="29.03.2014">
                                     <a class="apply_filter1" href="#">Отобрать</a>
                                 </div>
                                 <ul class="statistics__ul">
@@ -201,14 +201,10 @@
                                             </tr>
                                         </table>
 
-                                        <div class="diagram">
+                                        <div class="diaggain diagram">
                                             <div class="diagram__header">Диаграмма по доходам</div>
                                             <div class="calendarr"><img src="img/calendar.png" alt=""></div>
-                                            <div class="cat cat1">Категория 1</div>
-                                            <div class="cat cat2">Категория 2</div>
-                                            <div class="cat cat3">Категория 3</div>
-                                            <div class="cat cat4">Категория 4</div>
-                                            <div class="cat cat5">Категория 5</div>
+
                                         </div>
                                     </li>
                                     <li class="statistics__ul__li">
@@ -224,14 +220,9 @@
                                             </tr>
                                         </table>
 
-                                        <div class="diagram">    
+                                        <div class="diagcosts diagram">
                                             <div class="diagram__header">Диаграмма по расходам</div>
                                             <div class="calendarr"><img src="img/calendar.png" alt=""></div>
-                                            <div class="cat cat1">Категория 1</div>
-                                            <div class="cat cat2"> Категория 2</div>
-                                            <div class="cat cat3"> Категория 3</div>
-                                            <div class="cat cat4">Категория 4</div>
-                                            <div class="cat cat5">Категория 5</div>
                                         </div>
                                     </li>
                                 </ul>           
@@ -342,6 +333,10 @@
 
         </div>
 
+    </script>
+
+    <script type="text/template" class="cats">
+        <div  style="background-color: {{rgb}}; width: {{proc}}%;" class="categs">{{category}} {{price}}</div>
     </script>
 
         <script type="text/template" class="editCatForm">

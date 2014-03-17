@@ -163,11 +163,12 @@
     margin: 5px auto;
 }
 
-.cat {
+.categs {
     margin: 2px 0;
     height: 27px;
     border-radius: 4px;
     padding: 5px 2px 0 2px;
+    width: 70%;
 }
 
 .diagram__header, .filters__header {
@@ -181,31 +182,6 @@
 
 .calendarr {
     text-align: left;
-}
-
-.cat1 {
-    width: 70%;
-    background: #4BF069;
-}
-
-.cat2 {
-    width: 90%;
-    background: #6C7EF0;
-}
-
-.cat3 {
-    width: 55%;
-    background: #F0BE68;
-}
-
-.cat4 {
-    width: 40%;
-    background: #7042F0;
-}
-
-.cat5 {
-    width: 60%;
-    background: #F05550;
 }
 
 .form__gain__add, .form__gain__cancel,
