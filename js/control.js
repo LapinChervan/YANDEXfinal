@@ -13,6 +13,7 @@ CONTROL.initialize = (function() {
                     key, html;
 
                 CONTROL.user.login = data.name;
+                CONTROL.user.mainCurr = data.mainCurr;
 
                 for (key in data.categories) {
                     html = '';
@@ -165,7 +166,8 @@ CONTROL.requests = (function() {
 })();
 
 CONTROL.responses = (function() {
-    var doc = document;
+    var doc = document,
+        user = CONTROL.user;
 
     function newCategory(res) {
         var doc = document,
@@ -212,6 +214,24 @@ CONTROL.responses = (function() {
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
     }
 
+    function filterDate(res) {
+        var sum, key,
+            i, len,
+            elem;
+
+        for (key in res) {
+            if (key === 'accounts') continue;
+            sum = 0;
+            len = res[key].length;
+
+            for (i = 0; i < len; i++) {
+                sum += +res[key][i].sum;
+            }
+
+            doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.mainCurr;
+        }
+    }
+
     function removeOper(res) {
         console.log(res);
         var parent = doc.querySelector('.historyUl'),
@@ -252,7 +272,8 @@ CONTROL.responses = (function() {
         renameCategory: renameCategory,
         removeCategory: removeCategory,
         newOper: newOper,
-        removeOper: removeOper
+        removeOper: removeOper,
+        filterDate: filterDate
     }
 })();
 
@@ -302,7 +323,8 @@ CONTROL.access = (function() {
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
                 alert(tools.getDateMs(doc.querySelector('.dateFrom').value) + ' - '+ tools.getDateMs(doc.querySelector('.dateTo').value));
-                ajax.toServer(request.findOperation(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value), 'all'));
+                ajax.toServer(request.findOperation(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value), 'all'),
+                              response.filterDate);
             }
         }, false);
 
