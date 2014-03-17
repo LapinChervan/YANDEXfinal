@@ -71,6 +71,17 @@ CONTROL.initialize = (function() {
     }
 })();
 
+CONTROL.tools = (function() {
+    function getDateMs(date) {
+        var arr = date.split('.');
+        return Date.parse(new Date(arr[2],arr[1],arr[0]));
+    }
+
+    return {
+        getDateMs: getDateMs
+    }
+})();
+
 CONTROL.reload = (function() {
     var doc = document;
     function loadSelectForm(data, formType) {
@@ -275,12 +286,24 @@ CONTROL.access = (function() {
         response = CONTR.responses,
         request = CONTR.requests,
         user = CONTR.user,
+        tools = CONTR.tools,
         doc = document;
 
 	function showContent(responseData) {
         user.data  = responseData;
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize(responseData);
+
+        doc.querySelector('.statistics').addEventListener('click', function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement;
+
+            if (target.classList.contains('apply_filter1')) {
+                event.preventDefault();
+                alert(target.innerHTML);
+             //   ajax.toServer(user.login, )
+            }
+        }, false);
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
         doc.querySelector('.first__ul__button').addEventListener('click', function(e) {
@@ -315,9 +338,8 @@ CONTROL.access = (function() {
                             data[arr[i]] = item.value;
                         }
                         data['type'] = type;
-                        data['id'] = 'id'+Math.round(Math.random() * 1000000);
-                        var arrD = data.date.split('.');
-                        data.time = Date.parse(arrD[2],arrD[1],arrD[0]);
+                        data['id'] = 'id' + Math.round(Math.random() * 1000000);
+                        data.time = tools.getDateMs(data.date);
 
                         event.preventDefault();
                         ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
