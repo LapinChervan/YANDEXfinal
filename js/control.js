@@ -147,7 +147,7 @@ CONTROL.requests = (function() {
         return host + 'historyRemove?login=' + user + '&type=' + type + '&id=' + id;
     }
 
-    function findOperation(user, start, end, type) {
+    function filterDate(user, start, end, type) {
         return host + 'findOperation?login=' + user + '&start=' + start + '&end=' + end + '&type=' + type;
     }
 
@@ -161,7 +161,7 @@ CONTROL.requests = (function() {
         auth: auth,
         newOper: newOper,
         removeOper: removeOper,
-        findOperation: findOperation
+        filterDate: filterDate
     }
 })();
 
@@ -220,7 +220,6 @@ CONTROL.responses = (function() {
             elem;
 
         for (key in res) {
-            if (key === 'accounts') continue;
             sum = 0;
             len = res[key].length;
 
@@ -323,7 +322,7 @@ CONTROL.access = (function() {
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
                 alert(tools.getDateMs(doc.querySelector('.dateFrom').value) + ' - '+ tools.getDateMs(doc.querySelector('.dateTo').value));
-                ajax.toServer(request.findOperation(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value), 'all'),
+                ajax.toServer(request.filterDate(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value)),
                               response.filterDate);
             }
         }, false);
