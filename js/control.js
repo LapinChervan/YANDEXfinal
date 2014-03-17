@@ -135,6 +135,10 @@ CONTROL.requests = (function() {
         return host + 'historyRemove?login=' + user + '&type=' + type + '&id=' + id;
     }
 
+    function findOperation(user, start, end, type) {
+        return host + 'findOperation?login=' + user + '&start=' + start + '&end=' + end + '&type=' + type;
+    }
+
     return {
         changeMainCurr: changeMainCurr,
         changeRates: changeRates,
@@ -144,7 +148,8 @@ CONTROL.requests = (function() {
         registration: registration,
         auth: auth,
         newOper: newOper,
-        removeOper: removeOper
+        removeOper: removeOper,
+        findOperation: findOperation
     }
 })();
 
