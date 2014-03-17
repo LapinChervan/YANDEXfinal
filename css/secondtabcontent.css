@@ -108,7 +108,8 @@
 }
 
 .comm {
-  font-size: 16px;
+    font-size: 16px;
+    margin: 4px;
 }
 
 .color-income {

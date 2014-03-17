@@ -160,7 +160,7 @@
 .filters__inputs {
     text-align: center;
     width: 300px;
-    margin: 5px auto;
+    margin: 5px 0 0 848px;
 }
 
 .categs {
@@ -206,7 +206,6 @@
 
 .apply_filter1 {
     margin: 5px auto;
-    display: block;
 }
 
 .form__gain__add:hover, .form__gain__cancel:hover,

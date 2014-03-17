@@ -435,6 +435,7 @@ CONTROL.access = (function() {
 
                         event.preventDefault();
                         ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
+                        CONTROL.layer.destroyLayer();
                     }, false);
                 }
             }
@@ -484,6 +485,7 @@ CONTROL.access = (function() {
                                 event.preventDefault();
                                 ajax.toServer(request.editCategory(user.login, elem, input.placeholder, input.value),
                                     response.renameCategory);
+                                CONTROL.layer.destroyLayer();
                             });
                         }
                     });
@@ -508,6 +510,7 @@ CONTROL.access = (function() {
                                 event.preventDefault();
                                 ajax.toServer(request.removeCategory(user.login, elem, input.placeholder),
                                     response.removeCategory);
+                                CONTROL.layer.destroyLayer();
                             });
                         }
                     });
