@@ -133,11 +133,13 @@
     padding: 0 10px;
 }
 
-.tableprices__plus td:last-child {
+.tableprices__plus td:last-child, .tableprices__minus td:last-child {
     text-align: right;
-    color: #4D76B6;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 16px;
+}
+
+.tableprices__plus td:last-child {
+    color: #27A248;
 }
 
 .tableprices__plus td:first-child, .tableprices__minus td:first-child {
@@ -145,10 +147,7 @@
 }
 
 .tableprices__minus td:last-child {
-    text-align: right;
-    color: #F08A03;
-    font-size: 14px;
-    font-weight: bold;
+    color: #D9553D;
 }
 
 .diagram, .filters {

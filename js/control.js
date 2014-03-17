@@ -59,6 +59,17 @@ CONTROL.initialize = (function() {
 
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
+            },
+
+            selectLoadSch: function(data) {
+                var accounts = data.categories.accounts,
+                    html = '';
+
+                accounts.forEach(function(elem) {
+                    html = html + Mustache.render(doc.querySelector('.schHist').innerHTML, {'histSch': elem});
+                });
+
+                doc.querySelector('.history_sch_select').innerHTML = html;
             }
         };
     return  {
@@ -72,7 +83,8 @@ CONTROL.initialize = (function() {
                 //  }, 150);
             }
         },
-        history: initMethods.history
+        history: initMethods.history,
+        selectLoadSch: initMethods.selectLoadSch
     }/*function (data) {
         var key,
             methods = initMethods;
@@ -97,7 +109,7 @@ CONTROL.tools = (function() {
 
     function randomColor() {
         function getColor() {
-            return Math.round(Math.random() * 230);
+            return Math.round(Math.random() * 200 + 30);
         }
         return 'rgb(' +getColor()+ ',' +getColor()+ ',' +getColor()+ ');';
     }
@@ -233,6 +245,9 @@ CONTROL.responses = (function() {
             categories = doc.querySelector('.' + res.type);
 
         user.data.categories[res.type].push(res.cat);
+        console.log(user.data);
+        CONTROL.initialize.selectLoadSch(user.data);
+
         categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
                                                                       {costs: res.cat});
     }

@@ -236,8 +236,7 @@
                         <div class="indentation">
                             <div class="history-filter">
                                 <select class="history_sch_select">
-                                    <option>счет 1</option>
-                                    <option>счет 2</option>
+                                    <!-- SLOT FOR ACCOUNTS ON HISTORY TAB  -->
                                 </select>
                                 <label><input type="radio" name="operation" checked>Все операции</label>
                                 <label><input type="radio" name="operation">Доход</label>
@@ -333,6 +332,10 @@
 
     <script type="text/template" class="cats">
         <div  style="background-color: {{rgb}}; width: {{proc}}%;" class="categs">{{category}} {{price}}</div>
+    </script>
+
+    <script type="text/template" class="schHist">
+        <option>{{histSch}}</option>
     </script>
 
         <script type="text/template" class="editCatForm">
