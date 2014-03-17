@@ -75,11 +75,13 @@
 .statistics__ul {
     list-style-type: none;
     text-align: center;
+    overflow: hidden;
 }
 
 .statistics__ul__li {
     text-align: center;
-    display: inline-block;
+    margin: 0 5px;
+    float:left;
     border-radius: 4px;
     box-shadow: 2px 2px 10px #AFAFAF, -2px -2px 10px #AFAFAF;
     width: 49%;
@@ -156,7 +158,9 @@
 }
 
 .filters__inputs {
-    text-align: left;
+    text-align: center;
+    width: 300px;
+    margin: 5px auto;
 }
 
 .cat {
@@ -209,7 +213,7 @@
 .form__send__add, .form__send__cancel,
 .form__card__add, .form__card__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
-.apply_filter1, .apply_filter2, .buttonValuta, .butRenameCat,
+.apply_filter1, .buttonValuta, .butRenameCat,
 .butRemoveHist {
     display: inline-block;
     text-align: center;
@@ -224,8 +228,8 @@
     box-shadow: 0px 2px 5px #949494;
 }
 
-.apply_filter1, .apply_filter2 {
-    margin: 5px 3px;
+.apply_filter1 {
+    margin: 5px auto;
     display: block;
 }
 
