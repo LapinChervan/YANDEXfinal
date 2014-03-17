@@ -7,13 +7,14 @@ CONTROL.user = {
 
 CONTROL.initialize = (function() {
     var doc = document,
+        user = CONTROL.user,
         initMethods = {
             categories: function(data) {
                 var tmp = doc.querySelector('.useraccounts').innerHTML,
                     key, html;
 
-                CONTROL.user.login = data.name;
-                CONTROL.user.mainCurr = data.mainCurr;
+                user.login = data.name;
+                user.mainCurr = data.mainCurr;
 
                 for (key in data.categories) {
                     html = '';
