@@ -30,7 +30,7 @@ CONTROL.initialize = (function() {
                 var  doc = document,
                      objKey, objKey2, objKey3,
                      html = '',
-                     history = data.history,
+                     history = data.history ? data.history : data,
                      thisData = {};
 
                 for (objKey in history) {
@@ -52,7 +52,8 @@ CONTROL.initialize = (function() {
                                 thisData['ico'] = 'img/send.png';
                                 break;
                         }
-                        thisData.mainCurr = data.mainCurr;
+                        if (data.mainCurr) {
+                        thisData.mainCurr = data.mainCurr;}
                         html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
                     }
 
@@ -60,7 +61,19 @@ CONTROL.initialize = (function() {
                 doc.querySelector('.historyUl').innerHTML = html;
             }
         };
-    return function (data) {
+    return  {
+        init: function(data) {
+            var key,
+                methods = initMethods;
+
+            for (var key in methods) {
+                //  setTimeout(function() {
+                methods[key](data);
+                //  }, 150);
+            }
+        },
+        history: initMethods.history
+    }/*function (data) {
         var key,
             methods = initMethods;
 
@@ -69,7 +82,7 @@ CONTROL.initialize = (function() {
                 methods[key](data);
           //  }, 150);
         }
-    }
+    }*/
 })();
 
 CONTROL.tools = (function() {
@@ -370,7 +383,7 @@ CONTROL.access = (function() {
 	function showContent(responseData) {
         user.data  = responseData;
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
-        CONTR.initialize(responseData);
+        CONTR.initialize.init(responseData);
 
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
