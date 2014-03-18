@@ -258,7 +258,6 @@ CONTROL.responses = (function() {
             categories = doc.querySelector('.' + res.type);
 
         user.data.categories[res.type].push(res.cat);
-        console.log(user.data);
         CONTROL.initialize.selectLoadSch(user.data);
 
         categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
@@ -266,19 +265,28 @@ CONTROL.responses = (function() {
     }
 
     function renameCategory(res) {
-        var parent = doc.querySelector('.' + res.type);
+        var parent = doc.querySelector('.' + res.type),
+            parentHistSel = doc.querySelector('.history_sch_select'),
+            cat = user.data.categories[res.type];
+
+        cat[(cat.indexOf(res.old, 0))] = res.new;
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.old + '</div>', '<div>' + res.new + '</div>');
+        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.old + '</option>', '<option>' + res.new + '</option>');
     }
 
     function removeCategory(res) {
-        alert(res);
         var parent = doc.querySelector('.' + res.type),
+            parentHistSel = doc.querySelector('.history_sch_select'),
             html = parent.innerHTML,
-            indexStart, subs;
+            indexStart, subs,
+            cat = user.data.categories[res.type],
+
+        cat = cat.splice(cat.indexOf(res.cat, 0), 1);
+        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.cat + '</option>','');
 
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
-                                      html.indexOf('<div>', indexStart + 1));
+                                     html.indexOf('<div>', indexStart + 1));
         parent.innerHTML = html.replace(subs, '');
     }
 
