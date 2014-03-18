@@ -104,6 +104,16 @@ CONTROL.tools = (function() {
         return Date.parse(new Date(arr[2],arr[1],arr[0]));
     }
 
+    function findSelectedInput(collection, option) {
+        var i,
+            length = collection.length;
+        for (i = 0; i < length; i++) {
+            if (collection[i][option]) {
+                return collection[i];
+            }
+        }
+    }
+
     function isBiggest(numb, biggest) {
         return (numb > biggest) ? numb : biggest;
     }
@@ -147,7 +157,8 @@ CONTROL.tools = (function() {
         getDateMs: getDateMs,
         isBiggest: isBiggest,
         randomColor: randomColor,
-        showDiagram: showDiagram
+        showDiagram: showDiagram,
+        findSelectedInput: findSelectedInput
     }
 })();
 
@@ -233,7 +244,8 @@ CONTROL.requests = (function() {
         auth: auth,
         newOper: newOper,
         removeOper: removeOper,
-        filterDate: filterDate
+        filterDate: filterDate,
+        filterHistory: filterHistory
     }
 })();
 
@@ -413,6 +425,19 @@ CONTROL.access = (function() {
                               response.filterDate);
             }
         }, false);
+        //фильтр история
+        //TODO переделать шаблон, прокси..
+        doc.querySelector('.add_cat_sch.marginL5').addEventListener('click',function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement,
+                parent = target.parentNode,
+                options = parent.querySelectorAll('option'),
+                radio = parent.querySelectorAll('input[type=radio'),
+                activeOption = tools.findSelectedInput(options, 'selected'),
+                activeRadio = tools.findSelectedInput(radio, 'checked');
+            ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value), CONTR.initialize.history);
+
+        });
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
         doc.querySelector('.first__ul__button').addEventListener('click', function(e) {
