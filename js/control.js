@@ -1,17 +1,13 @@
 'use strict'
 var CONTROL = {};
 
-CONTROL.user = {
-    login: ''
-};
+CONTROL.user = {};
 
 CONTROL.initialize = (function() {
-    var CONTR = CONTROL,
-        doc = document,
+    var doc = document,
+        CONTR = CONTROL,
         user = CONTR.user,
-        filter = CONTR.responses,
         initMethods = {
-
             categories: function(data) {
                 var tmp = doc.querySelector('.useraccounts').innerHTML,
                     key, html;
@@ -35,10 +31,9 @@ CONTROL.initialize = (function() {
             },
 
             history: function(data) {
-                var  doc = document,
-                     objKey, objKey2, objKey3,
+                var  objKey, objKey2, objKey3,
                      html = '',
-                     history = data.history ? data.history : data,
+                     history = data.history ? data.history : data,  // ?
                      thisData = {};
 
                 for (objKey in history) {
@@ -61,7 +56,8 @@ CONTROL.initialize = (function() {
                                 break;
                         }
                         if (data.mainCurr) {
-                        thisData.mainCurr = data.mainCurr;}
+                            thisData.mainCurr = data.mainCurr;
+                        }
                         html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
                     }
 
@@ -76,33 +72,22 @@ CONTROL.initialize = (function() {
                 accounts.forEach(function(elem) {
                     html = html + Mustache.render(doc.querySelector('.schHist').innerHTML, {'histSch': elem});
                 });
-
                 doc.querySelector('.history_sch_select').innerHTML = html;
             }
         };
+
     return  {
         init: function(data) {
             var key,
                 methods = initMethods;
 
             for (var key in methods) {
-                //  setTimeout(function() {
                 methods[key](data);
-                //  }, 150);
             }
         },
         history: initMethods.history,
         selectLoadSch: initMethods.selectLoadSch
-    }/*function (data) {
-        var key,
-            methods = initMethods;
-
-        for (var key in methods) {
-          //  setTimeout(function() {
-                methods[key](data);
-          //  }, 150);
-        }
-    }*/
+    }
 })();
 
 CONTROL.tools = (function() {
