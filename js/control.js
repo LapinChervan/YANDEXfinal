@@ -6,9 +6,12 @@ CONTROL.user = {
 };
 
 CONTROL.initialize = (function() {
-    var doc = document,
-        user = CONTROL.user,
+    var CONTR = CONTROL,
+        doc = document,
+        user = CONTR.user,
+        filter = CONTR.responses,
         initMethods = {
+
             categories: function(data) {
                 var tmp = doc.querySelector('.useraccounts').innerHTML,
                     key, html;
@@ -25,6 +28,10 @@ CONTROL.initialize = (function() {
                     doc.querySelector('.' + key).innerHTML = html;
                 }
                 CONTROL.responses.rebuildCurrency(data);
+            },
+
+            statistics: function(data) {
+                CONTROL.responses.filterDate(data.history);
             },
 
             history: function(data) {
