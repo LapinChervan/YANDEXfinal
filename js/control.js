@@ -275,20 +275,19 @@ CONTROL.responses = (function() {
             parentHistSel = doc.querySelector('.history_sch_select'),
             html = parent.innerHTML,
             indexStart, subs,
-            cat = user.data.categories[res.type],
+            cat = user.data.categories[res.type];
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
         parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.cat + '</option>','');
 
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
-                                     html.indexOf('<div>', indexStart + 1));
+                          html.indexOf('<div>', indexStart + 1));
         parent.innerHTML = html.replace(subs, '');
     }
 
     function newOper(res) {
-        var doc = document,
-            parent = doc.querySelector('.historyUl');
+        var parent = doc.querySelector('.historyUl');
 
         switch (res.type) {
             case 'gain':
@@ -332,11 +331,10 @@ CONTROL.responses = (function() {
             doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.mainCurr;
         }
 
-        CONTROL.tools.showDiagram(diagram);
+        CONTR.tools.showDiagram(diagram);
     }
 
     function removeOper(res) {
-        console.log(res);
         var parent = doc.querySelector('.historyUl'),
             html = parent.innerHTML,
             indexStart,
@@ -344,12 +342,11 @@ CONTROL.responses = (function() {
 
         indexStart = html.indexOf(res);
         subs = html.slice(html.lastIndexOf('<li>', indexStart),
-            html.indexOf('</li>', indexStart) + 5);
+                          html.indexOf('</li>', indexStart) + 5);
 
-        alert(subs);
-        parent.innerHTML = html.replace(subs, '');
+        html = html.replace(subs, '');
     }
-
+    //LOOK DOWN....................
     function rebuildCurrency (obj) {
         var mainCurrWrap = doc.querySelector('.currency-radio'),
             mainCurr = obj.mainCurr,
