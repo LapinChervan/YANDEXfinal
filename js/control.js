@@ -81,7 +81,7 @@ CONTROL.initialize = (function() {
             var key,
                 methods = initMethods;
 
-            for (var key in methods) {
+            for (key in methods) {
                 methods[key](data);
             }
         },
@@ -97,11 +97,13 @@ CONTROL.tools = (function() {
     }
 
     function findSelectedInput(collection, option) {
-        var i,
-            length = collection.length;
+        var length = collection.length,
+            i, item;
+
         for (i = 0; i < length; i++) {
-            if (collection[i][option]) {
-                return collection[i];
+            item = collection[i];
+            if (item[option]) {
+                return item;
             }
         }
     }
@@ -156,6 +158,7 @@ CONTROL.tools = (function() {
 
 CONTROL.reload = (function() {
     var doc = document;
+
     function loadSelectForm(data, formType) {
         var html, key;
 
@@ -174,6 +177,7 @@ CONTROL.reload = (function() {
             }
         }
     }
+
     return {
         loadSelectForm: loadSelectForm
     }
@@ -243,14 +247,14 @@ CONTROL.requests = (function() {
 
 CONTROL.responses = (function() {
     var doc = document,
-        user = CONTROL.user;
+        CONTR = CONTROL,
+        user = CONTR.user;
 
     function newCategory(res) {
-        var doc = document,
-            categories = doc.querySelector('.' + res.type);
+        var categories = doc.querySelector('.' + res.type);
 
         user.data.categories[res.type].push(res.cat);
-        CONTROL.initialize.selectLoadSch(user.data);
+        CONTR.initialize.selectLoadSch(user.data);
 
         categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
                                                                       {costs: res.cat});
