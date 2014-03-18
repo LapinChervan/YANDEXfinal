@@ -431,12 +431,9 @@ CONTROL.access = (function() {
             var event = e || window.event,
                 target = event.target || event.srcElement,
                 parent = target.parentNode,
-                options = parent.querySelectorAll('option'),
-                radio = parent.querySelectorAll('input[type=radio'),
-                activeOption = tools.findSelectedInput(options, 'selected'),
-                activeRadio = tools.findSelectedInput(radio, 'checked');
+                activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
+                activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio'), 'checked');
             ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value), CONTR.initialize.history);
-
         });
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
