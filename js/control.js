@@ -716,7 +716,7 @@ CONTROL.layer = (function() {
             parent: document.body,
             clsOpacityLayer: 'modal',
             clsContentLayer: 'layer',
-            content: undefined
+            content: ''
         }
     }
 
