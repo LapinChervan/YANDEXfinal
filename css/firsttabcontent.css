@@ -159,7 +159,7 @@
 .filters__inputs {
     text-align: center;
     width: 300px;
-    margin: 5px 0 0 848px;
+    margin: 5px 0 0 752px;
 }
 
 .categs {
@@ -188,7 +188,7 @@
 .form__send__add, .form__send__cancel,
 .form__card__add, .form__card__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
-.apply_filter1, .buttonValuta, .butRenameCat,
+.apply_filter1, .apply_filter2, .buttonValuta, .butRenameCat,
 .butRemoveHist {
     display: inline-block;
     text-align: center;
@@ -203,7 +203,7 @@
     box-shadow: 0px 2px 5px #949494;
 }
 
-.apply_filter1 {
+.apply_filter1, .apply_filter2 {
     margin: 5px auto;
 }
 
@@ -214,7 +214,7 @@
 .form__gain__add__filters:hover, .form__gain__cancel__filters:hover,
 .form__costs__add__filters:hover, .form__costs__cancel__filters:hover,
 .add_cat_sch:hover, .add_cat_plus:hover, .add_cat_minus:hover,
-.apply_filter1:hover, .apply_filter2:hover,
+.apply_filter1:hover, .apply_filter2:hover, .apply_filter2:hover,
 .first__ul__li__button:hover, .buttonValuta:hover,
 .butRenameCat:hover, .butRemoveHist:hover {
     box-shadow: -1px -1px 5px #949494, 3px 3px 5px #949494;
@@ -227,7 +227,7 @@
 .form__gain__add__filters:active, .form__gain__cancel__filters:active,
 .form__costs__add__filters:active, .form__costs__cancel__filters:active,
 .add_cat_sch:active, .add_cat_plus:active, .add_cat_minus:active,
-.apply_filter1:active, .apply_filter2:active, 
+.apply_filter1:active, .apply_filter2:active, .apply_filter2:active,
 .first__ul__li__button:active, .buttonValuta:active,
 .butRenameCat:active, .butRemoveHist:active {
     box-shadow: inset 1px 2px 2px #949494;

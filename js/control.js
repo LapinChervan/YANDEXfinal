@@ -96,6 +96,11 @@ CONTROL.tools = (function() {
         return Date.parse(new Date(arr[2],arr[1],arr[0]));
     }
 
+    function getDateN(day) {
+        var date = new Date();
+        return day + '.' + date.getMonth() + '.' + date.getFullYear();
+    }
+
     function findSelectedInput(collection, option) {
         var length = collection.length,
             i, item;
@@ -149,6 +154,7 @@ CONTROL.tools = (function() {
 
     return {
         getDateMs: getDateMs,
+        getDateN: getDateN,
         isBiggest: isBiggest,
         randomColor: randomColor,
         showDiagram: showDiagram,
@@ -210,8 +216,8 @@ CONTROL.requests = (function() {
         return host + 'reg?login=' + user + '&password=' + password;
     }
 
-    function auth(user, password) {
-        return host + 'auth?login=' + user + '&password=' + password;
+    function auth(user, password, start, end) {
+        return host + 'auth?login=' + user + '&password=' + password + '&start=' + start + '&end=' + end;
     }
 
     function newOper(user, type, data) {
@@ -425,6 +431,12 @@ CONTROL.access = (function() {
                 ajax.toServer(request.filterDate(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value)),
                               response.filterDate);
             }
+
+            if (target.classList.contains('apply_filter2')) {
+                event.preventDefault();
+                ajax.toServer(request.filterDate(user.login, tools.getDateMs(tools.getDateN('01')), tools.getDateMs(tools.getDateN('30'))),
+                    response.filterDate);
+            }
         }, false);
         //фильтр история
         //TODO переделать шаблон, прокси..
@@ -622,7 +634,7 @@ CONTROL.access = (function() {
 
     function authorization(user, password) {
         if (user && password) {
-            ajax.toServer(request.auth(user, password), showContent);
+            ajax.toServer(request.auth(user, password, tools.getDateMs(tools.getDateN('01')), tools.getDateMs(tools.getDateN('30'))), showContent);
         }
         return false;
     }

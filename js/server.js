@@ -12,7 +12,7 @@ http.createServer(function(req, res) {
         },
 
         '/auth': function() {
-            requests.auth(data.query.login, data.query.password, res);
+            requests.auth(data.query.login, data.query.password, data.query.start, data.query.end, res);
         },
 
         '/currency': function() {
