@@ -17,7 +17,7 @@ http.createServer(function(req, res) {
 
         '/currency': function() {
             if (data.query.curr) {
-                requests.changeCurr(data.query.login, data.query.curr, res);
+                requests.changeCurr(data.query.login, data.query.curr, data.query.price, res);
             }
             else {
                 requests.setMainCurr(data.query.login, data.query.valuta, res);

@@ -16,6 +16,7 @@ doc.getElementsByClassName('header__reg')[0].addEventListener('click', function(
         layer.destroyLayer();
 		access.registration(form.getElementsByClassName('input_login_reg')[0].value,
                             form.getElementsByClassName('input_login_reg')[1].value);
+        CONTROL.layer.destroyLayer();
 	};
 }, false);
 
@@ -36,6 +37,7 @@ doc.getElementsByClassName('header__auth')[0].addEventListener('click', function
         //TODO поправить дейтпикеры
        // $('.dateFrom').datepicker();
       //  $('.dateTo').datepicker();
+        CONTROL.layer.destroyLayer();
 	};
 }, false);
 

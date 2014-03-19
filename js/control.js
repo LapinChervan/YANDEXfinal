@@ -215,8 +215,8 @@ CONTROL.reload = (function() {
 CONTROL.requests = (function() {
     var host = 'http://localhost:1111/';
 
-    function changeMainCurr(user, curr) {
-        return host + 'currency?login=' + user + '&curr=' + curr;
+    function changeMainCurr(user, curr, price) {
+        return host + 'currency?login=' + user + '&curr=' + curr + '&price=' + price;
     }
 
     function changeRates(user, currData) {
@@ -460,6 +460,7 @@ CONTROL.access = (function() {
 
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
+
                 ajax.toServer(request.filterDate(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value)),
                               response.filterDate);
             }
@@ -617,8 +618,12 @@ CONTROL.access = (function() {
         }, false);
 
         document.querySelector('.currency-radio').addEventListener('change', function() {
-            var target = event.target || event.srcElement;
-            CONTROL.ajax.toServer(request.changeMainCurr(user.login, target.value), CONTR.responses.rebuildCurrency);
+            var target = event.target || event.srcElement,
+                price;
+
+            price = +doc.querySelector('.curr-value input[name=' + target.value + ']').value;
+
+            CONTROL.ajax.toServer(request.changeMainCurr(user.login, target.value, price), CONTR.responses.rebuildCurrency);
         });
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
