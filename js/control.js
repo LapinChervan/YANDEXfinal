@@ -51,12 +51,11 @@ CONTROL.initialize = (function() {
                                 thisData['ico'] = 'img/send.png';
                                 break;
                         }
-                        if (data.mainCurr) {
-                            thisData.mainCurr = data.mainCurr;
-                        }
+
+                        thisData.mainCurr = user.mainCurr;
+
                         html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
                     }
-
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
                 CONTROL.responses.filterDate(history);
@@ -150,13 +149,22 @@ CONTROL.tools = (function() {
         }
     }
 
+    function isEmptyOne(elem) {
+        if (elem.value.trim().length === 0) {
+            elem.placeholder = 'Ошибка ввода';
+            return false;
+        }
+        return true;
+    }
+
     return {
         getDateMs: getDateMs,
         getDateN: getDateN,
         isBiggest: isBiggest,
         randomColor: randomColor,
         showDiagram: showDiagram,
-        findSelectedInput: findSelectedInput
+        findSelectedInput: findSelectedInput,
+        isEmptyOne: isEmptyOne
     }
 })();
 
@@ -511,8 +519,11 @@ CONTROL.access = (function() {
                 for (key in types) {
                     if (target.classList.contains(key)) {
                         txtInput = doc.querySelector('.' + types[key][0]);
-                        ajax.toServer(request.newCategory(user.login, types[key][1], txtInput.value), response.newCategory);
-                        txtInput.value = '';
+
+                        if (CONTROL.tools.isEmptyOne(txtInput)) {
+                            ajax.toServer(request.newCategory(user.login, types[key][1], txtInput.value), response.newCategory);
+                            txtInput.value = '';
+                        }
                     }
                 }
             }
