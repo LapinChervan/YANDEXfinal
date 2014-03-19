@@ -64,10 +64,11 @@ CONTROL.initialize = (function() {
 
             selectLoadSch: function(data) {
                 var accounts = data.categories.accounts,
-                    html = '';
+                    template = doc.querySelector('.schHist').innerHTML,
+                    html = Mustache.render(template, {'histSch': 'Все счета', 'value': 'all'});;
 
                 accounts.forEach(function(elem) {
-                    html = html + Mustache.render(doc.querySelector('.schHist').innerHTML, {'histSch': elem});
+                    html = html + Mustache.render(template, {'histSch': elem, 'value': elem});
                 });
                 doc.querySelector('.history_sch_select').innerHTML = html;
             }
