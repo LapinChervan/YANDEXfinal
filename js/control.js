@@ -26,10 +26,6 @@ CONTROL.initialize = (function() {
                 CONTROL.responses.rebuildCurrency(data);
             },
 
-            statistics: function(data) {
-                CONTROL.responses.filterDate(data.history);
-            },
-
             history: function(data) {
                 var  objKey, objKey2, objKey3,
                      html = '',
@@ -63,6 +59,7 @@ CONTROL.initialize = (function() {
 
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
+                CONTROL.responses.filterDate(history);
             },
 
             selectLoadSch: function(data) {
@@ -440,7 +437,7 @@ CONTROL.access = (function() {
         }, false);
         //фильтр история
         //TODO переделать шаблон, прокси..
-        doc.querySelector('.add_cat_sch.marginL5').addEventListener('click',function(e) {
+        doc.querySelector('.add_cat_sch.marginL5').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
                 parent = target.parentNode,
