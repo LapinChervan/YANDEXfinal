@@ -39,6 +39,15 @@
     padding: 2px 5px;
 }
 
+.more_history {
+    width: 100px;
+}
+
+.more {
+    width: 120px;
+    float: right;
+}
+
 .history-filter label {
     margin: 5px;
 }
