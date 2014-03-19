@@ -317,7 +317,12 @@
                                 <img class="statistics__header_img" src="img/stat.png" alt="">
                             </div>
                             <div class="currency-wrap">
-                                <div class="currency-radio"></div>
+                                <div class="currency-radio">
+                                    <label><input type="radio" name="valuta" value=uah>uah</label>
+                                    <label><input type="radio" name="valuta" value="rub">rub</label>
+                                    <label><input type="radio" name="valuta" value="usd">usd</label>
+                                    <label><input type="radio" name="valuta" value="eur">eur</label>
+                                </div>
                                 <div class="currency-radio"></div>
                                 <div class="buttonValuta">Сохранить</div>
                             </div>
@@ -468,10 +473,6 @@
                 <a class="form__card__add" href="">Добавить</a>
             </div>
         </div>
-    </script>
-
-    <script type="text/template" class="template_value">
-        <label><input type="radio" name="valuta" value={{value}}>{{value}}</label>
     </script>
 
     <script type="text/template" class="template_curr">
