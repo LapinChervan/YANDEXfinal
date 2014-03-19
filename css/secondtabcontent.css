@@ -32,7 +32,7 @@
     box-shadow: 0 0 10px rgba(18, 46, 30, 0.5);
 }
 
-.history-filter select {
+.history_sch_select {
     width: 150px;
     margin: 0 5px 0 5px;
     vertical-align: middle;
@@ -41,6 +41,11 @@
 
 .history-filter label {
     margin: 5px;
+}
+
+.historyCount {
+    width: 60px;
+    float:right;
 }
 
 .history-filter label input {
