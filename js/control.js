@@ -38,6 +38,7 @@ CONTROL.initialize = (function() {
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
+                document.querySelector('input[type=radio][value=' + data.mainCurr + ']').checked = true
                 CONTROL.responses.rebuildCurrency(data);
             },
 
@@ -391,22 +392,16 @@ CONTROL.responses = (function() {
     }
     //LOOK DOWN....................
     function rebuildCurrency (obj) {
-        var mainCurrWrap = doc.querySelector('.currency-radio'),
+        var mainCurrWrap = doc.querySelectorAll('.currency-radio')[1],
             mainCurr = obj.mainCurr,
             currency = obj.currency[mainCurr],
-            templateRadio = doc.querySelector('.template_value').innerHTML,
             templateInput = doc.querySelector('.template_curr').innerHTML,
-            currentCurr = Mustache.render(templateRadio, {value: mainCurr}),
-            index = currentCurr.indexOf('input') + 5,
             radio, key, input = '';
 
-        radio = currentCurr.slice(0, index) + ' checked' + currentCurr.slice(index, currentCurr.length);
         for (key in currency) {
-            radio = radio + Mustache.render(templateRadio, {value: key});
             input = input + Mustache.render(templateInput, {valuta: key, count: currency[key], main: mainCurr});
         }
-        mainCurrWrap.innerHTML = radio;
-        mainCurrWrap.nextElementSibling.innerHTML = input;
+        mainCurrWrap.innerHTML = input;
     }
 
     return {
