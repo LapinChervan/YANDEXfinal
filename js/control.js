@@ -10,16 +10,31 @@ CONTROL.initialize = (function() {
         initMethods = {
             categories: function(data) {
                 var tmp = doc.querySelector('.useraccounts').innerHTML,
-                    key, html;
+                    key, html,
+                    typeImg;
 
                 user.login = data.name;
                 user.mainCurr = data.mainCurr;
 
                 for (key in data.categories) {
+                    switch (key) {
+                        case 'gain':
+                            typeImg = 'img/dohod.png';
+                            break;
+
+                        case 'costs':
+                            typeImg = 'img/rashod.png';
+                            break;
+
+                        case 'accounts':
+                            typeImg = 'img/send.png';
+                            break;
+                    }
+
                     html = '';
                     data.categories[key].
                         forEach(function(elem) {
-                            html += Mustache.render(tmp, {costs: elem});
+                            html += Mustache.render(tmp, {costs: elem, img: typeImg});
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
@@ -95,7 +110,7 @@ CONTROL.tools = (function() {
 
     function getDateN(day) {
         var date = new Date();
-        return day + '.' + date.getMonth() + '.' + date.getFullYear();
+        return day + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
     }
 
     function findSelectedInput(collection, option) {
@@ -154,6 +169,7 @@ CONTROL.tools = (function() {
             elem.placeholder = 'Ошибка ввода';
             return false;
         }
+        elem.placeholder = 'Введите название';
         return true;
     }
 
@@ -263,13 +279,28 @@ CONTROL.responses = (function() {
         user = CONTR.user;
 
     function newCategory(res) {
-        var categories = doc.querySelector('.' + res.type);
+        var categories = doc.querySelector('.' + res.type),
+            typeImg;
+
+            switch (res.type) {
+                case 'gain':
+                    typeImg = 'img/dohod.png';
+                    break;
+
+                case 'costs':
+                    typeImg = 'img/rashod.png';
+                    break;
+
+                case 'accounts':
+                    typeImg = 'img/send.png';
+                    break;
+            }
 
         user.data.categories[res.type].push(res.cat);
         CONTR.initialize.selectLoadSch(user.data);
 
         categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
-                                                                      {costs: res.cat});
+                                                                      {costs: res.cat, img: typeImg});
     }
 
     function renameCategory(res) {
