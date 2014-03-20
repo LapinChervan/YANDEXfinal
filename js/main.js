@@ -4,33 +4,27 @@ var	doc = document,
 
 doc.querySelector('.allbutton').addEventListener('click', function(e) {
     var event = e || window.event,
-        target = event.target || event.srcElement;
+        target = event.target || event.srcElement,
+        formType = {
+            'auth': access.authorization,
+            'reg': access.registration
+        },
+        key;
 
-    if (target.classList.contains('header__auth__button')) {
-        event.stopPropagation();
-        layer.createLayer({content: doc.getElementById('form-login').innerHTML});
+    for (key in formType) {
+        if (target.classList.contains('header__' + key + '__button')) {
+            event.stopPropagation();
+            layer.createLayer({content: doc.querySelector('.form-' + key).innerHTML});
 
-        doc.querySelector('.log_in').addEventListener('click', function(e) {
-            var event = e || window.event;
-            event.preventDefault();
+            doc.querySelector('.log_' + key).addEventListener('click', function(e) {
+                var event = e || window.event;
+                event.preventDefault();
 
-            access.authorization(doc.querySelectorAll('.input_login_reg')[0].value,
-                                doc.querySelectorAll('.input_login_reg')[1].value);
-            CONTROL.layer.destroyLayer();
-        }, false);
-    }
-
-    if (target.classList.contains('header__reg__button')) {
-        event.stopPropagation();
-        layer.createLayer({content: doc.getElementById('form-reg').innerHTML});
-
-        doc.querySelector('.log_reg').addEventListener('click', function(e) {
-            var event = e || window.event;
-            event.preventDefault();
-
-            access.registration(doc.querySelectorAll('.input_login_reg')[0].value,
-                doc.querySelectorAll('.input_login_reg')[1].value);
-            CONTROL.layer.destroyLayer();
-        }, false);
+                formType[key](doc.querySelectorAll('.input_login_reg')[0].value,
+                    doc.querySelectorAll('.input_login_reg')[1].value);
+                CONTROL.layer.destroyLayer();
+            }, false);
+            break;
+        }
     }
 }, false);

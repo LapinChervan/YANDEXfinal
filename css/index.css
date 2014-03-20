@@ -23,7 +23,7 @@
     text-align: center;
 }
 
-.log_in, .log_reg {
+.log_auth, .log_reg {
     margin: 2px auto;
     display: block;
     height: 35px;
@@ -103,7 +103,7 @@ body {
     border: 1px solid #2189C2;
 }
 
-.header__auth__button, .log_in {
+.header__auth__button, .log_auth {
     background: #60B149; 
     border: 1px solid #60B149;
 }
@@ -126,16 +126,16 @@ body {
 /*-----------------------------------------------*/
 
 /*BUTTON AUTH*/
-.header__auth__button:hover, .log_in:hover {
+.header__auth__button:hover, .log_auth:hover {
     box-shadow: 1px 1px 20px #C2F9BC, -1px -1px 20px #C2F9BC;
     border: 1px solid #60B149;
 }
 
-.header__auth__button:focus, .log_in:focus {
+.header__auth__button:focus, .log_auth:focus {
     border: 1px solid #E2FFCB;
 }
 
-.header__auth__button:active, .log_in:active {
+.header__auth__button:active, .log_auth:active {
     background: #43942C;
     box-shadow: inset 1px 3px 12px #424B49;
     color: #D0D6DA;
