@@ -22,7 +22,7 @@ doc.querySelector('.allbutton').addEventListener('click', function(e) {
 
                 formType[key](doc.querySelectorAll('.input_login_reg')[0].value,
                     doc.querySelectorAll('.input_login_reg')[1].value);
-                CONTROL.layer.destroyLayer();
+                layer.destroyLayer();
             }, false);
             break;
         }
