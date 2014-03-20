@@ -13,9 +13,6 @@ CONTROL.initialize = (function() {
                     key, html,
                     typeImg;
 
-                user.login = data.name;
-                user.mainCurr = data.mainCurr;
-
                 for (key in data.categories) {
                     switch (key) {
                         case 'gain':
@@ -38,14 +35,15 @@ CONTROL.initialize = (function() {
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
-                document.querySelector('input[type=radio][value=' + data.mainCurr + ']').checked = true;
+                doc.querySelector('input[type=radio][value=' + data.mainCurr + ']').checked = true;
                 CONTROL.responses.rebuildCurrency(data);
             },
 
             history: function(data) {
                 var  objKey, objKey2, objKey3,
+                     tmp = doc.querySelector('.history').innerHTML,
                      html = '',
-                     history = data.history ? data.history : data,  // ?
+                     history = data.history ? data.history : data,
                      thisData = {};
 
                 for (objKey in history) {
@@ -67,10 +65,8 @@ CONTROL.initialize = (function() {
                                 thisData['ico'] = 'img/send.png';
                                 break;
                         }
-
-                        thisData.mainCurr = user.mainCurr;
-
-                        html = html + Mustache.render(doc.querySelector('.history').innerHTML, thisData);
+                        thisData.mainCurr = user.data.mainCurr;
+                        html = html + Mustache.render(tmp, thisData);
                     }
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
@@ -79,11 +75,11 @@ CONTROL.initialize = (function() {
 
             selectLoadSch: function(data) {
                 var accounts = data.categories.accounts,
-                    template = doc.querySelector('.schHist').innerHTML,
-                    html = Mustache.render(template, {'histSch': 'Все счета', 'value': 'all'});
+                    tmp = doc.querySelector('.schHist').innerHTML,
+                    html = Mustache.render(tmp, {'histSch': 'Все счета', 'value': 'all'});
 
                 accounts.forEach(function(elem) {
-                    html = html + Mustache.render(template, {'histSch': elem, 'value': elem});
+                    html = html + Mustache.render(tmp, {'histSch': elem, 'value': elem});
                 });
                 doc.querySelector('.history_sch_select').innerHTML = html;
             }
@@ -328,7 +324,7 @@ CONTROL.responses = (function() {
             cat = user.data.categories[res.type];
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
-        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.cat + '</option>','');
+        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.cat + '</option>', '');
 
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
@@ -352,7 +348,7 @@ CONTROL.responses = (function() {
                 res['ico'] = 'img/send.png';
                 break;
         }
-        res.mainCurr = user.mainCurr;
+        res.mainCurr = user.data.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
     }
 
@@ -454,10 +450,10 @@ CONTROL.access = (function() {
 
 	function showContent(responseData) {
         user.data  = responseData;
-
+        console.log(user.data);
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize.init(responseData);
-
+        console.log(user.data);
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
             var event = e || window.event,
