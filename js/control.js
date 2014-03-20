@@ -645,6 +645,7 @@ CONTROL.access = (function() {
             src = parent.querySelector('.icoHist').src;
 
             switch (src.slice(src.lastIndexOf('/') + 1)) {
+
                 case 'dohod.png':
                     type = 'gain';
                     break;
