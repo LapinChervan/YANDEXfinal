@@ -734,9 +734,7 @@ CONTROL.layer = (function() {
         }
     }
 
-    document.addEventListener('click', function(){
-        destroyLayer();
-    });
+    document.addEventListener('click', destroyLayer);
 
     return {
         createLayer: createLayer,
