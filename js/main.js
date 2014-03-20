@@ -15,8 +15,8 @@ doc.querySelector('.header__reg').addEventListener('click', function(e) {
     btn = form.querySelectorAll('.input_login_reg');
 	log_reg.onclick = function() {
         layer.destroyLayer();
-		access.registration(form.btn[0].value,
-                            form.btn[1].value);
+		access.registration(btn[0].value,
+                            btn[1].value);
         CONTROL.layer.destroyLayer();
 	};
 }, false);
@@ -32,8 +32,8 @@ doc.querySelector('.header__auth').addEventListener('click', function(e) {
     btn = form.querySelectorAll('.input_login_reg');
 	log_in.onclick = function() {
         layer.destroyLayer();
-		access.authorization(form.btn[0].value,
-                             form.btn[1].value);
+		access.authorization(btn[0].value,
+                             btn[1].value);
 
         //TODO поправить дейтпикеры
        // $('.dateFrom').datepicker();
