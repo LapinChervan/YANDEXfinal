@@ -104,6 +104,10 @@ CONTROL.initialize = (function() {
 })();
 
 CONTROL.tools = (function() {
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
     function getDateMs(date) {
         var arr = date.split('.');
         return Date.parse(new Date(arr[2],arr[1],arr[0]));
@@ -175,6 +179,7 @@ CONTROL.tools = (function() {
     }
 
     return {
+        isNumber: isNumber,
         getDateMs: getDateMs,
         getDateN: getDateN,
         isBiggest: isBiggest,

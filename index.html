@@ -321,10 +321,10 @@
                             </div>
                             <div class="currency-wrap">
                                 <div class="currency-radio">
-                                    <label><input type="radio" name="valuta" value=uah>uah</label>
-                                    <label><input type="radio" name="valuta" value="rub">rub</label>
-                                    <label><input type="radio" name="valuta" value="usd">usd</label>
-                                    <label><input type="radio" name="valuta" value="eur">eur</label>
+                                    <label><input type="radio" name="valuta"  value="uah">uah</label>
+                                    <label><input type="radio" name="valuta"  value="rub">rub</label>
+                                    <label><input type="radio" name="valuta"  value="usd">usd</label>
+                                    <label><input type="radio" name="valuta"  value="eur">eur</label>
                                 </div>
                                 <div class="currency-radio"></div>
                                 <div class="buttonValuta">Сохранить</div>
@@ -481,7 +481,7 @@
     <script type="text/template" class="template_curr">
             <div class="curr-value">
                 <img src="img/{{valuta}}.png">
-                <span>1 {{valuta}} = <input name={{valuta}} class="value" type="text" value={{count}}> {{main}}</span>
+                <span>1 {{valuta}} = <input name={{valuta}} class="value" type="text" placeholder="Курс" value={{count}}> {{main}}</span>
             </div>
     </script>
 <script src="js/jquery-1.10.2.js"></script>
