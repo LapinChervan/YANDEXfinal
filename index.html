@@ -97,6 +97,7 @@
             </div>
         </div>
 
+        <!--ФОРМА АВТОРИЗАЦИИ-->
         <script type="text/template" class="form-auth">
             <div class="logreg">
                 <div class="login__inputs">
@@ -108,6 +109,7 @@
             </div>
         </script>
 
+        <!--ФОРМА РЕГИСТРАЦИИ-->
         <script type="text/template" class="form-reg">
             <div class="logreg">
                 <div class="login__inputs">
@@ -120,6 +122,7 @@
         </script>
     </div>
 
+    <!--ОСНОВНАЯ ЧАСТЬ-->
     <script type="text/template" id="user-form">
 
         <div class="main">
@@ -329,89 +332,97 @@
 
     </script>
 
+    <!--ЭЛЕМЕНТ ДИАГРАММЫ-->
     <script type="text/template" class="cats">
         <div  style="background-color: {{rgb}}; width: {{proc}}%;" class="categs">{{category}} {{price}}</div>
     </script>
 
+    <!--SELECT В HISTORY ДЛЯ ФИЛЬТРА-->
     <script type="text/template" class="schHist">
         <option value={{value}}>{{histSch}}</option>
     </script>
 
-        <script type="text/template" class="editCatForm">
-            <div class="formCatEdit">
-                <div>
-                    <img src="{{img}}" alt="">
-                </div>
-                <input class="editCatInput" type="text" placeholder="{{edit}}" value="" {{readonly}}>
-                <div>
-                    <a href="#" class="butRenameCat">{{caption}}</a>
-                </div>
-            </div>
-        </script>
-
-        <script type="text/template" class="remHistForm">
-            <div class="remHistForm">
-                <div>
-                    <img src="img/close2.png" alt="">
-                </div>
-                <span>Подтвердите удаление операции</span>
-                <div>
-                    <a href="#" class="butRemoveHist">Удалить</a>
-                </div>
-            </div>
-        </script>
-
-        <script type="text/template" class="useraccounts">
+    <!--ФОРМА РЕДАКТИРОВАНИЯ И УДАЛЕНИЯ КАТЕГОРИИ-->
+    <script type="text/template" class="editCatForm">
+        <div class="formCatEdit">
             <div>
-                <span class="edit"></span>
-                <span class="delete"></span>
-                <img src="{{img}}">
-                <div>{{costs}}</div>
+                <img src="{{img}}" alt="">
             </div>
-        </script>
-
-        <script type="text/template" class="history">
-            <li>
-                <span class="id" style="display: none;">{{id}}</span>
-                <span class="delete"></span>
-                <div>
-                    <img class="icoHist" src="{{ico}}" alt="">
-                </div>
-                <div class="history-content-wrap">
-                    <div class="date history-date">{{date}}</div>
-                    <div class="cat">{{cat}}</div>
-                </div>
-                <div class="comm history-content-wrap alignCenter">{{comm}}</div>
-                <div class="history-content-wrap alignRight">
-                    <div class="sch account">{{sch}}</div>
-                    <div class="sum color-send">{{sum}}</div>
-                    <span class="currency">{{mainCurr}}</span>
-                </div>
-            </li>
-        </script>
-
-        <script type="text/template" class="form__gain">
-            <div class="form__gain">
-                <div class="form__gain__header">
-                    <img src="img/dohod.png" alt="">
-                </div>
-                <div class="form__gain__blockInputs">
-                    <input placeholder="Дата операции" type="text">
-                    <select class="select__accounts">
-                        <option>{{accounts}}</option>
-                    </select>
-                    <select class="select__gain">
-                        <option>{{accounts}}</option>
-                    </select>
-                    <input placeholder="Сумма" type="text">
-                    <input placeholder="Комментарий" type="text">
-                </div>
-                <div class="form__gain__blockButton">
-                    <a class="form__gain__add" href="">Добавить</a>
-                </div>
+            <input class="editCatInput" type="text" placeholder="{{edit}}" value="" {{readonly}}>
+            <div>
+                <a href="#" class="butRenameCat">{{caption}}</a>
             </div>
-        </script>
+        </div>
+    </script>
 
+    <!--ФОРМА ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ТЕКУЩЕЙ ОПЕРАЦИИ-->
+    <script type="text/template" class="remHistForm">
+        <div class="remHistForm">
+            <div>
+                <img src="img/close2.png" alt="">
+            </div>
+            <span>Подтвердите удаление операции</span>
+            <div>
+                <a href="#" class="butRemoveHist">Удалить</a>
+            </div>
+        </div>
+    </script>
+
+    <!--БЛОК ДЛЯ КАТЕГОРИЙ (СЧЕТА / ДОХОДЫ / РАСХОДЫ)-->
+    <script type="text/template" class="useraccounts">
+        <div>
+            <span class="edit"></span>
+            <span class="delete"></span>
+            <img src="{{img}}">
+            <div>{{costs}}</div>
+        </div>
+    </script>
+
+    <!--БЛОК ДЛЯ ОПЕРАЦИИ (ДОХОД / РАСХОД / ПЕРЕВОД-->
+    <script type="text/template" class="history">
+        <li>
+            <span class="id" style="display: none;">{{id}}</span>
+            <span class="delete"></span>
+            <div>
+                <img class="icoHist" src="{{ico}}" alt="">
+            </div>
+            <div class="history-content-wrap">
+                <div class="date history-date">{{date}}</div>
+                <div class="cat">{{cat}}</div>
+            </div>
+            <div class="comm history-content-wrap alignCenter">{{comm}}</div>
+            <div class="history-content-wrap alignRight">
+                <div class="sch account">{{sch}}</div>
+                <div class="sum color-send">{{sum}}</div>
+                <span class="currency">{{mainCurr}}</span>
+            </div>
+        </li>
+    </script>
+
+    <!--ФОРМА НОВОГО ДОХОДА-->
+    <script type="text/template" class="form__gain">
+        <div class="form__gain">
+            <div class="form__gain__header">
+                <img src="img/dohod.png" alt="">
+            </div>
+            <div class="form__gain__blockInputs">
+                <input placeholder="Дата операции" type="text">
+                <select class="select__accounts">
+                    <option>{{accounts}}</option>
+                </select>
+                <select class="select__gain">
+                    <option>{{accounts}}</option>
+                </select>
+                <input placeholder="Сумма" type="text">
+                <input placeholder="Комментарий" type="text">
+            </div>
+            <div class="form__gain__blockButton">
+                <a class="form__gain__add" href="">Добавить</a>
+            </div>
+        </div>
+    </script>
+
+    <!--ФОРМА НОВОГО РАСХОДА-->
     <script type="text/template" class="form__costs">
         <div class="form__costs">
             <div class="form__costs__header">
@@ -434,6 +445,7 @@
         </div>
     </script>
 
+    <!--ФОРМА НОВОГО ПЕРЕВОДА-->
     <script type="text/template" class="form__send">
         <div class="form__send">
             <div class="form__send__header">
@@ -456,30 +468,19 @@
         </div>
     </script>
 
-    <script type="text/template" id="form__card">
-        <div class="form__card">
-            <div class="form__card__header">Счета</div>
-            <div class="form__card__blockInputs">
-            </div>
-            <div class="form__card__blockButton">
-                <a class="form__card__cancel" href="">Отмена</a>
-                <a class="form__card__add" href="">Добавить</a>
-            </div>
-        </div>
-    </script>
-
+    <!--ШАБЛОН ДЛЯ КУРСОВ ВАЛЮТ-->
     <script type="text/template" class="template_curr">
             <div class="curr-value">
                 <img src="img/{{valuta}}.png">
                 <span>1 {{valuta}} = <input name={{valuta}} class="value" type="text" placeholder="Курс" value={{count}}> {{main}}</span>
             </div>
     </script>
-<script src="js/jquery-1.10.2.js"></script>
-<script src="js/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="js/pollyfills.js"></script>
-<script src="js/mustache.js"></script>
-<script src="js/control.js"></script>
-<script src="js/main.js"></script>
 
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="js/pollyfills.js"></script>
+    <script src="js/mustache.js"></script>
+    <script src="js/control.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

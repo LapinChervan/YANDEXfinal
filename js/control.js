@@ -375,6 +375,7 @@ CONTROL.responses = (function() {
                 }
                 diagram[key][data.cat] += +data.sum;
             }
+            console.log(res);
             doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.data.mainCurr;
         }
 
