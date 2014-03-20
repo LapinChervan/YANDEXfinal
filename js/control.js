@@ -454,6 +454,7 @@ CONTROL.access = (function() {
 
 	function showContent(responseData) {
         user.data  = responseData;
+
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize.init(responseData);
 
