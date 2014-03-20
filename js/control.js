@@ -38,7 +38,7 @@ CONTROL.initialize = (function() {
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
-                document.querySelector('input[type=radio][value=' + data.mainCurr + ']').checked = true
+                document.querySelector('input[type=radio][value=' + data.mainCurr + ']').checked = true;
                 CONTROL.responses.rebuildCurrency(data);
             },
 
@@ -80,7 +80,7 @@ CONTROL.initialize = (function() {
             selectLoadSch: function(data) {
                 var accounts = data.categories.accounts,
                     template = doc.querySelector('.schHist').innerHTML,
-                    html = Mustache.render(template, {'histSch': 'Все счета', 'value': 'all'});;
+                    html = Mustache.render(template, {'histSch': 'Все счета', 'value': 'all'});
 
                 accounts.forEach(function(elem) {
                     html = html + Mustache.render(template, {'histSch': elem, 'value': elem});
@@ -353,7 +353,6 @@ CONTROL.responses = (function() {
     function filterDate(res) {
         var sum, key, data,
             i, len,
-            elem,
             diagram = {};
 
         for (key in res) {
@@ -630,7 +629,7 @@ CONTROL.access = (function() {
         doc.querySelector('.historyUl').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
-                parent, type, src,  obj = {},
+                parent, type, src,
                 id;
 
             if (!target.classList.contains('delete')) return;
