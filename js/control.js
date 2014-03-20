@@ -621,7 +621,6 @@ CONTROL.access = (function() {
                 price;
 
             price = +doc.querySelector('.curr-value input[name=' + target.value + ']').value;
-
             CONTROL.ajax.toServer(request.changeMainCurr(user.login, target.value, price), CONTR.responses.rebuildCurrency);
         });
 
