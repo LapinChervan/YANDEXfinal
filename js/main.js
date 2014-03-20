@@ -17,8 +17,9 @@ doc.querySelector('.allbutton').addEventListener('click', function(e) {
             layer.createLayer({content: doc.querySelector('.form-' + key).innerHTML});
 
             doc.querySelector('.log_' + key).addEventListener('click', function() {
-                formType[key](doc.querySelectorAll('.input_login_reg')[0].value,
-                              doc.querySelectorAll('.input_login_reg')[1].value);
+                var inputs = doc.querySelectorAll('.input_login_reg');
+
+                formType[key](inputs[0].value, inputs[1].value);
                 layer.destroyLayer();
             }, false);
             break;
