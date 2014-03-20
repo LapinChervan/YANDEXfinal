@@ -167,6 +167,7 @@ CONTROL.tools = (function() {
             i++;
             doc.querySelector('.diag' + key).innerHTML = html;
         }
+        CONTROL.layer.destroyLayer();
     }
 
     function isEmptyOne(elem) {
@@ -427,7 +428,6 @@ CONTROL.ajax = (function() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
 
-            alert(xhr.responseText);
             if (typeof callback === 'function') {
                 try {
                     callback(JSON.parse(xhr.responseText));
@@ -484,7 +484,9 @@ CONTROL.access = (function() {
                 parent = target.parentNode,
                 activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
                 activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio'), 'checked');
+            event.stopPropagation();
             ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value), CONTR.initialize.history);
+            CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
         });
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
@@ -707,6 +709,7 @@ CONTROL.layer = (function() {
         });
         return function (options) {
             var fragment = doc.createDocumentFragment();
+            optionsObject = getDefaultOptions();
             Object.keys(options).
                 forEach(function(key) {
                     optionsObject[key] = options[key];
