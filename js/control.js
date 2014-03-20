@@ -13,6 +13,8 @@ CONTROL.initialize = (function() {
                     key, html,
                     typeImg;
 
+                user.login = data.name;
+
                 for (key in data.categories) {
                     switch (key) {
                         case 'gain':
@@ -373,7 +375,7 @@ CONTROL.responses = (function() {
                 }
                 diagram[key][data.cat] += +data.sum;
             }
-            doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.mainCurr;
+            doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.data.mainCurr;
         }
 
         CONTR.tools.showDiagram(diagram);
@@ -391,7 +393,7 @@ CONTROL.responses = (function() {
 
         html = html.replace(subs, '');
     }
-    //LOOK DOWN....................
+
     function rebuildCurrency (obj) {
         var mainCurrWrap = doc.querySelectorAll('.currency-radio')[1],
             mainCurr = obj.mainCurr,
@@ -450,10 +452,10 @@ CONTROL.access = (function() {
 
 	function showContent(responseData) {
         user.data  = responseData;
-        console.log(user.data);
+
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize.init(responseData);
-        console.log(user.data);
+
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
             var event = e || window.event,
@@ -472,14 +474,15 @@ CONTROL.access = (function() {
                     response.filterDate);
             }
         }, false);
+
         //фильтр история
-        //TODO переделать шаблон, прокси..
         doc.querySelector('.add_cat_sch.marginL5').addEventListener('click', function(e) {
             var event = e || window.event,
                 target = event.target || event.srcElement,
                 parent = target.parentNode,
                 activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
                 activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio'), 'checked');
+
             event.stopPropagation();
             ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value), CONTR.initialize.history);
             CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
@@ -503,6 +506,7 @@ CONTROL.access = (function() {
                 if (target.innerHTML === key) {
                     type = formType[key];
                     event.stopPropagation();
+                    
                     CONTROL.layer.createLayer({content: doc.querySelector('.form__' + type).innerHTML});
                     CONTROL.reload.loadSelectForm(CONTROL.user.data, type);
 
