@@ -506,7 +506,7 @@ CONTROL.access = (function() {
                 if (target.innerHTML === key) {
                     type = formType[key];
                     event.stopPropagation();
-                    
+
                     CONTROL.layer.createLayer({content: doc.querySelector('.form__' + type).innerHTML});
                     CONTROL.reload.loadSelectForm(CONTROL.user.data, type);
 

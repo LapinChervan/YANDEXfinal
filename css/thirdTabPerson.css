@@ -175,3 +175,20 @@ div.marginR0 {
     clear: both;
     margin-bottom: 15px;
 }
+
+.main__user-data {
+    font-size: 16px;
+    width: 100px;
+    height: 29px;
+    text-align: center;
+    float: right;
+    margin: 0 0 3px 0;
+    padding: 5px;
+    position: relative;
+    background: url("../img/libg.png");
+    border-radius: 4px;
+}
+
+.clear {
+    clear: right;
+}
