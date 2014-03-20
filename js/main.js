@@ -16,12 +16,9 @@ doc.querySelector('.allbutton').addEventListener('click', function(e) {
             event.stopPropagation();
             layer.createLayer({content: doc.querySelector('.form-' + key).innerHTML});
 
-            doc.querySelector('.log_' + key).addEventListener('click', function(e) {
-                var event = e || window.event;
-                event.preventDefault();
-
+            doc.querySelector('.log_' + key).addEventListener('click', function() {
                 formType[key](doc.querySelectorAll('.input_login_reg')[0].value,
-                    doc.querySelectorAll('.input_login_reg')[1].value);
+                              doc.querySelectorAll('.input_login_reg')[1].value);
                 layer.destroyLayer();
             }, false);
             break;
