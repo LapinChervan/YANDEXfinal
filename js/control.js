@@ -362,7 +362,7 @@ CONTROL.responses = (function() {
             diagram = {};
 
         for (key in res) {
-            if (key === 'accounts') continue;
+            if (key === 'send' || key === 'accounts') continue;
             sum = 0;
             len = res[key].length;
 
@@ -714,6 +714,10 @@ CONTROL.layer = (function() {
                 forEach(function(key) {
                     optionsObject[key] = options[key];
                 });
+            if (optionsObject.removeDestroy == true) {
+                document.removeEventListener('click',destroyLayer);
+                layerElements.destroy = true;
+            }
             layer.innerHTML = optionsObject.content;
             layer.className = optionsObject.clsContentLayer;
             fragment.appendChild(modal);
@@ -728,7 +732,8 @@ CONTROL.layer = (function() {
             parent: document.body,
             clsOpacityLayer: 'modal',
             clsContentLayer: 'layer',
-            content: ''
+            content: '',
+            removeDestroy: false
         }
     }
 
@@ -738,6 +743,9 @@ CONTROL.layer = (function() {
             parent.removeChild(layerElements.modal);
             parent.removeChild(layerElements.layer);
             layerElements.isCreated = false;
+            if (layerElements.destroy) {
+                document.addEventListener('click', destroyLayer);
+            }
         }
     }
 
