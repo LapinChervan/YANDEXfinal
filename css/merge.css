@@ -1,7 +1,7 @@
 .login__inputs input, .form__gain input,
 .form__costs input, .form__send input,
 .form__gain select, .form__costs select, .form__send select,
-.history_operand_select, .history_sch_select, .historyCount {
+.history_operand_select, .history_sch_select {
     padding: 0 5px;
     height: 40px;
     width: 80%;
