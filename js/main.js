@@ -6,7 +6,7 @@ var	doc = document, // документ
 
 // вызов формы регистрации
 doc.getElementsByClassName('header__reg')[0].addEventListener('click', function(e) {
-    var form, closeCross, log_reg;
+    var form, log_reg;
     e.stopPropagation();
     layer.createLayer({content: doc.getElementById('form-reg').innerHTML});
 
@@ -22,8 +22,7 @@ doc.getElementsByClassName('header__reg')[0].addEventListener('click', function(
 
 // вызов формы авторизации
 doc.getElementsByClassName('header__auth')[0].addEventListener('click', function(e) {
-    var log_in,
-        userData;
+    var log_in;
     e.stopPropagation();
     layer.createLayer({content: doc.getElementById('form-login').innerHTML});
 
