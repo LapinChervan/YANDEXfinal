@@ -641,7 +641,6 @@ CONTROL.layer = (function() {
             modal = layerElements.modal, layer = layerElements.layer;
         layerElements.parent = optionsObject.parent;
         modal.className = optionsObject.clsOpacityLayer;
-        layer.className = optionsObject.clsContentLayer;
 
         layer.addEventListener('click', function (e) {
             var event = e || window.event;
