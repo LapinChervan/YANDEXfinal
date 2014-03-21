@@ -270,9 +270,9 @@ CONTROL.responses = (function() {
             parentHistSel = doc.querySelector('.history_sch_select'),
             cat = user.data.categories[res.type];
 
-        cat[(cat.indexOf(res.old, 0))] = res.new;
-        parent.innerHTML = parent.innerHTML.replace('<div>' + res.old + '</div>', '<div>' + res.new + '</div>');
-        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.old + '</option>', '<option>' + res.new + '</option>');
+        cat[(cat.indexOf(res.oldName, 0))] = res.newName;
+        parent.innerHTML = parent.innerHTML.replace('<div>' + res.oldName + '</div>', '<div>' + res.newName + '</div>');
+        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.oldName + '</option>', '<option>' + res.newName + '</option>');
     }
 
     function removeCategory(res) {
