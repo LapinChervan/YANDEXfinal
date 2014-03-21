@@ -44,6 +44,7 @@ body {
     width: 96%;
     margin: 10px auto;
     min-width: 1185px;
+    position: relative;
 }
 
 .main__header {

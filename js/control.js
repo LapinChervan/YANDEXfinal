@@ -370,7 +370,7 @@ CONTROL.ajax = (function() {
         xhr.open('GET', link); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
-
+            alert(xhr.responseText);
             if (typeof callback === 'function') {
                 try {
                     callback(JSON.parse(xhr.responseText));
