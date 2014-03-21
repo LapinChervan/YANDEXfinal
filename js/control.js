@@ -10,30 +10,15 @@ CONTROL.initialize = (function() {
         initMethods = {
             categories: function(data) {
                 var tmp = doc.querySelector('.useraccounts').innerHTML,
-                    key, html,
-                    typeImg;
+                    key, html;
 
                 user.login = data.name;
 
                 for (key in data.categories) {
-                    switch (key) {
-                        case 'gain':
-                            typeImg = 'img/dohod.png';
-                            break;
-
-                        case 'costs':
-                            typeImg = 'img/rashod.png';
-                            break;
-
-                        case 'accounts':
-                            typeImg = 'img/send.png';
-                            break;
-                    }
-
                     html = '';
                     data.categories[key].
                         forEach(function(elem) {
-                            html += Mustache.render(tmp, {costs: elem, img: typeImg});
+                            html += Mustache.render(tmp, {costs: elem, img: 'img/'+key+'.png'});
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
@@ -53,20 +38,7 @@ CONTROL.initialize = (function() {
                         for (objKey3 in history[objKey][objKey2]) {
                             thisData[objKey3] = history[objKey][objKey2][objKey3];
                         }
-
-                        switch (thisData.type) {
-                            case 'gain':
-                                thisData['ico'] = 'img/dohod.png';
-                                break;
-
-                            case 'costs':
-                                thisData['ico'] = 'img/rashod.png';
-                                break;
-
-                            case 'send':
-                                thisData['ico'] = 'img/send.png';
-                                break;
-                        }
+                        thisData['ico'] = 'img/' + thisData.type + '.png';
                         thisData.mainCurr = user.data.mainCurr;
                         html = html + Mustache.render(tmp, thisData);
                     }
@@ -284,28 +256,13 @@ CONTROL.responses = (function() {
         user = CONTR.user;
 
     function newCategory(res) {
-        var categories = doc.querySelector('.' + res.type),
-            typeImg;
-
-            switch (res.type) {
-                case 'gain':
-                    typeImg = 'img/dohod.png';
-                    break;
-
-                case 'costs':
-                    typeImg = 'img/rashod.png';
-                    break;
-
-                case 'accounts':
-                    typeImg = 'img/send.png';
-                    break;
-            }
+        var categories = doc.querySelector('.' + res.type);
 
         user.data.categories[res.type].push(res.cat);
         CONTR.initialize.selectLoadSch(user.data);
 
         categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
-                                                                      {costs: res.cat, img: typeImg});
+                                                                      {costs: res.cat, img: 'img/' + res.type + '.png'});
     }
 
     function renameCategory(res) {
@@ -337,19 +294,7 @@ CONTROL.responses = (function() {
     function newOper(res) {
         var parent = doc.querySelector('.historyUl');
 
-        switch (res.type) {
-            case 'gain':
-                res['ico'] = 'img/dohod.png';
-                break;
-
-            case 'costs':
-                res['ico'] = 'img/rashod.png';
-                break;
-
-            case 'send':
-                res['ico'] = 'img/send.png';
-                break;
-        }
+        res['ico'] = 'img/' + res.type + '.png';
         res.mainCurr = user.data.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
     }
@@ -645,20 +590,7 @@ CONTROL.access = (function() {
             parent = target.parentNode;
             src = parent.querySelector('.icoHist').src;
 
-            switch (src.slice(src.lastIndexOf('/') + 1)) {
-
-                case 'dohod.png':
-                    type = 'gain';
-                    break;
-
-                case 'rashod.png':
-                    type = 'costs';
-                    break;
-
-                case 'send.png':
-                    type = 'send';
-                    break;
-            }
+            type = 'img/' + src.slice(src.lastIndexOf('/') + 1);
 
             id = parent.querySelector('.id').innerHTML;
             event.stopPropagation();
