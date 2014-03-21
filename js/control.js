@@ -336,7 +336,6 @@ CONTROL.responses = (function() {
         indexStart = html.indexOf(res);
         subs = html.slice(html.lastIndexOf('<li>', indexStart),
                           html.indexOf('</li>', indexStart) + 5);
-        alert(subs);
         parent.innerHTML = html.replace(subs, '');
     }
 
