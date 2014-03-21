@@ -96,19 +96,15 @@
 }
 
 .first {
-    background: url('../img/dohod.png') 50% 5% no-repeat;
+    background: url('../img/gain.png') 50% 5% no-repeat;
 }
 
 .second {
-    background: url('../img/rashod.png') 50% 5% no-repeat;
+    background: url('../img/costs.png') 50% 5% no-repeat;
 }
 
 .third {
     background: url('../img/send.png') 50% 0% no-repeat;
-}
-
-.four {
-    background: url('../img/sch.png') 50% 5% no-repeat;
 }
 
 .statistics__ul__li tr {
