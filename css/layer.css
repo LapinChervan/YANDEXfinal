@@ -18,7 +18,7 @@
 }
 
 .gif-layer {
-    background: url(../img/ajax-loader.gif);
+    background: url(../img/preloader.gif);
     width: 66px;
     height: 66px;
     top: 50%;
