@@ -9,6 +9,7 @@ CONTROL.initialize = (function() {
         user = CONTR.user,
         initMethods = {
             categories: function(data) {
+                console.log(data);
                 var tmp = doc.querySelector('.useraccounts').innerHTML,
                     key, html;
 
@@ -305,7 +306,7 @@ CONTROL.responses = (function() {
             diagram = {};
 
         for (key in res) {
-            if (key === 'send' || key === 'accounts') continue;
+            if (key === 'send') continue;
             sum = 0;
             len = res[key].length;
 
@@ -335,8 +336,8 @@ CONTROL.responses = (function() {
         indexStart = html.indexOf(res);
         subs = html.slice(html.lastIndexOf('<li>', indexStart),
                           html.indexOf('</li>', indexStart) + 5);
-
-        html = html.replace(subs, '');
+        alert(subs);
+        parent.innerHTML = html.replace(subs, '');
     }
 
     function rebuildCurrency (obj) {
@@ -370,7 +371,7 @@ CONTROL.ajax = (function() {
         xhr.open('GET', link); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
-            alert(xhr.responseText);
+
             if (typeof callback === 'function') {
                 try {
                     callback(JSON.parse(xhr.responseText));
@@ -596,7 +597,7 @@ CONTROL.access = (function() {
             parent = target.parentNode;
             src = parent.querySelector('.icoHist').src;
 
-            type = 'img/' + src.slice(src.lastIndexOf('/') + 1);
+            type = src.slice(src.lastIndexOf('/') + 1, src.length - 4);
 
             id = parent.querySelector('.id').innerHTML;
             event.stopPropagation();
