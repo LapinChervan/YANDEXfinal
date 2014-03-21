@@ -259,8 +259,8 @@ CONTROL.requests = (function() {
         return host + 'findOperation?login=' + user + '&start=' + start + '&end=' + end + '&type=' + type;
     }
 
-    function filterHistory(user, account, type) {
-        return host + 'findOperation?login=' + user + '&account=' + account + '&type=' + type;
+    function filterHistory(user, account, type, start, end) {
+        return host + 'findOperation?login=' + user + '&account=' + account + '&type=' + type + '&start=' + start + '&end=' + end;
     }
 
     return {
@@ -481,11 +481,18 @@ CONTROL.access = (function() {
             var event = e || window.event,
                 target = event.target || event.srcElement,
                 parent = target.parentNode,
+                date = parent.querySelectorAll('input[type=text]'),
                 activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
                 activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio'), 'checked');
 
             event.stopPropagation();
-            ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value), CONTR.initialize.history);
+            if (date[0].value && date[1].value) {
+                ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, tools.getDateMs(date[0].value), tools.getDateMs(date[1].value)), CONTR.initialize.history);
+            }
+            else {
+
+                ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, undefined, undefined), CONTR.initialize.history);
+            }
             CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
         });
 

@@ -48,11 +48,11 @@ http.createServer(function(req, res) {
                 requests.removeCat(data.query.login, data.query.type, data.query.old, res);
             },
             '/findOperation': function() {
-                if (data.query.start) {
+                if (!data.query.account) {
                     requests.dateFilter(data.query.login, data.query.start, data.query.end, res);
                 }
                 else {
-                    requests.historyFilter(data.query.login, data.query.account, res, data.query.type);
+                    requests.historyFilter(data.query.login, data.query.account, res, data.query.type, data.query.start, data.query.end);
                 }
             }
         };
