@@ -337,6 +337,7 @@ CONTROL.responses = (function() {
         subs = html.slice(html.lastIndexOf('<li>', indexStart),
                           html.indexOf('</li>', indexStart) + 5);
         parent.innerHTML = html.replace(subs, '');
+        CONTROL.layer.destroyLayer();
     }
 
     function rebuildCurrency (obj) {
