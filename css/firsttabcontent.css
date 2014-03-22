@@ -1,3 +1,24 @@
+.message {
+    position: absolute;
+    padding: 0 5px;
+    word-wrap: break-word;
+    width: 180px;
+    top: 30%;
+    left: 50%;
+    background: url('../img/headerbg.png');
+    font-size: 14px;
+    color: #EDEDE5;
+    z-index: 1;
+    text-align: center;
+    border-radius: 4px;
+    margin: 0 0 0 -90px;
+    display: none;
+}
+
+.message img {
+    margin: 2px 0;
+}
+
 .first__ul__button {
     list-style-type: none;
     text-align: left;

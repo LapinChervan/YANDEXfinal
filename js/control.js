@@ -150,6 +150,17 @@ CONTROL.tools = (function() {
         return true;
     }
 
+    function showMessage(cls, msg, img) {
+        var elem = cls,
+            style = elem.style;
+
+        elem.innerHTML = Mustache.render(elem.innerHTML, {msg: msg, img: img});
+        style.display = 'block';
+        setTimeout(function() {
+            style.display = 'none';
+        }, 1500);
+    }
+
     return {
         isNumber: isNumber,
         getDateMs: getDateMs,
@@ -158,7 +169,8 @@ CONTROL.tools = (function() {
         randomColor: randomColor,
         showDiagram: showDiagram,
         findSelectedInput: findSelectedInput,
-        isEmptyOne: isEmptyOne
+        isEmptyOne: isEmptyOne,
+        showMessage: showMessage
     }
 })();
 
@@ -254,7 +266,8 @@ CONTROL.requests = (function() {
 CONTROL.responses = (function() {
     var doc = document,
         CONTR = CONTROL,
-        user = CONTR.user;
+        user = CONTR.user,
+        tools = CONTR.tools;
 
     function newCategory(res) {
         var categories = doc.querySelector('.' + res.type);
@@ -298,6 +311,7 @@ CONTROL.responses = (function() {
         res['ico'] = 'img/' + res.type + '.png';
         res.mainCurr = user.data.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
+        tools.showMessage(doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'img/yes.png');
     }
 
     function filterDate(res) {
