@@ -87,7 +87,7 @@ CONTROL.tools = (function() {
 
     function isDate(d) {
        if (!!d.value.match(/(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d/)) {
-           d.placeholder = 'Дата операции';
+           d.placeholder = 'Дата';
            return true;
        }
         d.value = '';
@@ -441,8 +441,10 @@ CONTROL.access = (function() {
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
 
-                ajax.toServer(request.filterDate(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value)),
-                              response.filterDate);
+              if (tools.isDate(doc.querySelector('.dateFrom')) && tools.isDate(doc.querySelector('.dateTo'))) {
+                  ajax.toServer(request.filterDate(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value)),
+                                response.filterDate);
+              }
             }
 
             if (target.classList.contains('apply_filter2')) {
@@ -462,14 +464,14 @@ CONTROL.access = (function() {
                 activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio'), 'checked');
 
             event.stopPropagation();
-            if (date[0].value && date[1].value) {
-                ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, tools.getDateMs(date[0].value), tools.getDateMs(date[1].value)), CONTR.initialize.history);
-            }
-            else {
 
+            if (CONTR.tools.isDate(date[0]) && tools.isDate(date[1])) {
+                ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, tools.getDateMs(date[0].value), tools.getDateMs(date[1].value)), CONTR.initialize.history);
+                CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
+            } else {
                 ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, undefined, undefined), CONTR.initialize.history);
+                CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
             }
-            CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
         });
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
@@ -513,10 +515,7 @@ CONTROL.access = (function() {
 
                             ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
                             CONTROL.layer.destroyLayer();
-                        };/* else {
-                            sum.value = '';
-                            sum.placeholder = 'Ошибка ввода';
-                        }*/
+                        }
                     }, false);
                 }
             }
