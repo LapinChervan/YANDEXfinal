@@ -449,6 +449,10 @@ CONTROL.access = (function() {
         doc = document;
 
 	function showContent(responseData) {
+        if (responseData == '0') {
+            tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), 'Логин или пароль указаны неверно!', 'img/warn.png');
+            return false;
+        }
         user.data  = responseData;
 
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
