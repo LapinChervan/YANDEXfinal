@@ -10,7 +10,7 @@ var app = connect()
         var data = url.parse(req.url, true);
             pathObj = {
                 '/reg': function() {
-                    requests.reg(data.query.login, data.query.password);
+                    requests.reg(data.query.login, data.query.password, res);
                 },
 
                 '/auth': function() {

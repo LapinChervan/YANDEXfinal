@@ -3,9 +3,27 @@
     padding: 0;
 }
 
-.body {
+body {
+    font-family: Tahoma, Verdana;
     position: relative;
-    font-family: Verdana, Tahoma;
+}
+
+.messageResponse {
+    position: absolute;
+    padding: 0 5px;
+    word-wrap: break-word;
+    width: 180px;
+    top: 0;
+    left: 50%;
+    font-size: 16px;
+    color: #F0F0F0;
+    text-align: center;
+    margin: 10px 0 0 -100px;
+    display: none;
+}
+
+.messageResponse img {
+    margin: 3px 0 0 0;
 }
 
 .logreg {
@@ -36,10 +54,6 @@
     padding: 10px 0 0 0;
 }
 
-body {
-    font-family: Tahoma, Verdana;
-}
-
 .main {
     width: 96%;
     margin: 10px auto;
@@ -50,6 +64,7 @@ body {
 .main__header {
     height: 210px;
     margin: 20px 0 0 0;
+    position: relative;
 }
 
 .header__logo { 

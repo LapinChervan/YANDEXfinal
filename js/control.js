@@ -397,6 +397,15 @@ CONTROL.responses = (function() {
         mainCurrWrap.innerHTML = input;
     }
 
+    function registration(res) {
+        var sett = {
+            0: ['Регистрация успешно пройдена!', 'img/yes.png'],
+            1: ['Пользователь с таким именем существует!','img/warn.png']
+        }
+        tools.showMessage(doc.querySelector('.messageResponse'), sett[res][0], sett[res][1]);
+        res = undefined;
+    }
+
     return {
         newCategory: newCategory,
         rebuildCurrency: rebuildCurrency,
@@ -404,7 +413,8 @@ CONTROL.responses = (function() {
         removeCategory: removeCategory,
         newOper: newOper,
         removeOper: removeOper,
-        filterDate: filterDate
+        filterDate: filterDate,
+        registration: registration
     }
 })();
 
@@ -415,7 +425,7 @@ CONTROL.ajax = (function() {
         xhr.open('GET', link); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
-
+            alert(xhr.responseText);
             if (typeof callback === 'function') {
                 try {
                     callback(JSON.parse(xhr.responseText));
@@ -478,7 +488,7 @@ CONTROL.access = (function() {
 
             event.stopPropagation();
 
-            if (CONTR.tools.isDate(date[0]) && tools.isDate(date[1])) {
+            if (tools.isDate(date[0]) && tools.isDate(date[1])) {
                 ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, tools.getDateMs(date[0].value), tools.getDateMs(date[1].value)), CONTR.initialize.history);
                 CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
             } else {
@@ -576,14 +586,15 @@ CONTROL.access = (function() {
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event,
-                                    input = doc.querySelector('.editCatInput');
+                                    input = doc.querySelector('.editCatInput'),
+                                    old = input.placeholder;
 
                                 event.preventDefault();
-                            //    if (CONTROL.tools.isEmptyOne(input)) {
-                                    ajax.toServer(request.editCategory(user.login, elem, input.placeholder, input.value),
+                                if (CONTROL.tools.isEmptyOne(input)) {
+                                    ajax.toServer(request.editCategory(user.login, elem, old, input.value),
                                                   response.renameCategory);
                                     CONTROL.layer.destroyLayer();
-                            //    }
+                                }
                             });
                         }
                     });
@@ -665,7 +676,7 @@ CONTROL.access = (function() {
 
     function registration(user, password) {
         if (user && password) {
-            ajax.toServer(request.registration(user, password));
+            ajax.toServer(request.registration(user, password), response.registration);
         }
     }
 
