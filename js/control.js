@@ -86,10 +86,23 @@ CONTROL.tools = (function() {
     }
 
     function isDate(d) {
-       if (!!d.value.match(/(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d/)) {
-           d.placeholder = 'Дата';
-           return true;
-       }
+        var arr = d.value.split('.');
+
+        if (arr.length !== 3) {
+            d.value = '';
+            d.placeholder = 'Ошибка ввода';
+            return false;
+        }
+
+        if (+arr[0] > 0 && +arr[0] <= 31 && arr[0].length === 2) {
+            if (+arr[1] > 1 && +arr[1] <= 12  && arr[1].length === 2) {
+                if (+arr[2] > 1999 && +arr[2] < 3000 && arr[2].length === 4) {
+                    d.placeholder = 'Дата';
+                    return true;
+                }
+            }
+        }
+
         d.value = '';
         d.placeholder = 'Ошибка ввода';
         return false;
@@ -566,11 +579,11 @@ CONTROL.access = (function() {
                                     input = doc.querySelector('.editCatInput');
 
                                 event.preventDefault();
-                                if (CONTROL.tools.isEmptyOne(input)) {
+                            //    if (CONTROL.tools.isEmptyOne(input)) {
                                     ajax.toServer(request.editCategory(user.login, elem, input.placeholder, input.value),
                                                   response.renameCategory);
                                     CONTROL.layer.destroyLayer();
-                                }
+                            //    }
                             });
                         }
                     });
