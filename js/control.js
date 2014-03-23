@@ -480,21 +480,27 @@ CONTROL.access = (function() {
                     doc.querySelector('.form__' + type + '__add').addEventListener('click', function(e) {
                         var event = e || window.event,
                             form = doc.querySelector('.form__' + type  + '__blockInputs').children,
+                            sum = doc.querySelector('.sumAdd'),
                             len = form.length,
                             arr = ['date', 'sch', 'cat', 'sum', 'comm'],
                             i, item, data = {};
 
-                        for (i = 0; i < len; i++) {
-                            item = form[i];
-                            data[arr[i]] = item.value;
-                        }
-                        data['type'] = type;
-                        data['id'] = 'id' + Math.round(Math.random() * 1000000);
-                        data.time = tools.getDateMs(data.date);
-
                         event.preventDefault();
-                        ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
-                        CONTROL.layer.destroyLayer();
+                        if (CONTROL.tools.isNumber(sum.value)) {
+                            for (i = 0; i < len; i++) {
+                                item = form[i];
+                                data[arr[i]] = item.value;
+                            }
+                            data['type'] = type;
+                            data['id'] = 'id' + Math.round(Math.random() * 1000000);
+                            data.time = tools.getDateMs(data.date);
+
+                            ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
+                            CONTROL.layer.destroyLayer();
+                        } else {
+                            sum.value = '';
+                            sum.placeholder = 'Ошибка ввода';
+                        }
                     }, false);
                 }
             }
@@ -545,9 +551,11 @@ CONTROL.access = (function() {
                                     input = doc.querySelector('.editCatInput');
 
                                 event.preventDefault();
-                                ajax.toServer(request.editCategory(user.login, elem, input.placeholder, input.value),
-                                    response.renameCategory);
-                                CONTROL.layer.destroyLayer();
+                                if (CONTROL.tools.isEmptyOne(input)) {
+                                    ajax.toServer(request.editCategory(user.login, elem, input.placeholder, input.value),
+                                                  response.renameCategory);
+                                    CONTROL.layer.destroyLayer();
+                                }
                             });
                         }
                     });
