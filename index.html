@@ -13,8 +13,7 @@
         <div class="main__header">
             <!--ФОРМА ОТВЕТА-->
             <div class="messageResponse">
-                <div>{{msg}}</div>
-                <img src="{{img}}" alt="">
+                <!-- ДЛЯ ШАБЛОНА ПРИ ОТВЕТЕ ПРИ РЕГИСТРАЦИИ -->
             </div>
             <!--LOGO YANDEX-->
             <div class="header__logo">
@@ -147,8 +146,7 @@
             </div>
             <!--END tabMenuItems.css-->
             <div class="message">
-                <div>{{msg}}</div>
-                <img src="{{img}}" alt="">
+                <!--ОТВЕТ НА ДОБАВЛЕНИЕ НОВОЙ ОПЕРАЦИИ-->>
             </div>
             <!--Wrapper for ALL TABS CONTENT-->
             <div class="main__tabs__content">
@@ -322,6 +320,12 @@
 
         </div>
 
+    </script>
+
+    <!--ФОРМА ОТВЕТА НА НОВУЮ ОПЕРАЦИЮ и РЕГИСТРАЦИЮ-->
+    <script type="text/template" class="form-mess">
+        <div>{{msg}}</div>
+        <img src="{{img}}" alt="">
     </script>
 
     <!--ЭЛЕМЕНТ ДИАГРАММЫ-->

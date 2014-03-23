@@ -9,7 +9,6 @@ CONTROL.initialize = (function() {
         user = CONTR.user,
         initMethods = {
             categories: function(data) {
-                console.log(data);
                 var tmp = doc.querySelector('.useraccounts').innerHTML,
                     key, html;
 
@@ -179,11 +178,11 @@ CONTROL.tools = (function() {
         CONTROL.layer.destroyLayer();
     }
 
-    function showMessage(cls, msg, img) {
-        var elem = cls,
+    function showMessage(cls, parent, msg, img) {
+        var elem = parent,
             style = elem.style;
 
-        elem.innerHTML = Mustache.render(elem.innerHTML, {msg: msg, img: img});
+        parent.innerHTML = Mustache.render(cls.innerHTML, {msg: msg, img: img});
         style.display = 'block';
         setTimeout(function() {
             style.display = 'none';
@@ -341,7 +340,7 @@ CONTROL.responses = (function() {
         res['ico'] = 'img/' + res.type + '.png';
         res.mainCurr = user.data.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
-        tools.showMessage(doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'img/yes.png');
+        tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'img/yes.png');
     }
 
     function filterDate(res) {
@@ -402,8 +401,7 @@ CONTROL.responses = (function() {
             0: ['Регистрация успешно пройдена!', 'img/yes.png'],
             1: ['Пользователь с таким именем существует!','img/warn.png']
         }
-        tools.showMessage(doc.querySelector('.messageResponse'), sett[res][0], sett[res][1]);
-        res = undefined;
+        tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), sett[res][0], sett[res][1]);
     }
 
     return {
@@ -425,7 +423,7 @@ CONTROL.ajax = (function() {
         xhr.open('GET', link); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
-            alert(xhr.responseText);
+
             if (typeof callback === 'function') {
                 try {
                     callback(JSON.parse(xhr.responseText));
