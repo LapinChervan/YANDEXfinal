@@ -14,6 +14,7 @@ var app = connect()
                 },
 
                 '/auth': function() {
+                    res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*','Set-Cookie':'name=value;'});
                     requests.auth(data.query.login, data.query.password, data.query.start, data.query.end, res);
                 },
 
@@ -59,13 +60,14 @@ var app = connect()
                     }
                 }
             };
-
         if (pathObj[data.pathname]) {
-            res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+            if (data.pathname !== '/auth') {
+                res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
+            }
             pathObj[data.pathname]();
         } else {
             next();
         }
     });
-    app.use(connect.static('/Users/nvzC/Documents/GitHub/yandex'));
+    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);
