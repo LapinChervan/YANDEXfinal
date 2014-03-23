@@ -76,7 +76,32 @@ CONTROL.initialize = (function() {
 
 CONTROL.tools = (function() {
     function isNumber(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
+        if (!isNaN(parseFloat(n.value)) && isFinite(n.value)) {
+            n.placeholder = 'Сумма';
+            return true;
+        }
+        n.value = '';
+        n.placeholder = 'Ошибка ввода';
+        return false;
+    }
+
+    function isDate(d) {
+       if (!!d.value.match(/(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d/)) {
+           d.placeholder = 'Дата операции';
+           return true;
+       }
+        d.value = '';
+        d.placeholder = 'Ошибка ввода';
+        return false;
+    }
+
+    function isEmptyOne(elem) {
+        if (elem.value.trim().length === 0) {
+            elem.placeholder = 'Ошибка ввода';
+            return false;
+        }
+        elem.placeholder = 'Введите название';
+        return true;
     }
 
     function getDateMs(date) {
@@ -141,15 +166,6 @@ CONTROL.tools = (function() {
         CONTROL.layer.destroyLayer();
     }
 
-    function isEmptyOne(elem) {
-        if (elem.value.trim().length === 0) {
-            elem.placeholder = 'Ошибка ввода';
-            return false;
-        }
-        elem.placeholder = 'Введите название';
-        return true;
-    }
-
     function showMessage(cls, msg, img) {
         var elem = cls,
             style = elem.style;
@@ -163,6 +179,7 @@ CONTROL.tools = (function() {
 
     return {
         isNumber: isNumber,
+        isDate: isDate,
         getDateMs: getDateMs,
         getDateN: getDateN,
         isBiggest: isBiggest,
@@ -480,13 +497,12 @@ CONTROL.access = (function() {
                     doc.querySelector('.form__' + type + '__add').addEventListener('click', function(e) {
                         var event = e || window.event,
                             form = doc.querySelector('.form__' + type  + '__blockInputs').children,
-                            sum = doc.querySelector('.sumAdd'),
                             len = form.length,
                             arr = ['date', 'sch', 'cat', 'sum', 'comm'],
                             i, item, data = {};
 
                         event.preventDefault();
-                        if (CONTROL.tools.isNumber(sum.value)) {
+                        if (tools.isNumber(doc.querySelector('.sumCheck')) && tools.isDate(doc.querySelector('.dateCheck'))) {
                             for (i = 0; i < len; i++) {
                                 item = form[i];
                                 data[arr[i]] = item.value;
@@ -497,10 +513,10 @@ CONTROL.access = (function() {
 
                             ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
                             CONTROL.layer.destroyLayer();
-                        } else {
+                        };/* else {
                             sum.value = '';
                             sum.placeholder = 'Ошибка ввода';
-                        }
+                        }*/
                     }, false);
                 }
             }
