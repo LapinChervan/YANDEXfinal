@@ -417,12 +417,17 @@ CONTROL.responses = (function() {
 })();
 
 CONTROL.ajax = (function() {
-	function toServer(link, callback) {
+    function toServer(link, callback) {
 		var xhr = new XMLHttpRequest();
 
         xhr.open('GET', link); 
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
+
+            if (xhr.status != 200) {
+                alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+                return;
+            }
 
             if (typeof callback === 'function') {
                 try {

@@ -1,10 +1,9 @@
 var http = require('http'),
-	url = require('url'),
-	util = require('util'),
+    url = require('url'),
+    util = require('util'),
     connect = require('connect'),
-	requests = require('requests');
-
-var app = connect()
+    requests = require('requests'),
+    app = connect()
     .use(connect.cookieParser())
     .use(function(req, res, next){
         var data = url.parse(req.url, true);
@@ -14,7 +13,6 @@ var app = connect()
                 },
 
                 '/auth': function() {
-                    res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*','Set-Cookie':'name=value;'});
                     requests.auth(data.query.login, data.query.password, data.query.start, data.query.end, res);
                 },
 
@@ -61,13 +59,11 @@ var app = connect()
                 }
             };
         if (pathObj[data.pathname]) {
-            if (data.pathname !== '/auth') {
-                res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8', 'Access-Control-Allow-Origin': '*'});
-            }
+            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8', 'Access-Control-Allow-Origin': '*'});
             pathObj[data.pathname]();
         } else {
             next();
         }
     });
-    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
+    app.use(connect.static('/Users/nvzc/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);
