@@ -18,7 +18,7 @@ CONTROL.initialize = (function() {
                     html = '';
                     data.categories[key].
                         forEach(function(elem) {
-                            html += Mustache.render(tmp, {costs: elem, img: 'img/'+key+'.png'});
+                            html += Mustache.render(tmp, {costs: elem, img: 'img/' + key + '.png'});
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
@@ -702,28 +702,34 @@ CONTROL.access = (function() {
 
 CONTROL.layer = (function() {
     var doc = document,
-        layerElements = {};
-    var createLayer = (function () {
+        layerElements = {},
+        createLayer;
+
+    createLayer = (function() {
         layerElements.modal = doc.createElement('div');
         layerElements.layer = doc.createElement('div');
+
         var optionsObject = getDefaultOptions(),
-            modal = layerElements.modal, layer = layerElements.layer;
+            modal = layerElements.modal,
+            layer = layerElements.layer;
+
         layerElements.parent = optionsObject.parent;
         modal.className = optionsObject.clsOpacityLayer;
 
-        layer.addEventListener('click', function (e) {
+        layer.addEventListener('click', function(e) {
             var event = e || window.event;
             event.stopPropagation();
         });
+
         return function (options) {
             var fragment = doc.createDocumentFragment();
-            optionsObject = getDefaultOptions();
+       //     optionsObject = getDefaultOptions();
             Object.keys(options).
                 forEach(function(key) {
                     optionsObject[key] = options[key];
                 });
             if (optionsObject.removeDestroy == true) {
-                document.removeEventListener('click',destroyLayer);
+                document.removeEventListener('click', destroyLayer);
                 layerElements.destroy = true;
             }
             layer.innerHTML = optionsObject.content;
