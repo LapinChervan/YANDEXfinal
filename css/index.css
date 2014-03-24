@@ -193,6 +193,18 @@ body {
 .main__book {
     text-align: center;
     padding: 25px 0 0 0;
+    position: relative;
+}
+
+.slide_img {
+    border: 1px solid red;
+    position: absolute;
+    background: #fff;
+    top: 58px;
+    left: 451px;
+    width: 392px;
+    max-width: 392px;
+    height: 233px;
 }
 
 .main__book .mac {

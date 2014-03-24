@@ -436,6 +436,7 @@ CONTROL.ajax = (function() {
                     callback(xhr.responseText);
                 }
             }
+            xhr = null;
         };
         xhr.send();
 	}
