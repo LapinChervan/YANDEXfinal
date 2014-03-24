@@ -6,16 +6,8 @@ var http = require('http'),
     app = connect()
     .use(connect.cookieParser())
     .use(function(req, res, next){
-        var data = url.parse(req.url, true);
+        var data = url.parse(req.url, true),
             pathObj = {
-                '/reg': function() {
-                    requests.reg(data.query.login, data.query.password, res);
-                },
-
-                '/auth': function() {
-                    requests.auth(data.query.login, data.query.password, data.query.start, data.query.end, res);
-                },
-
                 '/currency': function() {
                     if (data.query.curr) {
                         requests.changeCurr(data.query.login, data.query.curr, data.query.price, res);
@@ -59,11 +51,66 @@ var http = require('http'),
                 }
             };
         if (pathObj[data.pathname]) {
-            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8', 'Access-Control-Allow-Origin': '*'});
+            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+            console.log(req.headers);
             pathObj[data.pathname]();
         } else {
             next();
         }
     });
-    app.use(connect.static('/Users/nvzc/Documents/GitHub/yandex'));
+
+    app.use(function(req, res, next) {
+        // if (req.headers.origin === 'http://habrahabr.ru') {
+        var data = url.parse(req.url, true);
+        if (data.pathname === '/auth') {
+        //    var crypto = require('crypto');
+         //   console.log(crypto.createHash('md5').update(data.query.login + data.query.password + Date.parse(new Date())).digest("hex"));
+        //    var date = new Date();
+          //  date.setTime(date.getTime()+(7*24*60*60*1000));
+          //  res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8','Set-Cookie':'zalupa='+crypto.createHash('md5').update(data.query.login + data.query.password + Date.parse(new Date())).digest("hex")+';path=/;expires='+date.toGMTString()+';HttpOnly'});
+            requests.auth(data.query.login, data.query.password, data.query.start, data.query.end, res);
+        }
+        //   }
+        else {
+            next();
+        }
+    });
+
+    app.use(function(req, res, next) {
+        // if (req.headers.origin === 'http://habrahabr.ru') {
+        var data = url.parse(req.url, true);
+        if (data.pathname === '/cookie') {
+            //    var crypto = require('crypto');
+            //   console.log(crypto.createHash('md5').update(data.query.login + data.query.password + Date.parse(new Date())).digest("hex"));
+            //    var date = new Date();
+            //  date.setTime(date.getTime()+(7*24*60*60*1000));
+            //  res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8','Set-Cookie':'zalupa='+crypto.createHash('md5').update(data.query.login + data.query.password + Date.parse(new Date())).digest("hex")+';path=/;expires='+date.toGMTString()+';HttpOnly'});
+            if (req.cookies.controls) {
+                console.log(req.cookies);
+                requests.checkSession(req.cookies.controls, data.query.start, data.query.end, res);
+            }
+            else {
+                res.end('0');
+            }
+        }
+        //   }
+        else {
+            next();
+        }
+    });
+
+    app.use(function(req, res, next) {
+        // if (req.headers.origin === 'localhost:1111') {
+        var data = url.parse(req.url, true);
+        if (data.pathname === '/reg') {
+            res.writeHead(200, {'Content-Type': 'text/plain; charset=utf8'});
+            requests.reg(data.query.login, data.query.password, res);
+        }
+        // }
+        else {
+            next();
+        }
+    });
+
+    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);

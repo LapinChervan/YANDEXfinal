@@ -478,5 +478,8 @@
     <script src="js/mustache.js"></script>
     <script src="js/control.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        CONTROL.ajax.toServer('http://localhost:1111/cookie?start='+CONTROL.tools.getDateMs(CONTROL.tools.getDateN('01'))+'&end=' +CONTROL.tools.getDateMs(CONTROL.tools.getDateN('30')), CONTROL.access.showContent);
+    </script>
 </body>
 </html>
