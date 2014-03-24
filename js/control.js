@@ -696,7 +696,8 @@ CONTROL.access = (function() {
 
     return {
         registration: registration,
-        authorization: authorization
+        authorization: authorization,
+        showContent: showContent
     }
 })();
 
