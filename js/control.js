@@ -126,6 +126,14 @@ CONTROL.tools = (function() {
         return day + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
     }
 
+    function updateButton(elem, type, date) {
+        if (type !== 'send' && ( getDateMs(getDateN('01')) <= getDateMs(date) ) && ( getDateMs(getDateN('30')) >= getDateMs(date)) ) {
+            elem.classList.add('update');
+            return true;
+        }
+        return false;
+    }
+
     function findSelectedInput(collection, option) {
         var length = collection.length,
             i, item;
@@ -194,6 +202,7 @@ CONTROL.tools = (function() {
         isDate: isDate,
         getDateMs: getDateMs,
         getDateN: getDateN,
+        updateButton: updateButton,
         isBiggest: isBiggest,
         randomColor: randomColor,
         showDiagram: showDiagram,
@@ -341,6 +350,7 @@ CONTROL.responses = (function() {
         res.mainCurr = user.data.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
         tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'img/yes.png');
+        tools.updateButton(doc.querySelector('.apply_filter2'), res.type, res.date);
     }
 
     function filterDate(res) {
@@ -479,6 +489,7 @@ CONTROL.access = (function() {
             }
 
             if (target.classList.contains('apply_filter2')) {
+                target.classList.remove('update');
                 event.preventDefault();
                 ajax.toServer(request.filterDate(user.login, tools.getDateMs(tools.getDateN('01')), tools.getDateMs(tools.getDateN('30'))),
                     response.filterDate);
