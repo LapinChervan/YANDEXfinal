@@ -192,3 +192,9 @@ div.marginR0 {
 .clear {
     clear: right;
 }
+
+.img-category {
+    background: url('../img/gain.png');
+    width: 48px;
+    height: 48px;
+}

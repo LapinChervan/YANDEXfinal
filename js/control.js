@@ -432,7 +432,7 @@ CONTROL.ajax = (function() {
     function toServer(link, callback) {
 		var xhr = new XMLHttpRequest();
 
-        xhr.open('GET', link); 
+        xhr.open('GET', link);
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
 
