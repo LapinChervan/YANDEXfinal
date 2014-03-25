@@ -783,3 +783,21 @@ CONTROL.layer = (function() {
         destroyLayer: destroyLayer
     }
 })();
+
+CONTROL.slider = (function() {
+    function start() {
+        var i = 0, doc = document,
+            timerId = setTimeout(function show() {
+                doc.querySelector('.mac').src = 'img/slide' + i + '.png';
+                setTimeout(show, 5000);
+                i++;
+                if (i === 4) {
+                    i = 0;
+                }
+        }, 100);
+    }
+
+    return {
+        start: start
+    }
+})();
