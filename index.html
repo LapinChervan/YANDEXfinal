@@ -374,6 +374,13 @@
         </div>
     </script>
 
+    <script type="text/template" class="useraccountsNew">
+            <span class="edit"></span>
+            <span class="delete"></span>
+            <img src="{{img}}">
+            <div>{{costs}}</div>
+    </script>
+
     <!--БЛОК ДЛЯ ОПЕРАЦИИ (ДОХОД / РАСХОД / ПЕРЕВОД-->
     <script type="text/template" class="history">
         <li>
@@ -480,7 +487,7 @@
     <script src="js/main.js"></script>
     <script>
         CONTROL.ajax.toServer('http://localhost:1111/cookie?start='+CONTROL.tools.getDateMs(CONTROL.tools.getDateN('01'))+'&end=' +CONTROL.tools.getDateMs(CONTROL.tools.getDateN('30')), CONTROL.access.showContent);
-        CONTROL.slider.start();
+     //   CONTROL.slider.start();
     </script>
 </body>
 </html>

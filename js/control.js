@@ -308,13 +308,15 @@ CONTROL.responses = (function() {
         tools = CONTR.tools;
 
     function newCategory(res) {
-        var categories = doc.querySelector('.' + res.type);
+        var categories = doc.querySelector('.' + res.type),
+            newCat = doc.createElement('div');
+
 
         user.data.categories[res.type].push(res.cat);
         CONTR.initialize.selectLoadSch(user.data);
-
-        categories.innerHTML = categories.innerHTML + Mustache.render(doc.querySelector('.useraccounts').innerHTML,
-                                                                      {costs: res.cat, img: 'img/' + res.type + '.png'});
+        newCat.innerHTML = Mustache.render(doc.querySelector('.useraccountsNew').innerHTML,
+                                          {costs: res.cat, img: 'img/' + res.type + '.png'});
+        categories.appendChild(newCat);
     }
 
     function renameCategory(res) {
