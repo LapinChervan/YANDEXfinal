@@ -219,15 +219,24 @@ CONTROL.reload = (function() {
 
         for (key in data.categories) {
             html = '';
+
             if (key === 'accounts' || key === formType) {
                 data.categories[key].
                     forEach(function(elem) {
-                        html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
+                        if (key === 'costs') {
+                            html = html + Mustache.render(doc.querySelector('.select__gain').innerHTML, {'accounts': elem});
+                        } else {
+                             html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
+                        }
                 });
-                doc.querySelector('.select__' + key).innerHTML = html;
+               if (key === 'costs') {
+                   doc.querySelector('.select__gain').innerHTML = html;
+               } else {
+                   doc.querySelector('.select__' + key).innerHTML = html;
+               }
 
                 if (formType === 'send') {
-                    doc.querySelectorAll('.select__' + key)[1].innerHTML = html;
+                    doc.querySelector('.select__gain').innerHTML = html;
                 }
             }
         }
@@ -538,12 +547,17 @@ CONTROL.access = (function() {
                     type = formType[key];
                     event.stopPropagation();
 
-                    CONTROL.layer.createLayer({content: doc.querySelector('.form__' + type).innerHTML});
+                    CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.form__gain').innerHTML,
+                                                        { spriteImg: 'operats_form_' + type,
+                                                          accounts: '{{accounts}}'
+                                                        })
+                                              });
+
                     CONTROL.reload.loadSelectForm(CONTROL.user.data, type);
 
-                    doc.querySelector('.form__' + type + '__add').addEventListener('click', function(e) {
+                    doc.querySelector('.form__gain__add').addEventListener('click', function(e) {
                         var event = e || window.event,
-                            form = doc.querySelector('.form__' + type  + '__blockInputs').children,
+                            form = doc.querySelector('.form__gain__blockInputs').children,
                             len = form.length,
                             arr = ['date', 'sch', 'cat', 'sum', 'comm'],
                             i, item, data = {};

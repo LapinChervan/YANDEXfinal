@@ -406,7 +406,7 @@
     <script type="text/template" class="form__gain">
         <div class="form__gain">
             <div class="form__gain__header">
-                <img src="img/gain.png" alt="">
+                <div class="{{spriteImg}}"></div>
             </div>
             <div class="form__gain__blockInputs">
                 <input class="dateCheck" placeholder="Дата" type="text">
@@ -421,52 +421,6 @@
             </div>
             <div class="form__gain__blockButton">
                 <a class="form__gain__add" href="">Добавить</a>
-            </div>
-        </div>
-    </script>
-
-    <!--ФОРМА НОВОГО РАСХОДА-->
-    <script type="text/template" class="form__costs">
-        <div class="form__costs">
-            <div class="form__costs__header">
-                <img src="img/costs.png" alt="">
-            </div>
-            <div class="form__costs__blockInputs">
-                <input class="dateCheck" placeholder="Дата" type="text">
-                <select class="select__accounts">
-                    <option>{{accounts}}</option>
-                </select>
-                <select class="select__costs">
-                    <option>{{accounts}}</option>
-                </select>
-                <input class="sumCheck" placeholder="Сумма" type="text">
-                <input placeholder="Комментарий" type="text">
-            </div>
-            <div class="form__costs__blockButton">
-                <a class="form__costs__add" href="">Добавить</a>
-            </div>
-        </div>
-    </script>
-
-    <!--ФОРМА НОВОГО ПЕРЕВОДА-->
-    <script type="text/template" class="form__send">
-        <div class="form__send">
-            <div class="form__send__header">
-                <img src="img/send.png" alt="">
-            </div>
-            <div class="form__send__blockInputs">
-                <input class="dateCheck" placeholder="Дата" type="text">
-                <select class="select__accounts">
-                    <option>{{accounts}}</option>
-                </select>
-                <select class="select__accounts">
-                    <option>{{accounts}}</option>
-                </select>
-                <input class="sumCheck" placeholder="Сумма" type="text">
-                <input placeholder="Комментарий" type="text">
-            </div>
-            <div class="form__send__blockButton">
-                <a class="form__send__add" href="">Добавить</a>
             </div>
         </div>
     </script>

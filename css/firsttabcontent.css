@@ -119,6 +119,27 @@
     padding: 50px 0 0 0;
 }
 
+/*СПРАЙТЫ ДЛЯ ЗАГОЛОВКОВ ФОРМ ОПЕРАЦИЙ */
+div[class^=operats_] {
+    width: 48px;
+    height: 48px;
+    background-image: url('../img/operats.png');
+    margin: 5px auto;
+}
+
+.operats_form_gain {
+    background-position: -294px 0;
+}
+
+.operats_form_costs {
+    background-position: -98px 0;
+}
+
+.operats_form_send {
+    background-position: -490px 0;
+}
+/*------------------------------------*/
+
 .first {
     background: url('../img/gain.png') 50% 5% no-repeat;
 }
@@ -204,9 +225,6 @@
 }
 
 .form__gain__add, .form__gain__cancel,
-.form__costs__add, .form__costs__cancel,
-.form__send__add, .form__send__cancel,
-.form__card__add, .form__card__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
 .apply_filter1, .apply_filter2, .buttonValuta, .butRenameCat,
 .butRemoveHist, .more_history, .main__user-data__exit {
@@ -227,10 +245,7 @@
     margin: 5px auto;
 }
 
-.form__gain__add:hover, .form__gain__cancel:hover,
-.form__costs__add:hover, .form__costs__cancel:hover,
-.form__send__add:hover, .form__send__cancel:hover,
-.form__card__add:hover, .form__card__cancel:hover,
+.form__gain__add:hover,
 .form__gain__add__filters:hover, .form__gain__cancel__filters:hover,
 .form__costs__add__filters:hover, .form__costs__cancel__filters:hover,
 .add_cat_sch:hover, .add_cat_plus:hover, .add_cat_minus:hover,
@@ -240,10 +255,7 @@
     box-shadow: -1px -1px 5px #949494, 3px 3px 5px #949494;
 }
 
-.form__gain__add:active, .form__gain__cancel:active,
-.form__costs__add:active, .form__costs__cancel:active,
-.form__send__add:active, .form__send__cancel:active,
-.form__card__add:active, .form__card__cancel:active,
+.form__gain__add:active,
 .form__gain__add__filters:active, .form__gain__cancel__filters:active,
 .form__costs__add__filters:active, .form__costs__cancel__filters:active,
 .add_cat_sch:active, .add_cat_plus:active, .add_cat_minus:active,
@@ -253,10 +265,7 @@
     box-shadow: inset 1px 2px 2px #949494;
 }
 
-.form__gain,
-.form__costs,
-.form__send,
-.form__card {
+.form__gain {
     text-align: center;
     height: 325px;
     width: 275px;
@@ -266,10 +275,7 @@
     background: url("../img/headerbg.png");
 }
 
-.form__gain__header,
-.form__costs__header,
-.form__send__header,
-.form__card__header {
+.form__gain__header {
     height: 40px;
     width: 269px;
     border-top-left-radius: 4px;
@@ -279,10 +285,7 @@
     padding: 5px 3px;
 }
 
-.form__gain__blockButton,
-.form__costs__blockButton,
-.form__send__blockButton,
-.form__card__blockButton {
+.form__gain__blockButton {
     position: absolute;
     width: 200px;
     height: 30px;
@@ -290,10 +293,7 @@
     left: 40px;
 }
 
-.form__gain__blockInputs,
-.form__costs__blockInputs,
-.form__send__blockInputs,
-.form__card__blockInputs {
+.form__gain__blockInputs {
     width: 250px;
     margin: 5px auto;
 }

@@ -181,7 +181,7 @@ body {
 div[class^=access_] {
     width: 64px;
     height: 64px;
-    background-image: url('../img/access.png');
+    background: url('../img/access.png');
     margin: 5px auto;
 }
 
