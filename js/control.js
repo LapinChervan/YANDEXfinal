@@ -13,7 +13,6 @@ CONTROL.initialize = (function() {
                     key, html;
 
                 user.login = data.name;
-
                 for (key in data.categories) {
                     html = '';
                     data.categories[key].
@@ -316,6 +315,7 @@ CONTROL.responses = (function() {
         CONTR.initialize.selectLoadSch(user.data);
         newCat.innerHTML = Mustache.render(doc.querySelector('.useraccountsNew').innerHTML,
                                           {costs: res.cat, img: 'categoryImg-' + res.type});
+       console.log(newCat);
         categories.appendChild(newCat);
     }
 
@@ -342,6 +342,7 @@ CONTROL.responses = (function() {
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
                           html.indexOf('<div>', indexStart + 1));
+        alert(subs);
         parent.innerHTML = html.replace(subs, '');
     }
 

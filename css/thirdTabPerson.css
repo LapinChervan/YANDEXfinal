@@ -14,6 +14,7 @@
 .setting-wrap {
     padding: 10px 0 5px 0;
     white-space: normal;
+    min-height: 95px;
 }
 
 .setting-wrap > div{
@@ -30,6 +31,10 @@
 .setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete, .inlineBlock {
     display: inline-block;
     cursor: pointer;
+}
+
+.inlineBlock {
+    margin: 10px 0 0 0;
 }
 
 div.removeStyle {

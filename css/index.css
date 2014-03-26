@@ -177,6 +177,47 @@ body {
     overflow: auto;
 }
 
+/*СПРАЙТЫ ДЛЯ ДОСТУПА (РЕГ, АВТОРИЗ)*/
+div[class^=access_] {
+    width: 64px;
+    height: 64px;
+    background-image: url('../img/access.png');
+    margin: 5px auto;
+}
+
+.access_auth {
+    background-position: 0 0;
+}
+
+.access_reg {
+    background-position: -114px 0;
+}
+
+/*СПРАЙТЫ ДЛЯ БЛОКОВ С ОПИСАНИЕМ*/
+div[class^=info_] {
+    width: 128px;
+    height: 128px;
+    background-image: url('../img/indexItem.png');
+    margin: 5px auto;
+}
+
+.info_doh {
+    background-position: 0 0;
+}
+
+.info_res {
+    background-position: 0 -178px;
+}
+
+.info_stats {
+    background-position: 0 -356px;
+}
+
+.info_sett {
+    background-position: 0 -534px;
+}
+/*----------------------------------*/
+
 .main__content__block h3 {
     text-transform: uppercase;
     color: #E74C3C;

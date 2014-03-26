@@ -4,8 +4,8 @@ var http = require('http'),
     connect = require('connect'),
     requests = require('requests'),
     app = connect()
-    .use(connect.cookieParser())
-    .use(function(req, res, next){
+        .use(connect.cookieParser())
+        .use(function(req, res, next){
         var data = url.parse(req.url, true),
             pathObj = {
                 '/currency': function() {
@@ -52,6 +52,7 @@ var http = require('http'),
                     requests.removeSession(req.cookies.controls, res);
                 }
             };
+
         if (pathObj[data.pathname]) {
             if (data.pathname !== '/close')
                 res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
@@ -99,5 +100,5 @@ var http = require('http'),
         }
     });
 
-    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
+    app.use(connect.static('/Users/nvzc/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);
