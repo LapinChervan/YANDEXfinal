@@ -28,7 +28,7 @@
     vertical-align: bottom;
 }
 
-.setting-wrap > div:hover .edit, .setting-wrap > div:hover .delete, .inlineBlock {
+.setting-wrap > div:hover .valute_edit, .setting-wrap > div:hover .valute_remove, .inlineBlock {
     display: inline-block;
     cursor: pointer;
 }
@@ -212,4 +212,23 @@ div[class^=valute_] {
 
 .valute_eur {
     background-position: -132px 0;
+}
+
+span[class^=valute_] {
+    background-image: url('../img/valute.png');
+    position: absolute;
+    display: none;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+}
+
+.valute_edit {
+    background-position: -66px 0;
+    right: 20px;
+}
+
+.valute_remove {
+    background-position: 0 0;
+    right: 2px;
 }

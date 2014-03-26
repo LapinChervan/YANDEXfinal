@@ -610,7 +610,7 @@ CONTROL.access = (function() {
             }
 
             //КНОПКИ РЕДАКТИРОВАНИЯ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
-            if (target.classList.contains('edit')) {
+            if (target.classList.contains('valute_edit')) {
                 ['accounts', 'gain', 'costs'].
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
@@ -637,7 +637,7 @@ CONTROL.access = (function() {
             }
 
             //КНОПКИ УДАЛЕНИЯ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
-            if (target.classList.contains('delete')) {
+            if (target.classList.contains('valute_remove')) {
                 ['accounts', 'gain', 'costs'].
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
