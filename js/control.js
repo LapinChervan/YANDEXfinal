@@ -18,7 +18,7 @@ CONTROL.initialize = (function() {
                     html = '';
                     data.categories[key].
                         forEach(function(elem) {
-                            html += Mustache.render(tmp, {costs: elem, img: 'img/' + key + '.png'});
+                            html += Mustache.render(tmp, {costs: elem, img: 'categoryImg-' + key});
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
@@ -315,7 +315,7 @@ CONTROL.responses = (function() {
         user.data.categories[res.type].push(res.cat);
         CONTR.initialize.selectLoadSch(user.data);
         newCat.innerHTML = Mustache.render(doc.querySelector('.useraccountsNew').innerHTML,
-                                          {costs: res.cat, img: 'img/' + res.type + '.png'});
+                                          {costs: res.cat, img: 'categoryImg-' + res.type});
         categories.appendChild(newCat);
     }
 

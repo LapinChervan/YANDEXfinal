@@ -193,8 +193,19 @@ div.marginR0 {
     clear: right;
 }
 
-.img-category {
-    background: url('../img/gain.png');
-    width: 48px;
+div[class^=categoryImg] {
+    width: 100%;
     height: 48px;
+}
+
+.categoryImg-gain {
+    background: url('../img/gain.png') center no-repeat;
+}
+
+.categoryImg-costs {
+    background: url('../img/costs.png') center no-repeat;
+}
+
+.categoryImg-accounts {
+    background: url('../img/accounts.png') center no-repeat;
 }
