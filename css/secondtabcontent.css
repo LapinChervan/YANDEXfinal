@@ -20,7 +20,7 @@
     margin-left: -20px;
 }
 
-#second li:hover .delete, #second li:hover .edit{
+#second li:hover .valute_remove {
     display: inline-block;
 }
 

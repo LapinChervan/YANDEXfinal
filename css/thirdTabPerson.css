@@ -81,24 +81,6 @@ div.removeStyle > div > span {
     display: block;
 }
 
-.edit, .delete {
-    width:16px;
-    height: 16px;
-    position: absolute;
-    display: none;
-    top: 2px;
-}
-
-.edit {
-    background: url(../img/edit.png);
-    right: 20px;
-}
-
-.delete {
-    background: url(../img/delete.png);
-    right: 2px;
-}
-
 .relative > div {
     position: relative
 }
