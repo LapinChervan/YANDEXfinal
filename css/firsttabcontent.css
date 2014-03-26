@@ -124,7 +124,7 @@ div[class^=operats_] {
     width: 48px;
     height: 48px;
     background-image: url('../img/operats.png');
-    margin: 5px auto;
+    margin: 0 auto;
 }
 
 .operats_form_gain, .operats_cat_gain, .operats_hist_gain {

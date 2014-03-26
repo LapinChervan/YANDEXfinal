@@ -705,7 +705,7 @@ CONTROL.access = (function() {
                 parent, type, src,
                 id;
 
-            if (!target.classList.contains('delete')) return;
+            if (!target.classList.contains('valute_remove')) return;
 
             parent = target.parentNode;
             src = parent.querySelector('div[class^=operats_hist_').className;
