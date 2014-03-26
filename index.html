@@ -341,9 +341,7 @@
     <!--ФОРМА РЕДАКТИРОВАНИЯ И УДАЛЕНИЯ КАТЕГОРИИ-->
     <script type="text/template" class="editCatForm">
         <div class="formCatEdit">
-            <div>
-                <img src="{{img}}" alt="">
-            </div>
+            <div class="{{spriteImg}}"></div>
             <input class="editCatInput" type="text" placeholder="{{edit}}" value="" {{readonly}}>
             <div>
                 <a href="#" class="butRenameCat">{{caption}}</a>
@@ -354,9 +352,7 @@
     <!--ФОРМА ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ ТЕКУЩЕЙ ОПЕРАЦИИ-->
     <script type="text/template" class="remHistForm">
         <div class="remHistForm">
-            <div>
-                <img src="img/close2.png" alt="">
-            </div>
+            <div class="operats_remove"></div>
             <span>Подтвердите удаление операции</span>
             <div>
                 <a href="#" class="butRemoveHist">Удалить</a>

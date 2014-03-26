@@ -17,7 +17,7 @@ CONTROL.initialize = (function() {
                     html = '';
                     data.categories[key].
                         forEach(function(elem) {
-                            html += Mustache.render(tmp, {costs: elem, img: 'categoryImg-' + key});
+                            html += Mustache.render(tmp, {costs: elem, img: 'operats_cat_' + key});
                         });
                     doc.querySelector('.' + key).innerHTML = html;
                 }
@@ -323,7 +323,7 @@ CONTROL.responses = (function() {
         user.data.categories[res.type].push(res.cat);
         CONTR.initialize.selectLoadSch(user.data);
         newCat.innerHTML = Mustache.render(doc.querySelector('.useraccountsNew').innerHTML,
-                                          {costs: res.cat, img: 'categoryImg-' + res.type});
+                                          {costs: res.cat, img: 'operats_cat_' + res.type});
        console.log(newCat);
         categories.appendChild(newCat);
     }
@@ -618,7 +618,7 @@ CONTROL.access = (function() {
                             CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Изменить',
-                                    img: 'img/edit2.png'})});
+                                    spriteImg: 'operats_edit'})});
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event,
@@ -646,7 +646,7 @@ CONTROL.access = (function() {
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Удалить',
                                     img: 'img/close2.png',
-                                    readonly: 'readonly'})});
+                                    spriteImg: 'operats_remove'})});
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event,

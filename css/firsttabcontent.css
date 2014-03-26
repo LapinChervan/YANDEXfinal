@@ -119,7 +119,7 @@
     padding: 50px 0 0 0;
 }
 
-/*СПРАЙТЫ ДЛЯ ЗАГОЛОВКОВ ФОРМ ОПЕРАЦИЙ */
+/*СПРАЙТЫ ДЛЯ ФОРМ, ЗАГОЛОВКОВ, КАТЕГОРИЙ, ОКОН ПОДТВЕРЖДЕНИЙ*/
 div[class^=operats_] {
     width: 48px;
     height: 48px;
@@ -127,16 +127,24 @@ div[class^=operats_] {
     margin: 5px auto;
 }
 
-.operats_form_gain {
+.operats_form_gain, .operats_cat_gain {
     background-position: -294px 0;
 }
 
-.operats_form_costs {
+.operats_form_costs, .operats_cat_costs {
     background-position: -98px 0;
 }
 
-.operats_form_send {
+.operats_form_send, .operats_cat_accounts {
     background-position: -490px 0;
+}
+
+.operats_edit {
+    background-position: -196px 0;
+}
+
+.operats_remove {
+    background-position: 0 0;
 }
 /*------------------------------------*/
 

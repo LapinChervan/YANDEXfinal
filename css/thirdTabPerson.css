@@ -64,11 +64,6 @@ div.removeStyle > div > span {
 .create-block {
     margin-top: 10px;
 }
-/*
-.create-image {
-    border: 1px dashed;
-    box-shadow: inset 0 0 1px;
-}*/
 
 .setting-wrap input[type=text], .create-block input[type=text], .currency-wrap input[type="text"]{
     width: 110px;
@@ -132,10 +127,7 @@ div.marginR0 {
 
 .remHistForm > span {
     color: #EB8745;
-}
-
-.remHistForm > div {
-    margin: 5px 0 0 0;
+    margin: 5px;
 }
 
 .formCatEdit input {
@@ -196,21 +188,4 @@ div.marginR0 {
 
 .clear {
     clear: right;
-}
-
-div[class^=categoryImg] {
-    width: 100%;
-    height: 48px;
-}
-
-.categoryImg-gain {
-    background: url('../img/gain.png') center no-repeat;
-}
-
-.categoryImg-costs {
-    background: url('../img/costs.png') center no-repeat;
-}
-
-.categoryImg-accounts {
-    background: url('../img/accounts.png') center no-repeat;
 }
