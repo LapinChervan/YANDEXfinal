@@ -47,10 +47,14 @@ var http = require('http'),
                     else {
                         requests.historyFilter(data.query.login, data.query.account, res, data.query.type, data.query.start, data.query.end);
                     }
+                },
+                '/close': function () {
+                    requests.removeSession(req.cookies.controls, res);
                 }
             };
         if (pathObj[data.pathname]) {
-            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+            if (data.pathname !== '/close')
+                res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
             console.log(req.headers);
             pathObj[data.pathname]();
         } else {
