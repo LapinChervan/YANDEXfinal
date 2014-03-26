@@ -294,6 +294,10 @@ CONTROL.requests = (function() {
         return host + 'findOperation?login=' + user + '&account=' + account + '&type=' + type + '&start=' + start + '&end=' + end;
     }
 
+    function closeSession() {
+        return host + 'close';
+    }
+
     return {
         changeMainCurr: changeMainCurr,
         changeRates: changeRates,
@@ -305,7 +309,8 @@ CONTROL.requests = (function() {
         newOper: newOper,
         removeOper: removeOper,
         filterDate: filterDate,
-        filterHistory: filterHistory
+        filterHistory: filterHistory,
+        closeSession: closeSession
     }
 })();
 
@@ -422,8 +427,12 @@ CONTROL.responses = (function() {
         var sett = {
             0: ['Регистрация успешно пройдена!', 'img/yes.png'],
             1: ['Пользователь с таким именем существует!','img/warn.png']
-        }
+        };
         tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), sett[res][0], sett[res][1]);
+    }
+
+    function exitToIndex () {
+        window.location.href = window.location.origin;
     }
 
     return {
@@ -434,7 +443,8 @@ CONTROL.responses = (function() {
         newOper: newOper,
         removeOper: removeOper,
         filterDate: filterDate,
-        registration: registration
+        registration: registration,
+        exitToIndex: exitToIndex
     }
 })();
 
@@ -485,6 +495,12 @@ CONTROL.access = (function() {
 
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
         CONTR.initialize.init(responseData);
+
+        doc.querySelector('.main__user-data__exit').addEventListener('click', function(e) {
+            var event = e || window.event;
+            event.preventDefault();
+            ajax.toServer(request.closeSession(), response.exitToIndex);
+        });
 
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
