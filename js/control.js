@@ -185,11 +185,11 @@ CONTROL.tools = (function() {
         CONTROL.layer.destroyLayer();
     }
 
-    function showMessage(cls, parent, msg, img) {
+    function showMessage(cls, parent, msg, spriteCls) {
         var elem = parent,
             style = elem.style;
 
-        parent.innerHTML = Mustache.render(cls.innerHTML, {msg: msg, img: img});
+        parent.innerHTML = Mustache.render(cls.innerHTML, {msg: msg, spriteImg: spriteCls});
         style.display = 'block';
         setTimeout(function() {
             style.display = 'none';
@@ -425,8 +425,8 @@ CONTROL.responses = (function() {
 
     function registration(res) {
         var sett = {
-            0: ['Регистрация успешно пройдена!', 'img/yes.png'],
-            1: ['Пользователь с таким именем существует!','img/warn.png']
+            0: ['Регистрация успешно пройдена!', 'warn_yes'],
+            1: ['Пользователь с таким именем существует!', 'warn_error']
         };
         tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), sett[res][0], sett[res][1]);
     }

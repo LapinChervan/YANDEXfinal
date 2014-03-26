@@ -177,6 +177,27 @@ body {
     overflow: auto;
 }
 
+div[class^=warn_] {
+    width: 32px;
+    height: 32px;
+    background-image: url('../img/warning.png');
+}
+
+.warn_yes {
+    background-position: -164px 0;
+    margin: 2px auto;
+}
+
+.warn_error {
+    background-position: -82px 0;
+    margin: 2px auto;
+}
+
+.warn_stat {
+    background-position: 0 0;
+    float: right;
+}
+
 /*СПРАЙТЫ ДЛЯ ДОСТУПА (РЕГ, АВТОРИЗ)*/
 div[class^=access_] {
     width: 64px;
