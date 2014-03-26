@@ -57,7 +57,7 @@
     width: 31%;
     line-height: .8;
     font-size: 14px;
-    margin: -5px 0 0 0;
+    margin: -20px 0 0 0;
 }
 
 .hist, .comm {
@@ -87,7 +87,7 @@
     text-align: right;
 }
 
- .account {
+.account {
     margin-bottom: 5px;
 }
 
@@ -109,7 +109,7 @@
 
 .comm {
     font-size: 16px;
-    margin: 4px;
+    margin: 8px;
 }
 
 .color-income {

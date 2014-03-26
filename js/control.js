@@ -37,7 +37,7 @@ CONTROL.initialize = (function() {
                         for (objKey3 in history[objKey][objKey2]) {
                             thisData[objKey3] = history[objKey][objKey2][objKey3];
                         }
-                        thisData['ico'] = 'img/' + thisData.type + '.png';
+                        thisData['spriteImg'] = 'operats_hist_' + thisData.type;
                         thisData.mainCurr = user.data.mainCurr;
                         html = html + Mustache.render(tmp, thisData);
                     }

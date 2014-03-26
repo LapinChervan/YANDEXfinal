@@ -127,15 +127,15 @@ div[class^=operats_] {
     margin: 5px auto;
 }
 
-.operats_form_gain, .operats_cat_gain {
+.operats_form_gain, .operats_cat_gain, .operats_hist_gain {
     background-position: -294px 0;
 }
 
-.operats_form_costs, .operats_cat_costs {
+.operats_form_costs, .operats_cat_costs, .operats_hist_costs {
     background-position: -98px 0;
 }
 
-.operats_form_send, .operats_cat_accounts {
+.operats_form_send, .operats_cat_accounts, .operats_hist_send {
     background-position: -490px 0;
 }
 
@@ -145,6 +145,10 @@ div[class^=operats_] {
 
 .operats_remove {
     background-position: 0 0;
+}
+
+.operats_hist_gain {
+    margin: -10px 0 0 0;
 }
 /*------------------------------------*/
 
