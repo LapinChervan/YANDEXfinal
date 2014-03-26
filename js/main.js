@@ -1,4 +1,4 @@
-var	doc = document,
+var doc = document,
     access = CONTROL.access,
     layer = CONTROL.layer;
 
