@@ -769,7 +769,7 @@ CONTROL.layer = (function() {
 
         return function (options) {
             var fragment = doc.createDocumentFragment();
-       //     optionsObject = getDefaultOptions();
+            optionsObject = getDefaultOptions();
             Object.keys(options).
                 forEach(function(key) {
                     optionsObject[key] = options[key];
