@@ -413,7 +413,7 @@ CONTROL.responses = (function() {
             radio, key, input = '';
 
         for (key in currency) {
-            input = input + Mustache.render(templateInput, {valuta: key, count: currency[key], main: mainCurr});
+            input = input + Mustache.render(templateInput, {spriteImg: 'valute_' + key, count: currency[key], main: mainCurr});
         }
         mainCurrWrap.innerHTML = input;
     }

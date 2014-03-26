@@ -12,9 +12,9 @@
 }
 
 .setting-wrap {
-    padding: 10px 0 5px 0;
+    padding: 0 0 2px 0;
     white-space: normal;
-    min-height: 95px;
+    min-height: 100px;
 }
 
 .setting-wrap > div{
@@ -34,7 +34,7 @@
 }
 
 .inlineBlock {
-    margin: 10px 0 0 0;
+    margin: 6px 0 0 0;
 }
 
 div.removeStyle {
@@ -188,4 +188,28 @@ div.marginR0 {
 
 .clear {
     clear: right;
+}
+
+div[class^=valute_] {
+    width: 16px;
+    height: 16px;
+    background-image: url('../img/valute.png');
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.valute_uah {
+     background-position: -264px 0;
+}
+
+.valute_rub {
+    background-position: -198px 0;
+}
+
+.valute_usd {
+    background-position: -330px 0;
+}
+
+.valute_eur {
+    background-position: -132px 0;
 }
