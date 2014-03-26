@@ -358,7 +358,7 @@ CONTROL.responses = (function() {
     function newOper(res) {
         var parent = doc.querySelector('.historyUl');
 
-        res['ico'] = 'img/' + res.type + '.png';
+        res['spriteImg'] = 'operats_hist_' + res.type;
         res.mainCurr = user.data.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
         tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'img/yes.png');
@@ -692,9 +692,9 @@ CONTROL.access = (function() {
             if (!target.classList.contains('delete')) return;
 
             parent = target.parentNode;
-            src = parent.querySelector('.icoHist').src;
+            src = parent.querySelector('div[class^=operats_hist_').className;
 
-            type = src.slice(src.lastIndexOf('/') + 1, src.length - 4);
+            type = src.slice(src.lastIndexOf('_') + 1);
 
             id = parent.querySelector('.id').innerHTML;
             event.stopPropagation();
