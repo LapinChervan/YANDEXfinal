@@ -12,7 +12,6 @@
     margin-bottom: 5px;
     cursor: pointer;
     position: relative;
-    height: 45px;
 
 }
 
@@ -57,7 +56,6 @@
     width: 31%;
     line-height: .8;
     font-size: 14px;
-    margin: -20px 0 0 0;
 }
 
 .hist, .comm {
@@ -92,7 +90,7 @@
 }
 
 .history-date {
-    margin: 6px 0 7px ;
+    margin-bottom: 7px;
 }
 
 .sch, .cat {
@@ -105,11 +103,6 @@
 
 .sum {
     margin: 4px 0;
-}
-
-.comm {
-    font-size: 16px;
-    margin: -10px 0 0 0;
 }
 
 .color-income {
