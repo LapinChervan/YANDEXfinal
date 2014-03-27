@@ -370,7 +370,6 @@ CONTROL.responses = (function() {
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
                           html.indexOf('</div>', indexStart + res.cat.length + 14));
-        alert(subs);
         parent.innerHTML = html.replace(subs, '');
     }
 
