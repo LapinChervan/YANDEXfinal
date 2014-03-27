@@ -355,7 +355,7 @@ CONTROL.responses = (function() {
 
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
-                          html.indexOf('<div>', indexStart + 1));
+                          html.indexOf('</div>', indexStart + res.cat.length + 14));
         alert(subs);
         parent.innerHTML = html.replace(subs, '');
     }
@@ -366,7 +366,7 @@ CONTROL.responses = (function() {
         res['spriteImg'] = 'operats_hist_' + res.type;
         res.mainCurr = user.data.mainCurr;
         parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
-        tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'img/yes.png');
+        tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'warn_yes');
         tools.updateButton(doc.querySelector('.apply_filter2'), res.type, res.date);
     }
 
