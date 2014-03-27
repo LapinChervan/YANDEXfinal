@@ -56,7 +56,7 @@ var http = require('http'),
         if (pathObj[data.pathname]) {
             if (data.pathname !== '/close')
                 res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-            console.log(req.headers);
+         //   console.log(req.headers);
             pathObj[data.pathname]();
         } else {
             next();
@@ -77,7 +77,7 @@ var http = require('http'),
         var data = url.parse(req.url, true);
         if (data.pathname === '/cookie') {
             if (req.cookies.controls) {
-                console.log(req.cookies);
+               // console.log(req.cookies);
                 requests.checkSession(req.cookies.controls, data.query.start, data.query.end, res);
             }
             else {
