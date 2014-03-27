@@ -35,8 +35,10 @@ CONTROL.initialize = (function() {
                 for (objKey in history) {
                     for (objKey2 in  history[objKey]) {
                         for (objKey3 in history[objKey][objKey2]) {
-                            thisData[objKey3] = history[objKey][objKey2][objKey3];
+                             thisData[objKey3] = history[objKey][objKey2][objKey3];
                         }
+                        thisData.sum = tools.checkValuePointer(thisData.sum);
+
                         thisData['spriteImg'] = 'operats_hist_' + thisData.type;
                         thisData.mainCurr = user.data.mainCurr;
                         html = html + Mustache.render(tmp, thisData);
@@ -115,6 +117,17 @@ CONTROL.tools = (function() {
         return true;
     }
 
+    function checkValuePointer(numb) {
+        var arr = numb.toString().split('.');
+
+        if (!arr[1] || arr[1].length < 2) {
+            return numb;
+        }
+        if (arr[1].length > 2) {
+            return +(arr[0] + '.' + arr[1].slice(0, 2));
+        }
+    }
+
     function getDateMs(date) {
         var arr = date.split('.');
         return Date.parse(new Date(arr[2],arr[1],arr[0]));
@@ -175,7 +188,7 @@ CONTROL.tools = (function() {
                 html = html + Mustache.render(doc.querySelector('.cats').innerHTML, {
                     proc: Math.round((data[key][key2] / biggestArr[i]) * 100),
                     category: key2,
-                    price: data[key][key2],
+                    price: checkValuePointer(data[key][key2]),
                     rgb: randomColor()
                 });
             }
@@ -207,6 +220,7 @@ CONTROL.tools = (function() {
         showDiagram: showDiagram,
         findSelectedInput: findSelectedInput,
         isEmptyOne: isEmptyOne,
+        checkValuePointer: checkValuePointer,
         showMessage: showMessage
     }
 })();
@@ -391,7 +405,7 @@ CONTROL.responses = (function() {
                 }
                 diagram[key][data.cat] += +data.sum;
             }
-            doc.querySelector('.' + key + '_sumfilter').innerHTML = sum + ' ' + user.data.mainCurr;
+            doc.querySelector('.' + key + '_sumfilter').innerHTML = tools.checkValuePointer(sum) + ' ' + user.data.mainCurr;
         }
 
         CONTR.tools.showDiagram(diagram);
