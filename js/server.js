@@ -52,7 +52,7 @@ var http = require('http'),
                                                    data.query.start, data.query.end);
                         }
                     },
-                    
+
                     '/close': function () {
                         requests.removeSession(req.cookies.controls, res);
                     }

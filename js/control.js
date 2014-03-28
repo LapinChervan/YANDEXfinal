@@ -544,7 +544,7 @@ CONTROL.access = (function() {
                 parent = target.parentNode,
                 date = parent.querySelectorAll('input[type=text]'),
                 activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
-                activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio'), 'checked');
+                activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio]'), 'checked');
 
             event.stopPropagation();
 
@@ -721,7 +721,7 @@ CONTROL.access = (function() {
             if (!target.classList.contains('valute_remove')) return;
 
             parent = target.parentNode;
-            src = parent.querySelector('div[class^=operats_hist_').className;
+            src = parent.querySelector('div[class^=operats_hist_]').className;
 
             type = src.slice(src.lastIndexOf('_') + 1);
 
