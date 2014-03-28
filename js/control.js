@@ -515,6 +515,30 @@ CONTROL.access = (function() {
             ajax.toServer(request.closeSession(), response.exitToIndex);
         });
 
+        //ДЕЛЕГИРОВАНИЕ ПЕРЕХОД ПО ТАБАМ
+        doc.querySelector('.main__tabs__ul').addEventListener('click', function(e) {
+            var event = e || window.event,
+                target = event.target || event.srcElement,
+                tabs, key,
+                parentContent = doc.querySelector('.main__tabs__content__ul');
+
+            tabs = {
+                'tab_main': ['tab_history', 'tab_person'],
+                'tab_history': ['tab_main', 'tab_person'],
+                'tab_person':['tab_main', 'tab_history']
+            }
+
+            for (key in tabs) {
+                if (target.classList.contains(key)) {
+                    target.classList.add('visit');
+                    parentContent.querySelector('.' + key).style.display = 'block';
+                } else {
+                    doc.querySelector('.' + key).classList.remove('visit');
+                    parentContent.querySelector('.' + key).style.display = 'none'; //кешировать такие моменты
+                }
+            }
+        }, false);
+
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
             var event = e || window.event,

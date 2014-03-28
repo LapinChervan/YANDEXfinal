@@ -53,7 +53,7 @@ body,
 .form__card__add, .form__card__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
 .apply_filter1, .apply_filter2, .more_history, .main__user-data__exit,
-#second li {
+.tab_history li {
 	background: url("../img/wavegrid.png");
 }
 

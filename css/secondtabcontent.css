@@ -1,8 +1,8 @@
-#second ul {
+.tab_history ul {
     list-style-type: none;
 }
 
-#second li {
+.tab_history li {
     color: #464646;
     padding: 1px 0 1px 10px;
     box-shadow: 0 0 10px rgba(18, 46, 30, 0.5);
@@ -15,11 +15,11 @@
 
 }
 
-#second li:hover div.alignRight {
+.tab_history li:hover div.alignRight {
     margin-left: -20px;
 }
 
-#second li:hover .valute_remove {
+.tab_history li:hover .valute_remove {
     display: inline-block;
 }
 
@@ -47,7 +47,7 @@
     vertical-align: middle;
 }
 
-#second li > div {
+.tab_history li > div {
     display: inline-block;
     vertical-align: middle;
 }
@@ -66,7 +66,7 @@
     color: #F94327;
 }
 
-#second img {
+.tab_history img {
     height: 40px;
     width: 40px;
     display: inline-block;
