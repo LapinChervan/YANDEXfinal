@@ -172,6 +172,24 @@
         return new DOMTokenList(this);
     });
 
+
+    defineElementGetter(Element.prototype, 'lastElementChild', function(){
+        var node = this;
+        node = node.lastChild;
+        while(node && node.nodeType != 1) node = node.previousSibling;
+        return node;
+        /*{
+        "firstElementChild" : {//https://developer.mozilla.org/en/DOM/Element.firstElementChild
+            "get" : function() {
+                var node = this;
+                node = node.firstChild;
+                while(node && node.nodeType != 1) node = node.nextSibling;
+                return node;
+            }
+        }*/
+    });
+
+
 })();
 
 //object keys
@@ -187,6 +205,8 @@
 
 //forEach
 (function(){
+
+
     if (!Array.prototype.forEach)
     {
         Array.prototype.forEach = function(fun /*, thisArg */)
@@ -209,4 +229,16 @@
             }
         };
     }
+
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function(prop) {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] === prop) return i;
+            }
+            return -1;
+        }
+    }
+
+
+
 })();

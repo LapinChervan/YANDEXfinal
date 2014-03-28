@@ -4,7 +4,8 @@ var doc = document,
     access = CONTR.access,
     layer = CONTR.layer;
 
-CONTR.slider.start();
+//CONTR.slider.start();
+
 CONTR.ajax.toServer('http://localhost:1111/cookie?start=' + tools.getDateMs(tools.getDateN('01')) +
                                                   '&end=' + tools.getDateMs(tools.getDateN('30')), access.showContent);
 

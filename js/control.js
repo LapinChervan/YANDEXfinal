@@ -34,14 +34,16 @@ CONTROL.initialize = (function() {
 
                 for (objKey in history) {
                     for (objKey2 in  history[objKey]) {
-                        for (objKey3 in history[objKey][objKey2]) {
-                             thisData[objKey3] = history[objKey][objKey2][objKey3];
-                        }
-                        thisData.sum = tools.checkValuePointer(thisData.sum);
+                        if (history[objKey].hasOwnProperty(objKey2)) {
+                            for (objKey3 in history[objKey][objKey2]) {
+                                 thisData[objKey3] = history[objKey][objKey2][objKey3];
+                            }
+                            thisData.sum = tools.checkValuePointer(thisData.sum);
 
-                        thisData['spriteImg'] = 'operats_hist_' + thisData.type;
-                        thisData.mainCurr = user.data.mainCurr;
-                        html = html + Mustache.render(tmp, thisData);
+                            thisData['spriteImg'] = 'operats_hist_' + thisData.type;
+                            thisData.mainCurr = user.data.mainCurr;
+                            html = html + Mustache.render(tmp, thisData);
+                        }
                     }
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
@@ -109,7 +111,7 @@ CONTROL.tools = (function() {
     }
 
     function isEmptyOne(elem) {
-        if (elem.value.trim().length === 0) {
+        if (elem.value.length === 0) {
             elem.placeholder = 'Ошибка ввода';
             return false;
         }
@@ -360,7 +362,7 @@ CONTROL.responses = (function() {
     function removeCategory(res) {
         var parent = doc.querySelector('.' + res.type),
             parentHistSel = doc.querySelector('.history_sch_select'),
-            html = parent.innerHTML,
+            html = parent.innerHTML.toLowerCase(),
             indexStart, subs,
             cat = user.data.categories[res.type];
 
@@ -463,7 +465,8 @@ CONTROL.responses = (function() {
 
 CONTROL.ajax = (function() {
     function toServer(link, callback) {
-		var xhr = new XMLHttpRequest();
+		var xhr = new XMLHttpRequest(),
+            a;
 
         xhr.open('GET', link);
         xhr.onreadystatechange = function() {
@@ -476,10 +479,11 @@ CONTROL.ajax = (function() {
 
             if (typeof callback === 'function') {
                 try {
-                    callback(JSON.parse(xhr.responseText));
+                    a = JSON.parse(xhr.responseText);
                 } catch (e){
-                    callback(xhr.responseText);
+                    a = xhr.responseText;
                 }
+                callback(a);
             }
             xhr = null;
         };
