@@ -132,7 +132,7 @@ CONTROL.tools = (function() {
 
     function getDateMs(date) {
         var arr = date.split('.');
-        return Date.parse(new Date(arr[2],arr[1],arr[0]));
+        return +new Date(arr[2],arr[1],arr[0]);
     }
 
     function getDateN(day) {
