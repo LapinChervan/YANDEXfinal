@@ -515,7 +515,10 @@ CONTROL.access = (function() {
 
 	function showContent(responseData) {
         if (responseData == '0') {
-            tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), 'Логин или пароль указаны неверно!', 'img/warn.png');
+            tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), 'Логин или пароль указаны неверно!', 'warn_error');
+            return false;
+        }
+        if (responseData == '00') {
             return false;
         }
         user.data  = responseData;
