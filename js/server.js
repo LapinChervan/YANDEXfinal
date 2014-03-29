@@ -85,7 +85,7 @@ var http = require('http'),
                 requests.checkSession(req.cookies.controls, data.query.start, data.query.end, res);
             }
             else {
-                res.end('0');
+                res.end('00');
             }
         }
         else {

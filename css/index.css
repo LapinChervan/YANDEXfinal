@@ -1,3 +1,7 @@
+/*------------------*/
+/*ИНДЕКСНАЯ СТРАНИЦА*/
+/*------------------*/
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +9,52 @@
 
 body {
     font-family: Tahoma, Verdana;
+}
+
+.main {
+    width: 96%;
+    margin: 10px auto;
+    min-width: 1185px;
     position: relative;
+}
+
+.main__header {
+    height: 210px;
+    margin: 20px 0 0 0;
+    position: relative;
+}
+
+.header__logo { 
+    margin: -2px 0 0 -1px;
+    display: inline-block;
+    height: 100px;
+}
+
+.header__logoname {
+    float: right;
+    margin: 5px 30px;
+}
+
+.clear {
+    clear: right;
+}
+
+.header__reg, .header__auth {
+    margin: 25px 35px 0;  
+    display: table;
+}
+
+.header__reg {
+    float: right;
+}
+
+.header__auth {
+    float: left; 
+}
+
+.allbutton {
+    width: 600px;
+    margin: 0 auto;
 }
 
 .messageResponse {
@@ -15,10 +64,10 @@ body {
     width: 180px;
     top: 40px;
     left: 50%;
+    margin: 10px 0 0 -100px;
     font-size: 16px;
     color: #F0F0F0;
     text-align: center;
-    margin: 10px 0 0 -100px;
 }
 
 .messageResponse img {
@@ -53,54 +102,6 @@ body {
     padding: 10px 0 0 0;
 }
 
-.main {
-    width: 96%;
-    margin: 10px auto;
-    min-width: 1185px;
-    position: relative;
-}
-
-.main__header {
-    height: 210px;
-    margin: 20px 0 0 0;
-    position: relative;
-}
-
-.header__logo { 
-    margin: -2px 0 0 -1px;
-    display: inline-block;
-    height:100px;
-    overflow: hidden;
-    color:#fff;
-}
-
-.header__logoname {
-    float: right;
-    margin: 5px 30px;
-}
-
-.clear {
-    clear: right;
-}
-
-.header__reg, .header__auth {
-    margin: 25px 35px 0;  
-    display: table;
-}
-
-.header__reg {
-    float: right;
-}
-
-.header__auth {
-    float: left; 
-}
-
-.allbutton {
-    width: 600px;
-    margin: 0 auto;
-}
-
 .header__reg__button, .header__auth__button {
     display: table-cell;
     height: 45px;
@@ -114,16 +115,10 @@ body {
 }
 
 .header__reg__button, .log_reg {
-    background: #2189C2; 
+    background: #2189C2;
     border: 1px solid #2189C2;
 }
 
-.header__auth__button, .log_auth {
-    background: #60B149; 
-    border: 1px solid #60B149;
-}
-
-/*BUTTON REG*/
 .header__reg__button:hover, .log_reg:hover {
     box-shadow: 1px 1px 20px #C0F6F6, -1px -1px 20px #C0F6F6;
     border: 1px solid #2189C2;
@@ -138,9 +133,12 @@ body {
     box-shadow: inset 1px 3px 12px #424B49;
     color: #D0D6DA;
 }
-/*-----------------------------------------------*/
 
-/*BUTTON AUTH*/
+.header__auth__button, .log_auth {
+    background: #60B149;
+    border: 1px solid #60B149;
+}
+
 .header__auth__button:hover, .log_auth:hover {
     box-shadow: 1px 1px 20px #C2F9BC, -1px -1px 20px #C2F9BC;
     border: 1px solid #60B149;
@@ -155,10 +153,9 @@ body {
     box-shadow: inset 1px 3px 12px #424B49;
     color: #D0D6DA;
 }
-/*-----------------------------------------------*/
 
 .main__content {
-    margin: -1px auto;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -198,7 +195,6 @@ div[class^=warn_] {
     float: right;
 }
 
-/*СПРАЙТЫ ДЛЯ ДОСТУПА (РЕГ, АВТОРИЗ)*/
 div[class^=access_] {
     width: 64px;
     height: 64px;
@@ -214,7 +210,6 @@ div[class^=access_] {
     background-position: -114px 0;
 }
 
-/*СПРАЙТЫ ДЛЯ БЛОКОВ С ОПИСАНИЕМ*/
 div[class^=info_] {
     width: 128px;
     height: 128px;
@@ -237,7 +232,6 @@ div[class^=info_] {
 .info_sett {
     background-position: 0 -534px;
 }
-/*----------------------------------*/
 
 .main__content__block h3 {
     text-transform: uppercase;
@@ -249,24 +243,12 @@ div[class^=info_] {
 .main__content__block:hover {
     background: #E9E9E9;
     box-shadow: 3px 3px 12px #C6C6C6, -3px -3px 12px #BBBBBB;
-    cursor: pointer;
 }
 
 .main__book {
     text-align: center;
     padding: 25px 0 0 0;
-    position: relative;
-}
 
-.slide_img {
-    border: 1px solid red;
-    position: absolute;
-    background: #fff;
-    top: 58px;
-    left: 451px;
-    width: 392px;
-    max-width: 392px;
-    height: 233px;
 }
 
 .main__book .mac {
