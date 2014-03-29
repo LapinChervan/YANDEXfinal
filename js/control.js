@@ -13,6 +13,7 @@ CONTROL.initialize = (function() {
                     key, html;
 
                 user.login = data.name;
+
                 for (key in data.categories) {
                     html = '';
                     data.categories[key].
@@ -27,21 +28,24 @@ CONTROL.initialize = (function() {
 
             history: function(data) {
                 var  objKey, objKey2, objKey3,
+                     data,
                      tmp = doc.querySelector('.history').innerHTML,
                      html = '',
                      history = data.history ? data.history : data,
                      thisData = {};
 
                 for (objKey in history) {
-                    for (objKey2 in  history[objKey]) {
-                        if (history[objKey].hasOwnProperty(objKey2)) {
-                            for (objKey3 in history[objKey][objKey2]) {
-                                 thisData[objKey3] = history[objKey][objKey2][objKey3];
+                    data = history[objKey];
+                    for (objKey2 in data) {
+                        if (data.hasOwnProperty(objKey2)) {
+                            for (objKey3 in data[objKey2]) {
+                                 thisData[objKey3] = data[objKey2][objKey3];
                             }
-                            thisData.sum = tools.checkValuePointer(thisData.sum);
 
+                            thisData.sum = tools.checkValuePointer(thisData.sum);
                             thisData['spriteImg'] = 'operats_hist_' + thisData.type;
                             thisData.mainCurr = user.data.mainCurr;
+
                             html = html + Mustache.render(tmp, thisData);
                         }
                     }
@@ -68,7 +72,11 @@ CONTROL.initialize = (function() {
                 methods = initMethods;
 
             for (key in methods) {
-                methods[key](data);
+                 setTimeout((function(prop) {
+                    return function() {
+                        methods[prop](data);
+                    }
+                 })(key), 15);
             }
         },
         history: initMethods.history,
@@ -141,7 +149,8 @@ CONTROL.tools = (function() {
     }
 
     function updateButton(elem, type, date) {
-        if (type !== 'send' && ( getDateMs(getDateN('01')) <= getDateMs(date) ) && ( getDateMs(getDateN('30')) >= getDateMs(date)) ) {
+        var dateNow = getDateMs(date);
+        if (type !== 'send' && ( getDateMs(getDateN('01')) <= dateNow ) && ( getDateMs(getDateN('30')) >= dateNow) ) {
             elem.classList.add('update');
             return true;
         }
@@ -172,7 +181,7 @@ CONTROL.tools = (function() {
     }
 
     function showDiagram(data) {
-        var key, key2,
+        var key, key2, sum,
             biggest, biggestArr = [],
             html, i = 0;
 
@@ -187,17 +196,18 @@ CONTROL.tools = (function() {
         for (key in data) {
             html = '';
             for (key2 in data[key]) {
+                sum = data[key][key2];
                 html = html + Mustache.render(doc.querySelector('.cats').innerHTML, {
-                    proc: Math.round((data[key][key2] / biggestArr[i]) * 100),
+                    proc: Math.round((sum / biggestArr[i]) * 100),
                     category: key2,
-                    price: checkValuePointer(data[key][key2]),
+                    price: checkValuePointer(sum),
                     rgb: randomColor()
                 });
             }
             i++;
             doc.querySelector('.diag' + key).innerHTML = html;
         }
-        CONTROL.layer.destroyLayer();
+        //CONTROL.layer.destroyLayer();
     }
 
     function showMessage(cls, parent, msg, spriteCls) {
@@ -340,12 +350,10 @@ CONTROL.responses = (function() {
         var categories = doc.querySelector('.' + res.type),
             newCat = doc.createElement('div');
 
-
         user.data.categories[res.type].push(res.cat);
         CONTR.initialize.selectLoadSch(user.data);
         newCat.innerHTML = Mustache.render(doc.querySelector('.useraccountsNew').innerHTML,
                                           {costs: res.cat, img: 'operats_cat_' + res.type});
-       console.log(newCat);
         categories.appendChild(newCat);
     }
 
@@ -638,6 +646,7 @@ CONTROL.access = (function() {
                             CONTROL.layer.destroyLayer();
                         }
                     }, false);
+                    break;
                 }
             }
         }, false);
@@ -667,6 +676,7 @@ CONTROL.access = (function() {
                             ajax.toServer(request.newCategory(user.login, types[key][1], txtInput.value), response.newCategory);
                             txtInput.value = '';
                         }
+                        break;
                     }
                 }
             }
@@ -824,7 +834,9 @@ CONTROL.layer = (function() {
                 document.removeEventListener('click', destroyLayer);
                 layerElements.destroy = true;
             }
+
             layer.innerHTML = optionsObject.content;
+
             layer.className = optionsObject.clsContentLayer;
             fragment.appendChild(modal);
             fragment.appendChild(layer);

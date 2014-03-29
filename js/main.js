@@ -9,8 +9,6 @@ var doc = document,
 CONTR.ajax.toServer('http://localhost:1111/cookie?start=' + tools.getDateMs(tools.getDateN('01')) +
                                                   '&end=' + tools.getDateMs(tools.getDateN('30')), access.showContent);
 
-
-
 doc.querySelector('.allbutton').addEventListener('click', function(e) {
     var event = e || window.event,
         target = event.target || event.srcElement,
