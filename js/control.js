@@ -231,7 +231,9 @@ CONTROL.reload = (function() {
     var doc = document;
 
     function loadSelectForm(data, formType) {
-        var html, key;
+        var html, key, clone,
+            fragment = document.createDocumentFragment(),
+            option = document.createElement('option');
 
         for (key in data.categories) {
             html = '';
@@ -239,20 +241,27 @@ CONTROL.reload = (function() {
             if (key === 'accounts' || key === formType) {
                 data.categories[key].
                     forEach(function(elem) {
-                        if (key === 'costs') {
-                            html = html + Mustache.render(doc.querySelector('.select__gain').innerHTML, {'accounts': elem});
-                        } else {
-                             html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
-                        }
+                   //     if (key === 'costs') {
+                          //  html = html + Mustache.render(doc.querySelector('.select__gain').innerHTML, {'accounts': elem});
+                            clone = option.cloneNode(true);
+                            clone.innerHTML = elem;
+                            fragment.appendChild(clone);
+                     //   } else {
+                           //  html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
+                       // }
                 });
                if (key === 'costs') {
-                   doc.querySelector('.select__gain').innerHTML = html;
+                  // doc.querySelector('.select__gain').innerHTML = html;
+                   doc.querySelector('.select__gain').appendChild(fragment);
                } else {
-                   doc.querySelector('.select__' + key).innerHTML = html;
+                  // doc.querySelector('.select__' + key).innerHTML = html;
+                   clone = fragment.cloneNode(true);
+                   doc.querySelector('.select__' + key).appendChild(fragment);
                }
 
                 if (formType === 'send') {
-                    doc.querySelector('.select__gain').innerHTML = html;
+                    //doc.querySelector('.select__gain').innerHTML = html;
+                    doc.querySelector('.select__gain').appendChild(clone);
                 }
             }
         }
@@ -283,7 +292,7 @@ CONTROL.requests = (function() {
     }
 
     function newCategory(user, type, cat) {
-        return host + 'newCategories?login=' + user + '&typ=' + type + '&cat=' + cat;
+        return host + 'newCategories?login=' + user + '&typ=' + type + '&cat=' + encodeURI(cat);
     }
 
     function registration(user, password) {
@@ -468,7 +477,8 @@ CONTROL.ajax = (function() {
 		var xhr = new XMLHttpRequest(),
             a;
 
-        xhr.open('GET', link);
+        xhr.open('POST', link);
+       // xhr.setRequestHeader('Content-Type', 'text/plain; charset=utf-8');
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
 
@@ -487,7 +497,7 @@ CONTROL.ajax = (function() {
             }
             xhr = null;
         };
-        xhr.send();
+        xhr.send('ыыыы');
 	}
 	return {
 		toServer: toServer
@@ -530,7 +540,7 @@ CONTROL.access = (function() {
                 'tab_main': ['tab_history', 'tab_person'],
                 'tab_history': ['tab_main', 'tab_person'],
                 'tab_person':['tab_main', 'tab_history']
-            }
+            };
 
             for (key in tabs) {
                 if (target.classList.contains(key)) {

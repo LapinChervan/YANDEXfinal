@@ -18,7 +18,7 @@ var http = require('http'),
                     },
 
                     '/newCategories': function() {
-                        requests.newCat(data.query.login, data.query.typ, data.query.cat, res);
+                        requests.newCat(data.query.login, data.query.typ, decodeURI(data.query.cat), res);
                     },
 
                     '/historyNewOper': function() {
@@ -60,7 +60,7 @@ var http = require('http'),
 
             if (pathObj[data.pathname]) {
                 if (data.pathname !== '/close')
-                    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+                    res.writeHead(200, {'Content-Type': 'text/html; charset=UTF-8'});
 
                 pathObj[data.pathname]();
             } else {
