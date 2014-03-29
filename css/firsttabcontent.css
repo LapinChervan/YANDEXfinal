@@ -1,3 +1,7 @@
+/*------------------*/
+/*  ТАБ 1 (ГЛАВНАЯ) */
+/*------------------*/
+
 .update {
   background: #B0EBAA;
 }
@@ -9,7 +13,6 @@
     width: 180px;
     top: 100px;
     right: 10px;
-    background: url('../img/headerbg.png');
     font-size: 14px;
     color: #EDEDE5;
     z-index: 1;
@@ -119,7 +122,6 @@
     padding: 50px 0 0 0;
 }
 
-/*СПРАЙТЫ ДЛЯ ФОРМ, ЗАГОЛОВКОВ, КАТЕГОРИЙ, ОКОН ПОДТВЕРЖДЕНИЙ*/
 div[class^=operats_] {
     width: 48px;
     height: 48px;
@@ -146,11 +148,6 @@ div[class^=operats_] {
 .operats_remove {
     background-position: 0 0;
 }
-
-/*.operats_hist_gain {
-    margin: -10px 0 0 0;
-}*/
-/*------------------------------------*/
 
 .first {
     background: url('../img/gain.png') 50% 5% no-repeat;
@@ -284,7 +281,6 @@ div[class^=operats_] {
     margin: 5px auto;
     border-radius: 4px;
     position: relative;
-    background: url("../img/headerbg.png");
 }
 
 .form__gain__header {

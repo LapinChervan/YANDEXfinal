@@ -1,3 +1,7 @@
+/*------------------*/
+/*  ТАБ 3 (ПЕРСОН)  */
+/*------------------*/
+
 .tab_person .first__ul__li__button {
     position: relative;
 }
@@ -17,8 +21,7 @@
     min-height: 92px;
 }
 
-.setting-wrap > div{
-    background: url(../img/wavegrid.png);
+.setting-wrap > div {
     display: inline-block;
     text-align: center;
     padding: 8px;
@@ -50,7 +53,6 @@ div.removeStyle > div {
     background: gray;
     padding: 8px;
     border-radius: 4px;
-    background: url(../img/wavegrid.png);
 }
 
 div.removeStyle > div > span {
@@ -96,13 +98,11 @@ div.marginR0 {
 
 .buttonValuta {
     cursor: pointer;
-    background: url(../img/wavegrid.png);
 }
 
 .formCatEdit, .remHistForm {
     text-align: center;
     width: 220px;
-    background:  url(../img/headerbg.png);
     border-radius: 4px;
     padding: 8px;
 }
@@ -125,17 +125,12 @@ div.marginR0 {
     text-align: center;
 }
 
-.formCatEdit a, .remHistForm a {
-    background:  url(../img/wavegrid.png)
-}
-
 .currency-wrap {
     padding: 10px 0 5px 0;
 }
 
 .currency-radio {
     width: 260px;
-    background: url(../img/wavegrid.png);
     padding: 8px;
     min-width: 100px;
     border-radius: 4px;
@@ -164,7 +159,6 @@ div.marginR0 {
     margin: 0 0 3px 0;
     padding: 5px;
     position: relative;
-    background: url("../img/libg.png");
     border-radius: 4px;
 }
 

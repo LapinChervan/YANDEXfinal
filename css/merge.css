@@ -1,3 +1,7 @@
+/*-----------------------------*/
+/*ОБЪЕДИНЕНИЕ ОДИНАКОВЫХ СТИЛЕЙ*/
+/*-----------------------------*/
+
 .login__inputs input, .form__gain input,
 .form__costs input, .form__send input,
 .form__gain select, .form__costs select, .form__send select,
@@ -39,7 +43,8 @@
 .form__costs__header,
 .form__send__header,
 .form__card__header,
-.history-filter {
+.history-filter, .message,
+.form__gain, .formCatEdit, .remHistForm {
     background: url("../img/headerbg.png");
     margin: 0 0 8px 0;
 }
@@ -53,11 +58,13 @@ body,
 .form__card__add, .form__card__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
 .apply_filter1, .apply_filter2, .more_history, .main__user-data__exit,
-.tab_history li {
+.tab_history li, .setting-wrap > div, div.removeStyle > div,
+.buttonValuta, .formCatEdit a, .remHistForm a, .currency-radio {
 	background: url("../img/wavegrid.png");
 }
 
 .main__tabs__content,
-.main__tabs__ul__li {
+.main__tabs__ul__li,
+.main__user-data {
 	background: url("../img/libg.png");
 }
