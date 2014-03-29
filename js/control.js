@@ -356,7 +356,9 @@ CONTROL.responses = (function() {
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.oldName + '</div>', '<div>' + res.newName + '</div>');
-        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.oldName + '</option>', '<option>' + res.newName + '</option>');
+        parentHistSel.innerHTML = parentHistSel.innerHTML.replace(
+            '<option value="' + res.oldName + '">' + res.oldName + '</option>',
+            '<option value="' + res.newName + '">' + res.newName + '</option>');
     }
 
     function removeCategory(res) {
@@ -367,7 +369,7 @@ CONTROL.responses = (function() {
             cat = user.data.categories[res.type];
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
-        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option>' + res.cat + '</option>', '');
+        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option value="' + res.cat + '">' + res.cat + '</option>', '');
 
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
