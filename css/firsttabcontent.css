@@ -3,7 +3,7 @@
 /*------------------*/
 
 .update {
-  background: #B0EBAA;
+    background: #B0EBAA;
 }
 
 .message {
@@ -305,3 +305,4 @@ div[class^=operats_] {
     width: 250px;
     margin: 5px auto;
 }
+
