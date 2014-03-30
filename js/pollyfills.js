@@ -1,5 +1,5 @@
-//addEventListener
 (function() {
+//addEventListener
     if (!Event.prototype.preventDefault) {
         Event.prototype.preventDefault=function() {
             this.returnValue=false;
@@ -69,10 +69,8 @@
             Window.prototype.removeEventListener=removeEventListener;
         }
     }
-})();
 
 //getElementsByClassName
-(function() {
     if (!document.getElementsByClassName) {
         var indexOf = [].indexOf || function(prop) {
             for (var i = 0; i < this.length; i++) {
@@ -99,12 +97,8 @@
             return getElementsByClassName(className,this);
         };
     }
-})();
-
 
 //classList
-(function () {
-
     if (typeof window.Element === "undefined" || "classList" in document.documentElement) return;
 
     var prototype = Array.prototype,
@@ -172,28 +166,15 @@
         return new DOMTokenList(this);
     });
 
-
+//lastElementChild
     defineElementGetter(Element.prototype, 'lastElementChild', function(){
         var node = this;
         node = node.lastChild;
         while(node && node.nodeType != 1) node = node.previousSibling;
         return node;
-        /*{
-        "firstElementChild" : {//https://developer.mozilla.org/en/DOM/Element.firstElementChild
-            "get" : function() {
-                var node = this;
-                node = node.firstChild;
-                while(node && node.nodeType != 1) node = node.nextSibling;
-                return node;
-            }
-        }*/
     });
 
-
-})();
-
 //object keys
-(function() {
     if (!Object.keys) Object.keys = function(o) {
         if (o !== Object(o))
             throw new TypeError('Object.keys called on a non-object');
@@ -201,12 +182,8 @@
         for (p in o) if (Object.prototype.hasOwnProperty.call(o,p)) k.push(p);
         return k;
     }
-})();
 
 //forEach
-(function(){
-
-
     if (!Array.prototype.forEach)
     {
         Array.prototype.forEach = function(fun /*, thisArg */)
@@ -229,7 +206,7 @@
             }
         };
     }
-
+//indexOf
     if (!Array.prototype.indexOf) {
         Array.prototype.indexOf = function(prop) {
             for (var i = 0; i < this.length; i++) {
@@ -238,7 +215,4 @@
             return -1;
         }
     }
-
-
-
 })();
