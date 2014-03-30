@@ -44,7 +44,7 @@
 			onBeforeClose: function () {},
 			onOpen: function () {},
 			onClose: function () {},
-			onSelect: function () {arguments[4].stopPropagation();},
+			onSelect: function () {},
 			onBeforeShowDay: function () {
 				return [true, ''];
 			}
@@ -504,6 +504,10 @@
 		bind: function (cell) {
 			var self = this,
 				s_arr, si, slen;
+
+            self.container.addEventListener('click', function(e){
+                e.stopPropagation();
+            });
 			Calendar.Util.addEvent(cell, 'click', (function (self, cell) {
     			return function () {
     				s_arr = Calendar.Util.getElementsByClass('bcal-selected', self.container, 'td');
@@ -519,7 +523,7 @@
     	    			self.close();
     	    			self.element.value = self.formatDate(self.opts.dateFormat, ts);
 	    			}
-	    			self.opts.onSelect.apply(self, [self.element, self.formatDate(self.opts.dateFormat, ts), ts, cell,event]);
+	    			self.opts.onSelect.apply(self, [self.element, self.formatDate(self.opts.dateFormat, ts), ts, cell]);
 	    			self.refresh.call(self);
     			};
     		})(self, cell));

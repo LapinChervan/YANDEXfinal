@@ -59,15 +59,29 @@ CONTROL.initialize = (function() {
                 CONTROL.responses.filterDate(history);
             },
 
-            selectLoadSch: function(data) {
-                var accounts = data.categories.accounts,
-                    tmp = doc.querySelector('.schHist').innerHTML,
-                    html = Mustache.render(tmp, {'histSch': 'Все счета', 'value': 'all'});
+            selectLoadSch: function(data, count) {
+                var fragment,
+                    option = document.createElement('option'),clone;
+                if (count) {
+                   option.innerHTML = data;
+                   fragment = option;
+                }
+                else {
+                    fragment = document.createDocumentFragment();
+                    option.value = 'all';
+                    option.innerHTML = 'Все счета';
+                    fragment.appendChild(option);
+                       // html = Mustache.render(tmp, {'histSch': 'Все счета', 'value': 'all'});
 
-                accounts.forEach(function(elem) {
-                    html = html + Mustache.render(tmp, {'histSch': elem, 'value': elem});
-                });
-                doc.querySelector('.history_sch_select').innerHTML = html;
+                    data.categories.accounts.forEach(function(elem) {
+                        clone = option.cloneNode();
+                        clone.innerHTML = elem;
+                        clone.value = elem;
+                        fragment.appendChild(clone);
+                        //html = html + Mustache.render(tmp, {'histSch': elem, 'value': elem});
+                    });
+                }
+                doc.querySelector('.history_sch_select').appendChild(fragment);// = html;
             }
         };
 
@@ -284,31 +298,31 @@ CONTROL.tools = (function() {
     }
 
     function loadSelectForm(data, formType) {
-        var html, key;
+        var html = '', key, clone,
+            tmp = doc.querySelector('.select__gain').innerHTML,
+            fragment = doc.createDocumentFragment(), fr = doc.createDocumentFragment(),
+            option = doc.createElement('option');
 
-        for (key in data.categories) {
-            html = '';
-
-            if (key === 'accounts' || key === formType) {
-                data.categories[key].
-                    forEach(function(elem) {
-                        if (key === 'costs') {
-                            html = html + Mustache.render(doc.querySelector('.select__gain').innerHTML, {'accounts': elem});
-                        } else {
-                            html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
-                        }
-                    });
-                if (key === 'costs') {
-                    doc.querySelector('.select__gain').innerHTML = html;
-                } else {
-                    doc.querySelector('.select__' + key).innerHTML = html;
-                }
-
-                if (formType === 'send') {
-                    doc.querySelector('.select__gain').innerHTML = html;
-                }
-            }
+        data.categories.accounts.forEach(function(elem) {
+           // html = html + Mustache.render(tmp, {'accounts': elem});
+            clone = option.cloneNode();
+            clone.innerHTML = elem;
+            fragment.appendChild(clone);
+        });
+        if (formType == 'send') {
+           fr = fragment.cloneNode(true);
         }
+        else  {
+          //  html = '';
+            data.categories[formType].forEach(function(elem) {
+              //  html = html + Mustache.render(tmp, {'accounts': elem});
+                clone = option.cloneNode();
+                clone.innerHTML = elem;
+                fr.appendChild(clone);
+            });
+        }
+        document.querySelector('.select__accounts').appendChild(fragment);
+        doc.querySelector('.select__gain').appendChild(fr);//.innerHTML = html;
     }
 
     return {
@@ -432,7 +446,9 @@ CONTROL.responses = (function() {
             newCat = doc.createElement('div');
 
         user.data.categories[res.type].push(res.cat);
-        CONTR.initialize.selectLoadSch(user.data);
+        if (res.type === 'accounts') {
+            CONTR.initialize.selectLoadSch(res.cat, 'one');
+        }
         newCat.innerHTML = Mustache.render(tmpUserAccoutsNew, {
             costs: res.cat,
             img: 'operats_cat_' + res.type
