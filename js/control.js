@@ -909,22 +909,23 @@ CONTROL.access = (function() {
                             i, item, options, data = {};
 
                         event.preventDefault();
-                        if (tools.isNumber(doc.querySelector('.sumCheck')) && tools.isEmptyOne(doc.querySelector('.dateCheck'), 'Дата')) {
-                            for (i = 0; i < len; i++) {
-                                item = form[i];
-                                if (item.tagName.toLocaleLowerCase() === 'select') {
-                                    options = item.children;
-                                    for (var j = 0, optLen = options.length; j < optLen; j++) {
-                                        if (options[j].selected) {
-                                            data[arr[i]] = options[j].value;
-                                            break;
+                        if (tools.isNumber(doc.querySelector('.sumCheck')) &&
+                            tools.isEmptyOne(doc.querySelector('.dateCheck'), 'Дата')) {
+                                for (i = 0; i < len; i++) {
+                                    item = form[i];
+                                    if (item.tagName.toLocaleLowerCase() === 'select') {
+                                        options = item.children;
+                                        for (var j = 0, optLen = options.length; j < optLen; j++) {
+                                            if (options[j].selected) {
+                                                data[arr[i]] = options[j].value;
+                                                break;
+                                            }
                                         }
                                     }
+                                    else {
+                                        data[arr[i]] = item.value;
+                                    }
                                 }
-                                else {
-                                    data[arr[i]] = item.value;
-                                }
-                            }
                             data['type'] = type;
                             data['id'] = 'id' + Math.round(Math.random() * 1000000);
                             data.time = tools.getDateMs(data.date);
@@ -935,7 +936,7 @@ CONTROL.access = (function() {
                                 JSON.stringify(data)),
                                 response.newOper
                             );
-                            CONTROL.layer.destroyLayer();
+                            CONTR.layer.destroyLayer();
                         }
                     }, false);
                     break;
