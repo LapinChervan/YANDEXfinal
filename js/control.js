@@ -975,9 +975,9 @@ CONTROL.access = (function() {
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
-                            catName = event.target.parentNode.lastElementChild.innerHTML;
+                            catName = target.parentNode.lastElementChild.innerHTML;
                             CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
-                                {edit: target.parentNode.lastElementChild.innerHTML,
+                                {edit: catName,
                                     caption: 'Изменить',
                                     spriteImg: 'operats_edit'})});
 
@@ -1007,9 +1007,9 @@ CONTROL.access = (function() {
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
-                            catName = event.target.parentNode.lastElementChild.innerHTML;
+                            catName = target.parentNode.lastElementChild.innerHTML;
                             CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
-                                {edit: target.parentNode.lastElementChild.innerHTML,
+                                {edit: catName,
                                     caption: 'Удалить',
                                     spriteImg: 'operats_remove',
                                     readonly: 'readonly'
