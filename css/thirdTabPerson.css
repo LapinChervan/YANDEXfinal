@@ -29,6 +29,12 @@
     border-radius: 4px;
     margin: 0 5px 5px 0;
     vertical-align: bottom;
+    width: 120px;
+}
+
+.setting-wrap > div > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .setting-wrap > div:hover .valute_edit, .setting-wrap > div:hover .valute_remove, .inlineBlock {
