@@ -261,6 +261,7 @@ CONTROL.tools = (function() {
             i++;
             doc.querySelector('.diag' + key).innerHTML = html;
         }
+        CONTROL.layer.destroyLayer();
     }
 
     /**
@@ -652,11 +653,6 @@ CONTROL.access = (function() {
             weekNumbers: false,
             startDay: 1
         });
-     /*   new Calendar({
-            element: '1',
-            weekNumbers: false,
-            startDay: 1
-        });*/
         // ВЫХОД
         doc.querySelector('.main__user-data__exit').addEventListener('click', function(e) {
             var event = e || window.event;
@@ -691,16 +687,18 @@ CONTROL.access = (function() {
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
             var event = e || window.event,
-                target = event.target || event.srcElement;
+                target = event.target || event.srcElement,
+                from, to;
 
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
-
-                if (tools.isDate(doc.querySelector('.dateFrom')) && tools.isDate(doc.querySelector('.dateTo'))) {
+                from = doc.querySelector('.dateFrom').value;
+                to = doc.querySelector('.dateTo').value;
+                if (from.length > 0 && to.length > 0) {
                     ajax.toServer(request.filterDate(
                         user.login,
-                        tools.getDateMs(doc.querySelector('.dateFrom').value),
-                        tools.getDateMs(doc.querySelector('.dateTo').value)),
+                        tools.getDateMs(from),
+                        tools.getDateMs(to)),
                         response.filterDate
                     );
                 }
@@ -729,7 +727,7 @@ CONTROL.access = (function() {
 
             event.stopPropagation();
 
-            if (tools.isDate(date[0]) && tools.isDate(date[1])) {
+            if (date[0].value.length > 0 && date[1].value.length > 0) {
                 ajax.toServer(request.filterHistory(
                     user.login,
                     activeOption.value,
@@ -738,7 +736,8 @@ CONTROL.access = (function() {
                     tools.getDateMs(date[1].value)),
                     CONTR.initialize.history
                 );
-                CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
+                date[0].value = '';
+                date[1].value = '';
             } else {
                 ajax.toServer(request.filterHistory(
                     user.login,
@@ -748,8 +747,8 @@ CONTROL.access = (function() {
                     undefined),
                     CONTR.initialize.history
                 );
-                CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
             }
+            CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
         });
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
@@ -778,6 +777,7 @@ CONTROL.access = (function() {
                     new Calendar({
                         element: 'formDate',
                         weekNumbers: false,
+                        secondName: 'bcal-container-fix',
                         startDay: 1
                     });
                     tools.loadSelectForm(CONTROL.user.data, type);
@@ -790,7 +790,7 @@ CONTROL.access = (function() {
                             i, item, data = {};
 
                         event.preventDefault();
-                        if (tools.isNumber(doc.querySelector('.sumCheck')) && tools.isDate(doc.querySelector('.dateCheck'))) {
+                        if (tools.isNumber(doc.querySelector('.sumCheck')) && doc.querySelector('.dateCheck').value.length > 0) {
                             for (i = 0; i < len; i++) {
                                 item = form[i];
                                 data[arr[i]] = item.value;

@@ -28,7 +28,7 @@
 			dayNamesFull: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 			monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 			monthNamesFull: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			startDay: 0,
+			startDay: 1,
 			weekNumbers: false,
 			selectOtherMonths: false,
 			showOtherMonths: true,
@@ -39,6 +39,7 @@
 			dateFormat: 'd.m.Y',
 			position: 'bottom',
 			minDate: null,
+            secondName: undefined,
 			onBeforeOpen: function () {},
 			onBeforeClose: function () {},
 			onOpen: function () {},
@@ -246,11 +247,16 @@
 			}
 			self.element.style.cursor = 'pointer';
 			div.setAttribute('id', ['bcal-container', self.id].join('-'));
-			Calendar.Util.addClass(div, 'bcal-container');
+            if (!self.opts.secondName) {
+                Calendar.Util.addClass(div, 'bcal-container');
+            }
+            else {
+                Calendar.Util.addClass(div, 'bcal-container ' + self.opts.secondName);
+            }
 			if (!self.opts.inline) {
 				div.style.display = 'none';
-				div.style.position = 'fixed';
-				div.style.zIndex = 1111;
+			//	div.style.position = 'fixed';
+			//	div.style.zIndex = 1111;
 				Calendar.Util.addEvent(self.element, 'click', function (e) {
 					if (self.isOpen && !self.focus) {
 						self.close();
