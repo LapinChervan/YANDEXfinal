@@ -485,13 +485,24 @@ CONTROL.responses = (function() {
             cat = user.data.categories[res.type],
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
-            option;
+            option, divOp, divCl;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
-        parent.innerHTML = parent.innerHTML.toLowerCase().replace(
-            '<div>' + res.oldName.toLowerCase() + '</div>',
-            '<div>' + res.newName + '</div>'
-        );
+        //parent.innerHTML = parent.innerHTML.toLowerCase().replace(
+        //    '<div>' + res.oldName.toLowerCase() + '</div>',
+        //    '<div>' + res.newName + '</div>'
+        //);
+
+        if (window.getComputedStyle) {
+            parent.innerHTML = parent.innerHTML.replace(
+                '<div>' + res.oldName + '</div>',
+                '<div>' + res.newName + '</div>');
+        }
+        else {
+            divOp = '<div>'.toUpperCase();
+            divCl = '</div>'.toUpperCase();
+            parent.innerHTML = parent.innerHTML.replace(divOp + res.oldName + divCl, divOp + res.newName + divCl);
+        }
 
         for (var i = 0, length = options.length; i < length; i++) {
             option = options[i];
@@ -510,11 +521,12 @@ CONTROL.responses = (function() {
     */
     function removeCategory(res) {
         var parent = doc.querySelector('.' + res.type),
-            html = parent.innerHTML.toLocaleLowerCase(),
-            indexStart, subs, catL = res.cat.toLowerCase(),
+            html = parent.innerHTML,
+            indexStart, subs,
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
-            cat = user.data.categories[res.type];
+            cat = user.data.categories[res.type],
+            divOp, divCl;
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
         for (var i = 0, length = options.length; i < length; i++) {
@@ -523,9 +535,23 @@ CONTROL.responses = (function() {
                 break;
             }
         }
-        indexStart = html.indexOf('<div>' + catL + '</div>');
-        subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
-                          html.indexOf('</div>', indexStart + catL.length + 14));
+        //indexStart = html.indexOf('<div>' + catL + '</div>');
+        //subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
+         //                 html.indexOf('</div>', indexStart + catL.length + 14));
+
+        if (window.getComputedStyle) {
+            indexStart = html.indexOf('<div>' + res.cat + '</div>');
+            subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
+                html.indexOf('</div>', indexStart + res.cat.length + 14));
+        }
+        else {
+            divOp = '<div>'.toUpperCase();
+            divCl = '</div>'.toUpperCase();
+            indexStart = html.indexOf(divOp + res.cat + divCl);
+            subs = html.slice(html.lastIndexOf(divOp, indexStart - 1),
+                html.indexOf(divCl.toUpperCase(), indexStart + res.cat.length + 14));
+        }
+
         parent.innerHTML = html.replace(subs, '');
     }
 
@@ -1184,11 +1210,14 @@ CONTROL.layer = (function() {
 })();
 
 CONTROL.slider = (function() {
+    var doc = document,
+        macElement = doc.querySelector('.mac');
+
     function start() {
-        var i = 0, doc = document,
+        var i = 0,
             timerId = setTimeout(function show() {
-                doc.querySelector('.mac').src = 'img/slide' + i + '.png';
-                CONTROL.slider.time = setTimeout(show, 5000);
+                macElement.src = 'img/slide' + i + '.png';
+                CONTR.slider.time = setTimeout(show, 5000);
                 i++;
                 if (i === 4) {
                     i = 0;
