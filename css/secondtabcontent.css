@@ -16,7 +16,10 @@
     margin-bottom: 5px;
     cursor: pointer;
     position: relative;
+}
 
+.tab_history ul .id {
+    display: none;
 }
 
 .tab_history li:hover div.alignRight {
@@ -129,5 +132,4 @@
     background: url('../img/clean.png') 50% no-repeat;
     background-color: #EAEAEA;
 }
-
 
