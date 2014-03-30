@@ -297,13 +297,12 @@ CONTROL.tools = (function() {
     }
 
     function loadSelectForm(data, formType) {
-        var html = '', key, clone,
+        var clone,
             tmp = doc.querySelector('.select__gain').innerHTML,
             fragment = doc.createDocumentFragment(), fr = doc.createDocumentFragment(),
             option = doc.createElement('option');
 
         data.categories.accounts.forEach(function(elem) {
-           // html = html + Mustache.render(tmp, {'accounts': elem});
             clone = option.cloneNode();
             clone.innerHTML = elem;
             fragment.appendChild(clone);
@@ -312,16 +311,14 @@ CONTROL.tools = (function() {
            fr = fragment.cloneNode(true);
         }
         else  {
-          //  html = '';
             data.categories[formType].forEach(function(elem) {
-              //  html = html + Mustache.render(tmp, {'accounts': elem});
                 clone = option.cloneNode();
                 clone.innerHTML = elem;
                 fr.appendChild(clone);
             });
         }
         document.querySelector('.select__accounts').appendChild(fragment);
-        doc.querySelector('.select__gain').appendChild(fr);//.innerHTML = html;
+        doc.querySelector('.select__gain').appendChild(fr);
     }
 
     return {
