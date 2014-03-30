@@ -632,7 +632,31 @@ CONTROL.access = (function() {
 
         //вызов инициализации
         CONTR.initialize.init(responseData);
-
+        new Calendar({
+            element: 'stat-from',
+            weekNumbers: false,
+            startDay: 1
+        });
+        new Calendar({
+            element: 'stat-to',
+            weekNumbers: false,
+            startDay: 1
+        });
+        new Calendar({
+            element: 'hist-to',
+            weekNumbers: false,
+            startDay: 1
+        });
+        new Calendar({
+            element: 'hist-from',
+            weekNumbers: false,
+            startDay: 1
+        });
+     /*   new Calendar({
+            element: '1',
+            weekNumbers: false,
+            startDay: 1
+        });*/
         // ВЫХОД
         doc.querySelector('.main__user-data__exit').addEventListener('click', function(e) {
             var event = e || window.event;
@@ -751,7 +775,11 @@ CONTROL.access = (function() {
                         spriteImg: 'operats_form_' + type,
                         accounts: '{{accounts}}'
                     })});
-
+                    new Calendar({
+                        element: 'formDate',
+                        weekNumbers: false,
+                        startDay: 1
+                    });
                     tools.loadSelectForm(CONTROL.user.data, type);
 
                     doc.querySelector('.form__gain__add').addEventListener('click', function(e) {

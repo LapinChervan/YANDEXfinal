@@ -105,5 +105,5 @@ var http = require('http'),
         }
     });
 
-    app.use(connect.static('/Users/nvzc/Documents/GitHub/yandex'));
+    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);
