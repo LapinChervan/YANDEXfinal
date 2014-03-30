@@ -468,7 +468,7 @@ CONTROL.responses = (function() {
             options = parentHistSel.children;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
-        parent.innerHTML = parent.innerHTML.replace('<div>' + res.oldName + '</div>', '<div>' + res.newName + '</div>');
+        parent.innerHTML = parent.innerHTML.toLowerCase().replace('<div>' + res.oldName.toLowerCase() + '</div>', '<div>' + res.newName + '</div>');
         for (var i = 0, length = options.length; i < length; i++) {
             if (options[i].innerHTML === res.oldName) {
                 options[i].innerHTML = res.newName;
@@ -554,11 +554,11 @@ CONTROL.responses = (function() {
      */
     function removeOper(res) {
         var parent = doc.querySelector('.historyUl'),
-            html = parent.innerHTML,
+            html = parent.innerHTML.toLocaleLowerCase(),
             indexStart,
             subs;
 
-        indexStart = html.indexOf(res);
+        indexStart = html.indexOf(res.toLocaleLowerCase());
         subs = html.slice(html.lastIndexOf('<li>', indexStart),
                           html.indexOf('</li>', indexStart) + 5);
         parent.innerHTML = html.replace(subs, '');
@@ -838,13 +838,24 @@ CONTROL.access = (function() {
                             form = doc.querySelector('.form__gain__blockInputs').children,
                             len = form.length,
                             arr = ['date', 'sch', 'cat', 'sum', 'comm'],
-                            i, item, data = {};
+                            i, item, options, data = {};
 
                         event.preventDefault();
                         if (tools.isNumber(doc.querySelector('.sumCheck')) && tools.isEmptyOne(doc.querySelector('.dateCheck'), 'Дата')) {
                             for (i = 0; i < len; i++) {
                                 item = form[i];
-                                data[arr[i]] = item.value;
+                                if (item.tagName.toLocaleLowerCase() === 'select') {
+                                    options = item.children;
+                                    for (var j = 0, optLen = options.length; j < optLen; j++) {
+                                        if (options[j].selected) {
+                                            data[arr[i]] = options[j].value;
+                                            break;
+                                        }
+                                    }
+                                }
+                                else {
+                                    data[arr[i]] = item.value;
+                                }
                             }
                             data['type'] = type;
                             data['id'] = 'id' + Math.round(Math.random() * 1000000);
