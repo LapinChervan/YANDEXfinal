@@ -1,8 +1,13 @@
 'use strict'
-var CONTROL = {};
 
+/*namespace*/
+var CONTROL = {};
 CONTROL.user = {};
 
+/*
+*   @name Инициализация.
+*   @return Возвращает объект с методами.
+*/
 CONTROL.initialize = (function() {
     var doc = document,
         CONTR = CONTROL,
@@ -23,7 +28,7 @@ CONTROL.initialize = (function() {
                     doc.querySelector('.' + key).innerHTML = html;
                 }
                 doc.querySelector('input[type=radio][value=' + data.mainCurr + ']').checked = true;
-                CONTROL.responses.rebuildCurrency(data);
+                CONTR.responses.rebuildCurrency(data);
             },
 
             history: function(data) {
@@ -72,9 +77,9 @@ CONTROL.initialize = (function() {
                 methods = initMethods;
 
             for (key in methods) {
-                 setTimeout((function(prop) {
+                 setTimeout((function(method) {
                     return function() {
-                        methods[prop](data);
+                        methods[method](data);
                     }
                  })(key), 15);
             }
@@ -84,7 +89,17 @@ CONTROL.initialize = (function() {
     }
 })();
 
+/*
+ *   @name Инструменты.
+ *   @return Возвращает объект с методами.
+ */
 CONTROL.tools = (function() {
+    /**
+    * Проверка на число.
+    *
+    * @param  {Integer} n Число.
+    * @return {Boolean}
+    */
     function isNumber(n) {
         if (!isNaN(parseFloat(n.value)) && isFinite(n.value)) {
             n.placeholder = 'Сумма';
@@ -118,15 +133,31 @@ CONTROL.tools = (function() {
         return false;
     }
 
+    /**
+    * Проверка на пустое поле.
+    *
+    * @param  {Element} elem DOM элемент.
+    * @return {Boolean}
+    */
     function isEmptyOne(elem) {
-        if (elem.value.length === 0) {
+        if (elem.value.trim().length === 0) {
             elem.placeholder = 'Ошибка ввода';
+            elem.value = '';
             return false;
         }
-        elem.placeholder = 'Введите название';
+        elem.placeholder = 'Категория';
         return true;
     }
 
+    /**
+    * Проверка плавающей точки у числа. Срез до 2х знаков.
+    * (т.к Math.round округляет принудительно в обе стороны,
+    * часто возникают потери копеек, поэтому в Коллекции лежат полные числа
+    * и операции происходят с полными числами, но чтобы не округлять, вырезаем :) )
+    * хотя, при отсутствии округления с некоторыми числа тоже бывают утери коппеек (НО РЕЖЕ)
+    * @param  {Integer} numb Число.
+    * @return {Integer} Возвращает новое число.
+    */
     function checkValuePointer(numb) {
         var arr = numb.toString().split('.');
 
@@ -138,16 +169,37 @@ CONTROL.tools = (function() {
         }
     }
 
+    /**
+    * Получение по дате миллисекунд.
+    *
+    * @param  {String} date Дата строкой.
+    * @return {Integer} Возвращает дату в миллисекундах.
+    */
     function getDateMs(date) {
         var arr = date.split('.');
         return +new Date(arr[2],arr[1],arr[0]);
     }
 
+    /**
+    * Получение даты по числу (dd) в формате dd.mm.yyyy
+    *
+    * @param  {String} day День месяца.
+    * @return {String} Возвращает дату строкой.
+    */
     function getDateN(day) {
         var date = new Date();
         return day + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
     }
 
+    /**
+    * Окрашивает background кнопки (Чтобы принудительно не обновлять после каждой новой
+    * операции диаграммы, подсвечивается кнопка, что дает понять о возможной перерисовке по желанию)
+    *
+    * @param {Element} elem DOM элемент, к которому нужно применить стиль.
+    * @param {String} type Тип добавленной операции (если это не доход и не расход, ничего не нужно делать
+    * @param {String} date Дата произведенной операции (дата должна быть в рамках текущего месяца с 01 по 30)
+    * @return (Boolean}
+    */
     function updateButton(elem, type, date) {
         var dateNow = getDateMs(date);
         if (type !== 'send' && ( getDateMs(getDateN('01')) <= dateNow ) && ( getDateMs(getDateN('30')) >= dateNow) ) {
@@ -157,6 +209,13 @@ CONTROL.tools = (function() {
         return false;
     }
 
+    /**
+    * Возвращает элмент с найденным атрибутом (применяется к radio с checked).
+    *
+    * @param  {Collection} collection DOM коллекция, в которой нужно искать элемент.
+    * @param  {Attribute} option Атрибут, который нужно найти у элемента.
+    * @return {Element} Возвращает найденный DOM элемент.
+    */
     function findSelectedInput(collection, option) {
         var length = collection.length,
             i, item;
@@ -169,10 +228,23 @@ CONTROL.tools = (function() {
         }
     }
 
+    /**
+    * Возвращает наибольшее число из двух.
+    *
+    * @param  {Integer} numb Новое число кандидат на проверку.
+    * @return {Integer} biggest  Текущее наибольшее число.
+    * @return {Integer} Возвращает наибольшее число.
+    */
     function isBiggest(numb, biggest) {
         return (numb > biggest) ? numb : biggest;
     }
 
+    /**
+    * Генерирует случайный цвет для элемента диаграммы.
+    * * 200 + 30 - чтобы отсеять слишком черные и приближенные к белому цвета
+    *
+    * @return {String} Возвращает строку со стилем.
+    */
     function randomColor() {
         function getColor() {
             return Math.round(Math.random() * 200 + 30);
@@ -180,6 +252,11 @@ CONTROL.tools = (function() {
         return 'rgb(' +getColor()+ ',' +getColor()+ ',' +getColor()+ ');';
     }
 
+    /**
+    * Производит подсчет и прорисовывает диаграммы.
+    *
+    * @param {Object} data Объект с данными.
+    */
     function showDiagram(data) {
         var key, key2, sum,
             biggest, biggestArr = [],
@@ -210,11 +287,19 @@ CONTROL.tools = (function() {
         //CONTROL.layer.destroyLayer();
     }
 
-    function showMessage(cls, parent, msg, spriteCls) {
+    /**
+    * Показывает уведомление о событиях.
+    *
+    * @param (String} tmp Класс шаблона.
+    * @param (String} parent Класс родителя, куда положить уведомление.
+    * @param (String} msg Текст сообщения.
+    * @param (String} spriteCls Класс с определенным спрайтом для иконки.
+    */
+    function showMessage(tmp, parent, msg, spriteCls) {
         var elem = parent,
             style = elem.style;
 
-        parent.innerHTML = Mustache.render(cls.innerHTML, {msg: msg, spriteImg: spriteCls});
+        parent.innerHTML = Mustache.render(tmp.innerHTML, {msg: msg, spriteImg: spriteCls});
         style.display = 'block';
         setTimeout(function() {
             style.display = 'none';
