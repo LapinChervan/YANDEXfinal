@@ -33,7 +33,9 @@
 **Установка:**
 
     * git clone https://github.com/LapinChervan/yandex.git
-    * Зайти в директорию с проектом: npm install
+    * Зайти в директорию с проектом: npm install / sudo npm install
+    * В server.js указать директорию app.use(connect.static('/home/...name.../yandex'));
+    * Сама MongoDB должна быть установлена
 
 ---
 

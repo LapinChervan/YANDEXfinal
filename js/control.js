@@ -296,31 +296,47 @@ CONTROL.tools = (function() {
         }, 1500);
     }
 
+    /**
+    * Загрузка данных в Селекты (формы операций).
+    *
+    * @param  {Object} data новые категории.
+    * @return {String} formType тип формы для операции.
+    */
     function loadSelectForm(data, formType) {
         var clone,
             tmp = doc.querySelector('.select__gain').innerHTML,
-            fragment = doc.createDocumentFragment(), fr = doc.createDocumentFragment(),
+            fragment = doc.createDocumentFragment(),
+            fr = doc.createDocumentFragment(),
             option = doc.createElement('option');
 
-        data.categories.accounts.forEach(function(elem) {
-            clone = option.cloneNode();
-            clone.innerHTML = elem;
-            fragment.appendChild(clone);
-        });
+        data.categories.accounts
+            .forEach(function(elem) {
+                clone = option.cloneNode();
+                clone.innerHTML = elem;
+                fragment.appendChild(clone);
+             });
+
         if (formType == 'send') {
            fr = fragment.cloneNode(true);
         }
         else  {
-            data.categories[formType].forEach(function(elem) {
-                clone = option.cloneNode();
-                clone.innerHTML = elem;
-                fr.appendChild(clone);
-            });
+            data.categories[formType]
+                .forEach(function(elem) {
+                    clone = option.cloneNode();
+                    clone.innerHTML = elem;
+                    fr.appendChild(clone);
+                });
         }
         document.querySelector('.select__accounts').appendChild(fragment);
         doc.querySelector('.select__gain').appendChild(fr);
     }
 
+    /**
+    * Проверка наличия категории в DOM.
+    *
+    * @param  {Element} parent Блок родитель (по типу категории).
+    * @return {Element} elem Значение элемента, которое нужно проверить.
+    */
     function categoryExist(parent, elem) {
         var par = parent.innerHTML.toLowerCase();
         return par.indexOf('<div>' + elem.value.toLowerCase() + '</div>', 0) === -1 ? true : false;
@@ -468,14 +484,20 @@ CONTROL.responses = (function() {
         var parent = doc.querySelector('.' + res.type),
             cat = user.data.categories[res.type],
             parentHistSel = doc.querySelector('.history_sch_select'),
-            options = parentHistSel.children;
+            options = parentHistSel.children,
+            option;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
-        parent.innerHTML = parent.innerHTML.toLowerCase().replace('<div>' + res.oldName.toLowerCase() + '</div>', '<div>' + res.newName + '</div>');
+        parent.innerHTML = parent.innerHTML.toLowerCase().replace(
+            '<div>' + res.oldName.toLowerCase() + '</div>',
+            '<div>' + res.newName + '</div>'
+        );
+
         for (var i = 0, length = options.length; i < length; i++) {
-            if (options[i].innerHTML === res.oldName) {
-                options[i].innerHTML = res.newName;
-                options[i].value = res.newName;
+            option = options[i];
+            if (option.innerHTML === res.oldName) {
+                option.innerHTML = res.newName;
+                option.value = res.newName;
                 break;
             }
         }

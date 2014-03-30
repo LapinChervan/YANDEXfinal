@@ -60,7 +60,7 @@ var http = require('http'),
 
             if (pathObj[data.pathname]) {
                 if (data.pathname !== '/close')
-                    res.writeHead(200, {'Content-Type': 'text/html; charset=UTF-8'});
+                    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
 
                 pathObj[data.pathname]();
             } else {
@@ -85,7 +85,7 @@ var http = require('http'),
                 requests.checkSession(req.cookies.controls, data.query.start, data.query.end, res);
             }
             else {
-                res.writeHead(404, {'Content-Type': 'text/plain; charset=UTF-8'});
+                res.writeHead(404, {'Content-Type': 'text/plain; charset=utf-8'});
                 res.end();
             }
         }
@@ -105,5 +105,5 @@ var http = require('http'),
         }
     });
 
-    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
+    app.use(connect.static('/Users/nvzc/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);
