@@ -251,7 +251,7 @@
                             </div>
                             <div class="floatRight create-block">
                                 <div class="inlineBlock">
-                                    <input class="block edit_cat_sch" placeholder="Введите название" type="text">
+                                    <input class="block edit_cat_sch" placeholder="Категория" type="text">
                                     <a href="#" class="add_cat_sch addCategoryButton">Добавить</a>
                                 </div>
                             </div>
@@ -266,7 +266,7 @@
                             </div>
                             <div class="floatRight create-block">
                                 <div class="inlineBlock">
-                                    <input class="block edit_cat_plus"  placeholder="Введите название" type="text">
+                                    <input class="block edit_cat_plus"  placeholder="Категория" type="text">
                                     <a href="#" class="add_cat_plus addCategoryButton">Добавить</a>
                                 </div>
                             </div>
@@ -281,7 +281,7 @@
                             </div>
                             <div class="floatRight create-block">
                                 <div class="inlineBlock">
-                                    <input class="block edit_cat_minus" placeholder="Введите название" type="text">
+                                    <input class="block edit_cat_minus" placeholder="Категория" type="text">
                                     <a href="#" class="add_cat_minus addCategoryButton">Добавить</a>
                                 </div>
                             </div>
@@ -386,6 +386,22 @@
                 <span class="currency">{{mainCurr}}</span>
             </div>
         </li>
+    </script>
+
+    <script type="text/template" class="historyLi">
+        <span class="id" style="display: none;">{{id}}</span>
+        <span class="valute_remove"></span>
+        <div class="{{spriteImg}}"></div>
+        <div class="history-content-wrap">
+            <div class="date history-date">{{date}}</div>
+            <div class="cat">{{cat}}</div>
+        </div>
+        <div class="comm history-content-wrap alignCenter">{{comm}}</div>
+        <div class="history-content-wrap alignRight">
+            <div class="sch account">{{sch}}</div>
+            <div class="sum color-send">{{sum}}</div>
+            <span class="currency">{{mainCurr}}</span>
+        </div>
     </script>
 
     <!--ФОРМА НОВОГО ДОХОДА-->

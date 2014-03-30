@@ -232,7 +232,7 @@ CONTROL.tools = (function() {
     * Возвращает наибольшее число из двух.
     *
     * @param  {Integer} numb Новое число кандидат на проверку.
-    * @return {Integer} biggest  Текущее наибольшее число.
+    * @param {Integer} biggest  Текущее наибольшее число.
     * @return {Integer} Возвращает наибольшее число.
     */
     function isBiggest(numb, biggest) {
@@ -284,7 +284,6 @@ CONTROL.tools = (function() {
             i++;
             doc.querySelector('.diag' + key).innerHTML = html;
         }
-        //CONTROL.layer.destroyLayer();
     }
 
     /**
@@ -358,53 +357,69 @@ CONTROL.reload = (function() {
     }
 })();
 
+/*
+*   @name Реквесты (запросы).
+*   @return Возвращает объект с методами.
+*/
 CONTROL.requests = (function() {
     var host = 'http://localhost:1111/';
 
+    // Смена основной валюты
     function changeMainCurr(user, curr, price) {
         return host + 'currency?login=' + user + '&curr=' + curr + '&price=' + price;
     }
 
+    // Установка нового курса
     function changeRates(user, currData) {
         return host + 'currency?login=' + user + '&valuta=' + currData;
     }
 
+    // Редактирование категории
     function editCategory(user, type, old, cat) {
         return host + 'renameCategory?login=' + user + '&type=' + type + '&old=' + old + '&new=' + cat;
     }
 
+    // Удаление категории
     function removeCategory(user, type, old) {
         return host + 'removeCategory?login=' + user + '&type=' + type + '&old=' + old;
     }
 
+    // Добавление категории
     function newCategory(user, type, cat) {
         return host + 'newCategories?login=' + user + '&typ=' + type + '&cat=' + cat;
     }
 
+    // Регистрация
     function registration(user, password) {
         return host + 'reg?login=' + user + '&password=' + password;
     }
 
+    // Авторизация
     function auth(user, password, start, end) {
         return host + 'auth?login=' + user + '&password=' + password + '&start=' + start + '&end=' + end;
     }
 
+    // Добавление операции
     function newOper(user, type, data) {
         return host + 'historyNewOper?login=' + user + '&type=' + type + '&formData=' + data;
     }
 
+    // Удаление операции
     function removeOper(user, type, id) {
         return host + 'historyRemove?login=' + user + '&type=' + type + '&id=' + id;
     }
 
+    // Фильтр по датам
     function filterDate(user, start, end, type) {
         return host + 'findOperation?login=' + user + '&start=' + start + '&end=' + end + '&type=' + type;
     }
 
+    // Фильтр по истории
     function filterHistory(user, account, type, start, end) {
         return host + 'findOperation?login=' + user + '&account=' + account + '&type=' + type + '&start=' + start + '&end=' + end;
     }
 
+    //Выход
     function closeSession() {
         return host + 'close';
     }
@@ -425,44 +440,71 @@ CONTROL.requests = (function() {
     }
 })();
 
+/*
+*   @name Респонсы (ответы).
+*   @return Возвращает объект с методами.
+*/
 CONTROL.responses = (function() {
     var doc = document,
         CONTR = CONTROL,
         user = CONTR.user,
-        tools = CONTR.tools;
-
+        tools = CONTR.tools,
+        tmpUserAccoutsNew = doc.querySelector('.useraccountsNew').innerHTML,// Шаблон для категорий
+        tmpHistory = doc.querySelector('.historyLi').innerHTML, // Шаблон для операции
+        tmpMessage = doc.querySelector('.form-mess'); // Шаблон для сообщения
+    /**
+    * Добавляет новую категорию.
+    *
+    * @param {Object} res Ответ с сервера с типом и названием категории.
+    */
     function newCategory(res) {
         var categories = doc.querySelector('.' + res.type),
             newCat = doc.createElement('div');
 
         user.data.categories[res.type].push(res.cat);
         CONTR.initialize.selectLoadSch(user.data);
-        newCat.innerHTML = Mustache.render(doc.querySelector('.useraccountsNew').innerHTML,
-                                          {costs: res.cat, img: 'operats_cat_' + res.type});
+        newCat.innerHTML = Mustache.render(tmpUserAccoutsNew, {
+            costs: res.cat,
+            img: 'operats_cat_' + res.type
+        });
         categories.appendChild(newCat);
     }
 
+    /**
+    * Редактирует текущую категорию.
+    *
+    * @param {Object} res Ответ с сервера с типом и названием категории (старой и новой).
+    */
     function renameCategory(res) {
         var parent = doc.querySelector('.' + res.type),
-            parentHistSel = doc.querySelector('.history_sch_select'),
-            cat = user.data.categories[res.type];
+            cat = user.data.categories[res.type],
+            parentHistSel = doc.querySelector('.history_sch_select');
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.oldName + '</div>', '<div>' + res.newName + '</div>');
         parentHistSel.innerHTML = parentHistSel.innerHTML.replace(
             '<option value="' + res.oldName + '">' + res.oldName + '</option>',
-            '<option value="' + res.newName + '">' + res.newName + '</option>');
+            '<option value="' + res.newName + '">' + res.newName + '</option>'
+        );
     }
 
+    /**
+    * Удаляет текущую категорию.
+    *
+    * @param {Object} res Ответ с сервера с типом и названием категории.
+    */
     function removeCategory(res) {
         var parent = doc.querySelector('.' + res.type),
-            parentHistSel = doc.querySelector('.history_sch_select'),
             html = parent.innerHTML,
             indexStart, subs,
+            parentHistSel = doc.querySelector('.history_sch_select'),
             cat = user.data.categories[res.type];
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
-        parentHistSel.innerHTML = parentHistSel.innerHTML.replace('<option value="' + res.cat + '">' + res.cat + '</option>', '');
+        parentHistSel.innerHTML = parentHistSel.innerHTML.replace(
+            '<option value="' + res.cat + '">' + res.cat + '</option>',
+            ''
+        );
 
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
@@ -470,13 +512,20 @@ CONTROL.responses = (function() {
         parent.innerHTML = html.replace(subs, '');
     }
 
+    /**
+    * Добавляет новую операцию.
+    *
+    * @param {Object} res Ответ с сервера с данными об операции.
+    */
     function newOper(res) {
-        var parent = doc.querySelector('.historyUl');
+        var parent = doc.querySelector('.historyUl'),
+            oper = doc.createElement('li');
 
         res['spriteImg'] = 'operats_hist_' + res.type;
         res.mainCurr = user.data.mainCurr;
-        parent.innerHTML = parent.innerHTML + Mustache.render(doc.querySelector('.history').innerHTML, res);
-        tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'warn_yes');
+        oper.innerHTML = Mustache.render(tmpHistory, res);
+        parent.appendChild(oper);
+        tools.showMessage(tmpMessage, doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'warn_yes');
         tools.updateButton(doc.querySelector('.apply_filter2'), res.type, res.date);
     }
 
@@ -503,10 +552,14 @@ CONTROL.responses = (function() {
             }
             doc.querySelector('.' + key + '_sumfilter').innerHTML = tools.checkValuePointer(sum) + ' ' + user.data.mainCurr;
         }
-
         CONTR.tools.showDiagram(diagram);
     }
 
+    /**
+     * Удаляет операцию.
+     *
+     * @param {String} res Ответ с сервера с ID операции.
+     */
     function removeOper(res) {
         var parent = doc.querySelector('.historyUl'),
             html = parent.innerHTML,
@@ -533,6 +586,11 @@ CONTROL.responses = (function() {
         mainCurrWrap.innerHTML = input;
     }
 
+    /**
+    * Ответ после отправки данных на регистрацию.
+    *
+    * @param {String} res Ответ с сервера.
+    */
     function registration(res) {
         var sett = {
             0: ['Регистрация успешно пройдена!', 'warn_yes'],
@@ -561,24 +619,19 @@ CONTROL.responses = (function() {
 CONTROL.ajax = (function() {
     function toServer(link, callback) {
 		var xhr = new XMLHttpRequest(),
-            a;
+            data;
 
         xhr.open('GET', link);
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
-
-          /*  if (xhr.status != 200) {
-                alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-                return;
-            }*/
             if (xhr.status == 200) {
                 if (typeof callback === 'function') {
                     try {
-                        a = JSON.parse(xhr.responseText);
+                        data = JSON.parse(xhr.responseText);
                     } catch (e){
-                        a = xhr.responseText;
+                        data = xhr.responseText;
                     }
-                    callback(a);
+                    callback(data);
                 }
                 xhr = null;
             }
@@ -601,7 +654,8 @@ CONTROL.access = (function() {
 
 	function showContent(responseData) {
         if (responseData == '0') {
-            tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), 'Логин или пароль указаны неверно!', 'warn_error');
+            tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'),
+                              'Логин или пароль указаны неверно!', 'warn_error');
             return false;
         }
         user.data  = responseData;
