@@ -63,8 +63,9 @@ CONTROL.initialize = (function() {
                 var fragment,
                     option = document.createElement('option'),clone;
                 if (count) {
-                   option.innerHTML = data;
-                   fragment = option;
+                    option.innerHTML = data;
+                    option.value = data;
+                    fragment = option;
                 }
                 else {
                     fragment = document.createDocumentFragment();
@@ -463,14 +464,18 @@ CONTROL.responses = (function() {
     function renameCategory(res) {
         var parent = doc.querySelector('.' + res.type),
             cat = user.data.categories[res.type],
-            parentHistSel = doc.querySelector('.history_sch_select');
+            parentHistSel = doc.querySelector('.history_sch_select'),
+            options = parentHistSel.children;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
         parent.innerHTML = parent.innerHTML.replace('<div>' + res.oldName + '</div>', '<div>' + res.newName + '</div>');
-        parentHistSel.innerHTML = parentHistSel.innerHTML.replace(
-            '<option value="' + res.oldName + '">' + res.oldName + '</option>',
-            '<option value="' + res.newName + '">' + res.newName + '</option>'
-        );
+        for (var i = 0, length = options.length; i < length; i++) {
+            if (options[i].innerHTML === res.oldName) {
+                options[i].innerHTML = res.newName;
+                options[i].value = res.newName;
+                break;
+            }
+        }
     }
 
     /**
@@ -483,14 +488,16 @@ CONTROL.responses = (function() {
             html = parent.innerHTML,
             indexStart, subs,
             parentHistSel = doc.querySelector('.history_sch_select'),
+            options = parentHistSel.children,
             cat = user.data.categories[res.type];
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
-        parentHistSel.innerHTML = parentHistSel.innerHTML.replace(
-            '<option value="' + res.cat + '">' + res.cat + '</option>',
-            ''
-        );
-
+        for (var i = 0, length = options.length; i < length; i++) {
+            if (options[i].innerHTML === res.cat) {
+                parentHistSel.removeChild(options[i]);
+                break;
+            }
+        }
         indexStart = html.indexOf('<div>' + res.cat + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
                           html.indexOf('</div>', indexStart + res.cat.length + 14));
@@ -843,7 +850,7 @@ CONTROL.access = (function() {
         doc.getElementsByClassName('indentation')[2].addEventListener('click', function(e) {
             var event = e || window,
                 target = event.target || event.srcElement,
-                key;
+                key, catName;
 
             //КНОПКИ ДОБАВЛЕНИЯ НОВЫХ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
             if (target.classList.contains('addCategoryButton')) {
@@ -880,6 +887,7 @@ CONTROL.access = (function() {
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
+                            catName = event.target.parentNode.lastElementChild.innerHTML;
                             CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Изменить',
@@ -887,15 +895,14 @@ CONTROL.access = (function() {
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event,
-                                    input = doc.querySelector('.editCatInput'),
-                                    old = input.placeholder;
+                                    input = doc.querySelector('.editCatInput');
 
                                 event.preventDefault();
                                 if (CONTROL.tools.isEmptyOne(input)) {
                                     ajax.toServer(request.editCategory(
                                         user.login,
                                         elem,
-                                        old,
+                                        catName,
                                         input.value),
                                         response.renameCategory
                                     );
@@ -912,6 +919,7 @@ CONTROL.access = (function() {
                     forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
+                            catName = event.target.parentNode.lastElementChild.innerHTML;
                             CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Удалить',
@@ -927,7 +935,7 @@ CONTROL.access = (function() {
                                 ajax.toServer(request.removeCategory(
                                     user.login,
                                     elem,
-                                    input.placeholder),
+                                    catName),
                                     response.removeCategory
                                 );
                                 CONTROL.layer.destroyLayer();
