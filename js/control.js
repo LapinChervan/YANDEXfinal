@@ -305,25 +305,6 @@ CONTROL.tools = (function() {
         }, 1500);
     }
 
-    return {
-        isNumber: isNumber,
-        isDate: isDate,
-        getDateMs: getDateMs,
-        getDateN: getDateN,
-        updateButton: updateButton,
-        isBiggest: isBiggest,
-        randomColor: randomColor,
-        showDiagram: showDiagram,
-        findSelectedInput: findSelectedInput,
-        isEmptyOne: isEmptyOne,
-        checkValuePointer: checkValuePointer,
-        showMessage: showMessage
-    }
-})();
-
-CONTROL.reload = (function() {
-    var doc = document;
-
     function loadSelectForm(data, formType) {
         var html, key;
 
@@ -336,14 +317,14 @@ CONTROL.reload = (function() {
                         if (key === 'costs') {
                             html = html + Mustache.render(doc.querySelector('.select__gain').innerHTML, {'accounts': elem});
                         } else {
-                             html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
+                            html = html + Mustache.render(doc.querySelector('.select__' + key).innerHTML, {'accounts': elem});
                         }
-                });
-               if (key === 'costs') {
-                   doc.querySelector('.select__gain').innerHTML = html;
-               } else {
-                   doc.querySelector('.select__' + key).innerHTML = html;
-               }
+                    });
+                if (key === 'costs') {
+                    doc.querySelector('.select__gain').innerHTML = html;
+                } else {
+                    doc.querySelector('.select__' + key).innerHTML = html;
+                }
 
                 if (formType === 'send') {
                     doc.querySelector('.select__gain').innerHTML = html;
@@ -353,6 +334,18 @@ CONTROL.reload = (function() {
     }
 
     return {
+        isNumber: isNumber,
+        isDate: isDate,
+        getDateMs: getDateMs,
+        getDateN: getDateN,
+        updateButton: updateButton,
+        isBiggest: isBiggest,
+        randomColor: randomColor,
+        showDiagram: showDiagram,
+        findSelectedInput: findSelectedInput,
+        isEmptyOne: isEmptyOne,
+        checkValuePointer: checkValuePointer,
+        showMessage: showMessage,
         loadSelectForm: loadSelectForm
     }
 })();
@@ -644,13 +637,13 @@ CONTROL.ajax = (function() {
 })();
 
 CONTROL.access = (function() {
-    var CONTR = CONTROL,
+    var doc = document,
+        CONTR = CONTROL,
         ajax = CONTR.ajax,
         response = CONTR.responses,
         request = CONTR.requests,
         user = CONTR.user,
-        tools = CONTR.tools,
-        doc = document;
+        tools = CONTR.tools;
 
 	function showContent(responseData) {
         if (responseData == '0') {
@@ -658,11 +651,13 @@ CONTROL.access = (function() {
                               'Логин или пароль указаны неверно!', 'warn_error');
             return false;
         }
-        user.data  = responseData;
-
+        user.data = responseData;
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
+
+        //вызов инициализации
         CONTR.initialize.init(responseData);
 
+        // ВЫХОД
         doc.querySelector('.main__user-data__exit').addEventListener('click', function(e) {
             var event = e || window.event;
             event.preventDefault();
@@ -688,7 +683,7 @@ CONTROL.access = (function() {
                     parentContent.querySelector('.' + key).style.display = 'block';
                 } else {
                     doc.querySelector('.' + key).classList.remove('visit');
-                    parentContent.querySelector('.' + key).style.display = 'none'; //кешировать такие моменты
+                    parentContent.querySelector('.' + key).style.display = 'none';
                 }
             }
         }, false);
@@ -701,17 +696,25 @@ CONTROL.access = (function() {
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
 
-              if (tools.isDate(doc.querySelector('.dateFrom')) && tools.isDate(doc.querySelector('.dateTo'))) {
-                  ajax.toServer(request.filterDate(user.login, tools.getDateMs(doc.querySelector('.dateFrom').value), tools.getDateMs(doc.querySelector('.dateTo').value)),
-                                response.filterDate);
-              }
+                if (tools.isDate(doc.querySelector('.dateFrom')) && tools.isDate(doc.querySelector('.dateTo'))) {
+                    ajax.toServer(request.filterDate(
+                        user.login,
+                        tools.getDateMs(doc.querySelector('.dateFrom').value),
+                        tools.getDateMs(doc.querySelector('.dateTo').value)),
+                        response.filterDate
+                    );
+                }
             }
 
             if (target.classList.contains('apply_filter2')) {
                 target.classList.remove('update');
                 event.preventDefault();
-                ajax.toServer(request.filterDate(user.login, tools.getDateMs(tools.getDateN('01')), tools.getDateMs(tools.getDateN('30'))),
-                    response.filterDate);
+                ajax.toServer(request.filterDate(
+                    user.login,
+                    tools.getDateMs(tools.getDateN('01')),
+                    tools.getDateMs(tools.getDateN('30'))),
+                    response.filterDate
+                );
             }
         }, false);
 
@@ -727,10 +730,24 @@ CONTROL.access = (function() {
             event.stopPropagation();
 
             if (tools.isDate(date[0]) && tools.isDate(date[1])) {
-                ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, tools.getDateMs(date[0].value), tools.getDateMs(date[1].value)), CONTR.initialize.history);
+                ajax.toServer(request.filterHistory(
+                    user.login,
+                    activeOption.value,
+                    activeRadio.value,
+                    tools.getDateMs(date[0].value),
+                    tools.getDateMs(date[1].value)),
+                    CONTR.initialize.history
+                );
                 CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
             } else {
-                ajax.toServer(request.filterHistory(user.login, activeOption.value, activeRadio.value, undefined, undefined), CONTR.initialize.history);
+                ajax.toServer(request.filterHistory(
+                    user.login,
+                    activeOption.value,
+                    activeRadio.value,
+                    undefined,
+                    undefined),
+                    CONTR.initialize.history
+                );
                 CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
             }
         });
@@ -754,13 +771,12 @@ CONTROL.access = (function() {
                     type = formType[key];
                     event.stopPropagation();
 
-                    CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.form__gain').innerHTML,
-                                                        { spriteImg: 'operats_form_' + type,
-                                                          accounts: '{{accounts}}'
-                                                        })
-                                              });
+                    CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.form__gain').innerHTML, {
+                        spriteImg: 'operats_form_' + type,
+                        accounts: '{{accounts}}'
+                    })});
 
-                    CONTROL.reload.loadSelectForm(CONTROL.user.data, type);
+                    tools.loadSelectForm(CONTROL.user.data, type);
 
                     doc.querySelector('.form__gain__add').addEventListener('click', function(e) {
                         var event = e || window.event,
@@ -779,7 +795,12 @@ CONTROL.access = (function() {
                             data['id'] = 'id' + Math.round(Math.random() * 1000000);
                             data.time = tools.getDateMs(data.date);
 
-                            ajax.toServer(request.newOper(user.login, type, JSON.stringify(data)), response.newOper);
+                            ajax.toServer(request.newOper(
+                                user.login,
+                                type,
+                                JSON.stringify(data)),
+                                response.newOper
+                            );
                             CONTROL.layer.destroyLayer();
                         }
                     }, false);
@@ -810,7 +831,12 @@ CONTROL.access = (function() {
                         txtInput = doc.querySelector('.' + types[key][0]);
 
                         if (CONTROL.tools.isEmptyOne(txtInput)) {
-                            ajax.toServer(request.newCategory(user.login, types[key][1], txtInput.value), response.newCategory);
+                            ajax.toServer(request.newCategory(
+                                user.login,
+                                types[key][1],
+                                txtInput.value),
+                                response.newCategory
+                            );
                             txtInput.value = '';
                         }
                         break;
@@ -836,8 +862,13 @@ CONTROL.access = (function() {
 
                                 event.preventDefault();
                                 if (CONTROL.tools.isEmptyOne(input)) {
-                                    ajax.toServer(request.editCategory(user.login, elem, old, input.value),
-                                                  response.renameCategory);
+                                    ajax.toServer(request.editCategory(
+                                        user.login,
+                                        elem,
+                                        old,
+                                        input.value),
+                                        response.renameCategory
+                                    );
                                     CONTROL.layer.destroyLayer();
                                 }
                             });
@@ -854,7 +885,6 @@ CONTROL.access = (function() {
                             CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Удалить',
-                                    img: 'img/close2.png',
                                     spriteImg: 'operats_remove'})});
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
@@ -862,8 +892,12 @@ CONTROL.access = (function() {
                                     input = doc.querySelector('.editCatInput');
 
                                 event.preventDefault();
-                                ajax.toServer(request.removeCategory(user.login, elem, input.placeholder),
-                                    response.removeCategory);
+                                ajax.toServer(request.removeCategory(
+                                    user.login,
+                                    elem,
+                                    input.placeholder),
+                                    response.removeCategory
+                                );
                                 CONTROL.layer.destroyLayer();
                             });
                         }
@@ -879,16 +913,25 @@ CONTROL.access = (function() {
                     item = inputCurr[i];
                     data[item.name] = item.value;
                 }
-                CONTROL.ajax.toServer(request.changeRates(user.login, JSON.stringify(data)));
+                CONTROL.ajax.toServer(request.changeRates(
+                    user.login,
+                    JSON.stringify(data))
+                );
             }
         }, false);
 
+        // СМЕНА ОСНОВНОЙ ВАЛЮТЫ
         document.querySelector('.currency-radio').addEventListener('change', function() {
             var target = event.target || event.srcElement,
                 price;
 
             price = +doc.querySelector('.curr-value input[name=' + target.value + ']').value;
-            CONTROL.ajax.toServer(request.changeMainCurr(user.login, target.value, price), CONTR.responses.rebuildCurrency);
+            CONTROL.ajax.toServer(request.changeMainCurr(
+                user.login,
+                target.value,
+                price),
+                CONTR.responses.rebuildCurrency
+            );
         });
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
@@ -913,7 +956,12 @@ CONTROL.access = (function() {
                var event = e || window.event;
 
                event.preventDefault();
-               ajax.toServer(request.removeOper(user.login, type, id), response.removeOper);
+               ajax.toServer(request.removeOper(
+                   user.login,
+                   type,
+                   id),
+                   response.removeOper
+               );
             });
 
         }, false);
@@ -921,13 +969,23 @@ CONTROL.access = (function() {
 
     function registration(user, password) {
         if (user && password) {
-            ajax.toServer(request.registration(user, password), response.registration);
+            ajax.toServer(request.registration(
+                user,
+                password),
+                response.registration
+            );
         }
     }
 
     function authorization(user, password) {
         if (user && password) {
-            ajax.toServer(request.auth(user, password, tools.getDateMs(tools.getDateN('01')), tools.getDateMs(tools.getDateN('30'))), showContent);
+            ajax.toServer(request.auth(
+                user,
+                password,
+                tools.getDateMs(tools.getDateN('01')),
+                tools.getDateMs(tools.getDateN('30'))),
+                showContent
+            );
         }
         return false;
     }

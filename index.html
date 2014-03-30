@@ -129,189 +129,185 @@
 
     <!--ОСНОВНАЯ ЧАСТЬ-->
     <script type="text/template" id="user-form">
-        <div class="main">
-            <!--userData.css-->
-            <div class="main__user-data">
-                <a class="main__user-data__exit" href="">Выйти</a>
-            </div>
-            <div class="clear"></div>
-            <!--END userData.css-->
+        <!--userData.css-->
+        <div class="main__user-data">
+            <a class="main__user-data__exit" href="">Выйти</a>
+        </div>
+        <div class="clear"></div>
+        <!--END userData.css-->
 
-            <!--tabMenuItems.css-->
-            <div class="main__tabs">
-                <ul class="main__tabs__ul">
-                    <li class="main__tabs__ul__li tab_main visit">Главная</li>
-                    <li class="main__tabs__ul__li tab_history">История</li>
-                    <li class="main__tabs__ul__li tab_person">Персонализация</li>
-                </ul>
-            </div>
-            <!--END tabMenuItems.css-->
-            <div class="message">
-                <!--ОТВЕТ НА ДОБАВЛЕНИЕ НОВОЙ ОПЕРАЦИИ-->>
-            </div>
-            <!--Wrapper for ALL TABS CONTENT-->
-            <div class="main__tabs__content">
-                <!--UL = WRAP FOR EACH LI(tab content)-->
-                <ul class="main__tabs__content__ul">
-                   <!--firstTabContents.css-->
-                    <li class="main__tabs__content__ul__li tab_main">
-                        <div class="indentation">
-                            <ul class="first__ul__button">
-                                <li class="first__ul__li__button ">
-                                    <div class="first">Доходы</div>
-                                </li>
-                                <li class="first__ul__li__button">
-                                    <div class="second">Расходы</div>
-                                </li>
-                                <li class="first__ul__li__button">
-                                    <div class="third">Переводы</div>
-                                </li>
-                            </ul>
+        <!--tabMenuItems.css-->
+        <div class="main__tabs">
+            <ul class="main__tabs__ul">
+                <li class="main__tabs__ul__li tab_main visit">Главная</li>
+                <li class="main__tabs__ul__li tab_history">История</li>
+                <li class="main__tabs__ul__li tab_person">Персонализация</li>
+            </ul>
+        </div>
+        <!--END tabMenuItems.css-->
+        <div class="message">
+            <!--ОТВЕТ НА ДОБАВЛЕНИЕ НОВОЙ ОПЕРАЦИИ-->>
+        </div>
+        <!--Wrapper for ALL TABS CONTENT-->
+        <div class="main__tabs__content">
+            <!--UL = WRAP FOR EACH LI(tab content)-->
+            <ul class="main__tabs__content__ul">
+               <!--firstTabContents.css-->
+                <li class="main__tabs__content__ul__li tab_main">
+                    <div class="indentation">
+                        <ul class="first__ul__button">
+                            <li class="first__ul__li__button ">
+                                <div class="first">Доходы</div>
+                            </li>
+                            <li class="first__ul__li__button">
+                                <div class="second">Расходы</div>
+                            </li>
+                            <li class="first__ul__li__button">
+                                <div class="third">Переводы</div>
+                            </li>
+                        </ul>
 
-                            <div class="statistics__header">
-                                <span class="statistics__header_stat">Статистика</span>
-                                <div class="warn_stat"></div>
-                            </div>
+                        <div class="statistics__header">
+                            <span class="statistics__header_stat">Статистика</span>
+                            <div class="warn_stat"></div>
+                        </div>
 
-                            <div class="statistics">
-                                <div class="filters__inputs">
-                                    <input class="dateFrom" placeholder="Дата" type="text" value="01.03.2014">
-                                    <input class="dateTo" type="text" placeholder="Дата" value="29.03.2014">
-                                    <a class="apply_filter1" href="#">Отобрать</a>
-                                    <a class="apply_filter2" href="#">За месяц</a>
-                                </div>
-                                <ul class="statistics__ul">
-                                    <li class="statistics__ul__li">
-                                        <img class="logo_stat" src="img/plus.png" alt="">
-
-                                        <table class="tableprices__plus">
-                                            <tr>
-                                                <td>Текущий период</td>
-                                                <td class="gain_sumfilter">...</td>
-                                            </tr>
-                                        </table>
-
-                                        <div class="diagram">
-                                            <div class="diagram__header">Диаграмма по доходам</div>
-                                            <div class="calendarr"><img src="img/calendar.png" alt=""></div>
-                                            <div class="diaggain"></div>
-                                        </div>
-                                    </li>
-                                    <li class="statistics__ul__li">
-                                        <img  class="logo_stat" src="img/minus.png" alt="">
-                                        <table class="tableprices__minus">
-                                            <tr>
-                                                <td>Текущий период</td>
-                                                <td class="costs_sumfilter">...</td>
-                                            </tr>
-                                        </table>
-
-                                        <div class="diagram">
-                                            <div class="diagram__header">Диаграмма по расходам</div>
-                                            <div class="calendarr"><img src="img/calendar.png" alt=""></div>
-                                            <div class="diagcosts"></div>
-                                        </div>
-                                    </li>
-                                </ul>           
-                            </div> 
-                        </div> 
-                    </li>
-                    <!--END firstTabContents.css-->
-
-                    <!--secondTabContents.css-->
-                    <li class="main__tabs__content__ul__li tab_history">
-                        <div class="indentation">
-                            <div class="history-filter">
-                                <select class="history_sch_select">
-                                    <!-- SLOT FOR ACCOUNTS ON HISTORY TAB  -->
-                                </select>
-                                <label><input value="all" type="radio" name="operation" checked>Все операции</label>
-                                <label><input value= "gain" type="radio" name="operation">Доход</label>
-                                <label><input value="costs" type="radio" name="operation">Расход</label>
-                                <label><input value="send" type="radio" name="operation">Перевод</label>
+                        <div class="statistics">
+                            <div class="filters__inputs">
                                 <input class="dateFrom" placeholder="Дата" type="text" value="01.03.2014">
                                 <input class="dateTo" type="text" placeholder="Дата" value="29.03.2014">
-                                <a class="add_cat_sch marginL5">Применить</a>
+                                <a class="apply_filter1" href="#">Отобрать</a>
+                                <a class="apply_filter2" href="#">За месяц</a>
                             </div>
-                            <ul class="historyUl">
+                            <ul class="statistics__ul">
+                                <li class="statistics__ul__li">
+                                    <img class="logo_stat" src="img/plus.png" alt="">
 
-                                <!--SLOT FOR TEMPLATE HISTORY-->
+                                    <table class="tableprices__plus">
+                                        <tr>
+                                            <td>Текущий период</td>
+                                            <td class="gain_sumfilter">...</td>
+                                        </tr>
+                                    </table>
 
+                                    <div class="diagram">
+                                        <div class="diagram__header">Диаграмма по доходам</div>
+                                        <div class="calendarr"><img src="img/calendar.png" alt=""></div>
+                                        <div class="diaggain"></div>
+                                    </div>
+                                </li>
+                                <li class="statistics__ul__li">
+                                    <img  class="logo_stat" src="img/minus.png" alt="">
+                                    <table class="tableprices__minus">
+                                        <tr>
+                                            <td>Текущий период</td>
+                                            <td class="costs_sumfilter">...</td>
+                                        </tr>
+                                    </table>
+
+                                    <div class="diagram">
+                                        <div class="diagram__header">Диаграмма по расходам</div>
+                                        <div class="calendarr"><img src="img/calendar.png" alt=""></div>
+                                        <div class="diagcosts"></div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
-                    </li>
-                    <!--END secondTabContents.css-->
+                    </div>
+                </li>
+                <!--END firstTabContents.css-->
 
-                    <!--thirdTabPerson.css-->
-                    <li class="main__tabs__content__ul__li tab_person">
-                        <div class="indentation">
-                            <div class="statistics__header">
-                                <span class="statistics__header_stat">Счета</span>
-                                <div class="warn_stat"></div>
-                            </div>
-                            <div class="floatRight create-block">
-                                <div class="inlineBlock">
-                                    <input class="block edit_cat_sch" placeholder="Категория" type="text">
-                                    <a href="#" class="add_cat_sch addCategoryButton">Добавить</a>
-                                </div>
-                            </div>
-                            <div class="accounts setting-wrap relative">
+                <!--secondTabContents.css-->
+                <li class="main__tabs__content__ul__li tab_history">
+                    <div class="indentation">
+                        <div class="history-filter">
+                            <select class="history_sch_select">
+                                <!-- SLOT FOR ACCOUNTS ON HISTORY TAB  -->
+                            </select>
+                            <label><input value="all" type="radio" name="operation" checked>Все операции</label>
+                            <label><input value= "gain" type="radio" name="operation">Доход</label>
+                            <label><input value="costs" type="radio" name="operation">Расход</label>
+                            <label><input value="send" type="radio" name="operation">Перевод</label>
+                            <input class="dateFrom" placeholder="Дата" type="text" value="01.03.2014">
+                            <input class="dateTo" type="text" placeholder="Дата" value="29.03.2014">
+                            <a class="add_cat_sch marginL5">Применить</a>
+                        </div>
+                        <ul class="historyUl">
 
-                                <!--SLOT FOR TEMPLATE CATEGORY 1-->
+                            <!--SLOT FOR TEMPLATE HISTORY-->
 
-                            </div>
-                            <div class="statistics__header">
-                                <span class="statistics__header_stat">Доходы</span>
-                                <div class="warn_stat"></div>
-                            </div>
-                            <div class="floatRight create-block">
-                                <div class="inlineBlock">
-                                    <input class="block edit_cat_plus"  placeholder="Категория" type="text">
-                                    <a href="#" class="add_cat_plus addCategoryButton">Добавить</a>
-                                </div>
-                            </div>
-                            <div class="gain setting-wrap relative">
+                        </ul>
+                    </div>
+                </li>
+                <!--END secondTabContents.css-->
 
-                               <!--SLOT FOR TEMPLATE CATEGORY 2-->
-
-                            </div>
-                            <div class="statistics__header">
-                                <span class="statistics__header_stat">Расходы</span>
-                                <div class="warn_stat"></div>
-                            </div>
-                            <div class="floatRight create-block">
-                                <div class="inlineBlock">
-                                    <input class="block edit_cat_minus" placeholder="Категория" type="text">
-                                    <a href="#" class="add_cat_minus addCategoryButton">Добавить</a>
-                                </div>
-                            </div>
-                            <div class="costs setting-wrap relative">
-
-                                <!--SLOT FOR TEMPLATE CATEGORY 3-->
-
-                            </div>
-                            <div class="statistics__header">
-                                <span class="statistics__header_stat">Курс валют</span>
-                                <div class="warn_stat"></div>
-                            </div>
-                            <div class="currency-wrap">
-                                <div class="currency-radio">
-                                    <label><input type="radio" name="valuta"  value="uah">uah</label>
-                                    <label><input type="radio" name="valuta"  value="rub">rub</label>
-                                    <label><input type="radio" name="valuta"  value="usd">usd</label>
-                                    <label><input type="radio" name="valuta"  value="eur">eur</label>
-                                </div>
-                                <div class="currency-radio"></div>
-                                <div class="buttonValuta">Сохранить</div>
+                <!--thirdTabPerson.css-->
+                <li class="main__tabs__content__ul__li tab_person">
+                    <div class="indentation">
+                        <div class="statistics__header">
+                            <span class="statistics__header_stat">Счета</span>
+                            <div class="warn_stat"></div>
+                        </div>
+                        <div class="floatRight create-block">
+                            <div class="inlineBlock">
+                                <input class="block edit_cat_sch" placeholder="Категория" type="text">
+                                <a href="#" class="add_cat_sch addCategoryButton">Добавить</a>
                             </div>
                         </div>
-                    </li>
-                    <!--END thirdTabPerson.css-->
-                </ul>
-            </div>
+                        <div class="accounts setting-wrap relative">
 
+                            <!--SLOT FOR TEMPLATE CATEGORY 1-->
+
+                        </div>
+                        <div class="statistics__header">
+                            <span class="statistics__header_stat">Доходы</span>
+                            <div class="warn_stat"></div>
+                        </div>
+                        <div class="floatRight create-block">
+                            <div class="inlineBlock">
+                                <input class="block edit_cat_plus"  placeholder="Категория" type="text">
+                                <a href="#" class="add_cat_plus addCategoryButton">Добавить</a>
+                            </div>
+                        </div>
+                        <div class="gain setting-wrap relative">
+
+                           <!--SLOT FOR TEMPLATE CATEGORY 2-->
+
+                        </div>
+                        <div class="statistics__header">
+                            <span class="statistics__header_stat">Расходы</span>
+                            <div class="warn_stat"></div>
+                        </div>
+                        <div class="floatRight create-block">
+                            <div class="inlineBlock">
+                                <input class="block edit_cat_minus" placeholder="Категория" type="text">
+                                <a href="#" class="add_cat_minus addCategoryButton">Добавить</a>
+                            </div>
+                        </div>
+                        <div class="costs setting-wrap relative">
+
+                            <!--SLOT FOR TEMPLATE CATEGORY 3-->
+
+                        </div>
+                        <div class="statistics__header">
+                            <span class="statistics__header_stat">Курс валют</span>
+                            <div class="warn_stat"></div>
+                        </div>
+                        <div class="currency-wrap">
+                            <div class="currency-radio">
+                                <label><input type="radio" name="valuta"  value="uah">uah</label>
+                                <label><input type="radio" name="valuta"  value="rub">rub</label>
+                                <label><input type="radio" name="valuta"  value="usd">usd</label>
+                                <label><input type="radio" name="valuta"  value="eur">eur</label>
+                            </div>
+                            <div class="currency-radio"></div>
+                            <div class="buttonValuta">Сохранить</div>
+                        </div>
+                    </div>
+                </li>
+                <!--END thirdTabPerson.css-->
+            </ul>
         </div>
-
     </script>
 
     <!--ФОРМА ОТВЕТА НА НОВУЮ ОПЕРАЦИЮ и РЕГИСТРАЦИЮ-->
