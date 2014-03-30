@@ -85,7 +85,8 @@ var http = require('http'),
                 requests.checkSession(req.cookies.controls, data.query.start, data.query.end, res);
             }
             else {
-                res.end('00');
+                res.writeHead(404, {'Content-Type': 'text/plain; charset=UTF-8'});
+                res.end();
             }
         }
         else {
@@ -104,5 +105,5 @@ var http = require('http'),
         }
     });
 
-    app.use(connect.static('/Users/nvzc/Documents/GitHub/yandex'));
+    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);

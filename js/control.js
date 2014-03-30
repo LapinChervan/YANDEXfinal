@@ -482,20 +482,21 @@ CONTROL.ajax = (function() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState != 4) return;
 
-            if (xhr.status != 200) {
+          /*  if (xhr.status != 200) {
                 alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
                 return;
-            }
-
-            if (typeof callback === 'function') {
-                try {
-                    a = JSON.parse(xhr.responseText);
-                } catch (e){
-                    a = xhr.responseText;
+            }*/
+            if (xhr.status == 200) {
+                if (typeof callback === 'function') {
+                    try {
+                        a = JSON.parse(xhr.responseText);
+                    } catch (e){
+                        a = xhr.responseText;
+                    }
+                    callback(a);
                 }
-                callback(a);
+                xhr = null;
             }
-            xhr = null;
         };
         xhr.send();
 	}
@@ -516,9 +517,6 @@ CONTROL.access = (function() {
 	function showContent(responseData) {
         if (responseData == '0') {
             tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), 'Логин или пароль указаны неверно!', 'warn_error');
-            return false;
-        }
-        if (responseData == '00') {
             return false;
         }
         user.data  = responseData;
