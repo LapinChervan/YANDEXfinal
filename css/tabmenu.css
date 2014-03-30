@@ -4,7 +4,7 @@
 
 .main__tabs__ul {
     list-style-type: none;
-    width: 620px;
+    width: 505px;
 }
 
 .main__tabs__ul__li {
@@ -45,3 +45,6 @@
     margin: 10px 10px 0 10px;
 }
 
+.main__tabs__content__ul__li.tab_person, .main__tabs__content__ul__li.tab_history {
+    display: none;
+}

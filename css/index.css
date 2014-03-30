@@ -268,32 +268,6 @@ div[class^=info_] {
     text-align: center;
 }
 
-.main__why {
-    display: inline-block;
-    margin: 30px 10px;
-    padding: 15px 0 0 0;
-    width: 28%;
-    height: 40px;
-    background: #CF4231;
-    border-radius: 4px;
-    position: relative;
-    color: #EDEDED;
-    text-transform: uppercase;
-    text-align: center;  
-}
-
-.main__why_triangle {
-    position: absolute;
-    left: 49%;
-    top: 55px;
-    margin: 0 auto;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #CF4231;
-}
-
 .main__footer__about {
     display: table-cell;
     vertical-align: middle;

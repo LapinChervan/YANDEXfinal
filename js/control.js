@@ -116,13 +116,13 @@ CONTROL.tools = (function() {
     * @param  {Element} elem DOM элемент.
     * @return {Boolean}
     */
-    function isEmptyOne(elem) {
+    function isEmptyOne(elem, val) {
         if (elem.value.trim().length === 0) {
             elem.placeholder = 'Ошибка ввода';
             elem.value = '';
             return false;
         }
-        elem.placeholder = 'Категория';
+        elem.placeholder = val;
         return true;
     }
 
@@ -692,13 +692,13 @@ CONTROL.access = (function() {
 
             if (target.classList.contains('apply_filter1')) {
                 event.preventDefault();
-                from = doc.querySelector('.dateFrom').value;
-                to = doc.querySelector('.dateTo').value;
-                if (from.length > 0 && to.length > 0) {
+                from = doc.querySelector('.dateFrom');
+                to = doc.querySelector('.dateTo');
+                if (CONTROL.tools.isEmptyOne(from) && CONTROL.tools.isEmptyOne(to)) {
                     ajax.toServer(request.filterDate(
                         user.login,
-                        tools.getDateMs(from),
-                        tools.getDateMs(to)),
+                        tools.getDateMs(from.value),
+                        tools.getDateMs(to.value)),
                         response.filterDate
                     );
                 }
