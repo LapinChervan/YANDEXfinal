@@ -125,3 +125,9 @@
     font-size: 12px;
 }
 
+.clearDateFrom, .clearDateTo {
+    background: url('../img/clean.png') 50% no-repeat;
+    background-color: #EAEAEA;
+}
+
+

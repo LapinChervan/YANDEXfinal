@@ -749,40 +749,53 @@ CONTROL.access = (function() {
             }
         }, false);
 
-        //фильтр история
-        doc.querySelector('.add_cat_sch.marginL5').addEventListener('click', function(e) {
+        //ДЕЛЕГИРОВАНИЕ ИСТОРИЯ
+        doc.querySelector('.history-filter').addEventListener('click', function(e) {
             var event = e || window.event,
-                target = event.target || event.srcElement,
-                parent = target.parentNode,
-                date = parent.querySelectorAll('input[type=text]'),
-                activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
-                activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio]'), 'checked');
+                target = event.target || event.srcElement;
 
-            event.stopPropagation();
+            if (target.classList.contains('marginL5')) {
+                var parent = target.parentNode,
+                    date = parent.querySelectorAll('input[type=text]'),
+                    activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
+                    activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio]'), 'checked');
 
-            if (tools.isEmptyOne(date[0], 'Дата') && tools.isEmptyOne(date[1], 'Дата')) {
-                ajax.toServer(request.filterHistory(
-                    user.login,
-                    activeOption.value,
-                    activeRadio.value,
-                    tools.getDateMs(date[0].value),
-                    tools.getDateMs(date[1].value)),
-                    CONTR.initialize.history
-                );
-                date[0].value = '';
-                date[1].value = '';
-            } else {
-                ajax.toServer(request.filterHistory(
-                    user.login,
-                    activeOption.value,
-                    activeRadio.value,
-                    undefined,
-                    undefined),
-                    CONTR.initialize.history
-                );
+                event.stopPropagation();
+
+                if (tools.isEmptyOne(date[0], 'Дата') && tools.isEmptyOne(date[1], 'Дата')) {
+                    ajax.toServer(request.filterHistory(
+                        user.login,
+                        activeOption.value,
+                        activeRadio.value,
+                        tools.getDateMs(date[0].value),
+                        tools.getDateMs(date[1].value)),
+                        CONTR.initialize.history
+                    );
+                    date[0].value = '';
+                    date[1].value = '';
+                } else {
+                    ajax.toServer(request.filterHistory(
+                        user.login,
+                        activeOption.value,
+                        activeRadio.value,
+                        undefined,
+                        undefined),
+                        CONTR.initialize.history
+                    );
+                }
+                CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
             }
-            CONTR.layer.createLayer({clsContentLayer: 'layer gif-layer'});
-        });
+
+            if (target.classList.contains('clearDateFrom')) {
+                event.preventDefault;
+                doc.querySelectorAll('.dateFrom')[1].value = '';
+            }
+            if (target.classList.contains('clearDateTo')) {
+                event.preventDefault;
+                doc.querySelectorAll('.dateTo')[1].value = '';
+            }
+
+        }, false);
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
         doc.querySelector('.first__ul__button').addEventListener('click', function(e) {
