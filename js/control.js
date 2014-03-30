@@ -542,7 +542,12 @@ CONTROL.responses = (function() {
         res.mainCurr = user.data.mainCurr;
         oper.innerHTML = Mustache.render(tmpHistory, res);
         parent.appendChild(oper);
-        tools.showMessage(tmpMessage, doc.querySelector('.message'), 'Новая операция успешно добавлена!', 'warn_yes');
+        tools.showMessage(
+            tmpMessage,
+            doc.querySelector('.message'),
+            'Новая операция успешно добавлена!',
+            'warn_yes'
+        );
         tools.updateButton(doc.querySelector('.apply_filter2'), res.type, res.date);
     }
 
@@ -567,16 +572,17 @@ CONTROL.responses = (function() {
                 }
                 diagram[key][data.cat] += +data.sum;
             }
-            doc.querySelector('.' + key + '_sumfilter').innerHTML = tools.checkValuePointer(sum) + ' ' + user.data.mainCurr;
+            doc.querySelector('.' + key + '_sumfilter').innerHTML = tools.checkValuePointer(sum) + ' ' +
+                                                                    user.data.mainCurr;
         }
         CONTR.tools.showDiagram(diagram);
     }
 
     /**
-     * Удаляет операцию.
-     *
-     * @param {String} res Ответ с сервера с ID операции.
-     */
+    * Удаляет операцию.
+    *
+    * @param {String} res Ответ с сервера с ID операции.
+    */
     function removeOper(res) {
         var parent = doc.querySelector('.historyUl'),
             html = parent.innerHTML.toLocaleLowerCase(),
@@ -587,9 +593,14 @@ CONTROL.responses = (function() {
         subs = html.slice(html.lastIndexOf('<li>', indexStart),
                           html.indexOf('</li>', indexStart) + 5);
         parent.innerHTML = html.replace(subs, '');
-        CONTROL.layer.destroyLayer();
+        CONTR.layer.destroyLayer();
     }
 
+    /**
+    * Прорисовка валюты.
+    *
+    * @param {Object} obj Объект с данными.
+    */
     function rebuildCurrency (obj) {
         var mainCurrWrap = doc.querySelectorAll('.currency-radio')[1],
             mainCurr = obj.mainCurr,
@@ -624,7 +635,12 @@ CONTROL.responses = (function() {
             0: ['Регистрация успешно пройдена!', 'warn_yes'],
             1: ['Пользователь с таким именем существует!', 'warn_error']
         };
-        tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'), sett[res][0], sett[res][1]);
+        tools.showMessage(
+            tmpMessage,
+            doc.querySelector('.messageResponse'),
+            sett[res][0],
+            sett[res][1]
+        );
     }
 
     function exitToIndex () {
