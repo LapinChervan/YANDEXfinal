@@ -56,7 +56,7 @@ body,
 .form__costs__add,
 .form__send__add,
 .form__card__add,
-.add_cat_sch, .add_cat_plus,
+.add_cat_sch, .add_cat_plus, .add_cat_minus,
 .apply_filter1, .apply_filter2, .more_history, .main__user-data__exit,
 .tab_history li, .setting-wrap > div, div.removeStyle > div,
 .buttonValuta, .formCatEdit a, .remHistForm a, .currency-radio {

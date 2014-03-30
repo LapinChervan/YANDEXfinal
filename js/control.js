@@ -324,6 +324,11 @@ CONTROL.tools = (function() {
         doc.querySelector('.select__gain').appendChild(fr);//.innerHTML = html;
     }
 
+    function categoryExist(parent, elem) {
+        var par = parent.innerHTML.toLowerCase();
+        return par.indexOf('<div>' + elem.value.toLowerCase() + '</div>', 0) === -1 ? true : false;
+    }
+
     return {
         isNumber: isNumber,
         getDateMs: getDateMs,
@@ -336,7 +341,8 @@ CONTROL.tools = (function() {
         isEmptyOne: isEmptyOne,
         checkValuePointer: checkValuePointer,
         showMessage: showMessage,
-        loadSelectForm: loadSelectForm
+        loadSelectForm: loadSelectForm,
+        categoryExist: categoryExist
     }
 })();
 
@@ -881,13 +887,15 @@ CONTROL.access = (function() {
                         txtInput = doc.querySelector('.' + types[key][0]);
 
                         if (tools.isEmptyOne(txtInput, 'Категория')) {
-                            ajax.toServer(request.newCategory(
-                                user.login,
-                                types[key][1],
-                                txtInput.value),
-                                response.newCategory
-                            );
-                            txtInput.value = '';
+                            if (tools.categoryExist(doc.querySelector('.' + types[key][1]), txtInput) ) {
+                                ajax.toServer(request.newCategory(
+                                    user.login,
+                                    types[key][1],
+                                    txtInput.value),
+                                    response.newCategory
+                                );
+                                txtInput.value = '';
+                            }
                         }
                         break;
                     }

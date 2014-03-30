@@ -7,12 +7,12 @@
 }
 
 .message {
-    position: absolute;
+    position: fixed;
     padding: 0 5px;
     word-wrap: break-word;
     width: 180px;
-    top: 100px;
-    right: 10px;
+    top: 105px;
+    right: 35px;
     font-size: 14px;
     color: #EDEDE5;
     z-index: 1;
