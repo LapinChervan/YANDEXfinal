@@ -30,7 +30,7 @@
     text-align: center;
 }
 
-.form__gain select, .form__costs select, .form__send select {
+.form__gain select {
     width: 84%;
 }
 
@@ -43,7 +43,7 @@
 .form__costs__header,
 .form__send__header,
 .form__card__header,
-.history-filter, .message,
+.history-filter, .message, .mes,
 .form__gain, .formCatEdit, .remHistForm {
     background: url("../img/headerbg.png");
     margin: 0 0 8px 0;

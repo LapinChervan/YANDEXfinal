@@ -434,6 +434,7 @@ CONTROL.responses = (function() {
         tmpUserAccoutsNew = doc.querySelector('.useraccountsNew').innerHTML,// Шаблон для категорий
         tmpHistory = doc.querySelector('.historyLi').innerHTML, // Шаблон для операции
         tmpMessage = doc.querySelector('.form-mess'); // Шаблон для сообщения
+
     /**
     * Добавляет новую категорию.
     *
@@ -565,9 +566,20 @@ CONTROL.responses = (function() {
             radio, key, input = '';
 
         for (key in currency) {
-            input = input + Mustache.render(templateInput, {spriteImg: 'valute_' + key, valuta: key, count: currency[key], main: mainCurr});
+            input = input + Mustache.render(templateInput, {
+                spriteImg: 'valute_' + key,
+                valuta: key,
+                count: currency[key],
+                main: mainCurr
+            });
         }
         mainCurrWrap.innerHTML = input;
+        CONTROL.tools.showMessage(
+            tmpMessage,
+            doc.querySelector('.mes'),
+            'Обновите страницу',
+            'warn_error'
+        )
     }
 
     /**
@@ -903,7 +915,9 @@ CONTROL.access = (function() {
                             CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: target.parentNode.lastElementChild.innerHTML,
                                     caption: 'Удалить',
-                                    spriteImg: 'operats_remove'})});
+                                    spriteImg: 'operats_remove',
+                                    readonly: 'readonly'
+                                })});
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event,
