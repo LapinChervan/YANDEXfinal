@@ -694,7 +694,7 @@ CONTROL.access = (function() {
                 event.preventDefault();
                 from = doc.querySelector('.dateFrom');
                 to = doc.querySelector('.dateTo');
-                if (CONTROL.tools.isEmptyOne(from) && CONTROL.tools.isEmptyOne(to)) {
+                if (CONTROL.tools.isEmptyOne(from, 'Дата') && CONTROL.tools.isEmptyOne(to, 'Дата')) {
                     ajax.toServer(request.filterDate(
                         user.login,
                         tools.getDateMs(from.value),
@@ -727,7 +727,7 @@ CONTROL.access = (function() {
 
             event.stopPropagation();
 
-            if (date[0].value.length > 0 && date[1].value.length > 0) {
+            if (tools.isEmptyOne(date[0], 'Дата') && tools.isEmptyOne(date[1], 'Дата')) {
                 ajax.toServer(request.filterHistory(
                     user.login,
                     activeOption.value,
@@ -790,7 +790,7 @@ CONTROL.access = (function() {
                             i, item, data = {};
 
                         event.preventDefault();
-                        if (tools.isNumber(doc.querySelector('.sumCheck')) && doc.querySelector('.dateCheck').value.length > 0) {
+                        if (tools.isNumber(doc.querySelector('.sumCheck')) && tools.isEmptyOne(doc.querySelector('.dateCheck'), 'Дата')) {
                             for (i = 0; i < len; i++) {
                                 item = form[i];
                                 data[arr[i]] = item.value;
@@ -834,7 +834,7 @@ CONTROL.access = (function() {
                     if (target.classList.contains(key)) {
                         txtInput = doc.querySelector('.' + types[key][0]);
 
-                        if (CONTROL.tools.isEmptyOne(txtInput)) {
+                        if (tools.isEmptyOne(txtInput, 'Категория')) {
                             ajax.toServer(request.newCategory(
                                 user.login,
                                 types[key][1],
