@@ -669,6 +669,7 @@ CONTROL.access = (function() {
                               'Логин или пароль указаны неверно!', 'warn_error');
             return false;
         }
+        clearTimeout(CONTR.slider.time);
         user.data = responseData;
 		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
 
@@ -1149,7 +1150,7 @@ CONTROL.slider = (function() {
         var i = 0, doc = document,
             timerId = setTimeout(function show() {
                 doc.querySelector('.mac').src = 'img/slide' + i + '.png';
-                setTimeout(show, 5000);
+                CONTROL.slider.time = setTimeout(show, 5000);
                 i++;
                 if (i === 4) {
                     i = 0;

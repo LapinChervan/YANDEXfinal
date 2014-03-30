@@ -28,6 +28,7 @@
     font-size: 14px;
     color: #464646;
     text-align: center;
+    vertical-align: middle;
 }
 
 .form__gain select {
