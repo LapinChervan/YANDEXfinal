@@ -488,10 +488,6 @@ CONTROL.responses = (function() {
             option, divOp, divCl;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
-        //parent.innerHTML = parent.innerHTML.toLowerCase().replace(
-        //    '<div>' + res.oldName.toLowerCase() + '</div>',
-        //    '<div>' + res.newName + '</div>'
-        //);
 
         if (window.getComputedStyle) {
             parent.innerHTML = parent.innerHTML.replace(
@@ -535,9 +531,6 @@ CONTROL.responses = (function() {
                 break;
             }
         }
-        //indexStart = html.indexOf('<div>' + catL + '</div>');
-        //subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
-         //                 html.indexOf('</div>', indexStart + catL.length + 14));
 
         if (window.getComputedStyle) {
             indexStart = html.indexOf('<div>' + res.cat + '</div>');
@@ -1056,17 +1049,24 @@ CONTROL.access = (function() {
         }, false);
 
         // СМЕНА ОСНОВНОЙ ВАЛЮТЫ
-        document.querySelector('.currency-radio').addEventListener('change', function() {
+        document.querySelector('.currency-radio').addEventListener('click', function() {
             var target = event.target || event.srcElement,
-                price;
-
-            price = +doc.querySelector('.curr-value input[name=' + target.value + ']').value;
-            CONTROL.ajax.toServer(request.changeMainCurr(
-                user.login,
-                target.value,
-                price),
-                CONTR.responses.rebuildCurrency
-            );
+                price, val;
+            if (target.tagName.toLowerCase() === 'label' || target.tagName.toLowerCase() === 'input') {
+                if (target.tagName.toLowerCase() === 'label') {
+                    val = target.querySelector('input').value;
+                }
+                else {
+                    val = target.value;
+                }
+                price = +doc.querySelector('.curr-value input[name=' + val + ']').value;
+                CONTROL.ajax.toServer(request.changeMainCurr(
+                    user.login,
+                    target.value,
+                    price),
+                    CONTR.responses.rebuildCurrency
+                );
+            }
         });
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
@@ -1166,7 +1166,6 @@ CONTROL.layer = (function() {
             }
 
             layer.innerHTML = optionsObject.content;
-
             layer.className = optionsObject.clsContentLayer;
             fragment.appendChild(modal);
             fragment.appendChild(layer);
