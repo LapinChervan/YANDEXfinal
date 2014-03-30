@@ -71,17 +71,15 @@ CONTROL.initialize = (function() {
                     option.value = 'all';
                     option.innerHTML = 'Все счета';
                     fragment.appendChild(option);
-                       // html = Mustache.render(tmp, {'histSch': 'Все счета', 'value': 'all'});
 
                     data.categories.accounts.forEach(function(elem) {
                         clone = option.cloneNode();
                         clone.innerHTML = elem;
                         clone.value = elem;
                         fragment.appendChild(clone);
-                        //html = html + Mustache.render(tmp, {'histSch': elem, 'value': elem});
                     });
                 }
-                doc.querySelector('.history_sch_select').appendChild(fragment);// = html;
+                doc.querySelector('.history_sch_select').appendChild(fragment);
             }
         };
 
