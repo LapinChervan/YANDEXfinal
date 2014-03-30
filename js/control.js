@@ -914,13 +914,8 @@ CONTROL.access = (function() {
                                 for (i = 0; i < len; i++) {
                                     item = form[i];
                                     if (item.tagName.toLocaleLowerCase() === 'select') {
-                                        options = item.children;
-                                        for (var j = 0, optLen = options.length; j < optLen; j++) {
-                                            if (options[j].selected) {
-                                                data[arr[i]] = options[j].value;
-                                                break;
-                                            }
-                                        }
+                                        options = tools.findSelectedInput(item.children, 'selected');
+                                        data[arr[i]] = options.value;
                                     }
                                     else {
                                         data[arr[i]] = item.value;
