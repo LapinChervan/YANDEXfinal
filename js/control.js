@@ -110,29 +110,6 @@ CONTROL.tools = (function() {
         return false;
     }
 
-    function isDate(d) {
-        var arr = d.value.split('.');
-
-        if (arr.length !== 3) {
-            d.value = '';
-            d.placeholder = 'Ошибка ввода';
-            return false;
-        }
-
-        if (+arr[0] > 0 && +arr[0] <= 31 && arr[0].length === 2) {
-            if (+arr[1] > 1 && +arr[1] <= 12  && arr[1].length === 2) {
-                if (+arr[2] > 1999 && +arr[2] < 3000 && arr[2].length === 4) {
-                    d.placeholder = 'Дата';
-                    return true;
-                }
-            }
-        }
-
-        d.value = '';
-        d.placeholder = 'Ошибка ввода';
-        return false;
-    }
-
     /**
     * Проверка на пустое поле.
     *
@@ -335,7 +312,6 @@ CONTROL.tools = (function() {
 
     return {
         isNumber: isNumber,
-        isDate: isDate,
         getDateMs: getDateMs,
         getDateN: getDateN,
         updateButton: updateButton,
