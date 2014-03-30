@@ -18,11 +18,11 @@ var http = require('http'),
                     },
 
                     '/newCategories': function() {
-                        requests.newCat(data.query.login, data.query.typ, data.query.cat, res);
+                        requests.newCat(data.query.login, data.query.typ, decodeURI(data.query.cat), res);
                     },
 
                     '/historyNewOper': function() {
-                        requests.newOper(data.query.login, data.query.type, data.query.formData, res);
+                        requests.newOper(data.query.login, data.query.type, decodeURI(data.query.formData), res);
                     },
 
                     '/historyRemove': function() {
@@ -33,14 +33,14 @@ var http = require('http'),
                         var obj = {
                             login: data.query.login,
                             type: data.query.type,
-                            old: data.query.old,
-                            new: data.query.new
+                            old: decodeURI(data.query.old),
+                            new: decodeURI(data.query.new)
                         };
                         requests.renameCat(obj, res);
                     },
 
                     '/removeCategory': function() {
-                        requests.removeCat(data.query.login, data.query.type, data.query.old, res);
+                        requests.removeCat(data.query.login, data.query.type, decodeURI(data.query.old), res);
                     },
 
                     '/findOperation': function() {
@@ -105,5 +105,5 @@ var http = require('http'),
         }
     });
 
-    app.use(connect.static('/Users/nvzc/Documents/GitHub/yandex'));
+    app.use(connect.static('/Users/1/Documents/GitHub/yandex'));
 http.createServer(app).listen(1111);

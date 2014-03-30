@@ -130,7 +130,7 @@ CONTROL.tools = (function() {
     * @return {Boolean}
     */
     function isEmptyOne(elem, val) {
-        if (elem.value.trim().length === 0) {
+        if (elem.value.length === 0) {
             elem.placeholder = 'Ошибка ввода';
             elem.value = '';
             return false;
@@ -359,17 +359,17 @@ CONTROL.requests = (function() {
 
     // Редактирование категории
     function editCategory(user, type, old, cat) {
-        return host + 'renameCategory?login=' + user + '&type=' + type + '&old=' + old + '&new=' + cat;
+        return host + 'renameCategory?login=' + user + '&type=' + type + '&old=' + encodeURI(old) + '&new=' + encodeURI(cat);
     }
 
     // Удаление категории
     function removeCategory(user, type, old) {
-        return host + 'removeCategory?login=' + user + '&type=' + type + '&old=' + old;
+        return host + 'removeCategory?login=' + user + '&type=' + type + '&old=' + encodeURI(old);
     }
 
     // Добавление категории
     function newCategory(user, type, cat) {
-        return host + 'newCategories?login=' + user + '&typ=' + type + '&cat=' + cat;
+        return host + 'newCategories?login=' + user + '&typ=' + type + '&cat=' + encodeURI(cat);
     }
 
     // Регистрация
@@ -384,7 +384,7 @@ CONTROL.requests = (function() {
 
     // Добавление операции
     function newOper(user, type, data) {
-        return host + 'historyNewOper?login=' + user + '&type=' + type + '&formData=' + data;
+        return host + 'historyNewOper?login=' + user + '&type=' + type + '&formData=' + encodeURI(data);
     }
 
     // Удаление операции
@@ -485,8 +485,8 @@ CONTROL.responses = (function() {
     */
     function removeCategory(res) {
         var parent = doc.querySelector('.' + res.type),
-            html = parent.innerHTML,
-            indexStart, subs,
+            html = parent.innerHTML.toLocaleLowerCase(),
+            indexStart, subs, catL = res.cat.toLowerCase(),
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
             cat = user.data.categories[res.type];
@@ -498,9 +498,9 @@ CONTROL.responses = (function() {
                 break;
             }
         }
-        indexStart = html.indexOf('<div>' + res.cat + '</div>');
+        indexStart = html.indexOf('<div>' + catL + '</div>');
         subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
-                          html.indexOf('</div>', indexStart + res.cat.length + 14));
+                          html.indexOf('</div>', indexStart + catL.length + 14));
         parent.innerHTML = html.replace(subs, '');
     }
 
@@ -603,7 +603,12 @@ CONTROL.responses = (function() {
     }
 
     function exitToIndex () {
-        window.location.href = window.location.origin;
+        if (window.location.origin) {
+            window.location.href = window.location.origin;
+            return;
+        }
+        window.location.href = window.location.protocol + '//' + window.location.host;
+
     }
 
     return {
