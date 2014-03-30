@@ -48,7 +48,7 @@ var http = require('http'),
                             requests.dateFilter(data.query.login, data.query.start, data.query.end, res);
                         }
                         else {
-                            requests.historyFilter(data.query.login, data.query.account, res, data.query.type,
+                            requests.historyFilter(data.query.login, decodeURI(data.query.account), res, data.query.type,
                                                    data.query.start, data.query.end);
                         }
                     },

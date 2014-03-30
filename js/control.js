@@ -399,7 +399,7 @@ CONTROL.requests = (function() {
 
     // Фильтр по истории
     function filterHistory(user, account, type, start, end) {
-        return host + 'findOperation?login=' + user + '&account=' + account + '&type=' + type + '&start=' + start + '&end=' + end;
+        return host + 'findOperation?login=' + user + '&account=' + encodeURI(account) + '&type=' + type + '&start=' + start + '&end=' + end;
     }
 
     //Выход
