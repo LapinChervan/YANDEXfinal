@@ -1,4 +1,4 @@
-/*------------------*/
+﻿/*------------------*/
 /*  ТАБ 3 (ПЕРСОН)  */
 /*------------------*/
 
@@ -218,21 +218,7 @@ span[class^=valute_] {
 
 .mes {
     position: absolute;
-    padding: 0 5px;
-    word-wrap: break-word;
-    width: 180px;
-    top: 10px;
+	top: 10px;
     right: 0;
-    font-size: 14px;
-    color: #EDEDE5;
-    z-index: 5;
-    text-align: center;
-    border-radius: 4px;
-    display: none;
-}
-
-
-.mes img {
-    margin: 2px 0;
 }
 

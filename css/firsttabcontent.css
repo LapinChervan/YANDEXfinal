@@ -6,7 +6,7 @@
     background: #B0EBAA;
 }
 
-.message {
+.message, .mes {
     position: fixed;
     padding: 0 5px;
     word-wrap: break-word;
@@ -21,7 +21,7 @@
     display: none;
 }
 
-.message img {
+.message img, .mes img {
     margin: 2px 0;
 }
 

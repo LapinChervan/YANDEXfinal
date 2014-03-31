@@ -32,19 +32,19 @@ CONTROL.initialize = (function() {
             },
 
             history: function(data) {
-                var  objKey, objKey2, objKey3,
+                var  key, key2, key3,
                      data,
                      tmp = doc.querySelector('.history').innerHTML,
                      html = '',
                      history = data.history ? data.history : data,
                      thisData = {};
 
-                for (objKey in history) {
-                    data = history[objKey];
-                    for (objKey2 in data) {
-                        if (data.hasOwnProperty(objKey2)) {
-                            for (objKey3 in data[objKey2]) {
-                                 thisData[objKey3] = data[objKey2][objKey3];
+                for (key in history) {
+                    data = history[key];
+                    for (key2 in data) {
+                        if (data.hasOwnProperty(key2)) {
+                            for (key3 in data[key2]) {
+                                 thisData[key3] = data[key2][key3];
                             }
 
                             thisData.sum = tools.checkValuePointer(thisData.sum);
@@ -61,7 +61,9 @@ CONTROL.initialize = (function() {
 
             selectLoadSch: function(data, count) {
                 var fragment,
-                    option = document.createElement('option'),clone;
+                    option = document.createElement('option'),
+                    clone;
+
                 if (count) {
                     option.innerHTML = data;
                     option.value = data;
@@ -73,11 +75,12 @@ CONTROL.initialize = (function() {
                     option.innerHTML = 'Все счета';
                     fragment.appendChild(option);
 
-                    data.categories.accounts.forEach(function(elem) {
-                        clone = option.cloneNode();
-                        clone.innerHTML = elem;
-                        clone.value = elem;
-                        fragment.appendChild(clone);
+                    data.categories.accounts
+                        .forEach(function(elem) {
+                            clone = option.cloneNode();
+                            clone.innerHTML = elem;
+                            clone.value = elem;
+                            fragment.appendChild(clone);
                     });
                 }
                 doc.querySelector('.history_sch_select').appendChild(fragment);
@@ -304,7 +307,6 @@ CONTROL.tools = (function() {
     */
     function loadSelectForm(data, formType) {
         var clone,
-            tmp = doc.querySelector('.select__gain').innerHTML,
             fragment = doc.createDocumentFragment(),
             fr = doc.createDocumentFragment(),
             option = doc.createElement('option');
@@ -314,7 +316,7 @@ CONTROL.tools = (function() {
                 clone = option.cloneNode();
                 clone.innerHTML = elem;
                 fragment.appendChild(clone);
-             });
+            });
 
         if (formType == 'send') {
            fr = fragment.cloneNode(true);
@@ -327,7 +329,7 @@ CONTROL.tools = (function() {
                     fr.appendChild(clone);
                 });
         }
-        document.querySelector('.select__accounts').appendChild(fragment);
+        doc.querySelector('.select__accounts').appendChild(fragment);
         doc.querySelector('.select__gain').appendChild(fr);
     }
 
@@ -489,6 +491,7 @@ CONTROL.responses = (function() {
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
 
+        // UPPERCASE TAGS FOR IE 8 :((
         if (window.getComputedStyle) {
             parent.innerHTML = parent.innerHTML.replace(
                 '<div>' + res.oldName + '</div>',
@@ -522,12 +525,13 @@ CONTROL.responses = (function() {
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
             cat = user.data.categories[res.type],
-            divOp, divCl;
+            divOp, divCl, option;
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
         for (var i = 0, length = options.length; i < length; i++) {
-            if (options[i].innerHTML === res.cat) {
-                parentHistSel.removeChild(options[i]);
+            option = options[i];
+            if (option.innerHTML === res.cat) {
+                parentHistSel.removeChild(option);
                 break;
             }
         }
@@ -570,6 +574,11 @@ CONTROL.responses = (function() {
         tools.updateButton(doc.querySelector('.apply_filter2'), res.type, res.date);
     }
 
+    /**
+    * Фильтр по датам.
+    *
+    * @param {Object} res Ответ с сервера с данными.
+    */
     function filterDate(res) {
         var sum, key, data,
             i, len,
@@ -604,13 +613,19 @@ CONTROL.responses = (function() {
     */
     function removeOper(res) {
         var parent = doc.querySelector('.historyUl'),
-            html = parent.innerHTML.toLocaleLowerCase(),
+            html = parent.innerHTML,
             indexStart,
             subs;
+        // ie 8...
+        indexStart = html.indexOf(res);
+        if (window.getComputedStyle) {
+            subs = html.slice(html.lastIndexOf('<li>', indexStart),
+                   html.indexOf('</li>', indexStart) + 5);
+        } else {
+            subs = html.slice(html.lastIndexOf('<LI>', indexStart),
+                   html.indexOf('</LI>', indexStart) + 5);
+        }
 
-        indexStart = html.indexOf(res.toLocaleLowerCase());
-        subs = html.slice(html.lastIndexOf('<li>', indexStart),
-                          html.indexOf('</li>', indexStart) + 5);
         parent.innerHTML = html.replace(subs, '');
         CONTR.layer.destroyLayer();
     }
@@ -636,7 +651,7 @@ CONTROL.responses = (function() {
             });
         }
         mainCurrWrap.innerHTML = input;
-        CONTROL.tools.showMessage(
+        CONTR.tools.showMessage(
             tmpMessage,
             doc.querySelector('.mes'),
             'Обновите страницу',
@@ -662,13 +677,15 @@ CONTROL.responses = (function() {
         );
     }
 
+    /**
+    * Выход на главную.
+    */
     function exitToIndex () {
         if (window.location.origin) {
             window.location.href = window.location.origin;
             return;
         }
         window.location.href = window.location.protocol + '//' + window.location.host;
-
     }
 
     return {
@@ -722,16 +739,23 @@ CONTROL.access = (function() {
 
 	function showContent(responseData) {
         if (responseData == '0') {
-            tools.showMessage(doc.querySelector('.form-mess'), doc.querySelector('.messageResponse'),
-                              'Логин или пароль указаны неверно!', 'warn_error');
+            tools.showMessage(
+                doc.querySelector('.form-mess'),
+                doc.querySelector('.messageResponse'),
+                'Логин или пароль указаны неверно!',
+                'warn_error'
+            );
             return false;
         }
+
         clearTimeout(CONTR.slider.time);
+
         user.data = responseData;
-		doc.querySelector('.main').innerHTML = doc.getElementById('user-form').innerHTML;
+		doc.querySelector('.main').innerHTML = doc.querySelector('.user-form').innerHTML;
 
         //вызов инициализации
         CONTR.initialize.init(responseData);
+
         new Calendar({
             element: 'stat-from',
             weekNumbers: false,
@@ -752,6 +776,7 @@ CONTROL.access = (function() {
             weekNumbers: false,
             startDay: 1
         });
+
         // ВЫХОД
         doc.querySelector('.main__user-data__exit').addEventListener('click', function(e) {
             var event = e || window.event;
@@ -781,7 +806,7 @@ CONTROL.access = (function() {
                     parentContent.querySelector('.' + key).style.display = 'none';
                 }
             }
-        }, false);
+        });
 
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
@@ -793,7 +818,7 @@ CONTROL.access = (function() {
                 event.preventDefault();
                 from = doc.querySelector('.dateFrom');
                 to = doc.querySelector('.dateTo');
-                if (CONTROL.tools.isEmptyOne(from, 'Дата') && CONTROL.tools.isEmptyOne(to, 'Дата')) {
+                if (tools.isEmptyOne(from, 'Дата') && tools.isEmptyOne(to, 'Дата')) {
                     ajax.toServer(request.filterDate(
                         user.login,
                         tools.getDateMs(from.value),
@@ -813,7 +838,7 @@ CONTROL.access = (function() {
                     response.filterDate
                 );
             }
-        }, false);
+        });
 
         //ДЕЛЕГИРОВАНИЕ ИСТОРИЯ
         doc.querySelector('.history-filter').addEventListener('click', function(e) {
@@ -824,7 +849,7 @@ CONTROL.access = (function() {
                 var parent = target.parentNode,
                     date = parent.querySelectorAll('input[type=text]'),
                     activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
-                    activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio]'), 'checked');
+                    activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio]'), 'checked');				
 
                 event.stopPropagation();
 
@@ -853,15 +878,21 @@ CONTROL.access = (function() {
             }
 
             if (target.classList.contains('clearDateFrom')) {
+				var dateFrom = doc.querySelectorAll('.dateFrom')[1];
+					
                 event.preventDefault;
-                doc.querySelectorAll('.dateFrom')[1].value = '';
+                dateFrom.value = '';
+                dateFrom.placeholder = 'Дата';
             }
             if (target.classList.contains('clearDateTo')) {
+                var dateTo = doc.querySelectorAll('.dateTo')[1];
+				
                 event.preventDefault;
-                doc.querySelectorAll('.dateTo')[1].value = '';
+                dateTo.value = '';
+                dateTo.placeholder = 'Дата';
             }
 
-        }, false);
+        });
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
         doc.querySelector('.first__ul__button').addEventListener('click', function(e) {
@@ -882,17 +913,19 @@ CONTROL.access = (function() {
                     type = formType[key];
                     event.stopPropagation();
 
-                    CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.form__gain').innerHTML, {
+                    CONTR.layer.createLayer({content: Mustache.render(doc.querySelector('.form__gain').innerHTML, {
                         spriteImg: 'operats_form_' + type,
                         accounts: '{{accounts}}'
                     })});
+
                     new Calendar({
                         element: 'formDate',
                         weekNumbers: false,
                         secondName: 'bcal-container-fix',
                         startDay: 1
                     });
-                    tools.loadSelectForm(CONTROL.user.data, type);
+
+                    tools.loadSelectForm(CONTR.user.data, type);
 
                     doc.querySelector('.form__gain__add').addEventListener('click', function(e) {
                         var event = e || window.event,
@@ -926,11 +959,11 @@ CONTROL.access = (function() {
                             );
                             CONTR.layer.destroyLayer();
                         }
-                    }, false);
+                    });
                     break;
                 }
             }
-        }, false);
+        });
 
         // ДЕЛЕГИРОВАНИЯ (ТАБ 3)
         doc.getElementsByClassName('indentation')[2].addEventListener('click', function(e) {
@@ -944,9 +977,9 @@ CONTROL.access = (function() {
 
                 var txtInput,
                     types = {
-                    add_cat_sch: ['edit_cat_sch', 'accounts'],
-                    add_cat_plus: ['edit_cat_plus', 'gain'],
-                    add_cat_minus: ['edit_cat_minus', 'costs']
+                        add_cat_sch: ['edit_cat_sch', 'accounts'],
+                        add_cat_plus: ['edit_cat_plus', 'gain'],
+                        add_cat_minus: ['edit_cat_minus', 'costs']
                     };
 
                 for (key in types) {
@@ -994,7 +1027,7 @@ CONTROL.access = (function() {
                                         input.value),
                                         response.renameCategory
                                     );
-                                    CONTROL.layer.destroyLayer();
+                                    CONTR.layer.destroyLayer();
                                 }
                             });
                         }
@@ -1008,7 +1041,7 @@ CONTROL.access = (function() {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
                             catName = target.parentNode.lastElementChild.innerHTML;
-                            CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
+                            CONTR.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: catName,
                                     caption: 'Удалить',
                                     spriteImg: 'operats_remove',
@@ -1026,7 +1059,7 @@ CONTROL.access = (function() {
                                     catName),
                                     response.removeCategory
                                 );
-                                CONTROL.layer.destroyLayer();
+                                CONTR.layer.destroyLayer();
                             });
                         }
                     });
@@ -1046,12 +1079,14 @@ CONTROL.access = (function() {
                     JSON.stringify(data))
                 );
             }
-        }, false);
+        });
 
         // СМЕНА ОСНОВНОЙ ВАЛЮТЫ
-        document.querySelector('.currency-radio').addEventListener('click', function() {
-            var target = event.target || event.srcElement,
+        document.querySelector('.currency-radio').addEventListener('click', function(e) {
+            var event = e || window.event,
+				target = event.target || event.srcElement,
                 price, val;
+
             if (target.tagName.toLowerCase() === 'label' || target.tagName.toLowerCase() === 'input') {
                 if (target.tagName.toLowerCase() === 'label') {
                     val = target.querySelector('input').value;
@@ -1085,7 +1120,7 @@ CONTROL.access = (function() {
 
             id = parent.querySelector('.id').innerHTML;
             event.stopPropagation();
-            CONTROL.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
+            CONTR.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
 
             doc.querySelector('.butRemoveHist').addEventListener('click', function(e) {
                var event = e || window.event;
@@ -1099,7 +1134,7 @@ CONTROL.access = (function() {
                );
             });
 
-        }, false);
+        });
     }
 
     function registration(user, password) {
@@ -1224,3 +1259,4 @@ CONTROL.slider = (function() {
         start: start
     }
 })();
+

@@ -29,8 +29,9 @@ doc.querySelector('.allbutton').addEventListener('click', function(e) {
 
                     formType[key](inputs[0].value, inputs[1].value);
                     layer.destroyLayer();
-                }, false);
+                });
                 break;
             }
         }
-}, false);
+});
+
