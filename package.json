@@ -13,6 +13,7 @@
     ],
     "dependencies": {
         "connect": "*",
-        "mongodb": "*"
+        "mongodb": "*",
+        "mustache": "0.8.1"
     }
 }
