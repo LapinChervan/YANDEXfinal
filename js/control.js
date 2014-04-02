@@ -143,7 +143,8 @@ CONTROL.tools = (function() {
     * @return {Boolean}
     */
     function isEmptyOne(elem, val) {
-        if (elem.value.length === 0) {
+        var arr = [];
+        if (elem.value.length === 0 || elem.value.split(' ').length !== 1) {
             elem.placeholder = 'Ошибка ввода';
             elem.value = '';
             return false;
@@ -685,6 +686,7 @@ CONTROL.responses = (function() {
             sett[res][0],
             sett[res][1]
         );
+        CONTROL.layer.destroyLayer();
     }
 
     /**
@@ -904,9 +906,7 @@ CONTROL.access = (function() {
 
                     new Calendar({
                         element: 'formDate',
-                        weekNumbers: false,
-                        secondName: 'bcal-container-fix',
-                        startDay: 1
+                        secondName: 'bcal-container-fix'
                     });
 
                     tools.loadSelectForm(CONTR.user.data, type);
@@ -1121,25 +1121,21 @@ CONTROL.access = (function() {
     }
 
     function registration(user, password) {
-        if (user && password) {
-            ajax.toServer(request.registration(
-                user,
-                password),
-                response.registration
-            );
-        }
+        ajax.toServer(request.registration(
+            user,
+            password),
+            response.registration
+        );
     }
 
     function authorization(user, password) {
-        if (user && password) {
-            ajax.toServer(request.auth(
-                user,
-                password,
-                tools.getDateMs(tools.getDateN('01')),
-                tools.getDateMs(tools.getDateN('30'))),
-                showContent
-            );
-        }
+        ajax.toServer(request.auth(
+            user,
+            password,
+            tools.getDateMs(tools.getDateN('01')),
+            tools.getDateMs(tools.getDateN('30'))),
+            showContent
+        );
         return false;
     }
 

@@ -25,8 +25,9 @@ document.querySelector('.allbutton').addEventListener('click', function(e) {
                 document.querySelector('.log_' + key).addEventListener('click', function() {
                     var inputs = document.querySelectorAll('.input_login_reg');
 
-                    formType[key](inputs[0].value, inputs[1].value);
-                    CONTROL.layer.destroyLayer();
+                    if (CONTROL.tools.isEmptyOne(inputs[0]) && CONTROL.tools.isEmptyOne(inputs[1])) {
+                        formType[key](inputs[0].value, inputs[1].value);
+                    }
                 });
                 break;
             }
