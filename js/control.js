@@ -143,7 +143,6 @@ CONTROL.tools = (function() {
     * @return {Boolean}
     */
     function isEmptyOne(elem, val) {
-        var arr = [];
         if (elem.value.length === 0 || elem.value.split(' ').length !== 1) {
             elem.placeholder = 'Ошибка ввода';
             elem.value = '';
