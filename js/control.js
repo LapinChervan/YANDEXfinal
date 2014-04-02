@@ -21,8 +21,8 @@ CONTROL.initialize = (function() {
 
                 for (key in data.categories) {
                     html = '';
-                    data.categories[key].
-                        forEach(function(elem) {
+                    data.categories[key]
+                        .forEach(function(elem) {
                             html += Mustache.render(tmp, {costs: elem, img: 'operats_cat_' + key});
                         });
                     doc.querySelector('.' + key).innerHTML = html;
@@ -47,7 +47,7 @@ CONTROL.initialize = (function() {
                                  thisData[key3] = data[key2][key3];
                             }
 
-                            thisData.sum = tools.checkValuePointer(thisData.sum);
+                            thisData.sum = CONTR.tools.checkValuePointer(thisData.sum);
                             thisData['spriteImg'] = 'operats_hist_' + thisData.type;
                             thisData.mainCurr = user.data.mainCurr;
 
@@ -56,12 +56,21 @@ CONTROL.initialize = (function() {
                     }
                 }
                 doc.querySelector('.historyUl').innerHTML = html;
-                CONTROL.responses.filterDate(history);
+                CONTR.responses.filterDate(history);
+            },
+
+            calendars: function() {
+                ['stat-from', 'stat-to', 'hist-to', 'hist-from']
+                    .forEach(function(className) {
+                        new Calendar({
+                            element:  className
+                        });
+                    });
             },
 
             selectLoadSch: function(data, count) {
                 var fragment,
-                    option = document.createElement('option'),
+                    option = doc.createElement('option'),
                     clone;
 
                 if (count) {
@@ -70,7 +79,7 @@ CONTROL.initialize = (function() {
                     fragment = option;
                 }
                 else {
-                    fragment = document.createDocumentFragment();
+                    fragment = doc.createDocumentFragment();
                     option.value = 'all';
                     option.innerHTML = 'Все счета';
                     fragment.appendChild(option);
@@ -110,6 +119,7 @@ CONTROL.initialize = (function() {
  *   @return Возвращает объект с методами.
  */
 CONTROL.tools = (function() {
+    var doc = document;
     /**
     * Проверка на число.
     *
@@ -756,27 +766,6 @@ CONTROL.access = (function() {
         //вызов инициализации
         CONTR.initialize.init(responseData);
 
-        new Calendar({
-            element: 'stat-from',
-            weekNumbers: false,
-            startDay: 1
-        });
-        new Calendar({
-            element: 'stat-to',
-            weekNumbers: false,
-            startDay: 1
-        });
-        new Calendar({
-            element: 'hist-to',
-            weekNumbers: false,
-            startDay: 1
-        });
-        new Calendar({
-            element: 'hist-from',
-            weekNumbers: false,
-            startDay: 1
-        });
-
         // ВЫХОД
         doc.querySelector('.main__user-data__exit').addEventListener('click', function(e) {
             var event = e || window.event;
@@ -791,21 +780,16 @@ CONTROL.access = (function() {
                 tabs, key,
                 parentContent = doc.querySelector('.main__tabs__content__ul');
 
-            tabs = {
-                'tab_main': ['tab_history', 'tab_person'],
-                'tab_history': ['tab_main', 'tab_person'],
-                'tab_person':['tab_main', 'tab_history']
-            };
-
-            for (key in tabs) {
-                if (target.classList.contains(key)) {
-                    target.classList.add('visit');
-                    parentContent.querySelector('.' + key).style.display = 'block';
-                } else {
-                    doc.querySelector('.' + key).classList.remove('visit');
-                    parentContent.querySelector('.' + key).style.display = 'none';
-                }
-            }
+            ['tab_main', 'tab_history', 'tab_person']
+                .forEach(function(tabClass) {
+                    if (target.classList.contains(tabClass)) {
+                        target.classList.add('visit');
+                        parentContent.querySelector('.' + tabClass).style.display = 'block';
+                    } else {
+                        doc.querySelector('.' + tabClass).classList.remove('visit');
+                        parentContent.querySelector('.' + tabClass).style.display = 'none';
+                    }
+                });
         });
 
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
@@ -1004,12 +988,12 @@ CONTROL.access = (function() {
 
             //КНОПКИ РЕДАКТИРОВАНИЯ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
             if (target.classList.contains('valute_edit')) {
-                ['accounts', 'gain', 'costs'].
-                    forEach(function(elem) {
+                ['accounts', 'gain', 'costs']
+                    .forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
                             catName = target.parentNode.lastElementChild.innerHTML;
-                            CONTROL.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
+                            CONTR.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: catName,
                                     caption: 'Изменить',
                                     spriteImg: 'operats_edit'})});
@@ -1019,7 +1003,7 @@ CONTROL.access = (function() {
                                     input = doc.querySelector('.editCatInput');
 
                                 event.preventDefault();
-                                if (CONTROL.tools.isEmptyOne(input)) {
+                                if (CONTR.tools.isEmptyOne(input)) {
                                     ajax.toServer(request.editCategory(
                                         user.login,
                                         elem,
@@ -1036,8 +1020,8 @@ CONTROL.access = (function() {
 
             //КНОПКИ УДАЛЕНИЯ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
             if (target.classList.contains('valute_remove')) {
-                ['accounts', 'gain', 'costs'].
-                    forEach(function(elem) {
+                ['accounts', 'gain', 'costs']
+                    .forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
                             event.stopPropagation();
                             catName = target.parentNode.lastElementChild.innerHTML;
@@ -1049,8 +1033,7 @@ CONTROL.access = (function() {
                                 })});
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
-                                var event = e || window.event,
-                                    input = doc.querySelector('.editCatInput');
+                                var event = e || window.event;
 
                                 event.preventDefault();
                                 ajax.toServer(request.removeCategory(
@@ -1074,7 +1057,7 @@ CONTROL.access = (function() {
                     item = inputCurr[i];
                     data[item.name] = item.value;
                 }
-                CONTROL.ajax.toServer(request.changeRates(
+                CONTR.ajax.toServer(request.changeRates(
                     user.login,
                     JSON.stringify(data))
                 );
@@ -1082,7 +1065,7 @@ CONTROL.access = (function() {
         });
 
         // СМЕНА ОСНОВНОЙ ВАЛЮТЫ
-        document.querySelector('.currency-radio').addEventListener('click', function(e) {
+        doc.querySelector('.currency-radio').addEventListener('click', function(e) {
             var event = e || window.event,
 				target = event.target || event.srcElement,
                 price, val;
@@ -1095,7 +1078,7 @@ CONTROL.access = (function() {
                     val = target.value;
                 }
                 price = +doc.querySelector('.curr-value input[name=' + val + ']').value;
-                CONTROL.ajax.toServer(request.changeMainCurr(
+                CONTR.ajax.toServer(request.changeMainCurr(
                     user.login,
                     target.value,
                     price),
@@ -1191,12 +1174,12 @@ CONTROL.layer = (function() {
         return function (options) {
             var fragment = doc.createDocumentFragment();
             optionsObject = getDefaultOptions();
-            Object.keys(options).
-                forEach(function(key) {
+            Object.keys(options)
+                .forEach(function(key) {
                     optionsObject[key] = options[key];
                 });
             if (optionsObject.removeDestroy == true) {
-                document.removeEventListener('click', destroyLayer);
+                doc.removeEventListener('click', destroyLayer);
                 layerElements.destroy = true;
             }
 
@@ -1211,7 +1194,7 @@ CONTROL.layer = (function() {
 
     function getDefaultOptions() {
         return {
-            parent: document.body,
+            parent: doc.body,
             clsOpacityLayer: 'modal',
             clsContentLayer: 'layer',
             content: '',
@@ -1226,12 +1209,12 @@ CONTROL.layer = (function() {
             parent.removeChild(layerElements.layer);
             layerElements.isCreated = false;
             if (layerElements.destroy) {
-                document.addEventListener('click', destroyLayer);
+                doc.addEventListener('click', destroyLayer);
             }
         }
     }
 
-    document.addEventListener('click', destroyLayer);
+    doc.addEventListener('click', destroyLayer);
 
     return {
         createLayer: createLayer,
@@ -1240,18 +1223,18 @@ CONTROL.layer = (function() {
 })();
 
 CONTROL.slider = (function() {
-    var doc = document,
-        macElement = doc.querySelector('.mac');
+    var macElement = document.querySelector('.mac');
 
     function start() {
-        var i = 0,
-            timerId = setTimeout(function show() {
-                macElement.src = 'img/slide' + i + '.png';
-                CONTR.slider.time = setTimeout(show, 5000);
-                i++;
-                if (i === 4) {
-                    i = 0;
-                }
+        var i = 0;
+
+        setTimeout(function show() {
+            macElement.src = 'img/slide' + i + '.png';
+            CONTROL.slider.time = setTimeout(show, 5000);
+            i++;
+            if (i === 4) {
+                i = 0;
+            }
         }, 100);
     }
 

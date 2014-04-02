@@ -25,11 +25,10 @@
     display: inline-block;
     text-align: center;
     padding: 8px;
-    min-width: 100px;
     border-radius: 4px;
     margin: 0 5px 5px 0;
     vertical-align: bottom;
-    width: 120px;
+    width: 105px;
 }
 
 .setting-wrap > div > div {
