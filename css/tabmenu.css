@@ -2,10 +2,10 @@
 /* КАРКАС ДЛЯ ТАБОВ */
 /*------------------*/
 
-.main__tabs__ul {
+/*.main__tabs__ul {
     list-style-type: none;
     width: 508px;
-}
+}*/
 
 .main__tabs__ul__li {
     display: inline-block;
