@@ -769,8 +769,7 @@ CONTROL.access = (function() {
 
         // ВЫХОД
         doc.querySelector('.main__user-data__exit').addEventListener('click', function(e) {
-            var event = e || window.event;
-            event.preventDefault();
+            e.preventDefault();
             ajax.toServer(request.closeSession(), response.exitToIndex);
         });
 
