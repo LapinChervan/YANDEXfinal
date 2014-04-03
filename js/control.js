@@ -140,6 +140,7 @@ CONTROL.tools = (function() {
     * Проверка на пустое поле.
     *
     * @param  {Element} elem DOM элемент.
+    * @param  {String} val содержимое инпута
     * @return {Boolean}
     */
     function isEmptyOne(elem, val) {
@@ -514,7 +515,7 @@ CONTROL.responses = (function() {
             cat = user.data.categories[res.type],
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
-            option, divOp, divCl;
+            option;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
 
@@ -525,9 +526,7 @@ CONTROL.responses = (function() {
                 '<div>' + res.newName + '</div>');
         }
         else {
-            divOp = '<div>'.toUpperCase();
-            divCl = '</div>'.toUpperCase();
-            parent.innerHTML = parent.innerHTML.replace(divOp + res.oldName + divCl, divOp + res.newName + divCl);
+            parent.innerHTML = parent.innerHTML.replace('<DIV>' + res.oldName + '</DIV>', '<DIV>' + res.newName + '</DIV>');
         }
 
         for (var i = 0, length = options.length; i < length; i++) {
@@ -552,7 +551,7 @@ CONTROL.responses = (function() {
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
             cat = user.data.categories[res.type],
-            divOp, divCl, option;
+            option;
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
         for (var i = 0, length = options.length; i < length; i++) {
@@ -569,11 +568,9 @@ CONTROL.responses = (function() {
                 html.indexOf('</div>', indexStart + res.cat.length + 14));
         }
         else {
-            divOp = '<div>'.toUpperCase();
-            divCl = '</div>'.toUpperCase();
-            indexStart = html.indexOf(divOp + res.cat + divCl);
-            subs = html.slice(html.lastIndexOf(divOp, indexStart - 1),
-                html.indexOf(divCl.toUpperCase(), indexStart + res.cat.length + 14));
+            indexStart = html.indexOf('<DIV>' + res.cat + '</DIV>');
+            subs = html.slice(html.lastIndexOf('<DIV>', indexStart - 1),
+                html.indexOf('</DIV>', indexStart + res.cat.length + 14));
         }
 
         parent.innerHTML = html.replace(subs, '');
