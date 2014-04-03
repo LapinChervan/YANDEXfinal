@@ -7,8 +7,7 @@ CONTROL.ajax.toServer(
 );
 
 document.querySelector('.allbutton').addEventListener('click', function(e) {
-    var event = e || window.event,
-        target = event.target || event.srcElement,
+    var target = e.target,
         formType = {
             'auth': CONTROL.access.authorization,
             'reg': CONTROL.access.registration
@@ -17,7 +16,7 @@ document.querySelector('.allbutton').addEventListener('click', function(e) {
 
         for (key in formType) {
             if (target.classList.contains('header__' + key + '__button')) {
-                event.stopPropagation();
+                e.stopPropagation();
                 CONTROL.layer.createLayer({
                     content: document.querySelector('.form-' + key).innerHTML
                 });

@@ -793,12 +793,11 @@ CONTROL.access = (function() {
 
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
         doc.querySelector('.statistics').addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement,
+            var target = e.target,
                 from, to;
 
             if (target.classList.contains('apply_filter1')) {
-                event.preventDefault();
+                e.preventDefault();
                 from = doc.querySelector('.dateFrom');
                 to = doc.querySelector('.dateTo');
                 if (tools.isEmptyOne(from, 'Дата') && tools.isEmptyOne(to, 'Дата')) {
@@ -813,7 +812,7 @@ CONTROL.access = (function() {
 
             if (target.classList.contains('apply_filter2')) {
                 target.classList.remove('update');
-                event.preventDefault();
+                e.preventDefault();
                 ajax.toServer(request.filterDate(
                     user.login,
                     tools.getDateMs(tools.getDateN('01')),
@@ -825,8 +824,7 @@ CONTROL.access = (function() {
 
         //ДЕЛЕГИРОВАНИЕ ИСТОРИЯ
         doc.querySelector('.history-filter').addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement;
+            var target = e.target;
 
             if (target.classList.contains('marginL5')) {
                 var parent = target.parentNode,
@@ -834,7 +832,7 @@ CONTROL.access = (function() {
                     activeOption = tools.findSelectedInput(parent.querySelectorAll('option'), 'selected'),
                     activeRadio = tools.findSelectedInput(parent.querySelectorAll('input[type=radio]'), 'checked');				
 
-                event.stopPropagation();
+                e.stopPropagation();
 
                 if (tools.isEmptyOne(date[0], 'Дата') && tools.isEmptyOne(date[1], 'Дата')) {
                     ajax.toServer(request.filterHistory(
@@ -863,14 +861,14 @@ CONTROL.access = (function() {
             if (target.classList.contains('clearDateFrom')) {
 				var dateFrom = doc.querySelectorAll('.dateFrom')[1];
 					
-                event.preventDefault;
+                e.preventDefault;
                 dateFrom.value = '';
                 dateFrom.placeholder = 'Дата';
             }
             if (target.classList.contains('clearDateTo')) {
                 var dateTo = doc.querySelectorAll('.dateTo')[1];
 				
-                event.preventDefault;
+                e.preventDefault;
                 dateTo.value = '';
                 dateTo.placeholder = 'Дата';
             }
@@ -879,8 +877,7 @@ CONTROL.access = (function() {
 
         // ДЕЛЕГИРОВАНИЯ КНОПОК ВЫЗОВА ФОРМ ДЛЯ ОПЕРАЦИЙ (ТАБ 1)
         doc.querySelector('.first__ul__button').addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement,
+            var target = e.target,
                 key, formType, type;
 
             if (target.tagName !== 'DIV') return;
@@ -894,7 +891,7 @@ CONTROL.access = (function() {
             for (key in formType) {
                 if (target.innerHTML === key) {
                     type = formType[key];
-                    event.stopPropagation();
+                    e.stopPropagation();
 
                     CONTR.layer.createLayer({content: Mustache.render(doc.querySelector('.form__gain').innerHTML, {
                         spriteImg: 'operats_form_' + type,
@@ -915,7 +912,7 @@ CONTROL.access = (function() {
                             arr = ['date', 'sch', 'cat', 'sum', 'comm'],
                             i, item, options, data = {};
 
-                        event.preventDefault();
+                        e.preventDefault();
                         if (tools.isNumber(doc.querySelector('.sumCheck')) &&
                             tools.isEmptyOne(doc.querySelector('.dateCheck'), 'Дата')) {
                                 for (i = 0; i < len; i++) {
@@ -948,13 +945,12 @@ CONTROL.access = (function() {
 
         // ДЕЛЕГИРОВАНИЯ (ТАБ 3)
         doc.getElementsByClassName('indentation')[2].addEventListener('click', function(e) {
-            var event = e || window,
-                target = event.target || event.srcElement,
+            var target = e.target,
                 key, catName;
 
             //КНОПКИ ДОБАВЛЕНИЯ НОВЫХ КАТЕГОРИЙ (СЧЕТОВ, ДОХОДОВ, РАСХОДОВ)
             if (target.classList.contains('addCategoryButton')) {
-                event.preventDefault();
+                e.preventDefault();
 
                 var txtInput,
                     types = {
@@ -988,7 +984,7 @@ CONTROL.access = (function() {
                 ['accounts', 'gain', 'costs']
                     .forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
-                            event.stopPropagation();
+                            e.stopPropagation();
                             catName = target.parentNode.lastElementChild.innerHTML;
                             CONTR.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: catName,
@@ -996,10 +992,9 @@ CONTROL.access = (function() {
                                     spriteImg: 'operats_edit'})});
 
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
-                                var event = e || window.event,
-                                    input = doc.querySelector('.editCatInput');
+                                var input = doc.querySelector('.editCatInput');
 
-                                event.preventDefault();
+                                e.preventDefault();
                                 if (CONTR.tools.isEmptyOne(input)) {
                                     ajax.toServer(request.editCategory(
                                         user.login,
@@ -1020,7 +1015,7 @@ CONTROL.access = (function() {
                 ['accounts', 'gain', 'costs']
                     .forEach(function(elem) {
                         if (target.parentNode.parentNode.classList.contains(elem)) {
-                            event.stopPropagation();
+                            e.stopPropagation();
                             catName = target.parentNode.lastElementChild.innerHTML;
                             CONTR.layer.createLayer({content: Mustache.render(doc.querySelector('.editCatForm').innerHTML,
                                 {edit: catName,
@@ -1032,7 +1027,7 @@ CONTROL.access = (function() {
                             doc.querySelector('.butRenameCat').addEventListener('click', function(e) {
                                 var event = e || window.event;
 
-                                event.preventDefault();
+                                e.preventDefault();
                                 ajax.toServer(request.removeCategory(
                                     user.login,
                                     elem,
@@ -1063,8 +1058,7 @@ CONTROL.access = (function() {
 
         // СМЕНА ОСНОВНОЙ ВАЛЮТЫ
         doc.querySelector('.currency-radio').addEventListener('click', function(e) {
-            var event = e || window.event,
-				target = event.target || event.srcElement,
+            var target = e.target,
                 price, val;
 
             if (target.tagName.toLowerCase() === 'label' || target.tagName.toLowerCase() === 'input') {
@@ -1086,8 +1080,7 @@ CONTROL.access = (function() {
 
         //УДАЛЕНИЕ ИЗ ИСТОРИИ
         doc.querySelector('.historyUl').addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement,
+            var target = e.target,
                 parent, type, src,
                 id;
 
@@ -1099,13 +1092,11 @@ CONTROL.access = (function() {
             type = src.slice(src.lastIndexOf('_') + 1);
 
             id = parent.querySelector('.id').innerHTML;
-            event.stopPropagation();
+            e.stopPropagation();
             CONTR.layer.createLayer({content: doc.querySelector('.remHistForm').innerHTML});
 
             doc.querySelector('.butRemoveHist').addEventListener('click', function(e) {
-               var event = e || window.event;
-
-               event.preventDefault();
+               e.preventDefault();
                ajax.toServer(request.removeOper(
                    user.login,
                    type,
@@ -1160,8 +1151,7 @@ CONTROL.layer = (function() {
         modal.className = optionsObject.clsOpacityLayer;
 
         layer.addEventListener('click', function(e) {
-            var event = e || window.event;
-            event.stopPropagation();
+            e.stopPropagation();
         });
 
         return function (options) {
