@@ -351,8 +351,7 @@ CONTROL.tools = (function() {
     * @return {Element} elem Значение элемента, которое нужно проверить.
     */
     function categoryExist(parent, elem) {
-        var par = parent.innerHTML.toLowerCase();
-        return par.indexOf('<div>' + elem.value.toLowerCase() + '</div>', 0) === -1 ? true : false;
+        return parent.innerHTML.toLowerCase().indexOf('<div>' + elem.value.toLowerCase() + '</div>', 0) === -1 ? true : false;
     }
 
     /**
