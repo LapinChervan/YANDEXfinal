@@ -483,41 +483,14 @@ CONTROL.responses = (function() {
         tmpUserAccoutsNew = doc.querySelector('.useraccountsNew').innerHTML,// Шаблон для категорий
         tmpHistory = doc.querySelector('.historyLi').innerHTML, // Шаблон для операции
         tmpMessage = doc.querySelector('.form-mess'), // Шаблон для сообщения
-        tagRegistr = (function() {
-            var removeCat,
-                changeCat;
-
-            if (window.getComputedStyle) {
-                changeCat = function(parent, old, newc) {
-                    parent.innerHTML = parent.innerHTML.replace(
-                        '<div>' + old + '</div>',
-                        '<div>' + newc + '</div>'
-                    );
-                };
-                removeCat = function(html, cat) {
-                    var indexStart = html.indexOf('<div>' + cat + '</div>');
-                    return html.slice(html.lastIndexOf('<div>', indexStart - 1),
-                           html.indexOf('</div>', indexStart + cat.length + 14));
-                };
-
-            } else {
-                changeCat = function(parent, old, newc) {
-                    parent.innerHTML = parent.innerHTML.replace(
-                        '<DIV>' + old + '</DIV>',
-                        '<DIV>' + newc + '</DIV>'
-                    );
-                };
-                removeCat = function(html, cat) {
-                    var indexStart = html.indexOf('<DIV>' + cat + '</DIV>');
-                    return html.slice(html.lastIndexOf('<DIV>', indexStart - 1),
-                           html.indexOf('</DIV>', indexStart + cat.length + 14));
-                }
-            }
-            return  {
-                changeCat: changeCat,
-                removeCat: removeCat
-            }
-        })();
+        tagRegistr = {};
+        if (window.getComputedStyle) {
+            tagRegistr.open = '<div>',
+            tagRegistr.close = '</div>'
+        } else {
+            tagRegistr.open = '<DIV>',
+            tagRegistr.close = '</DIV>'
+        }
 
     /**
     * Добавляет новую категорию.
@@ -549,10 +522,15 @@ CONTROL.responses = (function() {
             cat = user.data.categories[res.type],
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
-            option;
+            option,
+            open = tagRegistr.open,
+            close = tagRegistr.close;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
-        tagRegistr.changeCat(parent, res.oldName, res.newName);
+        parent.innerHTML = parent.innerHTML.replace(
+            open + res.oldName + close,
+            open + res.newName + close
+        );
 
         for (var i = 0, length = options.length; i < length; i++) {
             option = options[i];
@@ -576,7 +554,10 @@ CONTROL.responses = (function() {
             parentHistSel = doc.querySelector('.history_sch_select'),
             options = parentHistSel.children,
             cat = user.data.categories[res.type],
-            option;
+            option,
+            open = tagRegistr.open,
+            close = tagRegistr.close;
+
 
         cat = cat.splice(cat.indexOf(res.cat, 0), 1);
         for (var i = 0, length = options.length; i < length; i++) {
@@ -587,7 +568,10 @@ CONTROL.responses = (function() {
             }
         }
 
-        subs = tagRegistr.removeCat(html, res.cat);
+        indexStart = html.indexOf(open + res.cat + close);
+        subs = html.slice(html.lastIndexOf(open, indexStart - 1),
+               html.indexOf(close, indexStart + res.cat.length + 14));
+
         parent.innerHTML = html.replace(subs, '');
     }
 
