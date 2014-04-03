@@ -636,7 +636,7 @@ CONTROL.responses = (function() {
                 stopCurring = true;
             }
         }
-        doc.querySelector('.remain').innerHTML = 'Остаток ' + remain(sum) + ' ' + user.data.mainCurr;
+        doc.querySelector('.remain').innerHTML = 'Остаток ' + tools.checkValuePointer(remain(sum)) + ' ' + user.data.mainCurr;
         tools.showDiagram(diagram);
     }
 
