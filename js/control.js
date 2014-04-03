@@ -288,7 +288,6 @@ CONTROL.tools = (function() {
             i++;
             doc.querySelector('.diag' + key).innerHTML = html;
         }
-        CONTROL.layer.destroyLayer();
     }
 
     /**
@@ -351,15 +350,16 @@ CONTROL.tools = (function() {
     * @return {Element} elem Значение элемента, которое нужно проверить.
     */
     function categoryExist(parent, elem) {
-        return parent.innerHTML.toLowerCase().indexOf('<div>' + elem.value.toLowerCase() + '</div>', 0) === -1 ? true : false;
+        return parent.innerHTML.toLowerCase().indexOf('<div>' + elem.value.toLowerCase() + '</div>', 0) === -1
+               ? true : false;
     }
 
     /**
     * Выводит остаток.
     *
-    * @param  {Int} gainSum Сумма по доходу.
-    * @param {Int} costsSum Сумма по расходу.
-    * @return (Int} Возвращает разницу.
+    * @param  {float} gainSum Сумма по доходу.
+    * @param {float} costsSum Сумма по расходу.
+    * @return (float} Возвращает разницу.
     */
     function curringRemainSum(gainSum, costsSum) {
         if (!costsSum) {
@@ -482,7 +482,42 @@ CONTROL.responses = (function() {
         tools = CONTR.tools,
         tmpUserAccoutsNew = doc.querySelector('.useraccountsNew').innerHTML,// Шаблон для категорий
         tmpHistory = doc.querySelector('.historyLi').innerHTML, // Шаблон для операции
-        tmpMessage = doc.querySelector('.form-mess'); // Шаблон для сообщения
+        tmpMessage = doc.querySelector('.form-mess'), // Шаблон для сообщения
+        tagRegistr = (function() {
+            var removeCat,
+                changeCat;
+
+            if (window.getComputedStyle) {
+                changeCat = function(parent, old, newc) {
+                    parent.innerHTML = parent.innerHTML.replace(
+                        '<div>' + old + '</div>',
+                        '<div>' + newc + '</div>'
+                    );
+                };
+                removeCat = function(html, cat) {
+                    var indexStart = html.indexOf('<div>' + cat + '</div>');
+                    return html.slice(html.lastIndexOf('<div>', indexStart - 1),
+                           html.indexOf('</div>', indexStart + cat.length + 14));
+                };
+
+            } else {
+                changeCat = function(parent, old, newc) {
+                    parent.innerHTML = parent.innerHTML.replace(
+                        '<DIV>' + old + '</DIV>',
+                        '<DIV>' + newc + '</DIV>'
+                    );
+                };
+                removeCat = function(html, cat) {
+                    var indexStart = html.indexOf('<DIV>' + cat + '</DIV>');
+                    return html.slice(html.lastIndexOf('<DIV>', indexStart - 1),
+                           html.indexOf('</DIV>', indexStart + cat.length + 14));
+                }
+            }
+            return  {
+                changeCat: changeCat,
+                removeCat: removeCat
+            }
+        })();
 
     /**
     * Добавляет новую категорию.
@@ -517,16 +552,7 @@ CONTROL.responses = (function() {
             option;
 
         cat[(cat.indexOf(res.oldName, 0))] = res.newName;
-
-        // UPPERCASE TAGS FOR IE 8 :((
-        if (window.getComputedStyle) {
-            parent.innerHTML = parent.innerHTML.replace(
-                '<div>' + res.oldName + '</div>',
-                '<div>' + res.newName + '</div>');
-        }
-        else {
-            parent.innerHTML = parent.innerHTML.replace('<DIV>' + res.oldName + '</DIV>', '<DIV>' + res.newName + '</DIV>');
-        }
+        tagRegistr.changeCat(parent, res.oldName, res.newName);
 
         for (var i = 0, length = options.length; i < length; i++) {
             option = options[i];
@@ -561,17 +587,7 @@ CONTROL.responses = (function() {
             }
         }
 
-        if (window.getComputedStyle) {
-            indexStart = html.indexOf('<div>' + res.cat + '</div>');
-            subs = html.slice(html.lastIndexOf('<div>', indexStart - 1),
-                html.indexOf('</div>', indexStart + res.cat.length + 14));
-        }
-        else {
-            indexStart = html.indexOf('<DIV>' + res.cat + '</DIV>');
-            subs = html.slice(html.lastIndexOf('<DIV>', indexStart - 1),
-                html.indexOf('</DIV>', indexStart + res.cat.length + 14));
-        }
-
+        subs = tagRegistr.removeCat(html, res.cat);
         parent.innerHTML = html.replace(subs, '');
     }
 
@@ -606,10 +622,12 @@ CONTROL.responses = (function() {
         var sum, key, data,
             i, len,
             diagram = {},
-            remain, stopCurring = false;
+            remain,
+            stopCurring = false;
 
         for (key in res) {
             if (key === 'send') continue;
+
             sum = 0;
             len = res[key].length;
 
@@ -632,8 +650,11 @@ CONTROL.responses = (function() {
                 stopCurring = true;
             }
         }
-        doc.querySelector('.remain').innerHTML = 'Остаток ' + tools.checkValuePointer(remain(sum)) + ' ' + user.data.mainCurr;
-        tools.showDiagram(diagram);
+        if (remain) {
+            doc.querySelector('.remain').innerHTML = 'Остаток ' + tools.checkValuePointer(remain(sum)) + ' ' + user.data.mainCurr;
+            tools.showDiagram(diagram);
+        }
+        CONTROL.layer.destroyLayer();
     }
 
     /**
