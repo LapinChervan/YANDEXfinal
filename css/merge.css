@@ -45,7 +45,7 @@
 .form__send__header,
 .form__card__header,
 .history-filter, .message, .mes,
-.form__gain, .formCatEdit, .remHistForm {
+.form__gain, .formCatEdit, .remHistForm, .remain {
     background: url("../img/headerbg.png");
     margin: 0 0 8px 0;
 }

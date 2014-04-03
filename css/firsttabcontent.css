@@ -209,7 +209,7 @@ div[class^=operats_] {
 .filters__inputs {
     text-align: center;
     width: 415px;
-    margin: 0;
+    margin: 0 0 0 5px;
 }
 
 .categs {
@@ -236,7 +236,7 @@ div[class^=operats_] {
 .form__gain__add, .form__gain__cancel,
 .add_cat_sch, .add_cat_plus, .add_cat_minus,
 .apply_filter1, .apply_filter2, .buttonValuta, .butRenameCat,
-.butRemoveHist, .more_history, .main__user-data__exit, .clearDateFrom, .clearDateTo {
+.butRemoveHist, .more_history, .main__user-data__exit, .clearDateFrom, .clearDateTo, .remain {
     display: inline-block;
     text-align: center;
     border-radius: 4px; 
@@ -250,11 +250,16 @@ div[class^=operats_] {
     box-shadow: 0px 2px 5px #949494;
 }
 
+.remain {
+    color: #97E2DE;
+    width: 180px;
+}
+
 .clearDateFrom, .clearDateTo {
     width: 15px;
 }
 
-.apply_filter1, .apply_filter2 {
+.apply_filter1, .apply_filter2, .remain {
     margin: 5px auto;
 }
 

@@ -354,6 +354,22 @@ CONTROL.tools = (function() {
         return par.indexOf('<div>' + elem.value.toLowerCase() + '</div>', 0) === -1 ? true : false;
     }
 
+    /**
+    * Выводит остаток.
+    *
+    * @param  {Int} gainSum Сумма по доходу.
+    * @param {Int} costsSum Сумма по расходу.
+    * @return (Int} Возвращает разницу.
+    */
+    function curringRemainSum(gainSum, costsSum) {
+        if (!costsSum) {
+            return function(costsSum) {
+                return gainSum - costsSum;
+            }
+        }
+        return gainSum - costsSum;
+    }
+
     return {
         isNumber: isNumber,
         getDateMs: getDateMs,
@@ -367,7 +383,8 @@ CONTROL.tools = (function() {
         checkValuePointer: checkValuePointer,
         showMessage: showMessage,
         loadSelectForm: loadSelectForm,
-        categoryExist: categoryExist
+        categoryExist: categoryExist,
+        curringRemainSum: curringRemainSum
     }
 })();
 
@@ -592,7 +609,8 @@ CONTROL.responses = (function() {
     function filterDate(res) {
         var sum, key, data,
             i, len,
-            diagram = {};
+            diagram = {},
+            remain, stopCurring = false;
 
         for (key in res) {
             if (key === 'send') continue;
@@ -612,8 +630,14 @@ CONTROL.responses = (function() {
             }
             doc.querySelector('.' + key + '_sumfilter').innerHTML = tools.checkValuePointer(sum) + ' ' +
                                                                     user.data.mainCurr;
+
+            if (!stopCurring) {
+                remain = tools.curringRemainSum(sum);
+                stopCurring = true;
+            }
         }
-        CONTR.tools.showDiagram(diagram);
+        doc.querySelector('.remain').innerHTML = 'Остаток ' + remain(sum) + ' ' + user.data.mainCurr;
+        tools.showDiagram(diagram);
     }
 
     /**
