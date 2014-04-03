@@ -776,21 +776,20 @@ CONTROL.access = (function() {
 
         //ДЕЛЕГИРОВАНИЕ ПЕРЕХОД ПО ТАБАМ
         doc.querySelector('.main__tabs__ul').addEventListener('click', function(e) {
-            var event = e || window.event,
-                target = event.target || event.srcElement,
-                tabs, key,
+            var target = e.target,
                 parentContent = doc.querySelector('.main__tabs__content__ul');
-
-            ['tab_main', 'tab_history', 'tab_person']
-                .forEach(function(tabClass) {
-                    if (target.classList.contains(tabClass)) {
-                        target.classList.add('visit');
-                        parentContent.querySelector('.' + tabClass).style.display = 'block';
-                    } else {
-                        doc.querySelector('.' + tabClass).classList.remove('visit');
-                        parentContent.querySelector('.' + tabClass).style.display = 'none';
-                    }
-                });
+            if (target.tagName === 'LI') {
+                ['tab_main', 'tab_history', 'tab_person']
+                    .forEach(function(tabClass) {
+                        if (target.classList.contains(tabClass)) {
+                            target.classList.add('visit');
+                            parentContent.querySelector('.' + tabClass).style.display = 'block';
+                        } else {
+                            doc.querySelector('.' + tabClass).classList.remove('visit');
+                            parentContent.querySelector('.' + tabClass).style.display = 'none';
+                        }
+                    });
+            }
         });
 
         // ДЕЛЕГИРОВАНИЕ ФИЛЬТР ПО ДАТАМ В СТАТИСТИКЕ
